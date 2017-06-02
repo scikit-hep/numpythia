@@ -1,0 +1,5 @@
+recursive-include numpythia *.h *.cpp *.pyx *.pxi *.config
+recursive-include examples *.py
+include *.py
+include README.rst
+include COPYING

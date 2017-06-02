@@ -1,0 +1,11 @@
+MANIFEST
+build
+dist
+*.pyc
+*.tar.gz
+*.egg
+*.egg-info
+*.so
+*.o
+*.d
+*.png
