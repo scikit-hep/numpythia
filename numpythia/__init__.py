@@ -1,6 +1,7 @@
 from ._libnumpythia import generate as _generate
 from ._libnumpythia import PythiaInput, HepMCInput
 from .extern.six import string_types
+from pkg_resources import resource_filename
 from fnmatch import fnmatch
 import logging
 import os
@@ -20,7 +21,7 @@ def get_input(name, filename, **kwargs):
     """
     name = name.lower().strip()
     if name == 'pythia':
-        xmldoc = os.environ.get('PYTHIA8DATA', '/usr/local/share/Pythia8/xmldoc')
+        xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
         if not os.path.exists(filename):
             raise IOError("Pythia config not found: {0}".format(filename))
         gen_input = PythiaInput(filename, xmldoc, **kwargs)
