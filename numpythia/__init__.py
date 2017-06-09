@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 __all__ = [
     'generate', 'get_input',
     'PythiaInput', 'HepMCInput',
-    ]
+]
 
 
 def get_input(name, filename, **kwargs):
