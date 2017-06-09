@@ -1,9 +1,9 @@
-from ._libnumpythia import generate_events as _generate_events
+from ._libnumpythia import generate as _generate
 from ._libnumpythia import PythiaInput, HepMCInput
-import os
+from .extern.six import string_types
 from fnmatch import fnmatch
 import logging
-from .extern.six import string_types
+import os
 
 log = logging.getLogger(__name__)
 
@@ -20,19 +20,9 @@ def get_input(name, filename, **kwargs):
     """
     name = name.lower().strip()
     if name == 'pythia':
-        xmldoc = os.environ.get('PYTHIA8DATA', os.path.join(
-            os.environ.get('DEEPJETS_SFT_DIR', '/usr/local'),
-            'share/Pythia8/xmldoc'))
+        xmldoc = os.environ.get('PYTHIA8DATA', '/usr/local/share/Pythia8/xmldoc')
         if not os.path.exists(filename):
-            internal_filename = os.path.join(
-                os.environ.get('DEEPJETS_DIR'), 'config', 'pythia', filename)
-            if not os.path.isabs(filename) and os.path.exists(internal_filename):
-                log.warning("{0} does not exist but using internal "
-                            "config with the same name instead: {1}".format(
-                                filename, internal_filename))
-                filename = internal_filename
-            else:
-                raise IOError("Pythia config not found: {0}".format(filename))
+            raise IOError("Pythia config not found: {0}".format(filename))
         gen_input = PythiaInput(filename, xmldoc, **kwargs)
     elif name == 'hepmc':
         gen_input = HepMCInput(filename)
@@ -51,5 +41,5 @@ def generate(gen_input, events=-1, write_to='', ignore_weights=False, **kwargs):
             gen_input = get_input('hepmc', gen_input, **kwargs)
         else:
             gen_input = get_input('pythia', gen_input, **kwargs)
-    for event in _generate_events(gen_input, events, write_to, ignore_weights):
+    for event in _generate(gen_input, events, write_to, ignore_weights):
         yield event

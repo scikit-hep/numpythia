@@ -1,0 +1,16 @@
+HardQCD:all = on
+
+// Automated Variations of Shower Parameters for Uncertainty Bands
+// http://home.thep.lu.se/Pythia/pythia82html/Variations.html
+// http://arxiv.org/abs/1605.08352
+UncertaintyBands:doVariations = on
+UncertaintyBands:List = { 
+    alphaShi05 fsr:muRfac=0.5 isr:muRfac=0.5,
+    alphaShi07 fsr:muRfac=0.7 isr:muRfac=0.7,
+    alphaShi09 fsr:muRfac=0.9 isr:muRfac=0.9,
+    alphaSlo12 fsr:muRfac=1.2 isr:muRfac=1.2, 
+    alphaSlo16 fsr:muRfac=1.6 isr:muRfac=1.6, 
+    alphaSlo20 fsr:muRfac=2.0 isr:muRfac=2.0, 
+    hardHi fsr:cNS=2.0 isr:cNS=2.0, 
+    hardLo fsr:cNS=-2.0 isr:cNS=-2.0 
+}
