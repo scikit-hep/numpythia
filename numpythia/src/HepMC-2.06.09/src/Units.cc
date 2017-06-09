@@ -51,12 +51,12 @@ namespace HepMC {
 
     // if this function fails to compile, rerun configure using --with-length_units
     LengthUnit default_length_unit() {
-      return @HEPMC_DEFAULT_LEN_UNIT@ ;
+      return HEPMC_DEFAULT_LEN_UNIT ;
     }
 
     // if this function fails to compile, rerun configure using --with-momentum_units
     MomentumUnit default_momentum_unit() {
-      return @HEPMC_DEFAULT_MOM_UNIT@ ;
+      return HEPMC_DEFAULT_MOM_UNIT ;
     }
 
   }	// Units

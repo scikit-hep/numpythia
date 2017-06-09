@@ -66,7 +66,11 @@ libnumpythia = Extension(
         '-Wno-unused-function',
         '-Wno-write-strings',
     ],
-    define_macros=[('XMLDIR', '"/"')],
+    define_macros=[
+        ('XMLDIR', '""'),
+        ('HEPMC_DEFAULT_LEN_UNIT', 'MM'),
+        ('HEPMC_DEFAULT_MOM_UNIT', 'GEV'),
+    ],
     )
 
 #external_fastjet = False
