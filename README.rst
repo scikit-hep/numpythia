@@ -22,9 +22,10 @@ source code.
 Standalone Installation
 -----------------------
 
-To simply use the built-in PYTHIA and HepMC source::
+To simply use the built-in PYTHIA and HepMC::
 
    pip install --user -v numpythia
 
 And you're good to go!
 
+Support for building against an external PYTHIA will come soon.
