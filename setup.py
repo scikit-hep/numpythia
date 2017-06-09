@@ -145,12 +145,12 @@ else:
 
 setup(
     name='numpythia',
-    version='0.0.1',
+    version='0.0.2',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
     maintainer='Noel Dawe',
     maintainer_email='noel@dawe.me',
-    license='new BSD',
+    license='GPLv3',
     url='http://github.com/ndawe/numpythia',
     packages=[
         'numpythia',
