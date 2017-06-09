@@ -171,10 +171,10 @@ setup(
     packages=[
         'numpythia',
         'numpythia.tests',
-        'numpythia.testconfig',
+        'numpythia.testcmnd',
     ],
     package_data={
-        'numpythia': ['testconfig/*.config'],
+        'numpythia': ['testcmnd/*.cmnd'],
     },
     ext_modules=[libnumpythia],
     cmdclass={

@@ -186,12 +186,7 @@ cdef class PythiaInput(MCInput):
         The total number of variations that have been defined, N, can be
         queried using Pythia::info.nWeights().
         """
-        cdef int nweights = self.pythia.info.nWeights()
-        if nweights == 1:
-            # only nominal is present so don't bother with weights since it is
-            # normally 1. DIRE does produce weighted events, however.
-            return 0
-        return nweights
+        return self.pythia.info.nWeights()
 
     cdef bool get_next_event(self) except *:
         # generate event and quit if failure
@@ -301,7 +296,7 @@ cdef class HepMCInput(MCInput):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def generate_events(MCInput gen_input, int n_events, string write_to, bool ignore_weights=False):
+def generate(MCInput gen_input, int n_events, string write_to, bool weighted=False):
     """
     Generate events (or read HepMC) and yield numpy arrays of particles
     If weights are enabled, this function will yield the particles and weights array
@@ -311,7 +306,6 @@ def generate_events(MCInput gen_input, int n_events, string write_to, bool ignor
     cdef HepMC.IO_GenEvent* hepmc_writer = NULL
     cdef vector[HepMC.GenParticle*] particles
     cdef int ievent = 0;
-    cdef bool weighted = gen_input.get_num_weights() > 0
     if n_events < 0:
         ievent = n_events - 1
     if not write_to.empty():
@@ -326,7 +320,7 @@ def generate_events(MCInput gen_input, int n_events, string write_to, bool ignor
         numpythia.hepmc_finalstate_particles(event, particles)
         particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
         numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)
-        if weighted and not ignore_weights:
+        if weighted:
             yield particle_array, gen_input.weights
         else:
             yield particle_array
