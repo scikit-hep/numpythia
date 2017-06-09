@@ -1,4 +1,38 @@
+# cython: experimental_cpp_class_def=True, c_string_type=str, c_string_encoding=ascii
+
+import numpy as np
+cimport numpy as np
+np.import_array()
+
+cimport cython
+from cython.operator cimport dereference as deref
+
+from libc.stdlib cimport malloc, free
+
+from libcpp cimport bool
+from libcpp.vector cimport vector
+from libcpp.string cimport string, const_char
+
+from cpython cimport PyObject
+from cpython.cobject cimport (PyCObject_AsVoidPtr,
+                              PyCObject_Check,
+                              PyCObject_FromVoidPtr)
+
+from libcpp.memory cimport shared_ptr
 import os
+
+cimport pythia as Pythia
+cimport hepmc as HepMC
+cimport numpythia
+
+DTYPE = np.float64
+ctypedef np.float64_t DTYPE_t
+
+DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
+DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
+DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
+                           ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
+                           ('pdgid', DTYPE)])
 
 
 cdef class MCInput:
@@ -19,9 +53,10 @@ cdef class MCInput:
     cdef bool get_next_event(self) except *:
         return False
 
-    cdef GenEvent* get_hepmc(self):
+    cdef HepMC.GenEvent* get_hepmc(self):
         pass
 
+    """
     cdef void to_pseudojet(self, vector[PseudoJet]& particles, float eta_max):
         pass
 
@@ -30,6 +65,7 @@ cdef class MCInput:
                          TObjArray* delphes_stable_particles,
                          TObjArray* delphes_partons):
         pass
+    """
 
     cdef void finish(self):
         pass
@@ -37,10 +73,10 @@ cdef class MCInput:
 
 cdef class PythiaInput(MCInput):
 
-    cdef Pythia* pythia
-    cdef VinciaPlugin* vincia_plugin
-    cdef UserHooks* userhooks
-    cdef GenEvent* hepmc_event
+    cdef Pythia.Pythia* pythia
+    #cdef Pythia.VinciaPlugin* vincia_plugin
+    cdef Pythia.UserHooks* userhooks
+    cdef HepMC.GenEvent* hepmc_event
     cdef int verbosity
     cdef int cut_on_pdgid
     cdef float pdgid_pt_min
@@ -58,10 +94,10 @@ cdef class PythiaInput(MCInput):
         cdef int i
         cdef double mPDF
 
-        self.pythia = new Pythia(xmldoc, False)
+        self.pythia = new Pythia.Pythia(xmldoc, False)
 
         # Initialize pointers to NULL
-        self.vincia_plugin = NULL
+        #self.vincia_plugin = NULL
         self.userhooks = NULL
         self.hepmc_event = NULL
 
@@ -86,12 +122,12 @@ cdef class PythiaInput(MCInput):
             self.pythia.readString("Next:numberShowEvent = 0")
 
         # next read user config that may override options above
-        if shower == 'vincia':
-            self.vincia_plugin = new VinciaPlugin(self.pythia, config)
+        #if shower == 'vincia':
+            #self.vincia_plugin = new VinciaPlugin(self.pythia, config)
 
-        else:  # default Pythia shower
-            # Read config
-            self.pythia.readFile(config)
+        #else:  # default Pythia shower
+        # Read config
+        self.pythia.readFile(config)
 
         # __init__ arguments will always override the config
         self.pythia.readString('Beams:eCM = {0}'.format(beam_ecm))
@@ -104,15 +140,15 @@ cdef class PythiaInput(MCInput):
         for param, value in kwargs.items():
             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
 
-        if shower == 'vincia':
-            # vincia calls pythia's init
-            # but we lose the bool return value of Pythia's init
-            # if init fails there, pythia.next() will anyway abort
-            # TODO: follow this up with Skands et al
-            success = self.vincia_plugin.init()
-        else:
-            if not self.pythia.init():
-                raise RuntimeError("PYTHIA did not successfully initialize")
+        #if shower == 'vincia':
+            ## vincia calls pythia's init
+            ## but we lose the bool return value of Pythia's init
+            ## if init fails there, pythia.next() will anyway abort
+            ## TODO: follow this up with Skands et al
+            #success = self.vincia_plugin.init()
+        #else:
+        if not self.pythia.init():
+            raise RuntimeError("PYTHIA did not successfully initialize")
 
         self.cut_on_pdgid = cut_on_pdgid
         self.pdgid_pt_min = pdgid_pt_min
@@ -123,7 +159,7 @@ cdef class PythiaInput(MCInput):
     def __dealloc__(self):
         del self.hepmc_event
         del self.pythia
-        del self.vincia_plugin
+        #del self.vincia_plugin
         del self.userhooks
 
     cdef int get_num_weights(self):
@@ -165,17 +201,14 @@ cdef class PythiaInput(MCInput):
             self.weights = np.empty(self.num_weights, dtype=DTYPE)
             for iweight in range(self.num_weights):
                 self.weights[iweight] = self.pythia.info.weight(iweight)
-        if not keep_pythia_event(self.pythia.event, self.cut_on_pdgid,
-                                 self.pdgid_pt_min, self.pdgid_pt_max):
-            # event doesn't pass our truth-level cuts
-            return False
         return True
 
-    cdef GenEvent* get_hepmc(self):
+    cdef HepMC.GenEvent* get_hepmc(self):
         del self.hepmc_event
-        self.hepmc_event = pythia_to_hepmc(self.pythia)
+        self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)
         return self.hepmc_event
 
+    """
     cdef void to_pseudojet(self, vector[PseudoJet]& particles, float eta_max):
         pythia_to_pseudojet(self.pythia.event, particles, eta_max)
 
@@ -188,6 +221,7 @@ cdef class PythiaInput(MCInput):
                           all_particles,
                           stable_particles,
                           partons)
+    """
 
     cdef void finish(self):
         if self.verbosity > 0:
@@ -197,15 +231,15 @@ cdef class PythiaInput(MCInput):
 cdef class HepMCInput(MCInput):
 
     cdef string filename
-    cdef IO_GenEvent* hepmc_reader
-    cdef GenEvent* event
-    cdef TDatabasePDG *pdg
+    cdef HepMC.IO_GenEvent* hepmc_reader
+    cdef HepMC.GenEvent* event
+    #cdef TDatabasePDG *pdg
 
     def __cinit__(self, string filename):
         self.filename = filename
-        self.hepmc_reader = get_hepmc_reader(filename)
+        self.hepmc_reader = numpythia.get_hepmc_reader(filename)
         self.event = NULL
-        self.pdg = TDatabasePDG_Instance()
+        #self.pdg = TDatabasePDG_Instance()
 
     def __dealloc__(self):
         del self.event
@@ -218,9 +252,10 @@ cdef class HepMCInput(MCInput):
             return False
         return True
 
-    cdef GenEvent* get_hepmc(self):
+    cdef HepMC.GenEvent* get_hepmc(self):
         return self.event
 
+    """
     cdef void to_pseudojet(self, vector[PseudoJet]& particles, float eta_max):
         hepmc_to_pseudojet(self.event[0], particles, eta_max)
 
@@ -234,6 +269,7 @@ cdef class HepMCInput(MCInput):
                          all_particles,
                          stable_particles,
                          partons)
+    """
 
     def estimate_num_events(self, int sample_size=1000):
         """
@@ -271,15 +307,15 @@ def generate_events(MCInput gen_input, int n_events, string write_to, bool ignor
     If weights are enabled, this function will yield the particles and weights array
     """
     cdef np.ndarray particle_array
-    cdef GenEvent* event
-    cdef IO_GenEvent* hepmc_writer = NULL
-    cdef vector[GenParticle*] particles
+    cdef HepMC.GenEvent* event
+    cdef HepMC.IO_GenEvent* hepmc_writer = NULL
+    cdef vector[HepMC.GenParticle*] particles
     cdef int ievent = 0;
     cdef bool weighted = gen_input.get_num_weights() > 0
     if n_events < 0:
         ievent = n_events - 1
     if not write_to.empty():
-        hepmc_writer = get_hepmc_writer(write_to)
+        hepmc_writer = numpythia.get_hepmc_writer(write_to)
     while ievent < n_events:
         if not gen_input.get_next_event():
             continue
@@ -287,9 +323,9 @@ def generate_events(MCInput gen_input, int n_events, string write_to, bool ignor
         event = gen_input.get_hepmc()
         if hepmc_writer != NULL:
             hepmc_writer.write_event(event)
-        hepmc_finalstate_particles(event, particles)
-        particle_array = np.empty((particles.size(),), dtype=dtype_particle)
-        particles_to_array(particles, <DTYPE_t*> particle_array.data)
+        numpythia.hepmc_finalstate_particles(event, particles)
+        particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+        numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)
         if weighted and not ignore_weights:
             yield particle_array, gen_input.weights
         else:

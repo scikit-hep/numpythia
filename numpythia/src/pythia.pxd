@@ -1,3 +1,4 @@
+from libcpp cimport bool
 
 cdef extern from "Pythia8/Pythia.h" namespace "Pythia8":
     cdef cppclass Event:
@@ -55,7 +56,7 @@ cdef extern from "Pythia8/Pythia.h" namespace "Pythia8":
         bool setShowerPtr(TimeShower*, TimeShower*, SpaceShower*)
         bool setUserHooksPtr(UserHooks*)
 
-cdef extern from "Vincia/Vincia.h" namespace "Vincia":
-    cdef cppclass VinciaPlugin:
-        VinciaPlugin(Pythia*, string)
-        void init()
+#cdef extern from "Vincia/Vincia.h" namespace "Vincia":
+    #cdef cppclass VinciaPlugin:
+        #VinciaPlugin(Pythia*, string)
+        #void init()

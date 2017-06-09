@@ -1,5 +1,6 @@
-recursive-include numpythia *.h *.cpp *.pyx *.pxi *.config
-recursive-include examples *.py
+include MANIFEST.in
+recursive-include numpythia *.h *.cpp *.cc *.pyx *.pxi *.pxd
 include *.py
 include README.rst
 include COPYING
+global-exclude *.pyc *.pyo *.pyd
