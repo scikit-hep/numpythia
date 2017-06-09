@@ -28,5 +28,5 @@ To simply use the built-in PYTHIA and HepMC::
 
 And you're good to go!
 
-Support for building against an external PYTHIA, Delphes, and MUCH MORE will
+Support for building against an external PYTHIA, Delphes, and much more will
 come soon.
