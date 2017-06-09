@@ -174,7 +174,10 @@ setup(
         'numpythia.testcmnd',
     ],
     package_data={
-        'numpythia': ['testcmnd/*.cmnd'],
+        'numpythia': [
+            'testcmnd/*.cmnd',
+            'src/pythia8226/share/*',
+        ],
     },
     ext_modules=[libnumpythia],
     cmdclass={
