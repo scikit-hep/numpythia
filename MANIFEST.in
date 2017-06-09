@@ -1,5 +1,5 @@
 include MANIFEST.in
-recursive-include numpythia *.h *.cpp *.cc *.pyx *.pxi *.pxd
+recursive-include numpythia *.h *.cpp *.cc *.icc *.pyx *.pxi *.pxd
 include *.py
 include README.rst
 include COPYING
