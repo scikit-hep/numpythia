@@ -154,6 +154,7 @@ setup(
     url='http://github.com/ndawe/numpythia',
     packages=[
         'numpythia',
+        'numpythia.extern',
         'numpythia.tests',
         'numpythia.testcmnd',
     ],
