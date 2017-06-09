@@ -1,4 +1,5 @@
 from libcpp.vector cimport vector
+from libcpp.string cimport string
 
 cimport hepmc as HepMC
 cimport pythia as Pythia

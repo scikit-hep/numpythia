@@ -51,11 +51,15 @@ sys.path.insert(0, local_path)
 
 libnumpythia = Extension(
     'numpythia._libnumpythia',
-    sources=['numpythia/src/_libnumpythia.cpp'],
-    depends=['numpythia/src/core.h'],
+    sources=['numpythia/src/_libnumpythia.cpp'] +
+            glob('numpythia/src/HepMC-2.06.09/src/*.cc') +
+            glob('numpythia/src/pythia8226/src/*.cc'),
+    depends=[],
     language='c++',
     include_dirs=[
         'numpythia/src',
+        'numpythia/src/HepMC-2.06.09/include',
+        'numpythia/src/pythia8226/include',
     ],
     extra_compile_args=[
         '-Wno-unused-function',
@@ -84,7 +88,7 @@ class build_ext(_build_ext):
         except AttributeError:
             pass
         import numpy
-        libpyjet.include_dirs.append(numpy.get_include())
+        libnumpythia.include_dirs.append(numpy.get_include())
         #if external_fastjet or self.external_fastjet:
             #prefix = fastjet_prefix()
             #libpyjet.include_dirs += [os.path.join(prefix, 'include')]
@@ -155,7 +159,7 @@ setup(
     package_data={
         'numpythia': ['testconfig/*.config'],
     },
-    ext_modules=[libpyjet],
+    ext_modules=[libnumpythia],
     cmdclass={
         'build_ext': build_ext,
         'install': install,

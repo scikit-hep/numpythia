@@ -1,4 +1,5 @@
 from libcpp cimport bool
+from libcpp.string cimport string
 
 cdef extern from "Pythia8/Pythia.h" namespace "Pythia8":
     cdef cppclass Event:
