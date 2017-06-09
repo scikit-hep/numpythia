@@ -21,7 +21,9 @@ source code.
    for event in generate(get_cmnd('w.cmnd'), events=10):
        print(event)
 
-The dtype of each generated event is::
+The dtype of each generated event is:
+
+.. code-block:: python
 
    np.dtype([('E', 'f8'), ('px', 'f8'), ('py', 'f8'), ('pz', 'f8'), ('mass', 'f8'),
              ('prodx', 'f8'), ('prody', 'f8'), ('prodz', 'f8'), ('prodt', 'f8'),
