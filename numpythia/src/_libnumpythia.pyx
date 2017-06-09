@@ -25,6 +25,9 @@ cimport pythia as Pythia
 cimport hepmc as HepMC
 cimport numpythia
 
+cdef extern from "2to3.h":
+    pass
+
 DTYPE = np.float64
 ctypedef np.float64_t DTYPE_t
 
