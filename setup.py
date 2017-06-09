@@ -73,8 +73,6 @@ libnumpythia = Extension(
     ],
     )
 
-#external_fastjet = False
-
 
 class build_ext(_build_ext):
     user_options = _build_ext.user_options + [
@@ -96,20 +94,6 @@ class build_ext(_build_ext):
             pass
         import numpy
         libnumpythia.include_dirs.append(numpy.get_include())
-        #if external_fastjet or self.external_fastjet:
-            #prefix = fastjet_prefix()
-            #libpyjet.include_dirs += [os.path.join(prefix, 'include')]
-            #libpyjet.library_dirs = [os.path.join(prefix, 'lib')]
-            #libpyjet.runtime_library_dirs = libpyjet.library_dirs
-            #libpyjet.libraries = 'fastjettools fastjet CGAL gmp'.split()
-            #if platform.system() == 'Darwin':
-                #libpyjet.extra_link_args.append(
-                    #'-Wl,-rpath,' + os.path.join(prefix, 'lib'))
-        #else:
-            #pass
-            ##libpyjet.sources.append('pyjet/src/fjcore.cpp')
-            ##libpyjet.depends.append('pyjet/src/fjcore.h')
-            ##libpyjet.define_macros = [('PYJET_STANDALONE', None)]
 
     def build_extensions(self):
         # Remove the "-Wstrict-prototypes" compiler option, which isn't valid
