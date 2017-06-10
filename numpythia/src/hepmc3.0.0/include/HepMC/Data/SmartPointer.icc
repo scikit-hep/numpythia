@@ -1,0 +1,35 @@
+/**
+ *  @file SmartPointer.icc
+ *  @brief Implementation of inline functions from \b class SmartPointer
+ *
+ */
+
+namespace HepMC {
+
+template<class T>
+SmartPointer<T>::SmartPointer() {
+}
+
+template<class T>
+SmartPointer<T>::SmartPointer( const SmartPointer<T> &rhs ):
+m_data(rhs.m_data) {
+}
+
+template<class T>
+SmartPointer<T>::SmartPointer( const shared_ptr<T> &rhs ):
+m_data(rhs) {
+    if(m_data) m_data->m_this = m_data;
+}
+
+template<class T>
+SmartPointer<T>::SmartPointer( T *raw_pointer ) {
+    if(raw_pointer) {
+        if(raw_pointer->m_this.expired()) {
+            m_data.reset(raw_pointer);
+            m_data->m_this = m_data;
+        }
+        else m_data = raw_pointer->m_this.lock();
+    }
+}
+
+} // namespace HepMC

@@ -1,0 +1,67 @@
+
+
+
+
+
+
+
+
+
+
+
+# Backup Files
+# CMake output files
+# Compiled Dynamic libraries
+# Compiled Object files
+# Compiled Static libraries
+# Executables
+# HepMC output files
+# Other temp files
+# ROOT output files
+# check output files
+# root dictionaries
+# working directories
+*.a
+*.app
+*.dll
+*.dylib
+*.err
+*.exe
+*.hepmc
+*.hepmc2
+*.hepmc3
+*.la
+*.lai
+*.lib
+*.lo
+*.log
+*.o
+*.o_hepmc2
+*.obj
+*.out
+*.out
+*.root
+*.slo
+*.so
+*.so.*
+*~
+.build
+.test
+/.inst
+/CPackConfig.cmake
+/CPackSourceConfig.cmake
+/install_manifest_devel.txt
+CMakeCache.txt
+CMakeFiles
+CMakeFiles.txt
+Makefile
+build
+cmake_install.cmake
+examples/LHEFExample/LHEF_example_out.lhe
+examples/xmldoc
+install_manifest.txt
+install_manifest_headers.txt
+outputs
+rootIO/rootIO_Classes.cxx
+rootIO/rootIO_Classes.h
+test
