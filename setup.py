@@ -37,7 +37,7 @@ import subprocess
 from glob import glob
 from distutils.sysconfig import customize_compiler
 
-# monkey-patch for parallel compilation
+# monkey-patch distutils for parallel compilation
 def parallelCCompile(self, sources, output_dir=None, macros=None,
                      include_dirs=None, debug=0, extra_preargs=None,
                      extra_postargs=None, depends=None):
@@ -54,7 +54,13 @@ def parallelCCompile(self, sources, output_dir=None, macros=None,
             return
         self._compile(obj, src, ext, cc_args, extra_postargs, pp_opts)
     # convert to list, imap is evaluated on-demand
-    list(multiprocessing.pool.ThreadPool(N).imap(_single_compile, objects))
+    pool = multiprocessing.pool.ThreadPool(N)
+    try:
+        list(pool.imap(_single_compile, objects))
+    except:
+        pool.close()
+        pool.join()
+        raise
     return objects
 
 import distutils.ccompiler
