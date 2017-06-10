@@ -32,7 +32,7 @@ clean-cython:
 
 in: inplace # just a shortcut
 inplace:
-	@$(PYTHON) setup.py build_ext -i
+	@CC="ccache gcc" $(PYTHON) setup.py build_ext -i
 
 test: inplace
 	@$(NOSETESTS) -s -v numpythia
