@@ -18,7 +18,7 @@ source code.
    from numpythia import generate
    from numpythia.testcmnd import get_cmnd
 
-   for event in generate(get_cmnd('w.cmnd'), events=10):
+   for event in generate(get_cmnd('w'), events=10):
        print(event)
 
 The dtype of each generated event is:

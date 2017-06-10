@@ -7,5 +7,6 @@ __all__ = [
 ]
 
 
-def get_cmnd(filename):
-    return resource_filename('numpythia', os.path.join('testcmnd', filename))
+def get_cmnd(name):
+    return resource_filename('numpythia',
+                             os.path.join('testcmnd', name + '.cmnd'))
