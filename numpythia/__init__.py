@@ -1,6 +1,4 @@
-from ._libnumpythia import generate as _generate
-from ._libnumpythia import PythiaInput, HepMCInput
-from ._libnumpythia import MEV, GEV, MM, CM
+from ._libnumpythia import generate as _generate, PythiaInput, HepMCInput
 from .extern.six import string_types
 from pkg_resources import resource_filename
 from fnmatch import fnmatch
@@ -15,7 +13,7 @@ __all__ = [
 ]
 
 
-def get_input(name, filename, momentum_unit=GEV, length_unit=MM, **kwargs):
+def get_input(name, filename, **kwargs):
     """
     name may be 'pythia' or 'hepmc'
     filename may be the pythia config file or a HepMC file
@@ -25,9 +23,9 @@ def get_input(name, filename, momentum_unit=GEV, length_unit=MM, **kwargs):
         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
         if not os.path.exists(filename):
             raise IOError("Pythia config not found: {0}".format(filename))
-        gen_input = PythiaInput(filename, xmldoc, momentum_unit, length_unit, **kwargs)
+        gen_input = PythiaInput(filename, xmldoc, **kwargs)
     elif name == 'hepmc':
-        gen_input = HepMCInput(filename, momentum_unit, length_unit)
+        gen_input = HepMCInput(filename)
         if kwargs:
             raise ValueError(
                 "unrecognized parameters in kwargs: {0}".format(kwargs))
