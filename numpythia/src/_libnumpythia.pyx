@@ -38,8 +38,14 @@ DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DT
                            ('pdgid', DTYPE)])
 
 
+MEV, GEV = HepMC.MEV, HepMC.GEV
+MM, CM = HepMC.MM, HepMC.CM
+
+
 cdef class MCInput:
 
+    cdef HepMC.MomentumUnit momentum_unit
+    cdef HepMC.LengthUnit length_unit
     cdef np.ndarray weights
 
     cdef int get_num_weights(self):
@@ -87,6 +93,8 @@ cdef class PythiaInput(MCInput):
     cdef string shower
 
     def __cinit__(self, string config, string xmldoc,
+                  HepMC.MomentumUnit momentum_unit=GEV,
+                  HepMC.LengthUnit length_unit=MM,
                   int random_state=0, float beam_ecm=13000.,
                   int cut_on_pdgid=0,
                   float pdgid_pt_min=-1, float pdgid_pt_max=-1,
@@ -96,6 +104,9 @@ cdef class PythiaInput(MCInput):
 
         cdef int i
         cdef double mPDF
+
+        self.momentum_unit = momentum_unit
+        self.length_unit = length_unit
 
         self.pythia = new Pythia.Pythia(xmldoc, False)
 
@@ -203,7 +214,7 @@ cdef class PythiaInput(MCInput):
 
     cdef HepMC.GenEvent* get_hepmc(self):
         del self.hepmc_event
-        self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)
+        self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia, self.momentum_unit, self.length_unit)
         return self.hepmc_event
 
     """
@@ -233,8 +244,10 @@ cdef class HepMCInput(MCInput):
     cdef HepMC.GenEvent* event
     #cdef TDatabasePDG *pdg
 
-    def __cinit__(self, string filename):
+    def __cinit__(self, string filename, HepMC.MomentumUnit momentum_unit, HepMC.LengthUnit length_unit):
         self.filename = filename
+        self.momentum_unit = momentum_unit
+        self.length_unit = length_unit
         self.hepmc_reader = new HepMC.ReaderAscii(filename)
         self.event = NULL
         #self.pdg = TDatabasePDG_Instance()

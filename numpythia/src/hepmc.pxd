@@ -1,6 +1,15 @@
 from libcpp.string cimport string
 from libcpp cimport bool
 
+cdef extern from "HepMC/Units.h" namespace "HepMC::Units":
+    cdef enum MomentumUnit "HepMC::Units::MomentumUnit":
+        MEV,
+        GEV
+
+    cdef enum LengthUnit "HepMC::Units::LengthUnit":
+        MM,
+        CM
+
 cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
     cdef cppclass GenEvent:
         pass

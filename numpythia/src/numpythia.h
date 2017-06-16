@@ -207,11 +207,13 @@ void hepmc_finalstate_particles(HepMC::GenEvent* event, std::vector<HepMC::GenPa
 /*}*/
 
 
-HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia) {
+HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia,
+                                 HepMC::Units::MomentumUnit momentum_unit,
+                                 HepMC::Units::LengthUnit length_unit) {
     HepMC::Pythia8ToHepMC3 py2hepmc;
     // Suppress warnings with Vincia shower
     py2hepmc.set_print_inconsistency(false);
-    HepMC::GenEvent* event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
+    HepMC::GenEvent* event = new HepMC::GenEvent(momentum_unit, length_unit);
     if (!py2hepmc.fill_next_event(*pythia, event)) {
         delete event;
         return NULL;
