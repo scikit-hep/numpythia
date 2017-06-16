@@ -32,9 +32,9 @@ except ImportError:
     use_setuptools = False
 
 import os
+import fnmatch
 import platform
 import subprocess
-from glob import glob
 from distutils.sysconfig import customize_compiler
 
 # monkey-patch distutils for parallel compilation
@@ -79,16 +79,23 @@ local_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(local_path)
 sys.path.insert(0, local_path)
 
+def recursive_glob(path, pattern):
+    matches = []
+    for root, dirnames, filenames in os.walk(path):
+	for filename in fnmatch.filter(filenames, pattern):
+	    matches.append(os.path.join(root, filename))
+    return matches
+
 libnumpythia = Extension(
     'numpythia._libnumpythia',
     sources=['numpythia/src/_libnumpythia.cpp'] +
-            glob('numpythia/src/HepMC-2.06.09/src/*.cc') +
-            glob('numpythia/src/pythia8226/src/*.cc'),
+        recursive_glob('numpythia/src/hepmc3.0.0/src', '*.cc') +
+        recursive_glob('numpythia/src/pythia8226/src', '*.cc'),
     depends=[],
     language='c++',
     include_dirs=[
         'numpythia/src',
-        'numpythia/src/HepMC-2.06.09/include',
+        'numpythia/src/hepmc3.0.0/include',
         'numpythia/src/pythia8226/include',
     ],
     extra_compile_args=[
@@ -97,8 +104,6 @@ libnumpythia = Extension(
     ],
     define_macros=[
         ('XMLDIR', '""'),
-        ('HEPMC_DEFAULT_LEN_UNIT', 'MM'),
-        ('HEPMC_DEFAULT_MOM_UNIT', 'GEV'),
     ],
     )
 

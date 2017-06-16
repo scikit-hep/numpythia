@@ -1,17 +1,15 @@
+from libcpp.string cimport string
+from libcpp cimport bool
 
 cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
     cdef cppclass GenEvent:
         pass
 
-cdef extern from "HepMC/SimpleVector.h" namespace "HepMC":
-    cdef cppclass ThreeVector:
+cdef extern from "HepMC/FourVector.h" namespace "HepMC":
+    cdef cppclass FourVector:
         double x()
         double y()
         double z()
-        double phi()
-        double theta()
-
-    cdef cppclass FourVector:
         double px()
         double py()
         double pz()
@@ -24,7 +22,7 @@ cdef extern from "HepMC/SimpleVector.h" namespace "HepMC":
 
 cdef extern from "HepMC/GenVertex.h" namespace "HepMC":
     cdef cppclass GenVertex:
-        ThreeVector point3d()
+        FourVector position()
 
 cdef extern from "HepMC/GenParticle.h" namespace "HepMC":
     cdef cppclass GenParticle:
@@ -34,7 +32,12 @@ cdef extern from "HepMC/GenParticle.h" namespace "HepMC":
         GenVertex* end_vertex()
         GenVertex* production_vertex()
 
-cdef extern from "HepMC/IO_GenEvent.h" namespace "HepMC":
-    cdef cppclass IO_GenEvent:
-        GenEvent* read_next_event()
-        void write_event(GenEvent*)
+cdef extern from "HepMC/ReaderAscii.h" namespace "HepMC":
+    cdef cppclass ReaderAscii:
+        ReaderAscii(string filename)
+        bool read_event(GenEvent&)
+
+cdef extern from "HepMC/WriterAscii.h" namespace "HepMC":
+    cdef cppclass WriterAscii:
+        WriterAscii(string filename)
+        void write_event(GenEvent&)

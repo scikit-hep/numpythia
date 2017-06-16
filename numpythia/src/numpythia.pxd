@@ -5,8 +5,6 @@ cimport hepmc as HepMC
 cimport pythia as Pythia
 
 cdef extern from "numpythia.h":
-    HepMC.IO_GenEvent* get_hepmc_reader(string)
-    HepMC.IO_GenEvent* get_hepmc_writer(string)
     #void hepmc_to_pseudojet(GenEvent&, vector[PseudoJet]&, double)
     #void pythia_to_pseudojet(Event&, vector[PseudoJet]&, double)
     HepMC.GenEvent* pythia_to_hepmc(Pythia.Pythia*)

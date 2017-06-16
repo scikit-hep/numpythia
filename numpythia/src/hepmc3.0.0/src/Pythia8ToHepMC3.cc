@@ -1,4 +1,4 @@
-#include "Pythia8/Pythia8ToHepMC3.h"
+#include "HepMC/Pythia8ToHepMC3.h"
 #include "HepMC/GenEvent.h"
 #include "HepMC/GenParticle.h"
 #include "HepMC/GenVertex.h"

@@ -1,9 +1,10 @@
 #include "Pythia8/Pythia.h"
-#include "Pythia8Plugins/HepMC2.h"
 //#include "fastjet/ClusterSequence.hh"
 
-#include "HepMC/IO_GenEvent.h"
 #include "HepMC/GenEvent.h"
+#include "HepMC/WriterAscii.h"
+#include "HepMC/ReaderAscii.h"
+#include "HepMC/Pythia8ToHepMC3.h"
 
 //#include "Delphes/modules/Delphes.h"
 //#include "Delphes/classes/DelphesClasses.h"
@@ -29,18 +30,6 @@ public:
     return false;
   }
 };
-
-
-HepMC::IO_GenEvent* get_hepmc_reader(std::string filename) {
-  HepMC::IO_GenEvent* ascii_in = new HepMC::IO_GenEvent(filename, std::ios::in);
-  return ascii_in;
-}
-
-
-HepMC::IO_GenEvent* get_hepmc_writer(std::string filename) {
-  HepMC::IO_GenEvent* ascii_out = new HepMC::IO_GenEvent(filename, std::ios::out);
-  return ascii_out;
-}
 
 
 void hepmc_finalstate_particles(HepMC::GenEvent* event, std::vector<HepMC::GenParticle*>& particles) {
@@ -219,10 +208,10 @@ void hepmc_finalstate_particles(HepMC::GenEvent* event, std::vector<HepMC::GenPa
 
 
 HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia) {
-    HepMC::Pythia8ToHepMC py2hepmc;
+    HepMC::Pythia8ToHepMC3 py2hepmc;
     // Suppress warnings with Vincia shower
     py2hepmc.set_print_inconsistency(false);
-    HepMC::GenEvent* event = new HepMC::GenEvent();
+    HepMC::GenEvent* event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
     if (!py2hepmc.fill_next_event(*pythia, event)) {
         delete event;
         return NULL;

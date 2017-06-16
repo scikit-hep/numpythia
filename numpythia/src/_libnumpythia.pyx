@@ -229,13 +229,13 @@ cdef class PythiaInput(MCInput):
 cdef class HepMCInput(MCInput):
 
     cdef string filename
-    cdef HepMC.IO_GenEvent* hepmc_reader
+    cdef HepMC.ReaderAscii* hepmc_reader
     cdef HepMC.GenEvent* event
     #cdef TDatabasePDG *pdg
 
     def __cinit__(self, string filename):
         self.filename = filename
-        self.hepmc_reader = numpythia.get_hepmc_reader(filename)
+        self.hepmc_reader = new HepMC.ReaderAscii(filename)
         self.event = NULL
         #self.pdg = TDatabasePDG_Instance()
 
@@ -245,10 +245,8 @@ cdef class HepMCInput(MCInput):
 
     cdef bool get_next_event(self) except *:
         del self.event
-        self.event = self.hepmc_reader.read_next_event()
-        if self.event == NULL:
-            return False
-        return True
+        self.event = new HepMC.GenEvent()
+        return self.hepmc_reader.read_event(deref(self.event))
 
     cdef HepMC.GenEvent* get_hepmc(self):
         return self.event
@@ -306,20 +304,20 @@ def generate(MCInput gen_input, int n_events, string write_to, bool weighted=Fal
     """
     cdef np.ndarray particle_array
     cdef HepMC.GenEvent* event
-    cdef HepMC.IO_GenEvent* hepmc_writer = NULL
+    cdef HepMC.WriterAscii* hepmc_writer = NULL
     cdef vector[HepMC.GenParticle*] particles
     cdef int ievent = 0;
     if n_events < 0:
         ievent = n_events - 1
     if not write_to.empty():
-        hepmc_writer = numpythia.get_hepmc_writer(write_to)
+        hepmc_writer = new HepMC.WriterAscii(write_to)
     while ievent < n_events:
         if not gen_input.get_next_event():
             continue
         # We don't own event here. MCInput will delete it.
         event = gen_input.get_hepmc()
         if hepmc_writer != NULL:
-            hepmc_writer.write_event(event)
+            hepmc_writer.write_event(deref(event))
         numpythia.hepmc_finalstate_particles(event, particles)
         particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
         numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)
