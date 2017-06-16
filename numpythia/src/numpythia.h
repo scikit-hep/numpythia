@@ -213,11 +213,12 @@ HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia,
     HepMC::Pythia8ToHepMC3 py2hepmc;
     // Suppress warnings with Vincia shower
     py2hepmc.set_print_inconsistency(false);
-    HepMC::GenEvent* event = new HepMC::GenEvent(momentum_unit, length_unit);
+    HepMC::GenEvent* event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
     if (!py2hepmc.fill_next_event(*pythia, event)) {
         delete event;
         return NULL;
     }
+    event->set_units(momentum_unit, length_unit);
     return event;
 }
 
