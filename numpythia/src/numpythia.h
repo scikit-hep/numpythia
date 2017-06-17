@@ -1,6 +1,8 @@
 #include "Pythia8/Pythia.h"
 //#include "fastjet/ClusterSequence.hh"
 
+#include "HepMC/Common.h"
+#include "HepMC/Data/SmartPointer.h"
 #include "HepMC/GenEvent.h"
 #include "HepMC/WriterAscii.h"
 #include "HepMC/ReaderAscii.h"
@@ -220,23 +222,23 @@ HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia) {
 }
 
 
-void hepmc_to_array(std::vector<HepMC::GenParticle*>& particles, double* array) {
-  // particles should only contain finalstate particles
-  HepMC::GenParticle* particle;
-  HepMC::FourVector momentum, prod_vertex;
-  for (unsigned int i = 0; i < particles.size(); ++i) {
-    particle = particles[i];
-    momentum = particle->momentum();
-    prod_vertex = particle->production_vertex()->position();
-    array[i * 10 + 0] = momentum.e();
-    array[i * 10 + 1] = momentum.px();
-    array[i * 10 + 2] = momentum.py();
-    array[i * 10 + 3] = momentum.pz();
-    array[i * 10 + 4] = momentum.m();
-    array[i * 10 + 5] = prod_vertex.x();
-    array[i * 10 + 6] = prod_vertex.y();
-    array[i * 10 + 7] = prod_vertex.z();
-    array[i * 10 + 8] = prod_vertex.t();
-    array[i * 10 + 9] = particle->pdg_id();
-  }
+void hepmc_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> >& particles, double* array) {
+    // particles should only contain finalstate particles
+    HepMC::FourVector momentum, prod_vertex;
+    unsigned int i = 0;
+    FOREACH (const HepMC::SmartPointer<HepMC::GenParticle>& particle, particles) {
+        momentum = particle->momentum();
+        prod_vertex = particle->production_vertex()->position();
+        array[i * 10 + 0] = momentum.e();
+        array[i * 10 + 1] = momentum.px();
+        array[i * 10 + 2] = momentum.py();
+        array[i * 10 + 3] = momentum.pz();
+        array[i * 10 + 4] = momentum.m();
+        array[i * 10 + 5] = prod_vertex.x();
+        array[i * 10 + 6] = prod_vertex.y();
+        array[i * 10 + 7] = prod_vertex.z();
+        array[i * 10 + 8] = prod_vertex.t();
+        array[i * 10 + 9] = particle->pdg_id();
+        ++i;
+    }
 }

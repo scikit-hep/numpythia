@@ -46,13 +46,13 @@ LAST = HepMC.FIND_LAST
 cdef class FilterList:
     cdef HepMC.FilterList _filterlist
 
-    def __and__(self, other):
+    def __and__(FilterList self, other):
         filterlist = FilterList()
-        filterlist._filterlist.extend(<HepMC.FilterList&>self._filterlist)
+        filterlist._filterlist.extend(self._filterlist)
         if isinstance(other, BooleanFilter):
-            filterlist._filterlist.append(<HepMC.Filter&>other._filter)
+            filterlist._filterlist.append(deref(static_cast["const HepMC.Filter*"]((<BooleanFilter> other)._filter)))
         elif isinstance(other, FilterList):
-            filterlist._filterlist.extend(<HepMC.FilterList&>other._filterlist)
+            filterlist._filterlist.extend((<FilterList> other)._filterlist)
         else:
             raise TypeError("can only combine boolean filters")
         return filterlist
@@ -104,7 +104,7 @@ cdef class BooleanFilter(Filter):
     def __invert__(self):
         result = BooleanFilter()
         # Ouch
-        result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](result._filter)))
+        result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](self._filter)))
         result.own = True
         return result
 
@@ -406,7 +406,8 @@ def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType sele
     cdef np.ndarray particle_array
     cdef HepMC.GenEvent* event
     cdef HepMC.WriterAscii* hepmc_writer = NULL
-    cdef vector[HepMC.GenParticle*] particles
+    cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles
+    cdef HepMC.FindParticles* search = NULL
     cdef int ievent = 0;
     if n_events < 0:
         ievent = n_events - 1
@@ -414,25 +415,34 @@ def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType sele
         hepmc_writer = new HepMC.WriterAscii(write_to)
     if isinstance(find, BooleanFilter):
         find = FilterList(find)
-    if find and not isinstance(find, FilterList):
+    if find is not None and not isinstance(find, FilterList):
         raise TypeError("find must be a boolean expression of Filters")
-    while ievent < n_events:
-        if not gen_input.get_next_event():
-            continue
-        # We don't own event here. MCInput will delete it.
-        event = gen_input.get_hepmc()
-        if hepmc_writer != NULL:
-            hepmc_writer.write_event(deref(event))
+    try:
+        while ievent < n_events:
+            if not gen_input.get_next_event():
+                continue
+            # We don't own event here. MCInput will delete it.
+            event = gen_input.get_hepmc()
+            if hepmc_writer != NULL:
+                hepmc_writer.write_event(deref(event))
 
-        numpythia.hepmc_finalstate_particles(event, particles)
+            if find is not None:
+                search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
+                particles = search.results()
+                del search
+            #else:
+            #    numpythia.hepmc_finalstate_particles(event, particles)
 
-        particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
-        numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)
-        if weighted:
-            yield particle_array, gen_input.weights
-        else:
-            yield particle_array
-        if n_events > 0:
-            ievent += 1
+            particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+            numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)
+            if weighted:
+                yield particle_array, gen_input.weights
+            else:
+                yield particle_array
+            if n_events > 0:
+                ievent += 1
+    except:
+        raise
+    finally:
+        del hepmc_writer
     gen_input.finish()
-    del hepmc_writer

@@ -101,6 +101,11 @@ cdef extern from "HepMC/Search/FilterList.h" namespace "HepMC":
         FilterList& extend(FilterList&)
         FilterList& append(Filter&)
 
+cdef extern from "HepMC/Data/SmartPointer.h" namespace "HepMC":
+    cdef cppclass SmartPointer[T]:
+        pass
+
+
 cdef extern from "HepMC/Search/FindParticles.h" namespace "HepMC":
     cdef enum FilterType "HepMC::FilterType":
         FIND_ALL,
@@ -110,3 +115,4 @@ cdef extern from "HepMC/Search/FindParticles.h" namespace "HepMC":
     cdef cppclass FindParticles:
         FindParticles(GenEvent&, FilterType)
         FindParticles(GenEvent&, FilterType, FilterList)
+        vector[SmartPointer[GenParticle]] results()
