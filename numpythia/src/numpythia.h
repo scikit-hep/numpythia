@@ -1,5 +1,4 @@
 #include "Pythia8/Pythia.h"
-//#include "fastjet/ClusterSequence.hh"
 
 #include "HepMC/Common.h"
 #include "HepMC/Data/SmartPointer.h"
@@ -7,6 +6,8 @@
 #include "HepMC/WriterAscii.h"
 #include "HepMC/ReaderAscii.h"
 #include "HepMC/Pythia8ToHepMC3.h"
+
+//#include "fastjet/ClusterSequence.hh"
 
 //#include "Delphes/modules/Delphes.h"
 //#include "Delphes/classes/DelphesClasses.h"
@@ -24,6 +25,49 @@
 //#include <math.h>
 #include <vector>
 
+
+HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia) {
+    HepMC::Pythia8ToHepMC3 py2hepmc;
+    // Suppress warnings
+    py2hepmc.set_print_inconsistency(false);
+    HepMC::GenEvent* event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
+    if (!py2hepmc.fill_next_event(*pythia, event)) {
+        delete event;
+        return NULL;
+    }
+    return event;
+}
+
+
+void hepmc_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> >& particles,
+                    char* array, unsigned int rowbytes) {
+    HepMC::FourVector momentum, prod_vertex;
+    char* row;
+    double* double_fields;
+    int* int_fields;
+    unsigned int i = 0;
+    FOREACH (const HepMC::SmartPointer<HepMC::GenParticle>& particle, particles) {
+        momentum = particle->momentum();
+        prod_vertex = particle->production_vertex()->position();
+        row = &array[i * rowbytes];
+        // doubles
+        double_fields = (double*) row;
+        double_fields[0] = momentum.e();
+        double_fields[1] = momentum.px();
+        double_fields[2] = momentum.py();
+        double_fields[3] = momentum.pz();
+        double_fields[4] = momentum.m();
+        double_fields[5] = prod_vertex.x();
+        double_fields[6] = prod_vertex.y();
+        double_fields[7] = prod_vertex.z();
+        double_fields[8] = prod_vertex.t();
+        // integers
+        int_fields = (int*)&row[9 * sizeof(double)];
+        int_fields[0] = particle->pid();
+        int_fields[1] = particle->status();
+        ++i;
+    }
+}
 
 /*void hepmc_to_pseudojet(HepMC::GenEvent& evt, std::vector<fastjet::PseudoJet>& output, double eta_max) {*/
   //int pdgid;
@@ -185,38 +229,3 @@
         //++icand;
     //}
 /*}*/
-
-
-HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia) {
-    HepMC::Pythia8ToHepMC3 py2hepmc;
-    // Suppress warnings
-    py2hepmc.set_print_inconsistency(false);
-    HepMC::GenEvent* event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
-    if (!py2hepmc.fill_next_event(*pythia, event)) {
-        delete event;
-        return NULL;
-    }
-    return event;
-}
-
-
-void hepmc_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> >& particles, double* array) {
-    // particles should only contain finalstate particles
-    HepMC::FourVector momentum, prod_vertex;
-    unsigned int i = 0;
-    FOREACH (const HepMC::SmartPointer<HepMC::GenParticle>& particle, particles) {
-        momentum = particle->momentum();
-        prod_vertex = particle->production_vertex()->position();
-        array[i * 10 + 0] = momentum.e();
-        array[i * 10 + 1] = momentum.px();
-        array[i * 10 + 2] = momentum.py();
-        array[i * 10 + 3] = momentum.pz();
-        array[i * 10 + 4] = momentum.m();
-        array[i * 10 + 5] = prod_vertex.x();
-        array[i * 10 + 6] = prod_vertex.y();
-        array[i * 10 + 7] = prod_vertex.z();
-        array[i * 10 + 8] = prod_vertex.t();
-        array[i * 10 + 9] = particle->pdg_id();
-        ++i;
-    }
-}

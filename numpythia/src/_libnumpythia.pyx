@@ -36,7 +36,7 @@ DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
 DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
 DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
-                           ('pdgid', DTYPE)])
+                           ('pdgid', np.int32), ('status', np.int32)])
 
 ALL = HepMC.FIND_ALL
 FIRST = HepMC.FIND_FIRST
@@ -434,7 +434,7 @@ def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType sele
                 particles = event.particles()
 
             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
-            numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)
+            numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
             if weighted:
                 yield particle_array, gen_input.weights
             else:
