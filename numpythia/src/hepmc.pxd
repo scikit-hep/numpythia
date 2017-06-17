@@ -2,6 +2,10 @@ from libcpp.vector cimport vector
 from libcpp.string cimport string
 from libcpp cimport bool
 
+cdef extern from "HepMC/Data/SmartPointer.h" namespace "HepMC":
+    cdef cppclass SmartPointer[T]:
+        pass
+
 cdef extern from "HepMC/Units.h" namespace "HepMC::Units":
     cdef enum MomentumUnit "HepMC::Units::MomentumUnit":
         MEV,
@@ -13,7 +17,7 @@ cdef extern from "HepMC/Units.h" namespace "HepMC::Units":
 
 cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
     cdef cppclass GenEvent:
-        pass
+        vector[SmartPointer[GenParticle]]& particles()
 
 cdef extern from "HepMC/FourVector.h" namespace "HepMC":
     cdef cppclass FourVector:
@@ -100,11 +104,6 @@ cdef extern from "HepMC/Search/FilterList.h" namespace "HepMC":
         const vector[Filter]& filters()
         FilterList& extend(FilterList&)
         FilterList& append(Filter&)
-
-cdef extern from "HepMC/Data/SmartPointer.h" namespace "HepMC":
-    cdef cppclass SmartPointer[T]:
-        pass
-
 
 cdef extern from "HepMC/Search/FindParticles.h" namespace "HepMC":
     cdef enum FilterType "HepMC::FilterType":

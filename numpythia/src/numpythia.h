@@ -17,34 +17,12 @@
 //#include "TDatabasePDG.h"
 //#include "TParticlePDG.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <cmath>
-#include <algorithm>
-#include <math.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <cmath>
+//#include <algorithm>
+//#include <math.h>
 #include <vector>
-
-
-class HepMC_IsStateFinal {
-public:
-  bool operator()( const HepMC::GenParticle* p ) {
-    if ( !p->end_vertex() && p->status() == 1 ) return true;
-    return false;
-  }
-};
-
-
-void hepmc_finalstate_particles(HepMC::GenEvent* event, std::vector<HepMC::GenParticle*>& particles) {
-  int pdgid;
-  HepMC_IsStateFinal isfinal;
-  particles.clear();
-  for (HepMC::GenEvent::particle_iterator p = event->particles_begin(); p != event->particles_end(); ++p) if (isfinal(*p)) {
-    // visibility test
-    pdgid = abs((*p)->pdg_id());
-    if ((pdgid == 12) || (pdgid == 14) || (pdgid == 16)) continue; // neutrino
-    particles.push_back(*p);
-  }
-}
 
 
 /*void hepmc_to_pseudojet(HepMC::GenEvent& evt, std::vector<fastjet::PseudoJet>& output, double eta_max) {*/
@@ -211,7 +189,7 @@ void hepmc_finalstate_particles(HepMC::GenEvent* event, std::vector<HepMC::GenPa
 
 HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia) {
     HepMC::Pythia8ToHepMC3 py2hepmc;
-    // Suppress warnings with Vincia shower
+    // Suppress warnings
     py2hepmc.set_print_inconsistency(false);
     HepMC::GenEvent* event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
     if (!py2hepmc.fill_next_event(*pythia, event)) {

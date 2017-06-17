@@ -430,8 +430,8 @@ def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType sele
                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
                 particles = search.results()
                 del search
-            #else:
-            #    numpythia.hepmc_finalstate_particles(event, particles)
+            else:
+                particles = event.particles()
 
             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
             numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)

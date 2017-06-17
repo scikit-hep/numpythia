@@ -456,6 +456,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include <string>
 #include <memory>
 #include "Pythia8/Pythia.h"
+#include "HepMC/Data/SmartPointer.h"
 #include "HepMC/Units.h"
 #include "HepMC/GenEvent.h"
 #include "HepMC/FourVector.h"
@@ -466,7 +467,6 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "HepMC/Search/FilterBase.h"
 #include "HepMC/Search/Filter.h"
 #include "HepMC/Search/FilterList.h"
-#include "HepMC/Data/SmartPointer.h"
 #include "HepMC/Search/FindParticles.h"
 #include "numpythia.h"
 #include "2to3.h"
@@ -6186,7 +6186,7 @@ static PyObject *__pyx_gb_13_libnumpythia_2generator(__pyx_CoroutineObject *__py
  *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
  *                 particles = search.results()             # <<<<<<<<<<<<<<
  *                 del search
- *             #else:
+ *             else:
  */
             __pyx_cur_scope->__pyx_v_particles = __pyx_cur_scope->__pyx_v_search->results();
 
@@ -6194,8 +6194,8 @@ static PyObject *__pyx_gb_13_libnumpythia_2generator(__pyx_CoroutineObject *__py
  *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
  *                 particles = search.results()
  *                 del search             # <<<<<<<<<<<<<<
- *             #else:
- *             #    numpythia.hepmc_finalstate_particles(event, particles)
+ *             else:
+ *                 particles = event.particles()
  */
             delete __pyx_cur_scope->__pyx_v_search;
 
@@ -6206,10 +6206,23 @@ static PyObject *__pyx_gb_13_libnumpythia_2generator(__pyx_CoroutineObject *__py
  *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
  *                 particles = search.results()
  */
+            goto __pyx_L25;
           }
 
+          /* "_libnumpythia.pyx":434
+ *                 del search
+ *             else:
+ *                 particles = event.particles()             # <<<<<<<<<<<<<<
+ * 
+ *             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+ */
+          /*else*/ {
+            __pyx_cur_scope->__pyx_v_particles = __pyx_cur_scope->__pyx_v_event->particles();
+          }
+          __pyx_L25:;
+
           /* "_libnumpythia.pyx":436
- *             #    numpythia.hepmc_finalstate_particles(event, particles)
+ *                 particles = event.particles()
  * 
  *             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)             # <<<<<<<<<<<<<<
  *             numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)

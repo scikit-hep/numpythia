@@ -8,7 +8,6 @@ cdef extern from "numpythia.h":
     #void hepmc_to_pseudojet(GenEvent&, vector[PseudoJet]&, double)
     #void pythia_to_pseudojet(Event&, vector[PseudoJet]&, double)
     HepMC.GenEvent* pythia_to_hepmc(Pythia.Pythia*)
-    void hepmc_finalstate_particles(HepMC.GenEvent*, vector[HepMC.GenParticle*]&)
     void hepmc_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]]& particles, double*)
 
     # Delphes (optional)
