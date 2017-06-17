@@ -30,7 +30,7 @@ using std::string;
 
 class GenEvent;
 
-class Filter : protected FilterBase {
+class Filter : public FilterBase {
 
 friend class FilterBase; // To allow call to protected constructor
 
@@ -77,6 +77,17 @@ private:
 
     /** @brief Filter::passed_filter helper for attribute-type filters */
     bool passed_attribute_filter(const GenParticlePtr &p) const;
+
+// ADDED FOR NUMPYTHIA
+public:
+    Filter(const Filter& filter):
+        FilterBase(filter),
+        m_operator(filter.m_operator),
+        m_int_value(filter.m_int_value),
+        m_bool_value(filter.m_bool_value),
+        m_attribute_name(filter.m_attribute_name),
+        m_attribute_str(filter.m_attribute_str){}
+
 //
 // Fields
 //

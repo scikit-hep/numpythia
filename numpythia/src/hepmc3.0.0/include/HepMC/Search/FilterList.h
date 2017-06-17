@@ -55,6 +55,22 @@ public:
      */
     FilterList& operator&&(const Filter &f);
 
+// ADDED FOR NUMPYTHIA
+
+    FilterList& extend(FilterList& flist) {
+        const vector<Filter> filters = flist.filters();
+        vector<Filter>::const_iterator it(filters.begin());
+        for(; it != filters.end(); ++it) {
+            m_filters.push_back(*it);
+        }
+        return *this;
+    }
+
+    FilterList& append(const Filter& f) {
+        m_filters.push_back(f);
+        return *this;
+    }
+
 //
 // Accessors
 //

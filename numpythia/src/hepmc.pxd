@@ -1,3 +1,4 @@
+from libcpp.vector cimport vector
 from libcpp.string cimport string
 from libcpp cimport bool
 
@@ -82,6 +83,7 @@ cdef extern from "HepMC/Search/FilterBase.h" namespace "HepMC":
 
 cdef extern from "HepMC/Search/Filter.h" namespace "HepMC":
     cdef cppclass Filter(FilterBase):
+        Filter (const Filter&)
         Filter operator!()
     
     cdef const Filter HAS_END_VERTEX
@@ -92,7 +94,12 @@ cdef extern from "HepMC/Search/Filter.h" namespace "HepMC":
 
 cdef extern from "HepMC/Search/FilterList.h" namespace "HepMC":
     cdef cppclass FilterList:
-        pass
+        FilterList()
+        FilterList(const Filter&)
+        FilterList(const Filter&, const Filter&)
+        const vector[Filter]& filters()
+        FilterList& extend(FilterList&)
+        FilterList& append(Filter&)
 
 cdef extern from "HepMC/Search/FindParticles.h" namespace "HepMC":
     cdef enum FilterType "HepMC::FilterType":

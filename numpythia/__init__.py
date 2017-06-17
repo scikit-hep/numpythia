@@ -1,11 +1,13 @@
 from ._libnumpythia import generate as _generate
 from ._libnumpythia import PythiaInput, HepMCInput
-from ._libnumpythia import ALL, FIRST, LAST
+from ._libnumpythia import FILTERS, ALL, FIRST, LAST
 from .extern.six import string_types
 from pkg_resources import resource_filename
 from fnmatch import fnmatch
 import logging
 import os
+
+locals().update(FILTERS)
 
 log = logging.getLogger(__name__)
 

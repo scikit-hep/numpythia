@@ -12,6 +12,7 @@ from libc.stdlib cimport malloc, free
 from libcpp cimport bool
 from libcpp.vector cimport vector
 from libcpp.string cimport string, const_char
+from libcpp.cast cimport static_cast
 
 from cpython cimport PyObject
 from cpython.cobject cimport (PyCObject_AsVoidPtr,
@@ -37,7 +38,6 @@ DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DT
                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
                            ('pdgid', DTYPE)])
 
-
 ALL = HepMC.FIND_ALL
 FIRST = HepMC.FIND_FIRST
 LAST = HepMC.FIND_LAST
@@ -46,40 +46,98 @@ LAST = HepMC.FIND_LAST
 cdef class FilterList:
     cdef HepMC.FilterList _filterlist
 
+    def __and__(self, other):
+        filterlist = FilterList()
+        filterlist._filterlist.extend(<HepMC.FilterList&>self._filterlist)
+        if isinstance(other, BooleanFilter):
+            filterlist._filterlist.append(<HepMC.Filter&>other._filter)
+        elif isinstance(other, FilterList):
+            filterlist._filterlist.extend(<HepMC.FilterList&>other._filterlist)
+        else:
+            raise TypeError("can only combine boolean filters")
+        return filterlist
+
 cdef class Filter:
+    cdef bool own
     cdef const HepMC.FilterBase* _filter
 
-cdef class STATUS(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.STATUS
+    cdef init(self, const HepMC.FilterBase& _filter, bool own):
+        self._filter = &_filter
+        self.own = own
 
-cdef class PDG_ID(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.PDG_ID
+    def __dealloc__(self):
+        if self.own:
+            del self._filter
 
-cdef class ABS_PDG_ID(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.ABS_PDG_ID
+    def __and__(Filter self, other):
+        filterlist = FilterList()
+        if isinstance(other, BooleanFilter):
+            filterlist._filterlist = HepMC.FilterList(
+                deref(static_cast["const HepMC.Filter*"](self._filter)),
+                deref(static_cast["const HepMC.Filter*"]((<Filter> other)._filter)))
+        elif isinstance(other, FilterList):
+            filterlist._filterlist = HepMC.FilterList(deref(static_cast["const HepMC.Filter*"](self._filter)))
+            filterlist._filterlist.extend((<FilterList> other)._filterlist)
+        else:
+            raise TypeError("can only combine boolean filters")
+        return filterlist
 
-cdef class HAS_END_VERTEX(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.HAS_END_VERTEX
+cdef class IntegerFilter(Filter):
+    def __richcmp__(IntegerFilter self, int value, int op):
+        result = BooleanFilter()
+        if op == 0:
+            result._filter = new HepMC.Filter(deref(self._filter) < value)
+        elif op == 2:
+            result._filter = new HepMC.Filter(deref(self._filter) == value)
+        elif op == 4:
+            result._filter = new HepMC.Filter(deref(self._filter) > value)
+        elif op == 1:
+            result._filter = new HepMC.Filter(deref(self._filter) <= value)
+        elif op == 3:
+            result._filter = new HepMC.Filter(deref(self._filter) != value)
+        elif op == 5:
+            result._filter = new HepMC.Filter(deref(self._filter) >= value)
+        result.own = True
+        return result
 
-cdef class HAS_PRODUCTION_VERTEX(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.HAS_PRODUCTION_VERTEX
+cdef class BooleanFilter(Filter):
+    def __invert__(self):
+        result = BooleanFilter()
+        # Ouch
+        result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](result._filter)))
+        result.own = True
+        return result
 
-cdef class HAS_SAME_PDG_ID_DAUGHTER(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.HAS_SAME_PDG_ID_DAUGHTER
+# filters with integer parameter
+cpdef IntegerFilter STATUS = IntegerFilter()
+STATUS.init(HepMC.STATUS, False)
+cpdef IntegerFilter PDG_ID = IntegerFilter()
+PDG_ID.init(HepMC.PDG_ID, False)
+cpdef IntegerFilter ABS_PDG_ID = IntegerFilter()
+ABS_PDG_ID.init(HepMC.ABS_PDG_ID, False)
 
-cdef class IS_STABLE(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.IS_STABLE
+# filters with boolean parameter
+cpdef BooleanFilter HAS_END_VERTEX = BooleanFilter()
+HAS_END_VERTEX.init(HepMC.HAS_END_VERTEX, False)
+cpdef BooleanFilter HAS_PRODUCTION_VERTEX = BooleanFilter()
+HAS_PRODUCTION_VERTEX.init(HepMC.HAS_PRODUCTION_VERTEX, False)
+cpdef BooleanFilter HAS_SAME_PDG_ID_DAUGHTER = BooleanFilter()
+HAS_SAME_PDG_ID_DAUGHTER.init(HepMC.HAS_SAME_PDG_ID_DAUGHTER, False)
+cpdef BooleanFilter IS_STABLE = BooleanFilter()
+IS_STABLE.init(HepMC.IS_STABLE, False)
+cpdef BooleanFilter IS_BEAM = BooleanFilter()
+IS_BEAM.init(HepMC.IS_BEAM, False)
 
-cdef class IS_BEAM(Filter):
-    def __cinit__(self):
-        self._filter = &HepMC.IS_BEAM
+FILTERS = {
+    'STATUS': STATUS,
+    'PDG_ID': PDG_ID,
+    'ABS_PDG_ID': ABS_PDG_ID,
+    'HAS_END_VERTEX': HAS_END_VERTEX,
+    'HAS_PRODUCTION_VERTEX': HAS_PRODUCTION_VERTEX,
+    'HAS_SAME_PDG_ID_DAUGHTER': HAS_SAME_PDG_ID_DAUGHTER,
+    'IS_STABLE': IS_STABLE,
+    'IS_BEAM': IS_BEAM,
+}
 
 
 cdef class MCInput:
@@ -354,6 +412,10 @@ def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType sele
         ievent = n_events - 1
     if not write_to.empty():
         hepmc_writer = new HepMC.WriterAscii(write_to)
+    if isinstance(find, BooleanFilter):
+        find = FilterList(find)
+    if find and not isinstance(find, FilterList):
+        raise TypeError("find must be a boolean expression of Filters")
     while ievent < n_events:
         if not gen_input.get_next_event():
             continue

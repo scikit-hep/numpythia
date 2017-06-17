@@ -116,6 +116,17 @@ public:
     Filter operator< (int value) const; //!< Create integer filter with operator <
     Filter operator<=(int value) const; //!< Create integer filter with operator <=
 
+// ADDED FOR NUMPYTHIA
+
+    FilterBase(const FilterBase& filter) {
+        m_value_type = filter.m_value_type;
+        switch(filter.m_value_type) {
+            case ATTRIBUTE_PARAM: m_attribute = filter.m_attribute;
+            case INTEGER_PARAM: m_int = filter.m_int;
+            case BOOL_PARAM: m_bool = filter.m_bool;
+        }
+    }
+
 //
 // Fields
 //
