@@ -21,7 +21,7 @@ source code.
    for event in generate(
          get_cmnd('w'), events=1,
          find=(STATUS == 1) & ~HAS_END_VERTEX &
-               (ABS_PDG_ID != 12) & (ABS_PDG_ID != 14) & (ABS_PDG_ID != 16),
+              (ABS_PDG_ID != 12) & (ABS_PDG_ID != 14) & (ABS_PDG_ID != 16),
          random_state=1):
       print(event)
 
@@ -31,7 +31,7 @@ The dtype of each generated event is:
 
    np.dtype([('E', 'f8'), ('px', 'f8'), ('py', 'f8'), ('pz', 'f8'), ('mass', 'f8'),
              ('prodx', 'f8'), ('prody', 'f8'), ('prodz', 'f8'), ('prodt', 'f8'),
-             ('pdgid', 'f8')])
+             ('pdgid', 'i4'), ('status', 'i4')])
 
 Also see `pyjet <https://github.com/ndawe/pyjet>`_ for jet clustering.
 
