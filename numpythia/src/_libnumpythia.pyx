@@ -38,6 +38,50 @@ DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DT
                            ('pdgid', DTYPE)])
 
 
+ALL = HepMC.FIND_ALL
+FIRST = HepMC.FIND_FIRST
+LAST = HepMC.FIND_LAST
+
+
+cdef class FilterList:
+    cdef HepMC.FilterList _filterlist
+
+cdef class Filter:
+    cdef const HepMC.FilterBase* _filter
+
+cdef class STATUS(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.STATUS
+
+cdef class PDG_ID(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.PDG_ID
+
+cdef class ABS_PDG_ID(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.ABS_PDG_ID
+
+cdef class HAS_END_VERTEX(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.HAS_END_VERTEX
+
+cdef class HAS_PRODUCTION_VERTEX(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.HAS_PRODUCTION_VERTEX
+
+cdef class HAS_SAME_PDG_ID_DAUGHTER(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.HAS_SAME_PDG_ID_DAUGHTER
+
+cdef class IS_STABLE(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.IS_STABLE
+
+cdef class IS_BEAM(Filter):
+    def __cinit__(self):
+        self._filter = &HepMC.IS_BEAM
+
+
 cdef class MCInput:
     cdef np.ndarray weights
 
@@ -296,7 +340,7 @@ cdef class HepMCInput(MCInput):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def generate(MCInput gen_input, int n_events, string write_to, bool weighted=False):
+def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType select, string write_to, bool weighted=False):
     """
     Generate events (or read HepMC) and yield numpy arrays of particles
     If weights are enabled, this function will yield the particles and weights array
@@ -317,7 +361,9 @@ def generate(MCInput gen_input, int n_events, string write_to, bool weighted=Fal
         event = gen_input.get_hepmc()
         if hepmc_writer != NULL:
             hepmc_writer.write_event(deref(event))
+
         numpythia.hepmc_finalstate_particles(event, particles)
+
         particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
         numpythia.hepmc_to_array(particles, <DTYPE_t*> particle_array.data)
         if weighted:

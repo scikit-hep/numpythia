@@ -1,4 +1,6 @@
-from ._libnumpythia import generate as _generate, PythiaInput, HepMCInput
+from ._libnumpythia import generate as _generate
+from ._libnumpythia import PythiaInput, HepMCInput
+from ._libnumpythia import ALL, FIRST, LAST
 from .extern.six import string_types
 from pkg_resources import resource_filename
 from fnmatch import fnmatch
@@ -35,11 +37,12 @@ def get_input(name, filename, **kwargs):
     return gen_input
 
 
-def generate(gen_input, events=-1, write_to='', ignore_weights=False, **kwargs):
+def generate(gen_input, events=-1, find=None, select=ALL,
+             write_to='', weighted=False, **kwargs):
     if isinstance(gen_input, string_types):
         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
             gen_input = get_input('hepmc', gen_input, **kwargs)
         else:
             gen_input = get_input('pythia', gen_input, **kwargs)
-    for event in _generate(gen_input, events, write_to, ignore_weights):
+    for event in _generate(gen_input, events, find, select, write_to, weighted):
         yield event
