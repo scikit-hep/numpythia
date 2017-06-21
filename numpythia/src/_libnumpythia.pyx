@@ -26,6 +26,10 @@ cimport pythia as Pythia
 cimport hepmc as HepMC
 cimport numpythia
 
+from .extern.six import string_types
+from pkg_resources import resource_filename
+from fnmatch import fnmatch
+
 cdef extern from "2to3.h":
     pass
 
@@ -398,7 +402,33 @@ cdef class HepMCInput(MCInput):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType select, string write_to, bool weighted=False):
+def get_input(name, filename, **kwargs):
+    """
+    name may be 'pythia' or 'hepmc'
+    filename may be the pythia config file or a HepMC file
+    """
+    name = name.lower().strip()
+    if name == 'pythia':
+        xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
+        if not os.path.exists(filename):
+            raise IOError("Pythia config not found: {0}".format(filename))
+        gen_input = PythiaInput(filename, xmldoc, **kwargs)
+    elif name == 'hepmc':
+        gen_input = HepMCInput(filename)
+        if kwargs:
+            raise ValueError(
+                "unrecognized parameters in kwargs: {0}".format(kwargs))
+    else:
+        raise ValueError(
+            "no generator input available with name '{0}'".format(name))
+    return gen_input
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def generate(object gen_input, int events=-1, object find=None,
+             HepMC.FilterType select=ALL, string write_to='',
+             bool weighted=False, **kwargs):
     """
     Generate events (or read HepMC) and yield numpy arrays of particles
     If weights are enabled, this function will yield the particles and weights array
@@ -408,21 +438,31 @@ def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType sele
     cdef HepMC.WriterAscii* hepmc_writer = NULL
     cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles
     cdef HepMC.FindParticles* search = NULL
+    cdef MCInput _gen_input
     cdef int ievent = 0;
-    if n_events < 0:
-        ievent = n_events - 1
+    if events < 0:
+        ievent = events - 1
     if not write_to.empty():
         hepmc_writer = new HepMC.WriterAscii(write_to)
     if isinstance(find, BooleanFilter):
         find = FilterList(find)
     if find is not None and not isinstance(find, FilterList):
         raise TypeError("find must be a boolean expression of Filters")
+    if isinstance(gen_input, string_types):
+        if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
+            _gen_input = get_input('hepmc', gen_input, **kwargs)
+        else:
+            _gen_input = get_input('pythia', gen_input, **kwargs)
+    else:
+        if not isinstance(gen_input, MCInput):
+            raise TypeError("gen_input must be a string (filename) or MCInput instance")
+        _gen_input = <MCInput> gen_input
     try:
-        while ievent < n_events:
-            if not gen_input.get_next_event():
+        while ievent < events:
+            if not _gen_input.get_next_event():
                 continue
             # We don't own event here. MCInput will delete it.
-            event = gen_input.get_hepmc()
+            event = _gen_input.get_hepmc()
             if hepmc_writer != NULL:
                 hepmc_writer.write_event(deref(event))
 
@@ -439,10 +479,10 @@ def generate(MCInput gen_input, int n_events, object find, HepMC.FilterType sele
                 yield particle_array, gen_input.weights
             else:
                 yield particle_array
-            if n_events > 0:
+            if events > 0:
                 ievent += 1
     except:
         raise
     finally:
         del hepmc_writer
-    gen_input.finish()
+    _gen_input.finish()

@@ -15,10 +15,6 @@ cdef extern from "HepMC/Units.h" namespace "HepMC::Units":
         MM,
         CM
 
-cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
-    cdef cppclass GenEvent:
-        vector[SmartPointer[GenParticle]]& particles()
-
 cdef extern from "HepMC/FourVector.h" namespace "HepMC":
     cdef cppclass FourVector:
         double x()
@@ -40,11 +36,15 @@ cdef extern from "HepMC/GenVertex.h" namespace "HepMC":
 
 cdef extern from "HepMC/GenParticle.h" namespace "HepMC":
     cdef cppclass GenParticle:
-        int pdg_id()
+        int pid()
         int status()
-        FourVector momentum()
-        GenVertex* end_vertex()
-        GenVertex* production_vertex()
+        FourVector& momentum()
+        SmartPointer[GenVertex] end_vertex()
+        SmartPointer[GenVertex] production_vertex()
+
+cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
+    cdef cppclass GenEvent:
+        vector[SmartPointer[GenParticle]]& particles()
 
 cdef extern from "HepMC/ReaderAscii.h" namespace "HepMC":
     cdef cppclass ReaderAscii:
