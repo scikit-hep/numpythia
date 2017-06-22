@@ -1,5 +1,9 @@
 # cython: experimental_cpp_class_def=True, c_string_type=str, c_string_encoding=ascii
 
+# TODO:
+# Wrap HepMC Writer and remove write_to
+# Wrap GenEvent and yield that
+
 import numpy as np
 cimport numpy as np
 np.import_array()
@@ -144,6 +148,48 @@ FILTERS = {
 }
 
 
+cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):
+    cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+    numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
+    return particle_array
+
+
+cdef class GenEvent:
+    cdef shared_ptr[HepMC.GenEvent] event
+
+    @staticmethod
+    cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):
+        cdef GenEvent wrapped_event = GenEvent()
+        wrapped_event.event = event
+        return wrapped_event
+
+    @staticmethod
+    cdef inline GenEvent wrap_pythia(Pythia.Pythia& pythia):
+        cdef GenEvent wrapped_event = GenEvent()
+        cdef HepMC.Pythia8ToHepMC3 py2hepmc
+        # Suppress warnings
+        py2hepmc.set_print_inconsistency(False)
+        cdef HepMC.GenEvent* event = new HepMC.GenEvent(HepMC.GEV, HepMC.MM)
+        if not py2hepmc.fill_next_event(pythia, event):
+            del event;
+            raise RuntimeError("unable to convert PYTHIA event to HepMC")
+        wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
+        return wrapped_event
+
+    def select(self, object selection, HepMC.FilterType mode=ALL):
+        if isinstance(selection, BooleanFilter):
+            selection = FilterList(selection)
+        elif not isinstance(selection, FilterList):
+            raise TypeError("find must be a boolean expression of Filters")
+        cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
+        cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+        del search
+        return particles_to_array(particles)
+
+    def particles(self):
+        return particles_to_array(deref(self.event).particles())
+
+
 cdef class MCInput:
     cdef np.ndarray weights
 
@@ -161,7 +207,7 @@ cdef class MCInput:
     cdef bool get_next_event(self) except *:
         return False
 
-    cdef HepMC.GenEvent* get_hepmc(self):
+    cdef GenEvent get_hepmc(self):
         pass
 
     """
@@ -184,7 +230,6 @@ cdef class PythiaInput(MCInput):
     cdef Pythia.Pythia* pythia
     #cdef Pythia.VinciaPlugin* vincia_plugin
     cdef Pythia.UserHooks* userhooks
-    cdef HepMC.GenEvent* hepmc_event
     cdef int verbosity
     cdef int cut_on_pdgid
     cdef float pdgid_pt_min
@@ -207,7 +252,6 @@ cdef class PythiaInput(MCInput):
         # Initialize pointers to NULL
         #self.vincia_plugin = NULL
         self.userhooks = NULL
-        self.hepmc_event = NULL
 
         if verbosity > 0:
             self.pythia.readString("Init:showProcesses = on")
@@ -265,7 +309,6 @@ cdef class PythiaInput(MCInput):
         self.shower = shower
 
     def __dealloc__(self):
-        del self.hepmc_event
         del self.pythia
         #del self.vincia_plugin
         del self.userhooks
@@ -306,10 +349,8 @@ cdef class PythiaInput(MCInput):
                 self.weights[iweight] = self.pythia.info.weight(iweight)
         return True
 
-    cdef HepMC.GenEvent* get_hepmc(self):
-        del self.hepmc_event
-        self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)
-        return self.hepmc_event
+    cdef GenEvent get_hepmc(self):
+        return GenEvent.wrap_pythia(deref(self.pythia))
 
     """
     cdef void to_pseudojet(self, vector[PseudoJet]& particles, float eta_max):
@@ -335,26 +376,23 @@ cdef class HepMCInput(MCInput):
 
     cdef string filename
     cdef HepMC.ReaderAscii* hepmc_reader
-    cdef HepMC.GenEvent* event
+    cdef shared_ptr[HepMC.GenEvent] event
     #cdef TDatabasePDG *pdg
 
     def __cinit__(self, string filename):
         self.filename = filename
         self.hepmc_reader = new HepMC.ReaderAscii(filename)
-        self.event = NULL
         #self.pdg = TDatabasePDG_Instance()
 
     def __dealloc__(self):
-        del self.event
         del self.hepmc_reader
 
     cdef bool get_next_event(self) except *:
-        del self.event
-        self.event = new HepMC.GenEvent()
+        self.event.reset(new HepMC.GenEvent())
         return self.hepmc_reader.read_event(deref(self.event))
 
-    cdef HepMC.GenEvent* get_hepmc(self):
-        return self.event
+    cdef GenEvent get_hepmc(self):
+        return GenEvent.wrap(self.event)
 
     """
     cdef void to_pseudojet(self, vector[PseudoJet]& particles, float eta_max):
@@ -426,28 +464,21 @@ def get_input(name, filename, **kwargs):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def generate(object gen_input, int events=-1, object find=None,
-             HepMC.FilterType select=ALL, string write_to='',
+def generate(object gen_input, int events=-1,
+             string write_to='',
              bool weighted=False, **kwargs):
     """
     Generate events (or read HepMC) and yield numpy arrays of particles
     If weights are enabled, this function will yield the particles and weights array
     """
-    cdef np.ndarray particle_array
-    cdef HepMC.GenEvent* event
+    cdef GenEvent event
     cdef HepMC.WriterAscii* hepmc_writer = NULL
-    cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles
-    cdef HepMC.FindParticles* search = NULL
     cdef MCInput _gen_input
     cdef int ievent = 0;
     if events < 0:
         ievent = events - 1
     if not write_to.empty():
         hepmc_writer = new HepMC.WriterAscii(write_to)
-    if isinstance(find, BooleanFilter):
-        find = FilterList(find)
-    if find is not None and not isinstance(find, FilterList):
-        raise TypeError("find must be a boolean expression of Filters")
     if isinstance(gen_input, string_types):
         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
             _gen_input = get_input('hepmc', gen_input, **kwargs)
@@ -464,21 +495,8 @@ def generate(object gen_input, int events=-1, object find=None,
             # We don't own event here. MCInput will delete it.
             event = _gen_input.get_hepmc()
             if hepmc_writer != NULL:
-                hepmc_writer.write_event(deref(event))
-
-            if find is not None:
-                search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
-                particles = search.results()
-                del search
-            else:
-                particles = event.particles()
-
-            particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
-            numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
-            if weighted:
-                yield particle_array, gen_input.weights
-            else:
-                yield particle_array
+                hepmc_writer.write_event(deref(event.event))
+            yield event
             if events > 0:
                 ievent += 1
     except:

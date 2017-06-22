@@ -5,7 +5,6 @@
 #include "HepMC/GenEvent.h"
 #include "HepMC/WriterAscii.h"
 #include "HepMC/ReaderAscii.h"
-#include "HepMC/Pythia8ToHepMC3.h"
 
 //#include "fastjet/ClusterSequence.hh"
 
@@ -24,19 +23,6 @@
 //#include <algorithm>
 //#include <math.h>
 #include <vector>
-
-
-HepMC::GenEvent* pythia_to_hepmc(Pythia8::Pythia* pythia) {
-    HepMC::Pythia8ToHepMC3 py2hepmc;
-    // Suppress warnings
-    py2hepmc.set_print_inconsistency(false);
-    HepMC::GenEvent* event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
-    if (!py2hepmc.fill_next_event(*pythia, event)) {
-        delete event;
-        return NULL;
-    }
-    return event;
-}
 
 
 void hepmc_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> >& particles,

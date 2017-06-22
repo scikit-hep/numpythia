@@ -468,6 +468,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "HepMC/Search/Filter.h"
 #include "HepMC/Search/FilterList.h"
 #include "HepMC/Search/FindParticles.h"
+#include "HepMC/Pythia8ToHepMC3.h"
 #include "numpythia.h"
 #include "2to3.h"
 #include "pythread.h"
@@ -885,7 +886,7 @@ typedef npy_double __pyx_t_5numpy_double_t;
  */
 typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 
-/* "_libnumpythia.pyx":37
+/* "_libnumpythia.pyx":41
  * 
  * DTYPE = np.float64
  * ctypedef np.float64_t DTYPE_t             # <<<<<<<<<<<<<<
@@ -923,6 +924,7 @@ struct __pyx_obj_13_libnumpythia_FilterList;
 struct __pyx_obj_13_libnumpythia_Filter;
 struct __pyx_obj_13_libnumpythia_IntegerFilter;
 struct __pyx_obj_13_libnumpythia_BooleanFilter;
+struct __pyx_obj_13_libnumpythia_GenEvent;
 struct __pyx_obj_13_libnumpythia_MCInput;
 struct __pyx_obj_13_libnumpythia_PythiaInput;
 struct __pyx_obj_13_libnumpythia_HepMCInput;
@@ -964,7 +966,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
-/* "_libnumpythia.pyx":50
+/* "_libnumpythia.pyx":54
  * 
  * 
  * cdef class FilterList:             # <<<<<<<<<<<<<<
@@ -977,7 +979,7 @@ struct __pyx_obj_13_libnumpythia_FilterList {
 };
 
 
-/* "_libnumpythia.pyx":64
+/* "_libnumpythia.pyx":68
  *         return filterlist
  * 
  * cdef class Filter:             # <<<<<<<<<<<<<<
@@ -992,7 +994,7 @@ struct __pyx_obj_13_libnumpythia_Filter {
 };
 
 
-/* "_libnumpythia.pyx":89
+/* "_libnumpythia.pyx":93
  *         return filterlist
  * 
  * cdef class IntegerFilter(Filter):             # <<<<<<<<<<<<<<
@@ -1004,7 +1006,7 @@ struct __pyx_obj_13_libnumpythia_IntegerFilter {
 };
 
 
-/* "_libnumpythia.pyx":107
+/* "_libnumpythia.pyx":111
  *         return result
  * 
  * cdef class BooleanFilter(Filter):             # <<<<<<<<<<<<<<
@@ -1016,7 +1018,21 @@ struct __pyx_obj_13_libnumpythia_BooleanFilter {
 };
 
 
-/* "_libnumpythia.pyx":147
+/* "_libnumpythia.pyx":157
+ * 
+ * 
+ * cdef class GenEvent:             # <<<<<<<<<<<<<<
+ *     cdef shared_ptr[HepMC.GenEvent] event
+ * 
+ */
+struct __pyx_obj_13_libnumpythia_GenEvent {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_13_libnumpythia_GenEvent *__pyx_vtab;
+  std::shared_ptr<HepMC::GenEvent>  event;
+};
+
+
+/* "_libnumpythia.pyx":193
  * 
  * 
  * cdef class MCInput:             # <<<<<<<<<<<<<<
@@ -1030,7 +1046,7 @@ struct __pyx_obj_13_libnumpythia_MCInput {
 };
 
 
-/* "_libnumpythia.pyx":182
+/* "_libnumpythia.pyx":228
  * 
  * 
  * cdef class PythiaInput(MCInput):             # <<<<<<<<<<<<<<
@@ -1041,7 +1057,6 @@ struct __pyx_obj_13_libnumpythia_PythiaInput {
   struct __pyx_obj_13_libnumpythia_MCInput __pyx_base;
   Pythia8::Pythia *pythia;
   Pythia8::UserHooks *userhooks;
-  HepMC::GenEvent *hepmc_event;
   int verbosity;
   int cut_on_pdgid;
   float pdgid_pt_min;
@@ -1050,7 +1065,7 @@ struct __pyx_obj_13_libnumpythia_PythiaInput {
 };
 
 
-/* "_libnumpythia.pyx":334
+/* "_libnumpythia.pyx":375
  * 
  * 
  * cdef class HepMCInput(MCInput):             # <<<<<<<<<<<<<<
@@ -1061,31 +1076,26 @@ struct __pyx_obj_13_libnumpythia_HepMCInput {
   struct __pyx_obj_13_libnumpythia_MCInput __pyx_base;
   std::string filename;
   HepMC::ReaderAscii *hepmc_reader;
-  HepMC::GenEvent *event;
+  std::shared_ptr<HepMC::GenEvent>  event;
 };
 
 
-/* "_libnumpythia.pyx":429
+/* "_libnumpythia.pyx":467
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * def generate(object gen_input, int events=-1, object find=None,             # <<<<<<<<<<<<<<
- *              HepMC.FilterType select=ALL, string write_to='',
+ * def generate(object gen_input, int events=-1,             # <<<<<<<<<<<<<<
+ *              string write_to='',
  *              bool weighted=False, **kwargs):
  */
 struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate {
   PyObject_HEAD
   struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v__gen_input;
-  HepMC::GenEvent *__pyx_v_event;
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_v_event;
   int __pyx_v_events;
-  PyObject *__pyx_v_find;
   PyObject *__pyx_v_gen_input;
   HepMC::WriterAscii *__pyx_v_hepmc_writer;
   int __pyx_v_ievent;
   PyObject *__pyx_v_kwargs;
-  PyArrayObject *__pyx_v_particle_array;
-  std::vector<HepMC::SmartPointer<HepMC::GenParticle> >  __pyx_v_particles;
-  HepMC::FindParticles *__pyx_v_search;
-  enum HepMC::FilterType __pyx_v_select;
   bool __pyx_v_weighted;
   std::string __pyx_v_write_to;
   PyObject *__pyx_t_0;
@@ -1095,7 +1105,7 @@ struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate {
 
 
 
-/* "_libnumpythia.pyx":64
+/* "_libnumpythia.pyx":68
  *         return filterlist
  * 
  * cdef class Filter:             # <<<<<<<<<<<<<<
@@ -1109,7 +1119,7 @@ struct __pyx_vtabstruct_13_libnumpythia_Filter {
 static struct __pyx_vtabstruct_13_libnumpythia_Filter *__pyx_vtabptr_13_libnumpythia_Filter;
 
 
-/* "_libnumpythia.pyx":89
+/* "_libnumpythia.pyx":93
  *         return filterlist
  * 
  * cdef class IntegerFilter(Filter):             # <<<<<<<<<<<<<<
@@ -1123,7 +1133,7 @@ struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter {
 static struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *__pyx_vtabptr_13_libnumpythia_IntegerFilter;
 
 
-/* "_libnumpythia.pyx":107
+/* "_libnumpythia.pyx":111
  *         return result
  * 
  * cdef class BooleanFilter(Filter):             # <<<<<<<<<<<<<<
@@ -1137,7 +1147,24 @@ struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter {
 static struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *__pyx_vtabptr_13_libnumpythia_BooleanFilter;
 
 
-/* "_libnumpythia.pyx":147
+/* "_libnumpythia.pyx":157
+ * 
+ * 
+ * cdef class GenEvent:             # <<<<<<<<<<<<<<
+ *     cdef shared_ptr[HepMC.GenEvent] event
+ * 
+ */
+
+struct __pyx_vtabstruct_13_libnumpythia_GenEvent {
+  struct __pyx_obj_13_libnumpythia_GenEvent *(*wrap)(std::shared_ptr<HepMC::GenEvent>  &);
+  struct __pyx_obj_13_libnumpythia_GenEvent *(*wrap_pythia)(Pythia8::Pythia &);
+};
+static struct __pyx_vtabstruct_13_libnumpythia_GenEvent *__pyx_vtabptr_13_libnumpythia_GenEvent;
+static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_8GenEvent_wrap(std::shared_ptr<HepMC::GenEvent>  &);
+static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_8GenEvent_wrap_pythia(Pythia8::Pythia &);
+
+
+/* "_libnumpythia.pyx":193
  * 
  * 
  * cdef class MCInput:             # <<<<<<<<<<<<<<
@@ -1148,13 +1175,13 @@ static struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *__pyx_vtabptr_13_l
 struct __pyx_vtabstruct_13_libnumpythia_MCInput {
   int (*get_num_weights)(struct __pyx_obj_13_libnumpythia_MCInput *);
   bool (*get_next_event)(struct __pyx_obj_13_libnumpythia_MCInput *);
-  HepMC::GenEvent *(*get_hepmc)(struct __pyx_obj_13_libnumpythia_MCInput *);
+  struct __pyx_obj_13_libnumpythia_GenEvent *(*get_hepmc)(struct __pyx_obj_13_libnumpythia_MCInput *);
   void (*finish)(struct __pyx_obj_13_libnumpythia_MCInput *);
 };
 static struct __pyx_vtabstruct_13_libnumpythia_MCInput *__pyx_vtabptr_13_libnumpythia_MCInput;
 
 
-/* "_libnumpythia.pyx":182
+/* "_libnumpythia.pyx":228
  * 
  * 
  * cdef class PythiaInput(MCInput):             # <<<<<<<<<<<<<<
@@ -1168,7 +1195,7 @@ struct __pyx_vtabstruct_13_libnumpythia_PythiaInput {
 static struct __pyx_vtabstruct_13_libnumpythia_PythiaInput *__pyx_vtabptr_13_libnumpythia_PythiaInput;
 
 
-/* "_libnumpythia.pyx":334
+/* "_libnumpythia.pyx":375
  * 
  * 
  * cdef class HepMCInput(MCInput):             # <<<<<<<<<<<<<<
@@ -1302,9 +1329,11 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
-/* RaiseArgTupleInvalid.proto */
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+/* GetModuleGlobalName.proto */
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
+
+/* ExtTypeTest.proto */
+static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
 /* RaiseDoubleKeywords.proto */
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
@@ -1313,6 +1342,10 @@ static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_n
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
+
+/* RaiseArgTupleInvalid.proto */
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
 /* PyCFunctionFastCall.proto */
 #if CYTHON_FAST_PYCCALL
@@ -1385,12 +1418,6 @@ static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObje
 #else
 #define __Pyx_CallUnboundCMethod0(cfunc, self)  __Pyx__CallUnboundCMethod0(cfunc, self)
 #endif
-
-/* GetModuleGlobalName.proto */
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
-
-/* ExtTypeTest.proto */
-static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
 /* PyObjectLookupSpecial.proto */
 #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x02070000
@@ -1562,48 +1589,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(en
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
-/* CppExceptionConversion.proto */
-#ifndef __Pyx_CppExn2PyErr
-#include <new>
-#include <typeinfo>
-#include <stdexcept>
-#include <ios>
-static void __Pyx_CppExn2PyErr() {
-  try {
-    if (PyErr_Occurred())
-      ; // let the latest Python exn pass through and ignore the current one
-    else
-      throw;
-  } catch (const std::bad_alloc& exn) {
-    PyErr_SetString(PyExc_MemoryError, exn.what());
-  } catch (const std::bad_cast& exn) {
-    PyErr_SetString(PyExc_TypeError, exn.what());
-  } catch (const std::bad_typeid& exn) {
-    PyErr_SetString(PyExc_TypeError, exn.what());
-  } catch (const std::domain_error& exn) {
-    PyErr_SetString(PyExc_ValueError, exn.what());
-  } catch (const std::invalid_argument& exn) {
-    PyErr_SetString(PyExc_ValueError, exn.what());
-  } catch (const std::ios_base::failure& exn) {
-    PyErr_SetString(PyExc_IOError, exn.what());
-  } catch (const std::out_of_range& exn) {
-    PyErr_SetString(PyExc_IndexError, exn.what());
-  } catch (const std::overflow_error& exn) {
-    PyErr_SetString(PyExc_OverflowError, exn.what());
-  } catch (const std::range_error& exn) {
-    PyErr_SetString(PyExc_ArithmeticError, exn.what());
-  } catch (const std::underflow_error& exn) {
-    PyErr_SetString(PyExc_ArithmeticError, exn.what());
-  } catch (const std::exception& exn) {
-    PyErr_SetString(PyExc_RuntimeError, exn.what());
-  }
-  catch (...)
-  {
-    PyErr_SetString(PyExc_RuntimeError, "Unknown exception");
-  }
-}
-#endif
-
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
@@ -1718,10 +1703,10 @@ static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 static CYTHON_INLINE enum HepMC::FilterType __Pyx_PyInt_As_enum__HepMC_3a__3a_FilterType(PyObject *);
 
 /* CIntFromPy.proto */
-static CYTHON_INLINE PY_LONG_LONG __Pyx_PyInt_As_PY_LONG_LONG(PyObject *);
+static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *);
 
 /* CIntFromPy.proto */
-static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *);
+static CYTHON_INLINE PY_LONG_LONG __Pyx_PyInt_As_PY_LONG_LONG(PyObject *);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
@@ -1797,16 +1782,18 @@ static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnumpythia_Filter *__pyx_v_self, HepMC::FilterBase const &__pyx_v__filter, bool __pyx_v_own); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_8GenEvent_wrap(std::shared_ptr<HepMC::GenEvent>  &__pyx_v_event); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_8GenEvent_wrap_pythia(Pythia8::Pythia &__pyx_v_pythia); /* proto*/
 static int __pyx_f_13_libnumpythia_7MCInput_get_num_weights(CYTHON_UNUSED struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self); /* proto*/
 static bool __pyx_f_13_libnumpythia_7MCInput_get_next_event(CYTHON_UNUSED struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self); /* proto*/
-static HepMC::GenEvent *__pyx_f_13_libnumpythia_7MCInput_get_hepmc(CYTHON_UNUSED struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self); /* proto*/
+static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_7MCInput_get_hepmc(CYTHON_UNUSED struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self); /* proto*/
 static void __pyx_f_13_libnumpythia_7MCInput_finish(CYTHON_UNUSED struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self); /* proto*/
 static int __pyx_f_13_libnumpythia_11PythiaInput_get_num_weights(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self); /* proto*/
 static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self); /* proto*/
-static HepMC::GenEvent *__pyx_f_13_libnumpythia_11PythiaInput_get_hepmc(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self); /* proto*/
+static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_11PythiaInput_get_hepmc(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self); /* proto*/
 static void __pyx_f_13_libnumpythia_11PythiaInput_finish(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self); /* proto*/
 static bool __pyx_f_13_libnumpythia_10HepMCInput_get_next_event(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self); /* proto*/
-static HepMC::GenEvent *__pyx_f_13_libnumpythia_10HepMCInput_get_hepmc(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self); /* proto*/
+static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_10HepMCInput_get_hepmc(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self); /* proto*/
 
 /* Module declarations from 'cpython.buffer' */
 
@@ -1927,6 +1914,7 @@ static PyTypeObject *__pyx_ptype_13_libnumpythia_FilterList = 0;
 static PyTypeObject *__pyx_ptype_13_libnumpythia_Filter = 0;
 static PyTypeObject *__pyx_ptype_13_libnumpythia_IntegerFilter = 0;
 static PyTypeObject *__pyx_ptype_13_libnumpythia_BooleanFilter = 0;
+static PyTypeObject *__pyx_ptype_13_libnumpythia_GenEvent = 0;
 static PyTypeObject *__pyx_ptype_13_libnumpythia_MCInput = 0;
 static PyTypeObject *__pyx_ptype_13_libnumpythia_PythiaInput = 0;
 static PyTypeObject *__pyx_ptype_13_libnumpythia_HepMCInput = 0;
@@ -1939,6 +1927,7 @@ static struct __pyx_obj_13_libnumpythia_BooleanFilter *__pyx_v_13_libnumpythia_H
 static struct __pyx_obj_13_libnumpythia_BooleanFilter *__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER = 0;
 static struct __pyx_obj_13_libnumpythia_BooleanFilter *__pyx_v_13_libnumpythia_IS_STABLE = 0;
 static struct __pyx_obj_13_libnumpythia_BooleanFilter *__pyx_v_13_libnumpythia_IS_BEAM = 0;
+static CYTHON_INLINE PyArrayObject *__pyx_f_13_libnumpythia_particles_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> > ); /*proto*/
 static std::string __pyx_convert_string_from_py_std__in_string(PyObject *); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_std__in_string(std::string const &); /*proto*/
@@ -1958,8 +1947,8 @@ static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_ImportError;
 static const char __pyx_k_E[] = "E";
 static const char __pyx_k_r[] = "r";
-static const char __pyx_k__4[] = "_";
-static const char __pyx_k__5[] = ":";
+static const char __pyx_k__7[] = "_";
+static const char __pyx_k__8[] = ":";
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_os[] = "os";
 static const char __pyx_k_pT[] = "pT";
@@ -1968,15 +1957,15 @@ static const char __pyx_k_py[] = "py";
 static const char __pyx_k_pz[] = "pz";
 static const char __pyx_k_0_1[] = "{0} = {1}";
 static const char __pyx_k_ALL[] = "ALL";
-static const char __pyx_k__25[] = "";
+static const char __pyx_k__26[] = "";
 static const char __pyx_k_eta[] = "eta";
 static const char __pyx_k_phi[] = "phi";
 static const char __pyx_k_LAST[] = "LAST";
 static const char __pyx_k_args[] = "args";
 static const char __pyx_k_exit[] = "__exit__";
-static const char __pyx_k_find[] = "find";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_mass[] = "mass";
+static const char __pyx_k_mode[] = "mode";
 static const char __pyx_k_name[] = "name";
 static const char __pyx_k_open[] = "open";
 static const char __pyx_k_path[] = "path";
@@ -2013,8 +2002,6 @@ static const char __pyx_k_ievent[] = "ievent";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_kwargs[] = "kwargs";
 static const char __pyx_k_pythia[] = "pythia";
-static const char __pyx_k_search[] = "search";
-static const char __pyx_k_select[] = "select";
 static const char __pyx_k_shower[] = "shower";
 static const char __pyx_k_status[] = "status";
 static const char __pyx_k_xmldoc[] = "xmldoc";
@@ -2027,7 +2014,6 @@ static const char __pyx_k_fnmatch[] = "fnmatch";
 static const char __pyx_k_getsize[] = "getsize";
 static const char __pyx_k_hepmc_2[] = ".hepmc*";
 static const char __pyx_k_replace[] = "replace";
-static const char __pyx_k_weights[] = "weights";
 static const char __pyx_k_DTYPE_EP[] = "DTYPE_EP";
 static const char __pyx_k_beam_ecm[] = "beam_ecm";
 static const char __pyx_k_filename[] = "filename";
@@ -2041,7 +2027,7 @@ static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_gen_input[] = "gen_input";
 static const char __pyx_k_get_input[] = "get_input";
 static const char __pyx_k_numpythia[] = "numpythia";
-static const char __pyx_k_particles[] = "particles";
+static const char __pyx_k_selection[] = "selection";
 static const char __pyx_k_verbosity[] = "verbosity";
 static const char __pyx_k_ABS_PDG_ID[] = "ABS_PDG_ID";
 static const char __pyx_k_ValueError[] = "ValueError";
@@ -2066,7 +2052,6 @@ static const char __pyx_k_Random_seed_0[] = "Random:seed = {0}";
 static const char __pyx_k_pkg_resources[] = "pkg_resources";
 static const char __pyx_k_DTYPE_PARTICLE[] = "DTYPE_PARTICLE";
 static const char __pyx_k_HAS_END_VERTEX[] = "HAS_END_VERTEX";
-static const char __pyx_k_particle_array[] = "particle_array";
 static const char __pyx_k_Random_setSeed_on[] = "Random:setSeed = on";
 static const char __pyx_k_resource_filename[] = "resource_filename";
 static const char __pyx_k_src_pythia8226_share[] = "src/pythia8226/share";
@@ -2100,6 +2085,7 @@ static const char __pyx_k_gen_input_must_be_a_string_filen[] = "gen_input must b
 static const char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static const char __pyx_k_no_generator_input_available_wit[] = "no generator input available with name '{0}'";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
+static const char __pyx_k_unable_to_convert_PYTHIA_event_t[] = "unable to convert PYTHIA event to HepMC";
 static const char __pyx_k_unrecognized_parameters_in_kwarg[] = "unrecognized parameters in kwargs: {0}";
 static const char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
 static const char __pyx_k_Init_showMultipartonInteractions_2[] = "Init:showMultipartonInteractions = off";
@@ -2149,9 +2135,9 @@ static PyObject *__pyx_n_s_RuntimeError;
 static PyObject *__pyx_n_s_STATUS;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_ValueError;
-static PyObject *__pyx_kp_b__25;
-static PyObject *__pyx_n_s__4;
-static PyObject *__pyx_kp_s__5;
+static PyObject *__pyx_kp_b__26;
+static PyObject *__pyx_n_s__7;
+static PyObject *__pyx_kp_s__8;
 static PyObject *__pyx_n_s_args;
 static PyObject *__pyx_n_s_average;
 static PyObject *__pyx_n_s_beam_ecm;
@@ -2169,7 +2155,6 @@ static PyObject *__pyx_n_s_exists;
 static PyObject *__pyx_n_s_exit;
 static PyObject *__pyx_n_s_extern_six;
 static PyObject *__pyx_n_s_filename;
-static PyObject *__pyx_n_s_find;
 static PyObject *__pyx_kp_s_find_must_be_a_boolean_expressio;
 static PyObject *__pyx_n_s_float64;
 static PyObject *__pyx_n_s_fnmatch;
@@ -2194,6 +2179,7 @@ static PyObject *__pyx_n_s_libnumpythia;
 static PyObject *__pyx_n_s_lower;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_mass;
+static PyObject *__pyx_n_s_mode;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_kp_u_ndarray_is_not_C_contiguous;
 static PyObject *__pyx_kp_u_ndarray_is_not_Fortran_contiguou;
@@ -2208,8 +2194,6 @@ static PyObject *__pyx_n_s_open;
 static PyObject *__pyx_n_s_os;
 static PyObject *__pyx_n_s_pT;
 static PyObject *__pyx_n_s_params_dict;
-static PyObject *__pyx_n_s_particle_array;
-static PyObject *__pyx_n_s_particles;
 static PyObject *__pyx_n_s_path;
 static PyObject *__pyx_n_s_pdgid;
 static PyObject *__pyx_n_s_pdgid_pt_max;
@@ -2231,8 +2215,7 @@ static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_replace;
 static PyObject *__pyx_n_s_resource_filename;
 static PyObject *__pyx_n_s_sample_size;
-static PyObject *__pyx_n_s_search;
-static PyObject *__pyx_n_s_select;
+static PyObject *__pyx_n_s_selection;
 static PyObject *__pyx_n_s_send;
 static PyObject *__pyx_n_s_shower;
 static PyObject *__pyx_n_s_splitext;
@@ -2243,11 +2226,11 @@ static PyObject *__pyx_n_s_strip;
 static PyObject *__pyx_n_s_tell;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_throw;
+static PyObject *__pyx_kp_s_unable_to_convert_PYTHIA_event_t;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_kp_s_unrecognized_parameters_in_kwarg;
 static PyObject *__pyx_n_s_verbosity;
 static PyObject *__pyx_n_s_weighted;
-static PyObject *__pyx_n_s_weights;
 static PyObject *__pyx_n_s_write_to;
 static PyObject *__pyx_n_s_xmldoc;
 static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_13_libnumpythia_FilterList *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
@@ -2255,6 +2238,8 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
 static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_libnumpythia_Filter *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
 static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __pyx_obj_13_libnumpythia_IntegerFilter *__pyx_v_self, int __pyx_v_value, int __pyx_v_op); /* proto */
 static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __pyx_obj_13_libnumpythia_BooleanFilter *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_select(struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_v_self, PyObject *__pyx_v_selection, enum HepMC::FilterType __pyx_v_mode); /* proto */
+static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_2particles(struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_13_libnumpythia_7MCInput_8weighted___get__(struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_13_libnumpythia_7MCInput_11num_weights___get__(struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self); /* proto */
 static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self, std::string __pyx_v_config, std::string __pyx_v_xmldoc, int __pyx_v_random_state, float __pyx_v_beam_ecm, int __pyx_v_cut_on_pdgid, float __pyx_v_pdgid_pt_min, float __pyx_v_pdgid_pt_max, PyObject *__pyx_v_params_dict, int __pyx_v_verbosity, std::string __pyx_v_shower, PyObject *__pyx_v_kwargs); /* proto */
@@ -2263,32 +2248,33 @@ static int __pyx_pf_13_libnumpythia_10HepMCInput___cinit__(struct __pyx_obj_13_l
 static void __pyx_pf_13_libnumpythia_10HepMCInput_2__dealloc__(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self, int __pyx_v_sample_size); /* proto */
 static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_name, PyObject *__pyx_v_filename, PyObject *__pyx_v_kwargs); /* proto */
-static PyObject *__pyx_pf_13_libnumpythia_2generate(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_gen_input, int __pyx_v_events, PyObject *__pyx_v_find, enum HepMC::FilterType __pyx_v_select, std::string __pyx_v_write_to, bool __pyx_v_weighted, PyObject *__pyx_v_kwargs); /* proto */
+static PyObject *__pyx_pf_13_libnumpythia_2generate(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_gen_input, int __pyx_v_events, std::string __pyx_v_write_to, CYTHON_UNUSED bool __pyx_v_weighted, PyObject *__pyx_v_kwargs); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static PyObject *__pyx_tp_new_13_libnumpythia_FilterList(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_13_libnumpythia_Filter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_13_libnumpythia_IntegerFilter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_13_libnumpythia_BooleanFilter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_13_libnumpythia_GenEvent(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_13_libnumpythia_MCInput(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_13_libnumpythia_PythiaInput(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_13_libnumpythia_HepMCInput(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_13_libnumpythia___pyx_scope_struct__generate(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_items = {0, &__pyx_n_s_items, 0, 0, 0};
 static PyObject *__pyx_int_0;
-static std::string __pyx_k__3;
-static enum HepMC::FilterType __pyx_k__12;
-static std::string __pyx_k__13;
+static enum HepMC::FilterType __pyx_k__4;
+static std::string __pyx_k__6;
+static std::string __pyx_k__15;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
-static PyObject *__pyx_tuple__6;
-static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__8;
+static PyObject *__pyx_tuple__3;
+static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__9;
 static PyObject *__pyx_tuple__10;
 static PyObject *__pyx_tuple__11;
+static PyObject *__pyx_tuple__12;
+static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__14;
-static PyObject *__pyx_tuple__15;
 static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
@@ -2298,12 +2284,13 @@ static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__22;
 static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__24;
-static PyObject *__pyx_tuple__26;
-static PyObject *__pyx_tuple__28;
-static PyObject *__pyx_codeobj__27;
-static PyObject *__pyx_codeobj__29;
+static PyObject *__pyx_tuple__25;
+static PyObject *__pyx_tuple__27;
+static PyObject *__pyx_tuple__29;
+static PyObject *__pyx_codeobj__28;
+static PyObject *__pyx_codeobj__30;
 
-/* "_libnumpythia.pyx":53
+/* "_libnumpythia.pyx":57
  *     cdef HepMC.FilterList _filterlist
  * 
  *     def __and__(FilterList self, other):             # <<<<<<<<<<<<<<
@@ -2317,7 +2304,7 @@ static PyObject *__pyx_pw_13_libnumpythia_10FilterList_1__and__(PyObject *__pyx_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__and__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_13_libnumpythia_FilterList, 1, "self", 0))) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_13_libnumpythia_FilterList, 1, "self", 0))) __PYX_ERR(0, 57, __pyx_L1_error)
   __pyx_r = __pyx_pf_13_libnumpythia_10FilterList___and__(((struct __pyx_obj_13_libnumpythia_FilterList *)__pyx_v_self), ((PyObject *)__pyx_v_other));
 
   /* function exit code */
@@ -2338,19 +2325,19 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("__and__", 0);
 
-  /* "_libnumpythia.pyx":54
+  /* "_libnumpythia.pyx":58
  * 
  *     def __and__(FilterList self, other):
  *         filterlist = FilterList()             # <<<<<<<<<<<<<<
  *         filterlist._filterlist.extend(self._filterlist)
  *         if isinstance(other, BooleanFilter):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_FilterList), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_FilterList), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_filterlist = ((struct __pyx_obj_13_libnumpythia_FilterList *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":55
+  /* "_libnumpythia.pyx":59
  *     def __and__(FilterList self, other):
  *         filterlist = FilterList()
  *         filterlist._filterlist.extend(self._filterlist)             # <<<<<<<<<<<<<<
@@ -2359,7 +2346,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  */
   __pyx_v_filterlist->_filterlist.extend(__pyx_v_self->_filterlist);
 
-  /* "_libnumpythia.pyx":56
+  /* "_libnumpythia.pyx":60
  *         filterlist = FilterList()
  *         filterlist._filterlist.extend(self._filterlist)
  *         if isinstance(other, BooleanFilter):             # <<<<<<<<<<<<<<
@@ -2370,7 +2357,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "_libnumpythia.pyx":57
+    /* "_libnumpythia.pyx":61
  *         filterlist._filterlist.extend(self._filterlist)
  *         if isinstance(other, BooleanFilter):
  *             filterlist._filterlist.append(deref(static_cast["const HepMC.Filter*"]((<BooleanFilter> other)._filter)))             # <<<<<<<<<<<<<<
@@ -2379,7 +2366,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  */
     __pyx_v_filterlist->_filterlist.append((*static_cast<HepMC::Filter const *>(((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_v_other)->__pyx_base._filter)));
 
-    /* "_libnumpythia.pyx":56
+    /* "_libnumpythia.pyx":60
  *         filterlist = FilterList()
  *         filterlist._filterlist.extend(self._filterlist)
  *         if isinstance(other, BooleanFilter):             # <<<<<<<<<<<<<<
@@ -2389,7 +2376,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
     goto __pyx_L3;
   }
 
-  /* "_libnumpythia.pyx":58
+  /* "_libnumpythia.pyx":62
  *         if isinstance(other, BooleanFilter):
  *             filterlist._filterlist.append(deref(static_cast["const HepMC.Filter*"]((<BooleanFilter> other)._filter)))
  *         elif isinstance(other, FilterList):             # <<<<<<<<<<<<<<
@@ -2400,7 +2387,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
   __pyx_t_2 = (__pyx_t_3 != 0);
   if (__pyx_t_2) {
 
-    /* "_libnumpythia.pyx":59
+    /* "_libnumpythia.pyx":63
  *             filterlist._filterlist.append(deref(static_cast["const HepMC.Filter*"]((<BooleanFilter> other)._filter)))
  *         elif isinstance(other, FilterList):
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)             # <<<<<<<<<<<<<<
@@ -2409,7 +2396,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  */
     __pyx_v_filterlist->_filterlist.extend(((struct __pyx_obj_13_libnumpythia_FilterList *)__pyx_v_other)->_filterlist);
 
-    /* "_libnumpythia.pyx":58
+    /* "_libnumpythia.pyx":62
  *         if isinstance(other, BooleanFilter):
  *             filterlist._filterlist.append(deref(static_cast["const HepMC.Filter*"]((<BooleanFilter> other)._filter)))
  *         elif isinstance(other, FilterList):             # <<<<<<<<<<<<<<
@@ -2419,7 +2406,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
     goto __pyx_L3;
   }
 
-  /* "_libnumpythia.pyx":61
+  /* "_libnumpythia.pyx":65
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
@@ -2427,15 +2414,15 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  * 
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 61, __pyx_L1_error)
+    __PYX_ERR(0, 65, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "_libnumpythia.pyx":62
+  /* "_libnumpythia.pyx":66
  *         else:
  *             raise TypeError("can only combine boolean filters")
  *         return filterlist             # <<<<<<<<<<<<<<
@@ -2447,7 +2434,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
   __pyx_r = ((PyObject *)__pyx_v_filterlist);
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":53
+  /* "_libnumpythia.pyx":57
  *     cdef HepMC.FilterList _filterlist
  * 
  *     def __and__(FilterList self, other):             # <<<<<<<<<<<<<<
@@ -2467,7 +2454,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":68
+/* "_libnumpythia.pyx":72
  *     cdef const HepMC.FilterBase* _filter
  * 
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):             # <<<<<<<<<<<<<<
@@ -2480,7 +2467,7 @@ static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnum
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("init", 0);
 
-  /* "_libnumpythia.pyx":69
+  /* "_libnumpythia.pyx":73
  * 
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):
  *         self._filter = &_filter             # <<<<<<<<<<<<<<
@@ -2489,7 +2476,7 @@ static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnum
  */
   __pyx_v_self->_filter = (&__pyx_v__filter);
 
-  /* "_libnumpythia.pyx":70
+  /* "_libnumpythia.pyx":74
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):
  *         self._filter = &_filter
  *         self.own = own             # <<<<<<<<<<<<<<
@@ -2498,7 +2485,7 @@ static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnum
  */
   __pyx_v_self->own = __pyx_v_own;
 
-  /* "_libnumpythia.pyx":68
+  /* "_libnumpythia.pyx":72
  *     cdef const HepMC.FilterBase* _filter
  * 
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):             # <<<<<<<<<<<<<<
@@ -2513,7 +2500,7 @@ static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnum
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":72
+/* "_libnumpythia.pyx":76
  *         self.own = own
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2537,7 +2524,7 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "_libnumpythia.pyx":73
+  /* "_libnumpythia.pyx":77
  * 
  *     def __dealloc__(self):
  *         if self.own:             # <<<<<<<<<<<<<<
@@ -2547,7 +2534,7 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
   __pyx_t_1 = (__pyx_v_self->own != 0);
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":74
+    /* "_libnumpythia.pyx":78
  *     def __dealloc__(self):
  *         if self.own:
  *             del self._filter             # <<<<<<<<<<<<<<
@@ -2556,7 +2543,7 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
  */
     delete __pyx_v_self->_filter;
 
-    /* "_libnumpythia.pyx":73
+    /* "_libnumpythia.pyx":77
  * 
  *     def __dealloc__(self):
  *         if self.own:             # <<<<<<<<<<<<<<
@@ -2565,7 +2552,7 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
  */
   }
 
-  /* "_libnumpythia.pyx":72
+  /* "_libnumpythia.pyx":76
  *         self.own = own
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2577,7 +2564,7 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
   __Pyx_RefNannyFinishContext();
 }
 
-/* "_libnumpythia.pyx":76
+/* "_libnumpythia.pyx":80
  *             del self._filter
  * 
  *     def __and__(Filter self, other):             # <<<<<<<<<<<<<<
@@ -2591,7 +2578,7 @@ static PyObject *__pyx_pw_13_libnumpythia_6Filter_3__and__(PyObject *__pyx_v_sel
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__and__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_13_libnumpythia_Filter, 1, "self", 0))) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_13_libnumpythia_Filter, 1, "self", 0))) __PYX_ERR(0, 80, __pyx_L1_error)
   __pyx_r = __pyx_pf_13_libnumpythia_6Filter_2__and__(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_self), ((PyObject *)__pyx_v_other));
 
   /* function exit code */
@@ -2612,19 +2599,19 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("__and__", 0);
 
-  /* "_libnumpythia.pyx":77
+  /* "_libnumpythia.pyx":81
  * 
  *     def __and__(Filter self, other):
  *         filterlist = FilterList()             # <<<<<<<<<<<<<<
  *         if isinstance(other, BooleanFilter):
  *             filterlist._filterlist = HepMC.FilterList(
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_FilterList), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_FilterList), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_filterlist = ((struct __pyx_obj_13_libnumpythia_FilterList *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":78
+  /* "_libnumpythia.pyx":82
  *     def __and__(Filter self, other):
  *         filterlist = FilterList()
  *         if isinstance(other, BooleanFilter):             # <<<<<<<<<<<<<<
@@ -2635,7 +2622,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "_libnumpythia.pyx":79
+    /* "_libnumpythia.pyx":83
  *         filterlist = FilterList()
  *         if isinstance(other, BooleanFilter):
  *             filterlist._filterlist = HepMC.FilterList(             # <<<<<<<<<<<<<<
@@ -2644,7 +2631,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  */
     __pyx_v_filterlist->_filterlist = HepMC::FilterList((*static_cast<HepMC::Filter const *>(__pyx_v_self->_filter)), (*static_cast<HepMC::Filter const *>(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_other)->_filter)));
 
-    /* "_libnumpythia.pyx":78
+    /* "_libnumpythia.pyx":82
  *     def __and__(Filter self, other):
  *         filterlist = FilterList()
  *         if isinstance(other, BooleanFilter):             # <<<<<<<<<<<<<<
@@ -2654,7 +2641,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
     goto __pyx_L3;
   }
 
-  /* "_libnumpythia.pyx":82
+  /* "_libnumpythia.pyx":86
  *                 deref(static_cast["const HepMC.Filter*"](self._filter)),
  *                 deref(static_cast["const HepMC.Filter*"]((<Filter> other)._filter)))
  *         elif isinstance(other, FilterList):             # <<<<<<<<<<<<<<
@@ -2665,7 +2652,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
   __pyx_t_2 = (__pyx_t_3 != 0);
   if (__pyx_t_2) {
 
-    /* "_libnumpythia.pyx":83
+    /* "_libnumpythia.pyx":87
  *                 deref(static_cast["const HepMC.Filter*"]((<Filter> other)._filter)))
  *         elif isinstance(other, FilterList):
  *             filterlist._filterlist = HepMC.FilterList(deref(static_cast["const HepMC.Filter*"](self._filter)))             # <<<<<<<<<<<<<<
@@ -2674,7 +2661,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  */
     __pyx_v_filterlist->_filterlist = HepMC::FilterList((*static_cast<HepMC::Filter const *>(__pyx_v_self->_filter)));
 
-    /* "_libnumpythia.pyx":84
+    /* "_libnumpythia.pyx":88
  *         elif isinstance(other, FilterList):
  *             filterlist._filterlist = HepMC.FilterList(deref(static_cast["const HepMC.Filter*"](self._filter)))
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)             # <<<<<<<<<<<<<<
@@ -2683,7 +2670,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  */
     __pyx_v_filterlist->_filterlist.extend(((struct __pyx_obj_13_libnumpythia_FilterList *)__pyx_v_other)->_filterlist);
 
-    /* "_libnumpythia.pyx":82
+    /* "_libnumpythia.pyx":86
  *                 deref(static_cast["const HepMC.Filter*"](self._filter)),
  *                 deref(static_cast["const HepMC.Filter*"]((<Filter> other)._filter)))
  *         elif isinstance(other, FilterList):             # <<<<<<<<<<<<<<
@@ -2693,7 +2680,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
     goto __pyx_L3;
   }
 
-  /* "_libnumpythia.pyx":86
+  /* "_libnumpythia.pyx":90
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
@@ -2701,15 +2688,15 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  * 
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 86, __pyx_L1_error)
+    __PYX_ERR(0, 90, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "_libnumpythia.pyx":87
+  /* "_libnumpythia.pyx":91
  *         else:
  *             raise TypeError("can only combine boolean filters")
  *         return filterlist             # <<<<<<<<<<<<<<
@@ -2721,7 +2708,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
   __pyx_r = ((PyObject *)__pyx_v_filterlist);
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":76
+  /* "_libnumpythia.pyx":80
  *             del self._filter
  * 
  *     def __and__(Filter self, other):             # <<<<<<<<<<<<<<
@@ -2741,7 +2728,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":90
+/* "_libnumpythia.pyx":94
  * 
  * cdef class IntegerFilter(Filter):
  *     def __richcmp__(IntegerFilter self, int value, int op):             # <<<<<<<<<<<<<<
@@ -2757,7 +2744,7 @@ static PyObject *__pyx_pw_13_libnumpythia_13IntegerFilter_1__richcmp__(PyObject 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__richcmp__ (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2765,7 +2752,7 @@ static PyObject *__pyx_pw_13_libnumpythia_13IntegerFilter_1__richcmp__(PyObject 
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_13_libnumpythia_IntegerFilter, 1, "self", 0))) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_self), __pyx_ptype_13_libnumpythia_IntegerFilter, 1, "self", 0))) __PYX_ERR(0, 94, __pyx_L1_error)
   __pyx_r = __pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(((struct __pyx_obj_13_libnumpythia_IntegerFilter *)__pyx_v_self), ((int)__pyx_v_value), ((int)__pyx_v_op));
 
   /* function exit code */
@@ -2784,19 +2771,19 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__richcmp__", 0);
 
-  /* "_libnumpythia.pyx":91
+  /* "_libnumpythia.pyx":95
  * cdef class IntegerFilter(Filter):
  *     def __richcmp__(IntegerFilter self, int value, int op):
  *         result = BooleanFilter()             # <<<<<<<<<<<<<<
  *         if op == 0:
  *             result._filter = new HepMC.Filter(deref(self._filter) < value)
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = ((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":92
+  /* "_libnumpythia.pyx":96
  *     def __richcmp__(IntegerFilter self, int value, int op):
  *         result = BooleanFilter()
  *         if op == 0:             # <<<<<<<<<<<<<<
@@ -2806,7 +2793,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
   switch (__pyx_v_op) {
     case 0:
 
-    /* "_libnumpythia.pyx":93
+    /* "_libnumpythia.pyx":97
  *         result = BooleanFilter()
  *         if op == 0:
  *             result._filter = new HepMC.Filter(deref(self._filter) < value)             # <<<<<<<<<<<<<<
@@ -2815,7 +2802,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     __pyx_v_result->__pyx_base._filter = new HepMC::Filter(((*__pyx_v_self->__pyx_base._filter) < __pyx_v_value));
 
-    /* "_libnumpythia.pyx":92
+    /* "_libnumpythia.pyx":96
  *     def __richcmp__(IntegerFilter self, int value, int op):
  *         result = BooleanFilter()
  *         if op == 0:             # <<<<<<<<<<<<<<
@@ -2824,7 +2811,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     break;
 
-    /* "_libnumpythia.pyx":94
+    /* "_libnumpythia.pyx":98
  *         if op == 0:
  *             result._filter = new HepMC.Filter(deref(self._filter) < value)
  *         elif op == 2:             # <<<<<<<<<<<<<<
@@ -2833,7 +2820,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     case 2:
 
-    /* "_libnumpythia.pyx":95
+    /* "_libnumpythia.pyx":99
  *             result._filter = new HepMC.Filter(deref(self._filter) < value)
  *         elif op == 2:
  *             result._filter = new HepMC.Filter(deref(self._filter) == value)             # <<<<<<<<<<<<<<
@@ -2842,7 +2829,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     __pyx_v_result->__pyx_base._filter = new HepMC::Filter(((*__pyx_v_self->__pyx_base._filter) == __pyx_v_value));
 
-    /* "_libnumpythia.pyx":94
+    /* "_libnumpythia.pyx":98
  *         if op == 0:
  *             result._filter = new HepMC.Filter(deref(self._filter) < value)
  *         elif op == 2:             # <<<<<<<<<<<<<<
@@ -2851,7 +2838,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     break;
 
-    /* "_libnumpythia.pyx":96
+    /* "_libnumpythia.pyx":100
  *         elif op == 2:
  *             result._filter = new HepMC.Filter(deref(self._filter) == value)
  *         elif op == 4:             # <<<<<<<<<<<<<<
@@ -2860,7 +2847,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     case 4:
 
-    /* "_libnumpythia.pyx":97
+    /* "_libnumpythia.pyx":101
  *             result._filter = new HepMC.Filter(deref(self._filter) == value)
  *         elif op == 4:
  *             result._filter = new HepMC.Filter(deref(self._filter) > value)             # <<<<<<<<<<<<<<
@@ -2869,7 +2856,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     __pyx_v_result->__pyx_base._filter = new HepMC::Filter(((*__pyx_v_self->__pyx_base._filter) > __pyx_v_value));
 
-    /* "_libnumpythia.pyx":96
+    /* "_libnumpythia.pyx":100
  *         elif op == 2:
  *             result._filter = new HepMC.Filter(deref(self._filter) == value)
  *         elif op == 4:             # <<<<<<<<<<<<<<
@@ -2878,7 +2865,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     break;
 
-    /* "_libnumpythia.pyx":98
+    /* "_libnumpythia.pyx":102
  *         elif op == 4:
  *             result._filter = new HepMC.Filter(deref(self._filter) > value)
  *         elif op == 1:             # <<<<<<<<<<<<<<
@@ -2887,7 +2874,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     case 1:
 
-    /* "_libnumpythia.pyx":99
+    /* "_libnumpythia.pyx":103
  *             result._filter = new HepMC.Filter(deref(self._filter) > value)
  *         elif op == 1:
  *             result._filter = new HepMC.Filter(deref(self._filter) <= value)             # <<<<<<<<<<<<<<
@@ -2896,7 +2883,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     __pyx_v_result->__pyx_base._filter = new HepMC::Filter(((*__pyx_v_self->__pyx_base._filter) <= __pyx_v_value));
 
-    /* "_libnumpythia.pyx":98
+    /* "_libnumpythia.pyx":102
  *         elif op == 4:
  *             result._filter = new HepMC.Filter(deref(self._filter) > value)
  *         elif op == 1:             # <<<<<<<<<<<<<<
@@ -2905,7 +2892,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     break;
 
-    /* "_libnumpythia.pyx":100
+    /* "_libnumpythia.pyx":104
  *         elif op == 1:
  *             result._filter = new HepMC.Filter(deref(self._filter) <= value)
  *         elif op == 3:             # <<<<<<<<<<<<<<
@@ -2914,7 +2901,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     case 3:
 
-    /* "_libnumpythia.pyx":101
+    /* "_libnumpythia.pyx":105
  *             result._filter = new HepMC.Filter(deref(self._filter) <= value)
  *         elif op == 3:
  *             result._filter = new HepMC.Filter(deref(self._filter) != value)             # <<<<<<<<<<<<<<
@@ -2923,7 +2910,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     __pyx_v_result->__pyx_base._filter = new HepMC::Filter(((*__pyx_v_self->__pyx_base._filter) != __pyx_v_value));
 
-    /* "_libnumpythia.pyx":100
+    /* "_libnumpythia.pyx":104
  *         elif op == 1:
  *             result._filter = new HepMC.Filter(deref(self._filter) <= value)
  *         elif op == 3:             # <<<<<<<<<<<<<<
@@ -2932,7 +2919,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     break;
 
-    /* "_libnumpythia.pyx":102
+    /* "_libnumpythia.pyx":106
  *         elif op == 3:
  *             result._filter = new HepMC.Filter(deref(self._filter) != value)
  *         elif op == 5:             # <<<<<<<<<<<<<<
@@ -2941,7 +2928,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     case 5:
 
-    /* "_libnumpythia.pyx":103
+    /* "_libnumpythia.pyx":107
  *             result._filter = new HepMC.Filter(deref(self._filter) != value)
  *         elif op == 5:
  *             result._filter = new HepMC.Filter(deref(self._filter) >= value)             # <<<<<<<<<<<<<<
@@ -2950,7 +2937,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
     __pyx_v_result->__pyx_base._filter = new HepMC::Filter(((*__pyx_v_self->__pyx_base._filter) >= __pyx_v_value));
 
-    /* "_libnumpythia.pyx":102
+    /* "_libnumpythia.pyx":106
  *         elif op == 3:
  *             result._filter = new HepMC.Filter(deref(self._filter) != value)
  *         elif op == 5:             # <<<<<<<<<<<<<<
@@ -2961,7 +2948,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
     default: break;
   }
 
-  /* "_libnumpythia.pyx":104
+  /* "_libnumpythia.pyx":108
  *         elif op == 5:
  *             result._filter = new HepMC.Filter(deref(self._filter) >= value)
  *         result.own = True             # <<<<<<<<<<<<<<
@@ -2970,7 +2957,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  */
   __pyx_v_result->__pyx_base.own = 1;
 
-  /* "_libnumpythia.pyx":105
+  /* "_libnumpythia.pyx":109
  *             result._filter = new HepMC.Filter(deref(self._filter) >= value)
  *         result.own = True
  *         return result             # <<<<<<<<<<<<<<
@@ -2982,7 +2969,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
   __pyx_r = ((PyObject *)__pyx_v_result);
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":90
+  /* "_libnumpythia.pyx":94
  * 
  * cdef class IntegerFilter(Filter):
  *     def __richcmp__(IntegerFilter self, int value, int op):             # <<<<<<<<<<<<<<
@@ -3002,7 +2989,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":108
+/* "_libnumpythia.pyx":112
  * 
  * cdef class BooleanFilter(Filter):
  *     def __invert__(self):             # <<<<<<<<<<<<<<
@@ -3030,19 +3017,19 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__invert__", 0);
 
-  /* "_libnumpythia.pyx":109
+  /* "_libnumpythia.pyx":113
  * cdef class BooleanFilter(Filter):
  *     def __invert__(self):
  *         result = BooleanFilter()             # <<<<<<<<<<<<<<
  *         # Ouch
  *         result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](self._filter)))
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = ((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":111
+  /* "_libnumpythia.pyx":115
  *         result = BooleanFilter()
  *         # Ouch
  *         result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](self._filter)))             # <<<<<<<<<<<<<<
@@ -3051,7 +3038,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
  */
   __pyx_v_result->__pyx_base._filter = new HepMC::Filter((!(*static_cast<HepMC::Filter const *>(__pyx_v_self->__pyx_base._filter))));
 
-  /* "_libnumpythia.pyx":112
+  /* "_libnumpythia.pyx":116
  *         # Ouch
  *         result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](self._filter)))
  *         result.own = True             # <<<<<<<<<<<<<<
@@ -3060,7 +3047,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
  */
   __pyx_v_result->__pyx_base.own = 1;
 
-  /* "_libnumpythia.pyx":113
+  /* "_libnumpythia.pyx":117
  *         result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](self._filter)))
  *         result.own = True
  *         return result             # <<<<<<<<<<<<<<
@@ -3072,7 +3059,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
   __pyx_r = ((PyObject *)__pyx_v_result);
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":108
+  /* "_libnumpythia.pyx":112
  * 
  * cdef class BooleanFilter(Filter):
  *     def __invert__(self):             # <<<<<<<<<<<<<<
@@ -3092,7 +3079,590 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":150
+/* "_libnumpythia.pyx":151
+ * 
+ * 
+ * cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+ *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
+ */
+
+static CYTHON_INLINE PyArrayObject *__pyx_f_13_libnumpythia_particles_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> >  __pyx_v_particles) {
+  PyArrayObject *__pyx_v_particle_array = 0;
+  PyArrayObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  unsigned int __pyx_t_5;
+  __Pyx_RefNannySetupContext("particles_to_array", 0);
+
+  /* "_libnumpythia.pyx":152
+ * 
+ * cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):
+ *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)             # <<<<<<<<<<<<<<
+ *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
+ *     return particle_array
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_v_particles.size()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+  __pyx_t_3 = 0;
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE_PARTICLE); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_v_particle_array = ((PyArrayObject *)__pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "_libnumpythia.pyx":153
+ * cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):
+ *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+ *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)             # <<<<<<<<<<<<<<
+ *     return particle_array
+ * 
+ */
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_particle_array), __pyx_n_s_itemsize); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = __Pyx_PyInt_As_unsigned_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  hepmc_to_array(__pyx_v_particles, ((char *)__pyx_v_particle_array->data), ((unsigned int)__pyx_t_5));
+
+  /* "_libnumpythia.pyx":154
+ *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+ *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
+ *     return particle_array             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_particle_array));
+  __pyx_r = __pyx_v_particle_array;
+  goto __pyx_L0;
+
+  /* "_libnumpythia.pyx":151
+ * 
+ * 
+ * cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
+ *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("_libnumpythia.particles_to_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_particle_array);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "_libnumpythia.pyx":161
+ * 
+ *     @staticmethod
+ *     cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):             # <<<<<<<<<<<<<<
+ *         cdef GenEvent wrapped_event = GenEvent()
+ *         wrapped_event.event = event
+ */
+
+static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_8GenEvent_wrap(std::shared_ptr<HepMC::GenEvent>  &__pyx_v_event) {
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_v_wrapped_event = 0;
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("wrap", 0);
+
+  /* "_libnumpythia.pyx":162
+ *     @staticmethod
+ *     cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):
+ *         cdef GenEvent wrapped_event = GenEvent()             # <<<<<<<<<<<<<<
+ *         wrapped_event.event = event
+ *         return wrapped_event
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_GenEvent), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_wrapped_event = ((struct __pyx_obj_13_libnumpythia_GenEvent *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "_libnumpythia.pyx":163
+ *     cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):
+ *         cdef GenEvent wrapped_event = GenEvent()
+ *         wrapped_event.event = event             # <<<<<<<<<<<<<<
+ *         return wrapped_event
+ * 
+ */
+  __pyx_v_wrapped_event->event = __pyx_v_event;
+
+  /* "_libnumpythia.pyx":164
+ *         cdef GenEvent wrapped_event = GenEvent()
+ *         wrapped_event.event = event
+ *         return wrapped_event             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_wrapped_event));
+  __pyx_r = __pyx_v_wrapped_event;
+  goto __pyx_L0;
+
+  /* "_libnumpythia.pyx":161
+ * 
+ *     @staticmethod
+ *     cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):             # <<<<<<<<<<<<<<
+ *         cdef GenEvent wrapped_event = GenEvent()
+ *         wrapped_event.event = event
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("_libnumpythia.GenEvent.wrap", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_wrapped_event);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "_libnumpythia.pyx":167
+ * 
+ *     @staticmethod
+ *     cdef inline GenEvent wrap_pythia(Pythia.Pythia& pythia):             # <<<<<<<<<<<<<<
+ *         cdef GenEvent wrapped_event = GenEvent()
+ *         cdef HepMC.Pythia8ToHepMC3 py2hepmc
+ */
+
+static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_8GenEvent_wrap_pythia(Pythia8::Pythia &__pyx_v_pythia) {
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_v_wrapped_event = 0;
+  HepMC::Pythia8ToHepMC3 __pyx_v_py2hepmc;
+  HepMC::GenEvent *__pyx_v_event;
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  __Pyx_RefNannySetupContext("wrap_pythia", 0);
+
+  /* "_libnumpythia.pyx":168
+ *     @staticmethod
+ *     cdef inline GenEvent wrap_pythia(Pythia.Pythia& pythia):
+ *         cdef GenEvent wrapped_event = GenEvent()             # <<<<<<<<<<<<<<
+ *         cdef HepMC.Pythia8ToHepMC3 py2hepmc
+ *         # Suppress warnings
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_GenEvent), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_wrapped_event = ((struct __pyx_obj_13_libnumpythia_GenEvent *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "_libnumpythia.pyx":171
+ *         cdef HepMC.Pythia8ToHepMC3 py2hepmc
+ *         # Suppress warnings
+ *         py2hepmc.set_print_inconsistency(False)             # <<<<<<<<<<<<<<
+ *         cdef HepMC.GenEvent* event = new HepMC.GenEvent(HepMC.GEV, HepMC.MM)
+ *         if not py2hepmc.fill_next_event(pythia, event):
+ */
+  __pyx_v_py2hepmc.set_print_inconsistency(0);
+
+  /* "_libnumpythia.pyx":172
+ *         # Suppress warnings
+ *         py2hepmc.set_print_inconsistency(False)
+ *         cdef HepMC.GenEvent* event = new HepMC.GenEvent(HepMC.GEV, HepMC.MM)             # <<<<<<<<<<<<<<
+ *         if not py2hepmc.fill_next_event(pythia, event):
+ *             del event;
+ */
+  __pyx_v_event = new HepMC::GenEvent(HepMC::Units::GEV, HepMC::Units::MM);
+
+  /* "_libnumpythia.pyx":173
+ *         py2hepmc.set_print_inconsistency(False)
+ *         cdef HepMC.GenEvent* event = new HepMC.GenEvent(HepMC.GEV, HepMC.MM)
+ *         if not py2hepmc.fill_next_event(pythia, event):             # <<<<<<<<<<<<<<
+ *             del event;
+ *             raise RuntimeError("unable to convert PYTHIA event to HepMC")
+ */
+  __pyx_t_2 = ((!(__pyx_v_py2hepmc.fill_next_event(__pyx_v_pythia, __pyx_v_event) != 0)) != 0);
+  if (__pyx_t_2) {
+
+    /* "_libnumpythia.pyx":174
+ *         cdef HepMC.GenEvent* event = new HepMC.GenEvent(HepMC.GEV, HepMC.MM)
+ *         if not py2hepmc.fill_next_event(pythia, event):
+ *             del event;             # <<<<<<<<<<<<<<
+ *             raise RuntimeError("unable to convert PYTHIA event to HepMC")
+ *         wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
+ */
+    delete __pyx_v_event;
+
+    /* "_libnumpythia.pyx":175
+ *         if not py2hepmc.fill_next_event(pythia, event):
+ *             del event;
+ *             raise RuntimeError("unable to convert PYTHIA event to HepMC")             # <<<<<<<<<<<<<<
+ *         wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
+ *         return wrapped_event
+ */
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 175, __pyx_L1_error)
+
+    /* "_libnumpythia.pyx":173
+ *         py2hepmc.set_print_inconsistency(False)
+ *         cdef HepMC.GenEvent* event = new HepMC.GenEvent(HepMC.GEV, HepMC.MM)
+ *         if not py2hepmc.fill_next_event(pythia, event):             # <<<<<<<<<<<<<<
+ *             del event;
+ *             raise RuntimeError("unable to convert PYTHIA event to HepMC")
+ */
+  }
+
+  /* "_libnumpythia.pyx":176
+ *             del event;
+ *             raise RuntimeError("unable to convert PYTHIA event to HepMC")
+ *         wrapped_event.event = shared_ptr[HepMC.GenEvent](event)             # <<<<<<<<<<<<<<
+ *         return wrapped_event
+ * 
+ */
+  __pyx_v_wrapped_event->event = std::shared_ptr<HepMC::GenEvent> (__pyx_v_event);
+
+  /* "_libnumpythia.pyx":177
+ *             raise RuntimeError("unable to convert PYTHIA event to HepMC")
+ *         wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
+ *         return wrapped_event             # <<<<<<<<<<<<<<
+ * 
+ *     def select(self, object selection, HepMC.FilterType mode=ALL):
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_wrapped_event));
+  __pyx_r = __pyx_v_wrapped_event;
+  goto __pyx_L0;
+
+  /* "_libnumpythia.pyx":167
+ * 
+ *     @staticmethod
+ *     cdef inline GenEvent wrap_pythia(Pythia.Pythia& pythia):             # <<<<<<<<<<<<<<
+ *         cdef GenEvent wrapped_event = GenEvent()
+ *         cdef HepMC.Pythia8ToHepMC3 py2hepmc
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("_libnumpythia.GenEvent.wrap_pythia", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_wrapped_event);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "_libnumpythia.pyx":179
+ *         return wrapped_event
+ * 
+ *     def select(self, object selection, HepMC.FilterType mode=ALL):             # <<<<<<<<<<<<<<
+ *         if isinstance(selection, BooleanFilter):
+ *             selection = FilterList(selection)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_13_libnumpythia_8GenEvent_1select(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_13_libnumpythia_8GenEvent_1select(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_selection = 0;
+  enum HepMC::FilterType __pyx_v_mode;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("select (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_selection,&__pyx_n_s_mode,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_selection)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (kw_args > 0) {
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_mode);
+          if (value) { values[1] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "select") < 0)) __PYX_ERR(0, 179, __pyx_L3_error)
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_selection = values[0];
+    if (values[1]) {
+      __pyx_v_mode = ((enum HepMC::FilterType)__Pyx_PyInt_As_enum__HepMC_3a__3a_FilterType(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L3_error)
+    } else {
+      __pyx_v_mode = __pyx_k__4;
+    }
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("select", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 179, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("_libnumpythia.GenEvent.select", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_13_libnumpythia_8GenEvent_select(((struct __pyx_obj_13_libnumpythia_GenEvent *)__pyx_v_self), __pyx_v_selection, __pyx_v_mode);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_select(struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_v_self, PyObject *__pyx_v_selection, enum HepMC::FilterType __pyx_v_mode) {
+  HepMC::FindParticles *__pyx_v_search;
+  std::vector<HepMC::SmartPointer<HepMC::GenParticle> >  __pyx_v_particles;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  __Pyx_RefNannySetupContext("select", 0);
+  __Pyx_INCREF(__pyx_v_selection);
+
+  /* "_libnumpythia.pyx":180
+ * 
+ *     def select(self, object selection, HepMC.FilterType mode=ALL):
+ *         if isinstance(selection, BooleanFilter):             # <<<<<<<<<<<<<<
+ *             selection = FilterList(selection)
+ *         elif not isinstance(selection, FilterList):
+ */
+  __pyx_t_1 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_BooleanFilter); 
+  __pyx_t_2 = (__pyx_t_1 != 0);
+  if (__pyx_t_2) {
+
+    /* "_libnumpythia.pyx":181
+ *     def select(self, object selection, HepMC.FilterType mode=ALL):
+ *         if isinstance(selection, BooleanFilter):
+ *             selection = FilterList(selection)             # <<<<<<<<<<<<<<
+ *         elif not isinstance(selection, FilterList):
+ *             raise TypeError("find must be a boolean expression of Filters")
+ */
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 181, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_INCREF(__pyx_v_selection);
+    __Pyx_GIVEREF(__pyx_v_selection);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_selection);
+    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_FilterList), __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 181, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF_SET(__pyx_v_selection, __pyx_t_4);
+    __pyx_t_4 = 0;
+
+    /* "_libnumpythia.pyx":180
+ * 
+ *     def select(self, object selection, HepMC.FilterType mode=ALL):
+ *         if isinstance(selection, BooleanFilter):             # <<<<<<<<<<<<<<
+ *             selection = FilterList(selection)
+ *         elif not isinstance(selection, FilterList):
+ */
+    goto __pyx_L3;
+  }
+
+  /* "_libnumpythia.pyx":182
+ *         if isinstance(selection, BooleanFilter):
+ *             selection = FilterList(selection)
+ *         elif not isinstance(selection, FilterList):             # <<<<<<<<<<<<<<
+ *             raise TypeError("find must be a boolean expression of Filters")
+ *         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
+ */
+  __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_FilterList); 
+  __pyx_t_1 = ((!(__pyx_t_2 != 0)) != 0);
+  if (__pyx_t_1) {
+
+    /* "_libnumpythia.pyx":183
+ *             selection = FilterList(selection)
+ *         elif not isinstance(selection, FilterList):
+ *             raise TypeError("find must be a boolean expression of Filters")             # <<<<<<<<<<<<<<
+ *         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
+ *         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+ */
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(0, 183, __pyx_L1_error)
+
+    /* "_libnumpythia.pyx":182
+ *         if isinstance(selection, BooleanFilter):
+ *             selection = FilterList(selection)
+ *         elif not isinstance(selection, FilterList):             # <<<<<<<<<<<<<<
+ *             raise TypeError("find must be a boolean expression of Filters")
+ *         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
+ */
+  }
+  __pyx_L3:;
+
+  /* "_libnumpythia.pyx":184
+ *         elif not isinstance(selection, FilterList):
+ *             raise TypeError("find must be a boolean expression of Filters")
+ *         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)             # <<<<<<<<<<<<<<
+ *         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+ *         del search
+ */
+  __pyx_v_search = new HepMC::FindParticles((*__pyx_v_self->event), __pyx_v_mode, ((struct __pyx_obj_13_libnumpythia_FilterList *)__pyx_v_selection)->_filterlist);
+
+  /* "_libnumpythia.pyx":185
+ *             raise TypeError("find must be a boolean expression of Filters")
+ *         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
+ *         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()             # <<<<<<<<<<<<<<
+ *         del search
+ *         return particles_to_array(particles)
+ */
+  __pyx_v_particles = __pyx_v_search->results();
+
+  /* "_libnumpythia.pyx":186
+ *         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
+ *         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+ *         del search             # <<<<<<<<<<<<<<
+ *         return particles_to_array(particles)
+ * 
+ */
+  delete __pyx_v_search;
+
+  /* "_libnumpythia.pyx":187
+ *         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+ *         del search
+ *         return particles_to_array(particles)             # <<<<<<<<<<<<<<
+ * 
+ *     def particles(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_4 = ((PyObject *)__pyx_f_13_libnumpythia_particles_to_array(__pyx_v_particles)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_r = __pyx_t_4;
+  __pyx_t_4 = 0;
+  goto __pyx_L0;
+
+  /* "_libnumpythia.pyx":179
+ *         return wrapped_event
+ * 
+ *     def select(self, object selection, HepMC.FilterType mode=ALL):             # <<<<<<<<<<<<<<
+ *         if isinstance(selection, BooleanFilter):
+ *             selection = FilterList(selection)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("_libnumpythia.GenEvent.select", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_selection);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "_libnumpythia.pyx":189
+ *         return particles_to_array(particles)
+ * 
+ *     def particles(self):             # <<<<<<<<<<<<<<
+ *         return particles_to_array(deref(self.event).particles())
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_13_libnumpythia_8GenEvent_3particles(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_13_libnumpythia_8GenEvent_3particles(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("particles (wrapper)", 0);
+  __pyx_r = __pyx_pf_13_libnumpythia_8GenEvent_2particles(((struct __pyx_obj_13_libnumpythia_GenEvent *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_2particles(struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("particles", 0);
+
+  /* "_libnumpythia.pyx":190
+ * 
+ *     def particles(self):
+ *         return particles_to_array(deref(self.event).particles())             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = ((PyObject *)__pyx_f_13_libnumpythia_particles_to_array((*__pyx_v_self->event).particles())); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "_libnumpythia.pyx":189
+ *         return particles_to_array(particles)
+ * 
+ *     def particles(self):             # <<<<<<<<<<<<<<
+ *         return particles_to_array(deref(self.event).particles())
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("_libnumpythia.GenEvent.particles", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "_libnumpythia.pyx":196
  *     cdef np.ndarray weights
  * 
  *     cdef int get_num_weights(self):             # <<<<<<<<<<<<<<
@@ -3105,7 +3675,7 @@ static int __pyx_f_13_libnumpythia_7MCInput_get_num_weights(CYTHON_UNUSED struct
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_num_weights", 0);
 
-  /* "_libnumpythia.pyx":151
+  /* "_libnumpythia.pyx":197
  * 
  *     cdef int get_num_weights(self):
  *         return 0             # <<<<<<<<<<<<<<
@@ -3115,7 +3685,7 @@ static int __pyx_f_13_libnumpythia_7MCInput_get_num_weights(CYTHON_UNUSED struct
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":150
+  /* "_libnumpythia.pyx":196
  *     cdef np.ndarray weights
  * 
  *     cdef int get_num_weights(self):             # <<<<<<<<<<<<<<
@@ -3129,7 +3699,7 @@ static int __pyx_f_13_libnumpythia_7MCInput_get_num_weights(CYTHON_UNUSED struct
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":154
+/* "_libnumpythia.pyx":200
  * 
  *     property weighted:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3156,7 +3726,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7MCInput_8weighted___get__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "_libnumpythia.pyx":155
+  /* "_libnumpythia.pyx":201
  *     property weighted:
  *         def __get__(self):
  *             return self.get_num_weights() > 0             # <<<<<<<<<<<<<<
@@ -3164,13 +3734,13 @@ static PyObject *__pyx_pf_13_libnumpythia_7MCInput_8weighted___get__(struct __py
  *     property num_weights:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong((((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_v_self->__pyx_vtab)->get_num_weights(__pyx_v_self) > 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong((((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_v_self->__pyx_vtab)->get_num_weights(__pyx_v_self) > 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 201, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":154
+  /* "_libnumpythia.pyx":200
  * 
  *     property weighted:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3189,7 +3759,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7MCInput_8weighted___get__(struct __py
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":158
+/* "_libnumpythia.pyx":204
  * 
  *     property num_weights:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3216,7 +3786,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7MCInput_11num_weights___get__(struct 
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "_libnumpythia.pyx":159
+  /* "_libnumpythia.pyx":205
  *     property num_weights:
  *         def __get__(self):
  *             return self.get_num_weights()             # <<<<<<<<<<<<<<
@@ -3224,13 +3794,13 @@ static PyObject *__pyx_pf_13_libnumpythia_7MCInput_11num_weights___get__(struct 
  *     cdef bool get_next_event(self) except *:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_v_self->__pyx_vtab)->get_num_weights(__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_v_self->__pyx_vtab)->get_num_weights(__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":158
+  /* "_libnumpythia.pyx":204
  * 
  *     property num_weights:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -3249,7 +3819,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7MCInput_11num_weights___get__(struct 
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":161
+/* "_libnumpythia.pyx":207
  *             return self.get_num_weights()
  * 
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
@@ -3262,17 +3832,17 @@ static bool __pyx_f_13_libnumpythia_7MCInput_get_next_event(CYTHON_UNUSED struct
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_next_event", 0);
 
-  /* "_libnumpythia.pyx":162
+  /* "_libnumpythia.pyx":208
  * 
  *     cdef bool get_next_event(self) except *:
  *         return False             # <<<<<<<<<<<<<<
  * 
- *     cdef HepMC.GenEvent* get_hepmc(self):
+ *     cdef GenEvent get_hepmc(self):
  */
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":161
+  /* "_libnumpythia.pyx":207
  *             return self.get_num_weights()
  * 
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
@@ -3286,26 +3856,27 @@ static bool __pyx_f_13_libnumpythia_7MCInput_get_next_event(CYTHON_UNUSED struct
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":164
+/* "_libnumpythia.pyx":210
  *         return False
  * 
- *     cdef HepMC.GenEvent* get_hepmc(self):             # <<<<<<<<<<<<<<
+ *     cdef GenEvent get_hepmc(self):             # <<<<<<<<<<<<<<
  *         pass
  * 
  */
 
-static HepMC::GenEvent *__pyx_f_13_libnumpythia_7MCInput_get_hepmc(CYTHON_UNUSED struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self) {
-  HepMC::GenEvent *__pyx_r;
+static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_7MCInput_get_hepmc(CYTHON_UNUSED struct __pyx_obj_13_libnumpythia_MCInput *__pyx_v_self) {
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_hepmc", 0);
 
   /* function exit code */
-  __pyx_r = 0;
+  __pyx_r = ((struct __pyx_obj_13_libnumpythia_GenEvent *)Py_None); __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":178
+/* "_libnumpythia.pyx":224
  *     """
  * 
  *     cdef void finish(self):             # <<<<<<<<<<<<<<
@@ -3321,7 +3892,7 @@ static void __pyx_f_13_libnumpythia_7MCInput_finish(CYTHON_UNUSED struct __pyx_o
   __Pyx_RefNannyFinishContext();
 }
 
-/* "_libnumpythia.pyx":194
+/* "_libnumpythia.pyx":239
  *     cdef string shower
  * 
  *     def __cinit__(self, string config, string xmldoc,             # <<<<<<<<<<<<<<
@@ -3352,7 +3923,7 @@ static int __pyx_pw_13_libnumpythia_11PythiaInput_1__cinit__(PyObject *__pyx_v_s
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_config,&__pyx_n_s_xmldoc,&__pyx_n_s_random_state,&__pyx_n_s_beam_ecm,&__pyx_n_s_cut_on_pdgid,&__pyx_n_s_pdgid_pt_min,&__pyx_n_s_pdgid_pt_max,&__pyx_n_s_params_dict,&__pyx_n_s_verbosity,&__pyx_n_s_shower,0};
     PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
 
-    /* "_libnumpythia.pyx":198
+    /* "_libnumpythia.pyx":243
  *                   int cut_on_pdgid=0,
  *                   float pdgid_pt_min=-1, float pdgid_pt_max=-1,
  *                   object params_dict=None, int verbosity=1,             # <<<<<<<<<<<<<<
@@ -3385,7 +3956,7 @@ static int __pyx_pw_13_libnumpythia_11PythiaInput_1__cinit__(PyObject *__pyx_v_s
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_xmldoc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 2, 10, 1); __PYX_ERR(0, 194, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 2, 10, 1); __PYX_ERR(0, 239, __pyx_L3_error)
         }
         case  2:
         if (kw_args > 0) {
@@ -3429,7 +4000,7 @@ static int __pyx_pw_13_libnumpythia_11PythiaInput_1__cinit__(PyObject *__pyx_v_s
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 194, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 239, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3447,48 +4018,48 @@ static int __pyx_pw_13_libnumpythia_11PythiaInput_1__cinit__(PyObject *__pyx_v_s
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_config = __pyx_convert_string_from_py_std__in_string(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L3_error)
-    __pyx_v_xmldoc = __pyx_convert_string_from_py_std__in_string(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L3_error)
+    __pyx_v_config = __pyx_convert_string_from_py_std__in_string(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 239, __pyx_L3_error)
+    __pyx_v_xmldoc = __pyx_convert_string_from_py_std__in_string(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 239, __pyx_L3_error)
     if (values[2]) {
-      __pyx_v_random_state = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_random_state == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L3_error)
+      __pyx_v_random_state = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_random_state == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 240, __pyx_L3_error)
     } else {
       __pyx_v_random_state = ((int)0);
     }
     if (values[3]) {
-      __pyx_v_beam_ecm = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_beam_ecm == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L3_error)
+      __pyx_v_beam_ecm = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_beam_ecm == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 240, __pyx_L3_error)
     } else {
       __pyx_v_beam_ecm = ((float)13000.);
     }
     if (values[4]) {
-      __pyx_v_cut_on_pdgid = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_cut_on_pdgid == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 196, __pyx_L3_error)
+      __pyx_v_cut_on_pdgid = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_cut_on_pdgid == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 241, __pyx_L3_error)
     } else {
       __pyx_v_cut_on_pdgid = ((int)0);
     }
     if (values[5]) {
-      __pyx_v_pdgid_pt_min = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_pdgid_pt_min == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
+      __pyx_v_pdgid_pt_min = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_pdgid_pt_min == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 242, __pyx_L3_error)
     } else {
       __pyx_v_pdgid_pt_min = ((float)-1.0);
     }
     if (values[6]) {
-      __pyx_v_pdgid_pt_max = __pyx_PyFloat_AsFloat(values[6]); if (unlikely((__pyx_v_pdgid_pt_max == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
+      __pyx_v_pdgid_pt_max = __pyx_PyFloat_AsFloat(values[6]); if (unlikely((__pyx_v_pdgid_pt_max == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 242, __pyx_L3_error)
     } else {
       __pyx_v_pdgid_pt_max = ((float)-1.0);
     }
     __pyx_v_params_dict = values[7];
     if (values[8]) {
-      __pyx_v_verbosity = __Pyx_PyInt_As_int(values[8]); if (unlikely((__pyx_v_verbosity == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L3_error)
+      __pyx_v_verbosity = __Pyx_PyInt_As_int(values[8]); if (unlikely((__pyx_v_verbosity == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 243, __pyx_L3_error)
     } else {
       __pyx_v_verbosity = ((int)1);
     }
     if (values[9]) {
-      __pyx_v_shower = __pyx_convert_string_from_py_std__in_string(values[9]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L3_error)
+      __pyx_v_shower = __pyx_convert_string_from_py_std__in_string(values[9]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 244, __pyx_L3_error)
     } else {
-      __pyx_v_shower = __pyx_k__3;
+      __pyx_v_shower = __pyx_k__6;
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 2, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 194, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 2, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 239, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("_libnumpythia.PythiaInput.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3497,7 +4068,7 @@ static int __pyx_pw_13_libnumpythia_11PythiaInput_1__cinit__(PyObject *__pyx_v_s
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(((struct __pyx_obj_13_libnumpythia_PythiaInput *)__pyx_v_self), __pyx_v_config, __pyx_v_xmldoc, __pyx_v_random_state, __pyx_v_beam_ecm, __pyx_v_cut_on_pdgid, __pyx_v_pdgid_pt_min, __pyx_v_pdgid_pt_max, __pyx_v_params_dict, __pyx_v_verbosity, __pyx_v_shower, __pyx_v_kwargs);
 
-  /* "_libnumpythia.pyx":194
+  /* "_libnumpythia.pyx":239
  *     cdef string shower
  * 
  *     def __cinit__(self, string config, string xmldoc,             # <<<<<<<<<<<<<<
@@ -3531,7 +4102,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
   PyObject *__pyx_t_13 = NULL;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "_libnumpythia.pyx":205
+  /* "_libnumpythia.pyx":250
  *         cdef double mPDF
  * 
  *         self.pythia = new Pythia.Pythia(xmldoc, False)             # <<<<<<<<<<<<<<
@@ -3540,26 +4111,17 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   __pyx_v_self->pythia = new Pythia8::Pythia(__pyx_v_xmldoc, 0);
 
-  /* "_libnumpythia.pyx":209
+  /* "_libnumpythia.pyx":254
  *         # Initialize pointers to NULL
  *         #self.vincia_plugin = NULL
  *         self.userhooks = NULL             # <<<<<<<<<<<<<<
- *         self.hepmc_event = NULL
- * 
- */
-  __pyx_v_self->userhooks = NULL;
-
-  /* "_libnumpythia.pyx":210
- *         #self.vincia_plugin = NULL
- *         self.userhooks = NULL
- *         self.hepmc_event = NULL             # <<<<<<<<<<<<<<
  * 
  *         if verbosity > 0:
  */
-  __pyx_v_self->hepmc_event = NULL;
+  __pyx_v_self->userhooks = NULL;
 
-  /* "_libnumpythia.pyx":212
- *         self.hepmc_event = NULL
+  /* "_libnumpythia.pyx":256
+ *         self.userhooks = NULL
  * 
  *         if verbosity > 0:             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showProcesses = on")
@@ -3568,28 +4130,28 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
   __pyx_t_1 = ((__pyx_v_verbosity > 0) != 0);
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":213
+    /* "_libnumpythia.pyx":257
  * 
  *         if verbosity > 0:
  *             self.pythia.readString("Init:showProcesses = on")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showChangedSettings = on")
  *         else:
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showProcesses_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showProcesses_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 257, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":214
+    /* "_libnumpythia.pyx":258
  *         if verbosity > 0:
  *             self.pythia.readString("Init:showProcesses = on")
  *             self.pythia.readString("Init:showChangedSettings = on")             # <<<<<<<<<<<<<<
  *         else:
  *             self.pythia.readString("Init:showProcesses = off")
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedSettings_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedSettings_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 258, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":212
- *         self.hepmc_event = NULL
+    /* "_libnumpythia.pyx":256
+ *         self.userhooks = NULL
  * 
  *         if verbosity > 0:             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showProcesses = on")
@@ -3598,7 +4160,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     goto __pyx_L3;
   }
 
-  /* "_libnumpythia.pyx":216
+  /* "_libnumpythia.pyx":260
  *             self.pythia.readString("Init:showChangedSettings = on")
  *         else:
  *             self.pythia.readString("Init:showProcesses = off")             # <<<<<<<<<<<<<<
@@ -3606,22 +4168,22 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  * 
  */
   /*else*/ {
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showProcesses_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 216, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showProcesses_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 260, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":217
+    /* "_libnumpythia.pyx":261
  *         else:
  *             self.pythia.readString("Init:showProcesses = off")
  *             self.pythia.readString("Init:showChangedSettings = off")             # <<<<<<<<<<<<<<
  * 
  *         if verbosity > 1:
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedSettings_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedSettings_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
   }
   __pyx_L3:;
 
-  /* "_libnumpythia.pyx":219
+  /* "_libnumpythia.pyx":263
  *             self.pythia.readString("Init:showChangedSettings = off")
  * 
  *         if verbosity > 1:             # <<<<<<<<<<<<<<
@@ -3631,57 +4193,57 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
   __pyx_t_1 = ((__pyx_v_verbosity > 1) != 0);
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":220
+    /* "_libnumpythia.pyx":264
  * 
  *         if verbosity > 1:
  *             self.pythia.readString("Init:showMultipartonInteractions = on")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showChangedParticleData = on")
  *             self.pythia.readString("Next:numberShowInfo = 1")
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showMultipartonInteractions); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showMultipartonInteractions); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 264, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":221
+    /* "_libnumpythia.pyx":265
  *         if verbosity > 1:
  *             self.pythia.readString("Init:showMultipartonInteractions = on")
  *             self.pythia.readString("Init:showChangedParticleData = on")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Next:numberShowInfo = 1")
  *             self.pythia.readString("Next:numberShowProcess = 1")
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedParticleData_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedParticleData_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 265, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":222
+    /* "_libnumpythia.pyx":266
  *             self.pythia.readString("Init:showMultipartonInteractions = on")
  *             self.pythia.readString("Init:showChangedParticleData = on")
  *             self.pythia.readString("Next:numberShowInfo = 1")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Next:numberShowProcess = 1")
  *             self.pythia.readString("Next:numberShowEvent = 1")
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowInfo_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowInfo_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 266, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":223
+    /* "_libnumpythia.pyx":267
  *             self.pythia.readString("Init:showChangedParticleData = on")
  *             self.pythia.readString("Next:numberShowInfo = 1")
  *             self.pythia.readString("Next:numberShowProcess = 1")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Next:numberShowEvent = 1")
  *         else:
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowProcess_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowProcess_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 267, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":224
+    /* "_libnumpythia.pyx":268
  *             self.pythia.readString("Next:numberShowInfo = 1")
  *             self.pythia.readString("Next:numberShowProcess = 1")
  *             self.pythia.readString("Next:numberShowEvent = 1")             # <<<<<<<<<<<<<<
  *         else:
  *             self.pythia.readString("Init:showMultipartonInteractions = off")
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowEvent_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowEvent_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":219
+    /* "_libnumpythia.pyx":263
  *             self.pythia.readString("Init:showChangedSettings = off")
  * 
  *         if verbosity > 1:             # <<<<<<<<<<<<<<
@@ -3691,7 +4253,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     goto __pyx_L4;
   }
 
-  /* "_libnumpythia.pyx":226
+  /* "_libnumpythia.pyx":270
  *             self.pythia.readString("Next:numberShowEvent = 1")
  *         else:
  *             self.pythia.readString("Init:showMultipartonInteractions = off")             # <<<<<<<<<<<<<<
@@ -3699,52 +4261,52 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  *             self.pythia.readString("Next:numberShowInfo = 0")
  */
   /*else*/ {
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showMultipartonInteractions_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showMultipartonInteractions_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 270, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":227
+    /* "_libnumpythia.pyx":271
  *         else:
  *             self.pythia.readString("Init:showMultipartonInteractions = off")
  *             self.pythia.readString("Init:showChangedParticleData = off")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Next:numberShowInfo = 0")
  *             self.pythia.readString("Next:numberShowProcess = 0")
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedParticleData_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedParticleData_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 271, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":228
+    /* "_libnumpythia.pyx":272
  *             self.pythia.readString("Init:showMultipartonInteractions = off")
  *             self.pythia.readString("Init:showChangedParticleData = off")
  *             self.pythia.readString("Next:numberShowInfo = 0")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Next:numberShowProcess = 0")
  *             self.pythia.readString("Next:numberShowEvent = 0")
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowInfo_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 228, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowInfo_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":229
+    /* "_libnumpythia.pyx":273
  *             self.pythia.readString("Init:showChangedParticleData = off")
  *             self.pythia.readString("Next:numberShowInfo = 0")
  *             self.pythia.readString("Next:numberShowProcess = 0")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Next:numberShowEvent = 0")
  * 
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowProcess_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowProcess_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 273, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":230
+    /* "_libnumpythia.pyx":274
  *             self.pythia.readString("Next:numberShowInfo = 0")
  *             self.pythia.readString("Next:numberShowProcess = 0")
  *             self.pythia.readString("Next:numberShowEvent = 0")             # <<<<<<<<<<<<<<
  * 
  *         # next read user config that may override options above
  */
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowEvent_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 230, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowEvent_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 274, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_2);
   }
   __pyx_L4:;
 
-  /* "_libnumpythia.pyx":238
+  /* "_libnumpythia.pyx":282
  *         #else:  # default Pythia shower
  *         # Read config
  *         self.pythia.readFile(config)             # <<<<<<<<<<<<<<
@@ -3753,16 +4315,16 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   __pyx_v_self->pythia->readFile(__pyx_v_config);
 
-  /* "_libnumpythia.pyx":241
+  /* "_libnumpythia.pyx":285
  * 
  *         # __init__ arguments will always override the config
  *         self.pythia.readString('Beams:eCM = {0}'.format(beam_ecm))             # <<<<<<<<<<<<<<
  *         self.pythia.readString('Random:setSeed = on')
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Beams_eCM_0, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Beams_eCM_0, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 285, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_beam_ecm); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_beam_ecm); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 285, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -3775,14 +4337,14 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     }
   }
   if (!__pyx_t_6) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_3);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_5};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3791,49 +4353,49 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_5};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 241, __pyx_L1_error)
+      __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 285, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 285, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_self->pythia->readString(__pyx_t_2);
 
-  /* "_libnumpythia.pyx":242
+  /* "_libnumpythia.pyx":286
  *         # __init__ arguments will always override the config
  *         self.pythia.readString('Beams:eCM = {0}'.format(beam_ecm))
  *         self.pythia.readString('Random:setSeed = on')             # <<<<<<<<<<<<<<
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))
  * 
  */
-  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Random_setSeed_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 242, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Random_setSeed_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 286, __pyx_L1_error)
   __pyx_v_self->pythia->readString(__pyx_t_2);
 
-  /* "_libnumpythia.pyx":243
+  /* "_libnumpythia.pyx":287
  *         self.pythia.readString('Beams:eCM = {0}'.format(beam_ecm))
  *         self.pythia.readString('Random:setSeed = on')
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))             # <<<<<<<<<<<<<<
  * 
  *         if params_dict is not None:
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Random_seed_0, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Random_seed_0, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 287, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_random_state); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_random_state); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 287, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -3846,14 +4408,14 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     }
   }
   if (!__pyx_t_5) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 243, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_3);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_7};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 243, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -3862,30 +4424,30 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_7};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 243, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     } else
     #endif
     {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 243, __pyx_L1_error)
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_GIVEREF(__pyx_t_7);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_7);
       __pyx_t_7 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 243, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 287, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_self->pythia->readString(__pyx_t_2);
 
-  /* "_libnumpythia.pyx":245
+  /* "_libnumpythia.pyx":289
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))
  * 
  *         if params_dict is not None:             # <<<<<<<<<<<<<<
@@ -3896,14 +4458,14 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
   __pyx_t_8 = (__pyx_t_1 != 0);
   if (__pyx_t_8) {
 
-    /* "_libnumpythia.pyx":246
+    /* "_libnumpythia.pyx":290
  * 
  *         if params_dict is not None:
  *             for param, value in params_dict.items():             # <<<<<<<<<<<<<<
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_params_dict, __pyx_n_s_items); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 246, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_params_dict, __pyx_n_s_items); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 290, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -3916,10 +4478,10 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       }
     }
     if (__pyx_t_6) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else {
-      __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 290, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3927,9 +4489,9 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       __pyx_t_4 = __pyx_t_3; __Pyx_INCREF(__pyx_t_4); __pyx_t_9 = 0;
       __pyx_t_10 = NULL;
     } else {
-      __pyx_t_9 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __pyx_t_9 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_10 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __pyx_t_10 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 290, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     for (;;) {
@@ -3937,17 +4499,17 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_3); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 246, __pyx_L1_error)
+          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_3); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 290, __pyx_L1_error)
           #else
-          __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
+          __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 290, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         } else {
           if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_3); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 246, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_3); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 290, __pyx_L1_error)
           #else
-          __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
+          __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 290, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         }
@@ -3957,7 +4519,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 246, __pyx_L1_error)
+            else __PYX_ERR(0, 290, __pyx_L1_error)
           }
           break;
         }
@@ -3973,7 +4535,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
         if (unlikely(size != 2)) {
           if (size > 2) __Pyx_RaiseTooManyValuesError(2);
           else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          __PYX_ERR(0, 246, __pyx_L1_error)
+          __PYX_ERR(0, 290, __pyx_L1_error)
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
@@ -3986,15 +4548,15 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
         __Pyx_INCREF(__pyx_t_6);
         __Pyx_INCREF(__pyx_t_7);
         #else
-        __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 246, __pyx_L1_error)
+        __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 290, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_7 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 246, __pyx_L1_error)
+        __pyx_t_7 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 290, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         #endif
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else {
         Py_ssize_t index = -1;
-        __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 246, __pyx_L1_error)
+        __pyx_t_5 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 290, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_t_11 = Py_TYPE(__pyx_t_5)->tp_iternext;
@@ -4002,7 +4564,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
         __Pyx_GOTREF(__pyx_t_6);
         index = 1; __pyx_t_7 = __pyx_t_11(__pyx_t_5); if (unlikely(!__pyx_t_7)) goto __pyx_L8_unpacking_failed;
         __Pyx_GOTREF(__pyx_t_7);
-        if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_5), 2) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
+        if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_5), 2) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
         __pyx_t_11 = NULL;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         goto __pyx_L9_unpacking_done;
@@ -4010,7 +4572,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_11 = NULL;
         if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-        __PYX_ERR(0, 246, __pyx_L1_error)
+        __PYX_ERR(0, 290, __pyx_L1_error)
         __pyx_L9_unpacking_done:;
       }
       __Pyx_XDECREF_SET(__pyx_v_param, __pyx_t_6);
@@ -4018,14 +4580,14 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "_libnumpythia.pyx":247
+      /* "_libnumpythia.pyx":291
  *         if params_dict is not None:
  *             for param, value in params_dict.items():
  *                 self.pythia.readString('{0} = {1}'.format(param, value))             # <<<<<<<<<<<<<<
  *         for param, value in kwargs.items():
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
  */
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_1, __pyx_n_s_format); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 247, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_1, __pyx_n_s_format); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_6 = NULL;
       __pyx_t_12 = 0;
@@ -4042,7 +4604,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_7)) {
         PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_param, __pyx_v_value};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
@@ -4050,13 +4612,13 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
         PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_param, __pyx_v_value};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
       #endif
       {
-        __pyx_t_5 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 247, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 291, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (__pyx_t_6) {
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -4067,16 +4629,16 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
         __Pyx_INCREF(__pyx_v_value);
         __Pyx_GIVEREF(__pyx_v_value);
         PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_12, __pyx_v_value);
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 247, __pyx_L1_error)
+      __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_v_self->pythia->readString(__pyx_t_2);
 
-      /* "_libnumpythia.pyx":246
+      /* "_libnumpythia.pyx":290
  * 
  *         if params_dict is not None:
  *             for param, value in params_dict.items():             # <<<<<<<<<<<<<<
@@ -4086,7 +4648,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "_libnumpythia.pyx":245
+    /* "_libnumpythia.pyx":289
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))
  * 
  *         if params_dict is not None:             # <<<<<<<<<<<<<<
@@ -4095,22 +4657,22 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   }
 
-  /* "_libnumpythia.pyx":248
+  /* "_libnumpythia.pyx":292
  *             for param, value in params_dict.items():
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():             # <<<<<<<<<<<<<<
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
  * 
  */
-  __pyx_t_4 = __Pyx_PyDict_Items(__pyx_v_kwargs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_Items(__pyx_v_kwargs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
     __pyx_t_3 = __pyx_t_4; __Pyx_INCREF(__pyx_t_3); __pyx_t_9 = 0;
     __pyx_t_10 = NULL;
   } else {
-    __pyx_t_9 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 248, __pyx_L1_error)
+    __pyx_t_9 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_10 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 248, __pyx_L1_error)
+    __pyx_t_10 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 292, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   for (;;) {
@@ -4118,17 +4680,17 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       if (likely(PyList_CheckExact(__pyx_t_3))) {
         if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 248, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 292, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 248, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 292, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 248, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 292, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 248, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 292, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -4138,7 +4700,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 248, __pyx_L1_error)
+          else __PYX_ERR(0, 292, __pyx_L1_error)
         }
         break;
       }
@@ -4154,7 +4716,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 248, __pyx_L1_error)
+        __PYX_ERR(0, 292, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -4167,15 +4729,15 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       __Pyx_INCREF(__pyx_t_7);
       __Pyx_INCREF(__pyx_t_5);
       #else
-      __pyx_t_7 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 248, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 292, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_5 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 248, __pyx_L1_error)
+      __pyx_t_5 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 292, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       #endif
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_6 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 248, __pyx_L1_error)
+      __pyx_t_6 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 292, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_t_11 = Py_TYPE(__pyx_t_6)->tp_iternext;
@@ -4183,7 +4745,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       __Pyx_GOTREF(__pyx_t_7);
       index = 1; __pyx_t_5 = __pyx_t_11(__pyx_t_6); if (unlikely(!__pyx_t_5)) goto __pyx_L12_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_5);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_6), 2) < 0) __PYX_ERR(0, 248, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_6), 2) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
       __pyx_t_11 = NULL;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       goto __pyx_L13_unpacking_done;
@@ -4191,7 +4753,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_11 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 248, __pyx_L1_error)
+      __PYX_ERR(0, 292, __pyx_L1_error)
       __pyx_L13_unpacking_done:;
     }
     __Pyx_XDECREF_SET(__pyx_v_param, __pyx_t_7);
@@ -4199,18 +4761,18 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "_libnumpythia.pyx":249
+    /* "_libnumpythia.pyx":293
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))             # <<<<<<<<<<<<<<
  * 
  *         #if shower == 'vincia':
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_1, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_1, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 293, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_param, __pyx_n_s_replace); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_param, __pyx_n_s_replace); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 293, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 293, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = NULL;
@@ -4228,7 +4790,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_6, __pyx_v_value};
-      __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 293, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -4237,14 +4799,14 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_6, __pyx_v_value};
-      __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 293, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_13 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __pyx_t_13 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 293, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
       if (__pyx_t_7) {
         __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -4255,16 +4817,16 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
       __Pyx_GIVEREF(__pyx_v_value);
       PyTuple_SET_ITEM(__pyx_t_13, 1+__pyx_t_12, __pyx_v_value);
       __pyx_t_6 = 0;
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_13, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_13, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 293, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 249, __pyx_L1_error)
+    __pyx_t_2 = __pyx_convert_string_from_py_std__in_string(__pyx_t_4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 293, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_self->pythia->readString(__pyx_t_2);
 
-    /* "_libnumpythia.pyx":248
+    /* "_libnumpythia.pyx":292
  *             for param, value in params_dict.items():
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():             # <<<<<<<<<<<<<<
@@ -4274,7 +4836,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "_libnumpythia.pyx":258
+  /* "_libnumpythia.pyx":302
  *             #success = self.vincia_plugin.init()
  *         #else:
  *         if not self.pythia.init():             # <<<<<<<<<<<<<<
@@ -4284,20 +4846,20 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
   __pyx_t_8 = ((!(__pyx_v_self->pythia->init() != 0)) != 0);
   if (__pyx_t_8) {
 
-    /* "_libnumpythia.pyx":259
+    /* "_libnumpythia.pyx":303
  *         #else:
  *         if not self.pythia.init():
  *             raise RuntimeError("PYTHIA did not successfully initialize")             # <<<<<<<<<<<<<<
  * 
  *         self.cut_on_pdgid = cut_on_pdgid
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 259, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 303, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 259, __pyx_L1_error)
+    __PYX_ERR(0, 303, __pyx_L1_error)
 
-    /* "_libnumpythia.pyx":258
+    /* "_libnumpythia.pyx":302
  *             #success = self.vincia_plugin.init()
  *         #else:
  *         if not self.pythia.init():             # <<<<<<<<<<<<<<
@@ -4306,7 +4868,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   }
 
-  /* "_libnumpythia.pyx":261
+  /* "_libnumpythia.pyx":305
  *             raise RuntimeError("PYTHIA did not successfully initialize")
  * 
  *         self.cut_on_pdgid = cut_on_pdgid             # <<<<<<<<<<<<<<
@@ -4315,7 +4877,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   __pyx_v_self->cut_on_pdgid = __pyx_v_cut_on_pdgid;
 
-  /* "_libnumpythia.pyx":262
+  /* "_libnumpythia.pyx":306
  * 
  *         self.cut_on_pdgid = cut_on_pdgid
  *         self.pdgid_pt_min = pdgid_pt_min             # <<<<<<<<<<<<<<
@@ -4324,7 +4886,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   __pyx_v_self->pdgid_pt_min = __pyx_v_pdgid_pt_min;
 
-  /* "_libnumpythia.pyx":263
+  /* "_libnumpythia.pyx":307
  *         self.cut_on_pdgid = cut_on_pdgid
  *         self.pdgid_pt_min = pdgid_pt_min
  *         self.pdgid_pt_max = pdgid_pt_max             # <<<<<<<<<<<<<<
@@ -4333,7 +4895,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   __pyx_v_self->pdgid_pt_max = __pyx_v_pdgid_pt_max;
 
-  /* "_libnumpythia.pyx":264
+  /* "_libnumpythia.pyx":308
  *         self.pdgid_pt_min = pdgid_pt_min
  *         self.pdgid_pt_max = pdgid_pt_max
  *         self.verbosity = verbosity             # <<<<<<<<<<<<<<
@@ -4342,7 +4904,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   __pyx_v_self->verbosity = __pyx_v_verbosity;
 
-  /* "_libnumpythia.pyx":265
+  /* "_libnumpythia.pyx":309
  *         self.pdgid_pt_max = pdgid_pt_max
  *         self.verbosity = verbosity
  *         self.shower = shower             # <<<<<<<<<<<<<<
@@ -4351,7 +4913,7 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
  */
   __pyx_v_self->shower = __pyx_v_shower;
 
-  /* "_libnumpythia.pyx":194
+  /* "_libnumpythia.pyx":239
  *     cdef string shower
  * 
  *     def __cinit__(self, string config, string xmldoc,             # <<<<<<<<<<<<<<
@@ -4378,12 +4940,12 @@ static int __pyx_pf_13_libnumpythia_11PythiaInput___cinit__(struct __pyx_obj_13_
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":267
+/* "_libnumpythia.pyx":311
  *         self.shower = shower
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         del self.hepmc_event
  *         del self.pythia
+ *         #del self.vincia_plugin
  */
 
 /* Python wrapper */
@@ -4401,25 +4963,16 @@ static void __pyx_pf_13_libnumpythia_11PythiaInput_2__dealloc__(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "_libnumpythia.pyx":268
+  /* "_libnumpythia.pyx":312
  * 
  *     def __dealloc__(self):
- *         del self.hepmc_event             # <<<<<<<<<<<<<<
- *         del self.pythia
- *         #del self.vincia_plugin
- */
-  delete __pyx_v_self->hepmc_event;
-
-  /* "_libnumpythia.pyx":269
- *     def __dealloc__(self):
- *         del self.hepmc_event
  *         del self.pythia             # <<<<<<<<<<<<<<
  *         #del self.vincia_plugin
  *         del self.userhooks
  */
   delete __pyx_v_self->pythia;
 
-  /* "_libnumpythia.pyx":271
+  /* "_libnumpythia.pyx":314
  *         del self.pythia
  *         #del self.vincia_plugin
  *         del self.userhooks             # <<<<<<<<<<<<<<
@@ -4428,19 +4981,19 @@ static void __pyx_pf_13_libnumpythia_11PythiaInput_2__dealloc__(struct __pyx_obj
  */
   delete __pyx_v_self->userhooks;
 
-  /* "_libnumpythia.pyx":267
+  /* "_libnumpythia.pyx":311
  *         self.shower = shower
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         del self.hepmc_event
  *         del self.pythia
+ *         #del self.vincia_plugin
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "_libnumpythia.pyx":273
+/* "_libnumpythia.pyx":316
  *         del self.userhooks
  * 
  *     cdef int get_num_weights(self):             # <<<<<<<<<<<<<<
@@ -4453,7 +5006,7 @@ static int __pyx_f_13_libnumpythia_11PythiaInput_get_num_weights(struct __pyx_ob
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_num_weights", 0);
 
-  /* "_libnumpythia.pyx":297
+  /* "_libnumpythia.pyx":340
  *         queried using Pythia::info.nWeights().
  *         """
  *         return self.pythia.info.nWeights()             # <<<<<<<<<<<<<<
@@ -4463,7 +5016,7 @@ static int __pyx_f_13_libnumpythia_11PythiaInput_get_num_weights(struct __pyx_ob
   __pyx_r = __pyx_v_self->pythia->info.nWeights();
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":273
+  /* "_libnumpythia.pyx":316
  *         del self.userhooks
  * 
  *     cdef int get_num_weights(self):             # <<<<<<<<<<<<<<
@@ -4477,7 +5030,7 @@ static int __pyx_f_13_libnumpythia_11PythiaInput_get_num_weights(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":299
+/* "_libnumpythia.pyx":342
  *         return self.pythia.info.nWeights()
  * 
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
@@ -4499,7 +5052,7 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
   int __pyx_t_8;
   __Pyx_RefNannySetupContext("get_next_event", 0);
 
-  /* "_libnumpythia.pyx":301
+  /* "_libnumpythia.pyx":344
  *     cdef bool get_next_event(self) except *:
  *         # generate event and quit if failure
  *         if not self.pythia.next():             # <<<<<<<<<<<<<<
@@ -4509,20 +5062,20 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
   __pyx_t_1 = ((!(__pyx_v_self->pythia->next() != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":302
+    /* "_libnumpythia.pyx":345
  *         # generate event and quit if failure
  *         if not self.pythia.next():
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")             # <<<<<<<<<<<<<<
  *         if self.num_weights > 0:
  *             self.weights = np.empty(self.num_weights, dtype=DTYPE)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 345, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 302, __pyx_L1_error)
+    __PYX_ERR(0, 345, __pyx_L1_error)
 
-    /* "_libnumpythia.pyx":301
+    /* "_libnumpythia.pyx":344
  *     cdef bool get_next_event(self) except *:
  *         # generate event and quit if failure
  *         if not self.pythia.next():             # <<<<<<<<<<<<<<
@@ -4531,82 +5084,82 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
  */
   }
 
-  /* "_libnumpythia.pyx":303
+  /* "_libnumpythia.pyx":346
  *         if not self.pythia.next():
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")
  *         if self.num_weights > 0:             # <<<<<<<<<<<<<<
  *             self.weights = np.empty(self.num_weights, dtype=DTYPE)
  *             for iweight in range(self.num_weights):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_weights); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_weights); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":304
+    /* "_libnumpythia.pyx":347
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")
  *         if self.num_weights > 0:
  *             self.weights = np.empty(self.num_weights, dtype=DTYPE)             # <<<<<<<<<<<<<<
  *             for iweight in range(self.num_weights):
  *                 self.weights[iweight] = self.pythia.info.weight(iweight)
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 304, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_weights); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_weights); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 304, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
+    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 304, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 304, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 304, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 304, __pyx_L1_error)
+    if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 347, __pyx_L1_error)
     __Pyx_GIVEREF(__pyx_t_5);
     __Pyx_GOTREF(__pyx_v_self->__pyx_base.weights);
     __Pyx_DECREF(((PyObject *)__pyx_v_self->__pyx_base.weights));
     __pyx_v_self->__pyx_base.weights = ((PyArrayObject *)__pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "_libnumpythia.pyx":305
+    /* "_libnumpythia.pyx":348
  *         if self.num_weights > 0:
  *             self.weights = np.empty(self.num_weights, dtype=DTYPE)
  *             for iweight in range(self.num_weights):             # <<<<<<<<<<<<<<
  *                 self.weights[iweight] = self.pythia.info.weight(iweight)
  *         return True
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_weights); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 305, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_num_weights); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 305, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 305, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 348, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
       __pyx_t_3 = __pyx_t_5; __Pyx_INCREF(__pyx_t_3); __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 305, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 348, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_7 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 305, __pyx_L1_error)
+      __pyx_t_7 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 348, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     for (;;) {
@@ -4614,17 +5167,17 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
         if (likely(PyList_CheckExact(__pyx_t_3))) {
           if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 305, __pyx_L1_error)
+          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 348, __pyx_L1_error)
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 305, __pyx_L1_error)
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 348, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         } else {
           if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 305, __pyx_L1_error)
+          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 348, __pyx_L1_error)
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 305, __pyx_L1_error)
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 348, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         }
@@ -4634,7 +5187,7 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 305, __pyx_L1_error)
+            else __PYX_ERR(0, 348, __pyx_L1_error)
           }
           break;
         }
@@ -4643,20 +5196,20 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
       __Pyx_XDECREF_SET(__pyx_v_iweight, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "_libnumpythia.pyx":306
+      /* "_libnumpythia.pyx":349
  *             self.weights = np.empty(self.num_weights, dtype=DTYPE)
  *             for iweight in range(self.num_weights):
  *                 self.weights[iweight] = self.pythia.info.weight(iweight)             # <<<<<<<<<<<<<<
  *         return True
  * 
  */
-      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_iweight); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 306, __pyx_L1_error)
-      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_self->pythia->info.weight(__pyx_t_8)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 306, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_iweight); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 349, __pyx_L1_error)
+      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_self->pythia->info.weight(__pyx_t_8)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 349, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self->__pyx_base.weights), __pyx_v_iweight, __pyx_t_5) < 0)) __PYX_ERR(0, 306, __pyx_L1_error)
+      if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_self->__pyx_base.weights), __pyx_v_iweight, __pyx_t_5) < 0)) __PYX_ERR(0, 349, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "_libnumpythia.pyx":305
+      /* "_libnumpythia.pyx":348
  *         if self.num_weights > 0:
  *             self.weights = np.empty(self.num_weights, dtype=DTYPE)
  *             for iweight in range(self.num_weights):             # <<<<<<<<<<<<<<
@@ -4666,7 +5219,7 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "_libnumpythia.pyx":303
+    /* "_libnumpythia.pyx":346
  *         if not self.pythia.next():
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")
  *         if self.num_weights > 0:             # <<<<<<<<<<<<<<
@@ -4675,17 +5228,17 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
  */
   }
 
-  /* "_libnumpythia.pyx":307
+  /* "_libnumpythia.pyx":350
  *             for iweight in range(self.num_weights):
  *                 self.weights[iweight] = self.pythia.info.weight(iweight)
  *         return True             # <<<<<<<<<<<<<<
  * 
- *     cdef HepMC.GenEvent* get_hepmc(self):
+ *     cdef GenEvent get_hepmc(self):
  */
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":299
+  /* "_libnumpythia.pyx":342
  *         return self.pythia.info.nWeights()
  * 
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
@@ -4707,62 +5260,54 @@ static bool __pyx_f_13_libnumpythia_11PythiaInput_get_next_event(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":309
+/* "_libnumpythia.pyx":352
  *         return True
  * 
- *     cdef HepMC.GenEvent* get_hepmc(self):             # <<<<<<<<<<<<<<
- *         del self.hepmc_event
- *         self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)
+ *     cdef GenEvent get_hepmc(self):             # <<<<<<<<<<<<<<
+ *         return GenEvent.wrap_pythia(deref(self.pythia))
+ * 
  */
 
-static HepMC::GenEvent *__pyx_f_13_libnumpythia_11PythiaInput_get_hepmc(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self) {
-  HepMC::GenEvent *__pyx_r;
+static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_11PythiaInput_get_hepmc(struct __pyx_obj_13_libnumpythia_PythiaInput *__pyx_v_self) {
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_hepmc", 0);
 
-  /* "_libnumpythia.pyx":310
+  /* "_libnumpythia.pyx":353
  * 
- *     cdef HepMC.GenEvent* get_hepmc(self):
- *         del self.hepmc_event             # <<<<<<<<<<<<<<
- *         self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)
- *         return self.hepmc_event
- */
-  delete __pyx_v_self->hepmc_event;
-
-  /* "_libnumpythia.pyx":311
- *     cdef HepMC.GenEvent* get_hepmc(self):
- *         del self.hepmc_event
- *         self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)             # <<<<<<<<<<<<<<
- *         return self.hepmc_event
- * 
- */
-  __pyx_v_self->hepmc_event = pythia_to_hepmc(__pyx_v_self->pythia);
-
-  /* "_libnumpythia.pyx":312
- *         del self.hepmc_event
- *         self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)
- *         return self.hepmc_event             # <<<<<<<<<<<<<<
+ *     cdef GenEvent get_hepmc(self):
+ *         return GenEvent.wrap_pythia(deref(self.pythia))             # <<<<<<<<<<<<<<
  * 
  *     """
  */
-  __pyx_r = __pyx_v_self->hepmc_event;
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __pyx_t_1 = ((PyObject *)__pyx_f_13_libnumpythia_8GenEvent_wrap_pythia((*__pyx_v_self->pythia))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = ((struct __pyx_obj_13_libnumpythia_GenEvent *)__pyx_t_1);
+  __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":309
+  /* "_libnumpythia.pyx":352
  *         return True
  * 
- *     cdef HepMC.GenEvent* get_hepmc(self):             # <<<<<<<<<<<<<<
- *         del self.hepmc_event
- *         self.hepmc_event = numpythia.pythia_to_hepmc(self.pythia)
+ *     cdef GenEvent get_hepmc(self):             # <<<<<<<<<<<<<<
+ *         return GenEvent.wrap_pythia(deref(self.pythia))
+ * 
  */
 
   /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("_libnumpythia.PythiaInput.get_hepmc", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":329
+/* "_libnumpythia.pyx":370
  *     """
  * 
  *     cdef void finish(self):             # <<<<<<<<<<<<<<
@@ -4775,7 +5320,7 @@ static void __pyx_f_13_libnumpythia_11PythiaInput_finish(struct __pyx_obj_13_lib
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("finish", 0);
 
-  /* "_libnumpythia.pyx":330
+  /* "_libnumpythia.pyx":371
  * 
  *     cdef void finish(self):
  *         if self.verbosity > 0:             # <<<<<<<<<<<<<<
@@ -4785,7 +5330,7 @@ static void __pyx_f_13_libnumpythia_11PythiaInput_finish(struct __pyx_obj_13_lib
   __pyx_t_1 = ((__pyx_v_self->verbosity > 0) != 0);
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":331
+    /* "_libnumpythia.pyx":372
  *     cdef void finish(self):
  *         if self.verbosity > 0:
  *             self.pythia.stat()             # <<<<<<<<<<<<<<
@@ -4794,7 +5339,7 @@ static void __pyx_f_13_libnumpythia_11PythiaInput_finish(struct __pyx_obj_13_lib
  */
     __pyx_v_self->pythia->stat();
 
-    /* "_libnumpythia.pyx":330
+    /* "_libnumpythia.pyx":371
  * 
  *     cdef void finish(self):
  *         if self.verbosity > 0:             # <<<<<<<<<<<<<<
@@ -4803,7 +5348,7 @@ static void __pyx_f_13_libnumpythia_11PythiaInput_finish(struct __pyx_obj_13_lib
  */
   }
 
-  /* "_libnumpythia.pyx":329
+  /* "_libnumpythia.pyx":370
  *     """
  * 
  *     cdef void finish(self):             # <<<<<<<<<<<<<<
@@ -4815,7 +5360,7 @@ static void __pyx_f_13_libnumpythia_11PythiaInput_finish(struct __pyx_obj_13_lib
   __Pyx_RefNannyFinishContext();
 }
 
-/* "_libnumpythia.pyx":341
+/* "_libnumpythia.pyx":382
  *     #cdef TDatabasePDG *pdg
  * 
  *     def __cinit__(self, string filename):             # <<<<<<<<<<<<<<
@@ -4848,18 +5393,18 @@ static int __pyx_pw_13_libnumpythia_10HepMCInput_1__cinit__(PyObject *__pyx_v_se
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 341, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 382, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v_filename = __pyx_convert_string_from_py_std__in_string(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 341, __pyx_L3_error)
+    __pyx_v_filename = __pyx_convert_string_from_py_std__in_string(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 382, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 341, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 382, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("_libnumpythia.HepMCInput.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4877,34 +5422,25 @@ static int __pyx_pf_13_libnumpythia_10HepMCInput___cinit__(struct __pyx_obj_13_l
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "_libnumpythia.pyx":342
+  /* "_libnumpythia.pyx":383
  * 
  *     def __cinit__(self, string filename):
  *         self.filename = filename             # <<<<<<<<<<<<<<
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)
- *         self.event = NULL
+ *         #self.pdg = TDatabasePDG_Instance()
  */
   __pyx_v_self->filename = __pyx_v_filename;
 
-  /* "_libnumpythia.pyx":343
+  /* "_libnumpythia.pyx":384
  *     def __cinit__(self, string filename):
  *         self.filename = filename
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)             # <<<<<<<<<<<<<<
- *         self.event = NULL
- *         #self.pdg = TDatabasePDG_Instance()
- */
-  __pyx_v_self->hepmc_reader = new HepMC::ReaderAscii(__pyx_v_filename);
-
-  /* "_libnumpythia.pyx":344
- *         self.filename = filename
- *         self.hepmc_reader = new HepMC.ReaderAscii(filename)
- *         self.event = NULL             # <<<<<<<<<<<<<<
  *         #self.pdg = TDatabasePDG_Instance()
  * 
  */
-  __pyx_v_self->event = NULL;
+  __pyx_v_self->hepmc_reader = new HepMC::ReaderAscii(__pyx_v_filename);
 
-  /* "_libnumpythia.pyx":341
+  /* "_libnumpythia.pyx":382
  *     #cdef TDatabasePDG *pdg
  * 
  *     def __cinit__(self, string filename):             # <<<<<<<<<<<<<<
@@ -4918,12 +5454,12 @@ static int __pyx_pf_13_libnumpythia_10HepMCInput___cinit__(struct __pyx_obj_13_l
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":347
+/* "_libnumpythia.pyx":387
  *         #self.pdg = TDatabasePDG_Instance()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         del self.event
  *         del self.hepmc_reader
+ * 
  */
 
 /* Python wrapper */
@@ -4941,139 +5477,121 @@ static void __pyx_pf_13_libnumpythia_10HepMCInput_2__dealloc__(struct __pyx_obj_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "_libnumpythia.pyx":348
+  /* "_libnumpythia.pyx":388
  * 
  *     def __dealloc__(self):
- *         del self.event             # <<<<<<<<<<<<<<
- *         del self.hepmc_reader
- * 
- */
-  delete __pyx_v_self->event;
-
-  /* "_libnumpythia.pyx":349
- *     def __dealloc__(self):
- *         del self.event
  *         del self.hepmc_reader             # <<<<<<<<<<<<<<
  * 
  *     cdef bool get_next_event(self) except *:
  */
   delete __pyx_v_self->hepmc_reader;
 
-  /* "_libnumpythia.pyx":347
+  /* "_libnumpythia.pyx":387
  *         #self.pdg = TDatabasePDG_Instance()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         del self.event
  *         del self.hepmc_reader
+ * 
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "_libnumpythia.pyx":351
+/* "_libnumpythia.pyx":390
  *         del self.hepmc_reader
  * 
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
- *         del self.event
- *         self.event = new HepMC.GenEvent()
+ *         self.event.reset(new HepMC.GenEvent())
+ *         return self.hepmc_reader.read_event(deref(self.event))
  */
 
 static bool __pyx_f_13_libnumpythia_10HepMCInput_get_next_event(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self) {
   bool __pyx_r;
   __Pyx_RefNannyDeclarations
-  HepMC::GenEvent *__pyx_t_1;
   __Pyx_RefNannySetupContext("get_next_event", 0);
 
-  /* "_libnumpythia.pyx":352
+  /* "_libnumpythia.pyx":391
  * 
  *     cdef bool get_next_event(self) except *:
- *         del self.event             # <<<<<<<<<<<<<<
- *         self.event = new HepMC.GenEvent()
- *         return self.hepmc_reader.read_event(deref(self.event))
- */
-  delete __pyx_v_self->event;
-
-  /* "_libnumpythia.pyx":353
- *     cdef bool get_next_event(self) except *:
- *         del self.event
- *         self.event = new HepMC.GenEvent()             # <<<<<<<<<<<<<<
+ *         self.event.reset(new HepMC.GenEvent())             # <<<<<<<<<<<<<<
  *         return self.hepmc_reader.read_event(deref(self.event))
  * 
  */
-  try {
-    __pyx_t_1 = new HepMC::GenEvent();
-  } catch(...) {
-    __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 353, __pyx_L1_error)
-  }
-  __pyx_v_self->event = __pyx_t_1;
+  __pyx_v_self->event.reset(new HepMC::GenEvent());
 
-  /* "_libnumpythia.pyx":354
- *         del self.event
- *         self.event = new HepMC.GenEvent()
+  /* "_libnumpythia.pyx":392
+ *     cdef bool get_next_event(self) except *:
+ *         self.event.reset(new HepMC.GenEvent())
  *         return self.hepmc_reader.read_event(deref(self.event))             # <<<<<<<<<<<<<<
  * 
- *     cdef HepMC.GenEvent* get_hepmc(self):
+ *     cdef GenEvent get_hepmc(self):
  */
   __pyx_r = __pyx_v_self->hepmc_reader->read_event((*__pyx_v_self->event));
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":351
+  /* "_libnumpythia.pyx":390
  *         del self.hepmc_reader
  * 
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
- *         del self.event
- *         self.event = new HepMC.GenEvent()
+ *         self.event.reset(new HepMC.GenEvent())
+ *         return self.hepmc_reader.read_event(deref(self.event))
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "_libnumpythia.pyx":394
+ *         return self.hepmc_reader.read_event(deref(self.event))
+ * 
+ *     cdef GenEvent get_hepmc(self):             # <<<<<<<<<<<<<<
+ *         return GenEvent.wrap(self.event)
+ * 
+ */
+
+static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_10HepMCInput_get_hepmc(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self) {
+  struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("get_hepmc", 0);
+
+  /* "_libnumpythia.pyx":395
+ * 
+ *     cdef GenEvent get_hepmc(self):
+ *         return GenEvent.wrap(self.event)             # <<<<<<<<<<<<<<
+ * 
+ *     """
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __pyx_t_1 = ((PyObject *)__pyx_f_13_libnumpythia_8GenEvent_wrap(__pyx_v_self->event)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 395, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = ((struct __pyx_obj_13_libnumpythia_GenEvent *)__pyx_t_1);
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "_libnumpythia.pyx":394
+ *         return self.hepmc_reader.read_event(deref(self.event))
+ * 
+ *     cdef GenEvent get_hepmc(self):             # <<<<<<<<<<<<<<
+ *         return GenEvent.wrap(self.event)
+ * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("_libnumpythia.HepMCInput.get_next_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("_libnumpythia.HepMCInput.get_hepmc", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":356
- *         return self.hepmc_reader.read_event(deref(self.event))
- * 
- *     cdef HepMC.GenEvent* get_hepmc(self):             # <<<<<<<<<<<<<<
- *         return self.event
- * 
- */
-
-static HepMC::GenEvent *__pyx_f_13_libnumpythia_10HepMCInput_get_hepmc(struct __pyx_obj_13_libnumpythia_HepMCInput *__pyx_v_self) {
-  HepMC::GenEvent *__pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("get_hepmc", 0);
-
-  /* "_libnumpythia.pyx":357
- * 
- *     cdef HepMC.GenEvent* get_hepmc(self):
- *         return self.event             # <<<<<<<<<<<<<<
- * 
- *     """
- */
-  __pyx_r = __pyx_v_self->event;
-  goto __pyx_L0;
-
-  /* "_libnumpythia.pyx":356
- *         return self.hepmc_reader.read_event(deref(self.event))
- * 
- *     cdef HepMC.GenEvent* get_hepmc(self):             # <<<<<<<<<<<<<<
- *         return self.event
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "_libnumpythia.pyx":375
+/* "_libnumpythia.pyx":413
  *     """
  * 
  *     def estimate_num_events(self, int sample_size=1000):             # <<<<<<<<<<<<<<
@@ -5109,7 +5627,7 @@ static PyObject *__pyx_pw_13_libnumpythia_10HepMCInput_5estimate_num_events(PyOb
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "estimate_num_events") < 0)) __PYX_ERR(0, 375, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "estimate_num_events") < 0)) __PYX_ERR(0, 413, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5119,14 +5637,14 @@ static PyObject *__pyx_pw_13_libnumpythia_10HepMCInput_5estimate_num_events(PyOb
       }
     }
     if (values[0]) {
-      __pyx_v_sample_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_sample_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 375, __pyx_L3_error)
+      __pyx_v_sample_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_sample_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 413, __pyx_L3_error)
     } else {
       __pyx_v_sample_size = ((int)0x3E8);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("estimate_num_events", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 375, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("estimate_num_events", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 413, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("_libnumpythia.HepMCInput.estimate_num_events", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5166,44 +5684,44 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
   int __pyx_t_16;
   __Pyx_RefNannySetupContext("estimate_num_events", 0);
 
-  /* "_libnumpythia.pyx":385
+  /* "_libnumpythia.pyx":423
  *         loops over events.
  *         """
  *         cdef np.ndarray sizes = np.empty(sample_size, dtype=np.int32)             # <<<<<<<<<<<<<<
  *         cdef int num_found = 0
  *         cdef long long prev_location = 0
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_sample_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_sample_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 385, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 385, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 423, __pyx_L1_error)
   __pyx_v_sizes = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "_libnumpythia.pyx":386
+  /* "_libnumpythia.pyx":424
  *         """
  *         cdef np.ndarray sizes = np.empty(sample_size, dtype=np.int32)
  *         cdef int num_found = 0             # <<<<<<<<<<<<<<
@@ -5212,7 +5730,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  */
   __pyx_v_num_found = 0;
 
-  /* "_libnumpythia.pyx":387
+  /* "_libnumpythia.pyx":425
  *         cdef np.ndarray sizes = np.empty(sample_size, dtype=np.int32)
  *         cdef int num_found = 0
  *         cdef long long prev_location = 0             # <<<<<<<<<<<<<<
@@ -5221,22 +5739,22 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  */
   __pyx_v_prev_location = 0;
 
-  /* "_libnumpythia.pyx":388
+  /* "_libnumpythia.pyx":426
  *         cdef int num_found = 0
  *         cdef long long prev_location = 0
  *         filesize = os.path.getsize(self.filename)             # <<<<<<<<<<<<<<
  *         with open(self.filename, 'r') as infile:
  *             for line in infile:
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_path); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_path); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_getsize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_getsize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __pyx_convert_PyStr_string_to_py_std__in_string(__pyx_v_self->filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
+  __pyx_t_3 = __pyx_convert_PyStr_string_to_py_std__in_string(__pyx_v_self->filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 426, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -5249,14 +5767,14 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_5);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_t_3};
-      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5265,20 +5783,20 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_t_3};
-      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 388, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 426, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -5287,7 +5805,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
   __pyx_v_filesize = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "_libnumpythia.pyx":389
+  /* "_libnumpythia.pyx":427
  *         cdef long long prev_location = 0
  *         filesize = os.path.getsize(self.filename)
  *         with open(self.filename, 'r') as infile:             # <<<<<<<<<<<<<<
@@ -5295,9 +5813,9 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  *                 if line[0] == 'E':
  */
   /*with:*/ {
-    __pyx_t_5 = __pyx_convert_PyStr_string_to_py_std__in_string(__pyx_v_self->filename); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_5 = __pyx_convert_PyStr_string_to_py_std__in_string(__pyx_v_self->filename); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 427, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 427, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5);
@@ -5305,12 +5823,12 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
     __Pyx_GIVEREF(__pyx_n_s_r);
     PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_r);
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 427, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 389, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 427, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_enter); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 389, __pyx_L3_error)
+    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_enter); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 427, __pyx_L3_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -5323,10 +5841,10 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
       }
     }
     if (__pyx_t_3) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 389, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 427, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else {
-      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 389, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 427, __pyx_L3_error)
     }
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -5345,7 +5863,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
           __pyx_v_infile = __pyx_t_4;
           __pyx_t_4 = 0;
 
-          /* "_libnumpythia.pyx":390
+          /* "_libnumpythia.pyx":428
  *         filesize = os.path.getsize(self.filename)
  *         with open(self.filename, 'r') as infile:
  *             for line in infile:             # <<<<<<<<<<<<<<
@@ -5356,26 +5874,26 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
             __pyx_t_4 = __pyx_v_infile; __Pyx_INCREF(__pyx_t_4); __pyx_t_10 = 0;
             __pyx_t_11 = NULL;
           } else {
-            __pyx_t_10 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_infile); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 390, __pyx_L7_error)
+            __pyx_t_10 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_infile); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 428, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_4);
-            __pyx_t_11 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 390, __pyx_L7_error)
+            __pyx_t_11 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 428, __pyx_L7_error)
           }
           for (;;) {
             if (likely(!__pyx_t_11)) {
               if (likely(PyList_CheckExact(__pyx_t_4))) {
                 if (__pyx_t_10 >= PyList_GET_SIZE(__pyx_t_4)) break;
                 #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_10); __Pyx_INCREF(__pyx_t_5); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 390, __pyx_L7_error)
+                __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_10); __Pyx_INCREF(__pyx_t_5); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 428, __pyx_L7_error)
                 #else
-                __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 390, __pyx_L7_error)
+                __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 428, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_5);
                 #endif
               } else {
                 if (__pyx_t_10 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
                 #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_10); __Pyx_INCREF(__pyx_t_5); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 390, __pyx_L7_error)
+                __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_10); __Pyx_INCREF(__pyx_t_5); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 428, __pyx_L7_error)
                 #else
-                __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 390, __pyx_L7_error)
+                __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 428, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_5);
                 #endif
               }
@@ -5385,7 +5903,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 390, __pyx_L7_error)
+                  else __PYX_ERR(0, 428, __pyx_L7_error)
                 }
                 break;
               }
@@ -5394,20 +5912,20 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
             __Pyx_XDECREF_SET(__pyx_v_line, __pyx_t_5);
             __pyx_t_5 = 0;
 
-            /* "_libnumpythia.pyx":391
+            /* "_libnumpythia.pyx":429
  *         with open(self.filename, 'r') as infile:
  *             for line in infile:
  *                 if line[0] == 'E':             # <<<<<<<<<<<<<<
  *                     if num_found > 0:
  *                         sizes[num_found - 1] = infile.tell() - prev_location
  */
-            __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_line, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 391, __pyx_L7_error)
+            __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_line, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 429, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_5, __pyx_n_s_E, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 391, __pyx_L7_error)
+            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_5, __pyx_n_s_E, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 429, __pyx_L7_error)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             if (__pyx_t_12) {
 
-              /* "_libnumpythia.pyx":392
+              /* "_libnumpythia.pyx":430
  *             for line in infile:
  *                 if line[0] == 'E':
  *                     if num_found > 0:             # <<<<<<<<<<<<<<
@@ -5417,14 +5935,14 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
               __pyx_t_12 = ((__pyx_v_num_found > 0) != 0);
               if (__pyx_t_12) {
 
-                /* "_libnumpythia.pyx":393
+                /* "_libnumpythia.pyx":431
  *                 if line[0] == 'E':
  *                     if num_found > 0:
  *                         sizes[num_found - 1] = infile.tell() - prev_location             # <<<<<<<<<<<<<<
  *                     if num_found == sample_size:
  *                         break
  */
-                __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_tell); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 393, __pyx_L7_error)
+                __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_tell); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 431, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 __pyx_t_3 = NULL;
                 if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -5437,24 +5955,24 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
                   }
                 }
                 if (__pyx_t_3) {
-                  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 393, __pyx_L7_error)
+                  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 431, __pyx_L7_error)
                   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
                 } else {
-                  __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 393, __pyx_L7_error)
+                  __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 431, __pyx_L7_error)
                 }
                 __Pyx_GOTREF(__pyx_t_5);
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-                __pyx_t_1 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_prev_location); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 393, __pyx_L7_error)
+                __pyx_t_1 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_prev_location); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 431, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_1);
-                __pyx_t_3 = PyNumber_Subtract(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 393, __pyx_L7_error)
+                __pyx_t_3 = PyNumber_Subtract(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 431, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_3);
                 __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                 __pyx_t_13 = (__pyx_v_num_found - 1);
-                if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_sizes), __pyx_t_13, __pyx_t_3, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 393, __pyx_L7_error)
+                if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_sizes), __pyx_t_13, __pyx_t_3, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 431, __pyx_L7_error)
                 __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-                /* "_libnumpythia.pyx":392
+                /* "_libnumpythia.pyx":430
  *             for line in infile:
  *                 if line[0] == 'E':
  *                     if num_found > 0:             # <<<<<<<<<<<<<<
@@ -5463,7 +5981,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  */
               }
 
-              /* "_libnumpythia.pyx":394
+              /* "_libnumpythia.pyx":432
  *                     if num_found > 0:
  *                         sizes[num_found - 1] = infile.tell() - prev_location
  *                     if num_found == sample_size:             # <<<<<<<<<<<<<<
@@ -5473,7 +5991,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
               __pyx_t_12 = ((__pyx_v_num_found == __pyx_v_sample_size) != 0);
               if (__pyx_t_12) {
 
-                /* "_libnumpythia.pyx":395
+                /* "_libnumpythia.pyx":433
  *                         sizes[num_found - 1] = infile.tell() - prev_location
  *                     if num_found == sample_size:
  *                         break             # <<<<<<<<<<<<<<
@@ -5482,7 +6000,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  */
                 goto __pyx_L16_break;
 
-                /* "_libnumpythia.pyx":394
+                /* "_libnumpythia.pyx":432
  *                     if num_found > 0:
  *                         sizes[num_found - 1] = infile.tell() - prev_location
  *                     if num_found == sample_size:             # <<<<<<<<<<<<<<
@@ -5491,7 +6009,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  */
               }
 
-              /* "_libnumpythia.pyx":396
+              /* "_libnumpythia.pyx":434
  *                     if num_found == sample_size:
  *                         break
  *                     num_found += 1             # <<<<<<<<<<<<<<
@@ -5500,14 +6018,14 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  */
               __pyx_v_num_found = (__pyx_v_num_found + 1);
 
-              /* "_libnumpythia.pyx":397
+              /* "_libnumpythia.pyx":435
  *                         break
  *                     num_found += 1
  *                     prev_location = infile.tell()             # <<<<<<<<<<<<<<
  *             else:
  *                 return num_found
  */
-              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_tell); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 397, __pyx_L7_error)
+              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_tell); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 435, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_1);
               __pyx_t_5 = NULL;
               if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -5520,18 +6038,18 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
                 }
               }
               if (__pyx_t_5) {
-                __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 397, __pyx_L7_error)
+                __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 435, __pyx_L7_error)
                 __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               } else {
-                __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 397, __pyx_L7_error)
+                __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 435, __pyx_L7_error)
               }
               __Pyx_GOTREF(__pyx_t_3);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_14 = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_t_3); if (unlikely((__pyx_t_14 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 397, __pyx_L7_error)
+              __pyx_t_14 = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_t_3); if (unlikely((__pyx_t_14 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 435, __pyx_L7_error)
               __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
               __pyx_v_prev_location = __pyx_t_14;
 
-              /* "_libnumpythia.pyx":391
+              /* "_libnumpythia.pyx":429
  *         with open(self.filename, 'r') as infile:
  *             for line in infile:
  *                 if line[0] == 'E':             # <<<<<<<<<<<<<<
@@ -5540,7 +6058,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  */
             }
 
-            /* "_libnumpythia.pyx":390
+            /* "_libnumpythia.pyx":428
  *         filesize = os.path.getsize(self.filename)
  *         with open(self.filename, 'r') as infile:
  *             for line in infile:             # <<<<<<<<<<<<<<
@@ -5550,7 +6068,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
           }
           /*else*/ {
 
-            /* "_libnumpythia.pyx":399
+            /* "_libnumpythia.pyx":437
  *                     prev_location = infile.tell()
  *             else:
  *                 return num_found             # <<<<<<<<<<<<<<
@@ -5558,7 +6076,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  * 
  */
             __Pyx_XDECREF(__pyx_r);
-            __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_found); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 399, __pyx_L7_error)
+            __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_found); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 437, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_3);
             __pyx_r = __pyx_t_3;
             __pyx_t_3 = 0;
@@ -5566,7 +6084,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
             goto __pyx_L11_try_return;
           }
 
-          /* "_libnumpythia.pyx":390
+          /* "_libnumpythia.pyx":428
  *         filesize = os.path.getsize(self.filename)
  *         with open(self.filename, 'r') as infile:
  *             for line in infile:             # <<<<<<<<<<<<<<
@@ -5576,7 +6094,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
           __pyx_L16_break:;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-          /* "_libnumpythia.pyx":389
+          /* "_libnumpythia.pyx":427
  *         cdef long long prev_location = 0
  *         filesize = os.path.getsize(self.filename)
  *         with open(self.filename, 'r') as infile:             # <<<<<<<<<<<<<<
@@ -5597,20 +6115,20 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("_libnumpythia.HepMCInput.estimate_num_events", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_3, &__pyx_t_1) < 0) __PYX_ERR(0, 389, __pyx_L9_except_error)
+          if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_3, &__pyx_t_1) < 0) __PYX_ERR(0, 427, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_4, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 389, __pyx_L9_except_error)
+          __pyx_t_5 = PyTuple_Pack(3, __pyx_t_4, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 427, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_5);
           __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 389, __pyx_L9_except_error)
+          if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 427, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_15);
           __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_15);
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-          if (__pyx_t_12 < 0) __PYX_ERR(0, 389, __pyx_L9_except_error)
+          if (__pyx_t_12 < 0) __PYX_ERR(0, 427, __pyx_L9_except_error)
           __pyx_t_16 = ((!(__pyx_t_12 != 0)) != 0);
           if (__pyx_t_16) {
             __Pyx_GIVEREF(__pyx_t_4);
@@ -5618,7 +6136,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
             __Pyx_XGIVEREF(__pyx_t_1);
             __Pyx_ErrRestoreWithState(__pyx_t_4, __pyx_t_3, __pyx_t_1);
             __pyx_t_4 = 0; __pyx_t_3 = 0; __pyx_t_1 = 0; 
-            __PYX_ERR(0, 389, __pyx_L9_except_error)
+            __PYX_ERR(0, 427, __pyx_L9_except_error)
           }
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5651,9 +6169,9 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
     /*finally:*/ {
       /*normal exit:*/{
         if (__pyx_t_6) {
-          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__9, NULL);
+          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__12, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 389, __pyx_L1_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 427, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
@@ -5663,9 +6181,9 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
         __pyx_t_9 = __pyx_r;
         __pyx_r = 0;
         if (__pyx_t_6) {
-          __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__10, NULL);
+          __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__13, NULL);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 389, __pyx_L1_error)
+          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 427, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         }
@@ -5682,7 +6200,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
     __pyx_L24:;
   }
 
-  /* "_libnumpythia.pyx":400
+  /* "_libnumpythia.pyx":438
  *             else:
  *                 return num_found
  *         return long(filesize / np.average(sizes))             # <<<<<<<<<<<<<<
@@ -5690,9 +6208,9 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_average); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_average); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -5706,13 +6224,13 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, ((PyObject *)__pyx_v_sizes)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, ((PyObject *)__pyx_v_sizes)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, ((PyObject *)__pyx_v_sizes)};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -5720,40 +6238,40 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, ((PyObject *)__pyx_v_sizes)};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 400, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 438, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(((PyObject *)__pyx_v_sizes));
       __Pyx_GIVEREF(((PyObject *)__pyx_v_sizes));
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, ((PyObject *)__pyx_v_sizes));
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_v_filesize, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_v_filesize, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&PyLong_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 400, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&PyLong_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 438, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":375
+  /* "_libnumpythia.pyx":413
  *     """
  * 
  *     def estimate_num_events(self, int sample_size=1000):             # <<<<<<<<<<<<<<
@@ -5780,7 +6298,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10HepMCInput_4estimate_num_events(stru
   return __pyx_r;
 }
 
-/* "_libnumpythia.pyx":405
+/* "_libnumpythia.pyx":443
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def get_input(name, filename, **kwargs):             # <<<<<<<<<<<<<<
@@ -5821,11 +6339,11 @@ static PyObject *__pyx_pw_13_libnumpythia_1get_input(PyObject *__pyx_self, PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_filename)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_input", 1, 2, 2, 1); __PYX_ERR(0, 405, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_input", 1, 2, 2, 1); __PYX_ERR(0, 443, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "get_input") < 0)) __PYX_ERR(0, 405, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "get_input") < 0)) __PYX_ERR(0, 443, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5838,7 +6356,7 @@ static PyObject *__pyx_pw_13_libnumpythia_1get_input(PyObject *__pyx_self, PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_input", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 405, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_input", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 443, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
   __Pyx_AddTraceback("_libnumpythia.get_input", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -5867,14 +6385,14 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
   __Pyx_RefNannySetupContext("get_input", 0);
   __Pyx_INCREF(__pyx_v_name);
 
-  /* "_libnumpythia.pyx":410
+  /* "_libnumpythia.pyx":448
  *     filename may be the pythia config file or a HepMC file
  *     """
  *     name = name.lower().strip()             # <<<<<<<<<<<<<<
  *     if name == 'pythia':
  *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_name, __pyx_n_s_lower); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_name, __pyx_n_s_lower); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 448, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -5887,14 +6405,14 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 448, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 448, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_strip); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_strip); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 448, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5908,54 +6426,54 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
     }
   }
   if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 448, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 448, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF_SET(__pyx_v_name, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":411
+  /* "_libnumpythia.pyx":449
  *     """
  *     name = name.lower().strip()
  *     if name == 'pythia':             # <<<<<<<<<<<<<<
  *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
  *         if not os.path.exists(filename):
  */
-  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_v_name, __pyx_n_s_pythia, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 411, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_v_name, __pyx_n_s_pythia, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 449, __pyx_L1_error)
   if (__pyx_t_5) {
 
-    /* "_libnumpythia.pyx":412
+    /* "_libnumpythia.pyx":450
  *     name = name.lower().strip()
  *     if name == 'pythia':
  *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')             # <<<<<<<<<<<<<<
  *         if not os.path.exists(filename):
  *             raise IOError("Pythia config not found: {0}".format(filename))
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_resource_filename); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 412, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_resource_filename); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 450, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 412, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 450, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_xmldoc = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "_libnumpythia.pyx":413
+    /* "_libnumpythia.pyx":451
  *     if name == 'pythia':
  *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
  *         if not os.path.exists(filename):             # <<<<<<<<<<<<<<
  *             raise IOError("Pythia config not found: {0}".format(filename))
  *         gen_input = PythiaInput(filename, xmldoc, **kwargs)
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 413, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 451, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 413, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 451, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_exists); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 413, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_exists); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 451, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -5969,13 +6487,13 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
       }
     }
     if (!__pyx_t_2) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 413, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_filename};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 413, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
@@ -5983,37 +6501,37 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_filename};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 413, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
       #endif
       {
-        __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 413, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 451, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
         __Pyx_INCREF(__pyx_v_filename);
         __Pyx_GIVEREF(__pyx_v_filename);
         PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_filename);
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 413, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 413, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 451, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_6 = ((!__pyx_t_5) != 0);
     if (__pyx_t_6) {
 
-      /* "_libnumpythia.pyx":414
+      /* "_libnumpythia.pyx":452
  *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
  *         if not os.path.exists(filename):
  *             raise IOError("Pythia config not found: {0}".format(filename))             # <<<<<<<<<<<<<<
  *         gen_input = PythiaInput(filename, xmldoc, **kwargs)
  *     elif name == 'hepmc':
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Pythia_config_not_found_0, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 414, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Pythia_config_not_found_0, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 452, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_4 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -6026,13 +6544,13 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
         }
       }
       if (!__pyx_t_4) {
-        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 414, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
       } else {
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_1)) {
           PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_filename};
-          __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 414, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_3);
         } else
@@ -6040,37 +6558,37 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
           PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_filename};
-          __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 414, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_3);
         } else
         #endif
         {
-          __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 414, __pyx_L1_error)
+          __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 452, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4); __pyx_t_4 = NULL;
           __Pyx_INCREF(__pyx_v_filename);
           __Pyx_GIVEREF(__pyx_v_filename);
           PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_filename);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 414, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         }
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 414, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 452, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IOError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 414, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IOError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 414, __pyx_L1_error)
+      __PYX_ERR(0, 452, __pyx_L1_error)
 
-      /* "_libnumpythia.pyx":413
+      /* "_libnumpythia.pyx":451
  *     if name == 'pythia':
  *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
  *         if not os.path.exists(filename):             # <<<<<<<<<<<<<<
@@ -6079,14 +6597,14 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
  */
     }
 
-    /* "_libnumpythia.pyx":415
+    /* "_libnumpythia.pyx":453
  *         if not os.path.exists(filename):
  *             raise IOError("Pythia config not found: {0}".format(filename))
  *         gen_input = PythiaInput(filename, xmldoc, **kwargs)             # <<<<<<<<<<<<<<
  *     elif name == 'hepmc':
  *         gen_input = HepMCInput(filename)
  */
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 415, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_v_filename);
     __Pyx_GIVEREF(__pyx_v_filename);
@@ -6094,13 +6612,13 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
     __Pyx_INCREF(__pyx_v_xmldoc);
     __Pyx_GIVEREF(__pyx_v_xmldoc);
     PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_xmldoc);
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_PythiaInput), __pyx_t_3, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 415, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_PythiaInput), __pyx_t_3, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "_libnumpythia.pyx":411
+    /* "_libnumpythia.pyx":449
  *     """
  *     name = name.lower().strip()
  *     if name == 'pythia':             # <<<<<<<<<<<<<<
@@ -6110,52 +6628,52 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
     goto __pyx_L3;
   }
 
-  /* "_libnumpythia.pyx":416
+  /* "_libnumpythia.pyx":454
  *             raise IOError("Pythia config not found: {0}".format(filename))
  *         gen_input = PythiaInput(filename, xmldoc, **kwargs)
  *     elif name == 'hepmc':             # <<<<<<<<<<<<<<
  *         gen_input = HepMCInput(filename)
  *         if kwargs:
  */
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_v_name, __pyx_n_s_hepmc, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 416, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_v_name, __pyx_n_s_hepmc, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 454, __pyx_L1_error)
   if (__pyx_t_6) {
 
-    /* "_libnumpythia.pyx":417
+    /* "_libnumpythia.pyx":455
  *         gen_input = PythiaInput(filename, xmldoc, **kwargs)
  *     elif name == 'hepmc':
  *         gen_input = HepMCInput(filename)             # <<<<<<<<<<<<<<
  *         if kwargs:
  *             raise ValueError(
  */
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 417, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 455, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_v_filename);
     __Pyx_GIVEREF(__pyx_v_filename);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_filename);
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_HepMCInput), __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 417, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_HepMCInput), __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 455, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "_libnumpythia.pyx":418
+    /* "_libnumpythia.pyx":456
  *     elif name == 'hepmc':
  *         gen_input = HepMCInput(filename)
  *         if kwargs:             # <<<<<<<<<<<<<<
  *             raise ValueError(
  *                 "unrecognized parameters in kwargs: {0}".format(kwargs))
  */
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_kwargs); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 418, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_kwargs); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 456, __pyx_L1_error)
     if (__pyx_t_6) {
 
-      /* "_libnumpythia.pyx":420
+      /* "_libnumpythia.pyx":458
  *         if kwargs:
  *             raise ValueError(
  *                 "unrecognized parameters in kwargs: {0}".format(kwargs))             # <<<<<<<<<<<<<<
  *     else:
  *         raise ValueError(
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_unrecognized_parameters_in_kwarg, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 420, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_unrecognized_parameters_in_kwarg, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_2 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -6168,13 +6686,13 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
         }
       }
       if (!__pyx_t_2) {
-        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_kwargs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 420, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_kwargs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 458, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
       } else {
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_1)) {
           PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_kwargs};
-          __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 420, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 458, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_GOTREF(__pyx_t_3);
         } else
@@ -6182,45 +6700,45 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
           PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_kwargs};
-          __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 420, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 458, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_GOTREF(__pyx_t_3);
         } else
         #endif
         {
-          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 420, __pyx_L1_error)
+          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 458, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
           __Pyx_INCREF(__pyx_v_kwargs);
           __Pyx_GIVEREF(__pyx_v_kwargs);
           PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_kwargs);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 420, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 458, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "_libnumpythia.pyx":419
+      /* "_libnumpythia.pyx":457
  *         gen_input = HepMCInput(filename)
  *         if kwargs:
  *             raise ValueError(             # <<<<<<<<<<<<<<
  *                 "unrecognized parameters in kwargs: {0}".format(kwargs))
  *     else:
  */
-      __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 419, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 457, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 419, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 457, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 419, __pyx_L1_error)
+      __PYX_ERR(0, 457, __pyx_L1_error)
 
-      /* "_libnumpythia.pyx":418
+      /* "_libnumpythia.pyx":456
  *     elif name == 'hepmc':
  *         gen_input = HepMCInput(filename)
  *         if kwargs:             # <<<<<<<<<<<<<<
@@ -6229,7 +6747,7 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
  */
     }
 
-    /* "_libnumpythia.pyx":416
+    /* "_libnumpythia.pyx":454
  *             raise IOError("Pythia config not found: {0}".format(filename))
  *         gen_input = PythiaInput(filename, xmldoc, **kwargs)
  *     elif name == 'hepmc':             # <<<<<<<<<<<<<<
@@ -6239,7 +6757,7 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
     goto __pyx_L3;
   }
 
-  /* "_libnumpythia.pyx":422
+  /* "_libnumpythia.pyx":460
  *                 "unrecognized parameters in kwargs: {0}".format(kwargs))
  *     else:
  *         raise ValueError(             # <<<<<<<<<<<<<<
@@ -6248,14 +6766,14 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
  */
   /*else*/ {
 
-    /* "_libnumpythia.pyx":423
+    /* "_libnumpythia.pyx":461
  *     else:
  *         raise ValueError(
  *             "no generator input available with name '{0}'".format(name))             # <<<<<<<<<<<<<<
  *     return gen_input
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_no_generator_input_available_wit, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_no_generator_input_available_wit, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -6268,13 +6786,13 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 423, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 461, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_name};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 423, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 461, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
@@ -6282,47 +6800,47 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_name};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 423, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 461, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
       #endif
       {
-        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 423, __pyx_L1_error)
+        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 461, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4); __pyx_t_4 = NULL;
         __Pyx_INCREF(__pyx_v_name);
         __Pyx_GIVEREF(__pyx_v_name);
         PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_name);
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 423, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 461, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "_libnumpythia.pyx":422
+    /* "_libnumpythia.pyx":460
  *                 "unrecognized parameters in kwargs: {0}".format(kwargs))
  *     else:
  *         raise ValueError(             # <<<<<<<<<<<<<<
  *             "no generator input available with name '{0}'".format(name))
  *     return gen_input
  */
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 422, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 460, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 422, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 460, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 422, __pyx_L1_error)
+    __PYX_ERR(0, 460, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "_libnumpythia.pyx":424
+  /* "_libnumpythia.pyx":462
  *         raise ValueError(
  *             "no generator input available with name '{0}'".format(name))
  *     return gen_input             # <<<<<<<<<<<<<<
@@ -6334,7 +6852,7 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
   __pyx_r = ((PyObject *)__pyx_v_gen_input);
   goto __pyx_L0;
 
-  /* "_libnumpythia.pyx":405
+  /* "_libnumpythia.pyx":443
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def get_input(name, filename, **kwargs):             # <<<<<<<<<<<<<<
@@ -6360,11 +6878,11 @@ static PyObject *__pyx_pf_13_libnumpythia_get_input(CYTHON_UNUSED PyObject *__py
 }
 static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__pyx_generator, PyObject *__pyx_sent_value); /* proto */
 
-/* "_libnumpythia.pyx":429
+/* "_libnumpythia.pyx":467
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * def generate(object gen_input, int events=-1, object find=None,             # <<<<<<<<<<<<<<
- *              HepMC.FilterType select=ALL, string write_to='',
+ * def generate(object gen_input, int events=-1,             # <<<<<<<<<<<<<<
+ *              string write_to='',
  *              bool weighted=False, **kwargs):
  */
 
@@ -6375,10 +6893,8 @@ static PyMethodDef __pyx_mdef_13_libnumpythia_3generate = {"generate", (PyCFunct
 static PyObject *__pyx_pw_13_libnumpythia_3generate(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_gen_input = 0;
   int __pyx_v_events;
-  PyObject *__pyx_v_find = 0;
-  enum HepMC::FilterType __pyx_v_select;
   std::string __pyx_v_write_to;
-  bool __pyx_v_weighted;
+  CYTHON_UNUSED bool __pyx_v_weighted;
   PyObject *__pyx_v_kwargs = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -6386,15 +6902,12 @@ static PyObject *__pyx_pw_13_libnumpythia_3generate(PyObject *__pyx_self, PyObje
   __pyx_v_kwargs = PyDict_New(); if (unlikely(!__pyx_v_kwargs)) return NULL;
   __Pyx_GOTREF(__pyx_v_kwargs);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_gen_input,&__pyx_n_s_events,&__pyx_n_s_find,&__pyx_n_s_select,&__pyx_n_s_write_to,&__pyx_n_s_weighted,0};
-    PyObject* values[6] = {0,0,0,0,0,0};
-    values[2] = ((PyObject *)Py_None);
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_gen_input,&__pyx_n_s_events,&__pyx_n_s_write_to,&__pyx_n_s_weighted,0};
+    PyObject* values[4] = {0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
-        case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
-        case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
         case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -6414,32 +6927,20 @@ static PyObject *__pyx_pw_13_libnumpythia_3generate(PyObject *__pyx_self, PyObje
         }
         case  2:
         if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_find);
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_write_to);
           if (value) { values[2] = value; kw_args--; }
         }
         case  3:
         if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_select);
-          if (value) { values[3] = value; kw_args--; }
-        }
-        case  4:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_write_to);
-          if (value) { values[4] = value; kw_args--; }
-        }
-        case  5:
-        if (kw_args > 0) {
           PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_weighted);
-          if (value) { values[5] = value; kw_args--; }
+          if (value) { values[3] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "generate") < 0)) __PYX_ERR(0, 429, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, pos_args, "generate") < 0)) __PYX_ERR(0, 467, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
-        case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
-        case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
         case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -6450,28 +6951,22 @@ static PyObject *__pyx_pw_13_libnumpythia_3generate(PyObject *__pyx_self, PyObje
     }
     __pyx_v_gen_input = values[0];
     if (values[1]) {
-      __pyx_v_events = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_events == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 429, __pyx_L3_error)
+      __pyx_v_events = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_events == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 467, __pyx_L3_error)
     } else {
       __pyx_v_events = ((int)-1);
     }
-    __pyx_v_find = values[2];
+    if (values[2]) {
+      __pyx_v_write_to = __pyx_convert_string_from_py_std__in_string(values[2]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 468, __pyx_L3_error)
+    } else {
+      __pyx_v_write_to = __pyx_k__15;
+    }
     if (values[3]) {
-      __pyx_v_select = ((enum HepMC::FilterType)__Pyx_PyInt_As_enum__HepMC_3a__3a_FilterType(values[3])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
-    } else {
-      __pyx_v_select = __pyx_k__12;
-    }
-    if (values[4]) {
-      __pyx_v_write_to = __pyx_convert_string_from_py_std__in_string(values[4]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L3_error)
-    } else {
-      __pyx_v_write_to = __pyx_k__13;
-    }
-    if (values[5]) {
-      __pyx_v_weighted = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_weighted == ((bool)-1)) && PyErr_Occurred())) __PYX_ERR(0, 431, __pyx_L3_error)
+      __pyx_v_weighted = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_weighted == ((bool)-1)) && PyErr_Occurred())) __PYX_ERR(0, 469, __pyx_L3_error)
     } else {
 
-      /* "_libnumpythia.pyx":431
- * def generate(object gen_input, int events=-1, object find=None,
- *              HepMC.FilterType select=ALL, string write_to='',
+      /* "_libnumpythia.pyx":469
+ * def generate(object gen_input, int events=-1,
+ *              string write_to='',
  *              bool weighted=False, **kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     Generate events (or read HepMC) and yield numpy arrays of particles
@@ -6481,20 +6976,20 @@ static PyObject *__pyx_pw_13_libnumpythia_3generate(PyObject *__pyx_self, PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("generate", 0, 1, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 429, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("generate", 0, 1, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 467, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_CLEAR(__pyx_v_kwargs);
   __Pyx_AddTraceback("_libnumpythia.generate", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13_libnumpythia_2generate(__pyx_self, __pyx_v_gen_input, __pyx_v_events, __pyx_v_find, __pyx_v_select, __pyx_v_write_to, __pyx_v_weighted, __pyx_v_kwargs);
+  __pyx_r = __pyx_pf_13_libnumpythia_2generate(__pyx_self, __pyx_v_gen_input, __pyx_v_events, __pyx_v_write_to, __pyx_v_weighted, __pyx_v_kwargs);
 
-  /* "_libnumpythia.pyx":429
+  /* "_libnumpythia.pyx":467
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * def generate(object gen_input, int events=-1, object find=None,             # <<<<<<<<<<<<<<
- *              HepMC.FilterType select=ALL, string write_to='',
+ * def generate(object gen_input, int events=-1,             # <<<<<<<<<<<<<<
+ *              string write_to='',
  *              bool weighted=False, **kwargs):
  */
 
@@ -6504,7 +6999,7 @@ static PyObject *__pyx_pw_13_libnumpythia_3generate(PyObject *__pyx_self, PyObje
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13_libnumpythia_2generate(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_gen_input, int __pyx_v_events, PyObject *__pyx_v_find, enum HepMC::FilterType __pyx_v_select, std::string __pyx_v_write_to, bool __pyx_v_weighted, PyObject *__pyx_v_kwargs) {
+static PyObject *__pyx_pf_13_libnumpythia_2generate(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_gen_input, int __pyx_v_events, std::string __pyx_v_write_to, CYTHON_UNUSED bool __pyx_v_weighted, PyObject *__pyx_v_kwargs) {
   struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -6513,7 +7008,7 @@ static PyObject *__pyx_pf_13_libnumpythia_2generate(CYTHON_UNUSED PyObject *__py
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 429, __pyx_L1_error)
+    __PYX_ERR(0, 467, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -6521,17 +7016,13 @@ static PyObject *__pyx_pf_13_libnumpythia_2generate(CYTHON_UNUSED PyObject *__py
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_gen_input);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_gen_input);
   __pyx_cur_scope->__pyx_v_events = __pyx_v_events;
-  __pyx_cur_scope->__pyx_v_find = __pyx_v_find;
-  __Pyx_INCREF(__pyx_cur_scope->__pyx_v_find);
-  __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_find);
-  __pyx_cur_scope->__pyx_v_select = __pyx_v_select;
   __pyx_cur_scope->__pyx_v_write_to = __pyx_v_write_to;
   __pyx_cur_scope->__pyx_v_weighted = __pyx_v_weighted;
   __pyx_cur_scope->__pyx_v_kwargs = __pyx_v_kwargs;
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_kwargs);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_kwargs);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_13_libnumpythia_4generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_generate, __pyx_n_s_generate, __pyx_n_s_libnumpythia); if (unlikely(!gen)) __PYX_ERR(0, 429, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_13_libnumpythia_4generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_generate, __pyx_n_s_generate, __pyx_n_s_libnumpythia); if (unlikely(!gen)) __PYX_ERR(0, 467, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6552,58 +7043,46 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
   struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate *__pyx_cur_scope = ((struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate *)__pyx_generator->closure);
   PyObject *__pyx_r = NULL;
   int __pyx_t_1;
-  int __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_t_3;
   PyObject *__pyx_t_4 = NULL;
-  int __pyx_t_5;
+  PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   PyObject *__pyx_t_8 = NULL;
-  PyObject *__pyx_t_9 = NULL;
-  int __pyx_t_10;
+  int __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
   PyObject *__pyx_t_11 = NULL;
   PyObject *__pyx_t_12 = NULL;
-  PyObject *__pyx_t_13 = NULL;
-  bool __pyx_t_14;
-  unsigned int __pyx_t_15;
-  int __pyx_t_16;
-  char const *__pyx_t_17;
+  bool __pyx_t_13;
+  int __pyx_t_14;
+  char const *__pyx_t_15;
+  PyObject *__pyx_t_16 = NULL;
+  PyObject *__pyx_t_17 = NULL;
   PyObject *__pyx_t_18 = NULL;
-  PyObject *__pyx_t_19 = NULL;
-  PyObject *__pyx_t_20 = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("None", 0);
   switch (__pyx_generator->resume_label) {
     case 0: goto __pyx_L3_first_run;
-    case 1: goto __pyx_L30_resume_from_yield;
-    case 2: goto __pyx_L31_resume_from_yield;
+    case 1: goto __pyx_L24_resume_from_yield;
     default: /* CPython raises the right error here */
     __Pyx_RefNannyFinishContext();
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 429, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 467, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":438
- *     cdef np.ndarray particle_array
- *     cdef HepMC.GenEvent* event
+  /* "_libnumpythia.pyx":475
+ *     """
+ *     cdef GenEvent event
  *     cdef HepMC.WriterAscii* hepmc_writer = NULL             # <<<<<<<<<<<<<<
- *     cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles
- *     cdef HepMC.FindParticles* search = NULL
- */
-  __pyx_cur_scope->__pyx_v_hepmc_writer = NULL;
-
-  /* "_libnumpythia.pyx":440
- *     cdef HepMC.WriterAscii* hepmc_writer = NULL
- *     cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles
- *     cdef HepMC.FindParticles* search = NULL             # <<<<<<<<<<<<<<
  *     cdef MCInput _gen_input
  *     cdef int ievent = 0;
  */
-  __pyx_cur_scope->__pyx_v_search = NULL;
+  __pyx_cur_scope->__pyx_v_hepmc_writer = NULL;
 
-  /* "_libnumpythia.pyx":442
- *     cdef HepMC.FindParticles* search = NULL
+  /* "_libnumpythia.pyx":477
+ *     cdef HepMC.WriterAscii* hepmc_writer = NULL
  *     cdef MCInput _gen_input
  *     cdef int ievent = 0;             # <<<<<<<<<<<<<<
  *     if events < 0:
@@ -6611,7 +7090,7 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  */
   __pyx_cur_scope->__pyx_v_ievent = 0;
 
-  /* "_libnumpythia.pyx":443
+  /* "_libnumpythia.pyx":478
  *     cdef MCInput _gen_input
  *     cdef int ievent = 0;
  *     if events < 0:             # <<<<<<<<<<<<<<
@@ -6621,7 +7100,7 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
   __pyx_t_1 = ((__pyx_cur_scope->__pyx_v_events < 0) != 0);
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":444
+    /* "_libnumpythia.pyx":479
  *     cdef int ievent = 0;
  *     if events < 0:
  *         ievent = events - 1             # <<<<<<<<<<<<<<
@@ -6630,7 +7109,7 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  */
     __pyx_cur_scope->__pyx_v_ievent = (__pyx_cur_scope->__pyx_v_events - 1);
 
-    /* "_libnumpythia.pyx":443
+    /* "_libnumpythia.pyx":478
  *     cdef MCInput _gen_input
  *     cdef int ievent = 0;
  *     if events < 0:             # <<<<<<<<<<<<<<
@@ -6639,281 +7118,199 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  */
   }
 
-  /* "_libnumpythia.pyx":445
+  /* "_libnumpythia.pyx":480
  *     if events < 0:
  *         ievent = events - 1
  *     if not write_to.empty():             # <<<<<<<<<<<<<<
  *         hepmc_writer = new HepMC.WriterAscii(write_to)
- *     if isinstance(find, BooleanFilter):
+ *     if isinstance(gen_input, string_types):
  */
   __pyx_t_1 = ((!(__pyx_cur_scope->__pyx_v_write_to.empty() != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "_libnumpythia.pyx":446
+    /* "_libnumpythia.pyx":481
  *         ievent = events - 1
  *     if not write_to.empty():
  *         hepmc_writer = new HepMC.WriterAscii(write_to)             # <<<<<<<<<<<<<<
- *     if isinstance(find, BooleanFilter):
- *         find = FilterList(find)
+ *     if isinstance(gen_input, string_types):
+ *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
  */
     __pyx_cur_scope->__pyx_v_hepmc_writer = new HepMC::WriterAscii(__pyx_cur_scope->__pyx_v_write_to);
 
-    /* "_libnumpythia.pyx":445
+    /* "_libnumpythia.pyx":480
  *     if events < 0:
  *         ievent = events - 1
  *     if not write_to.empty():             # <<<<<<<<<<<<<<
  *         hepmc_writer = new HepMC.WriterAscii(write_to)
- *     if isinstance(find, BooleanFilter):
+ *     if isinstance(gen_input, string_types):
  */
   }
 
-  /* "_libnumpythia.pyx":447
+  /* "_libnumpythia.pyx":482
  *     if not write_to.empty():
  *         hepmc_writer = new HepMC.WriterAscii(write_to)
- *     if isinstance(find, BooleanFilter):             # <<<<<<<<<<<<<<
- *         find = FilterList(find)
- *     if find is not None and not isinstance(find, FilterList):
- */
-  __pyx_t_1 = __Pyx_TypeCheck(__pyx_cur_scope->__pyx_v_find, __pyx_ptype_13_libnumpythia_BooleanFilter); 
-  __pyx_t_2 = (__pyx_t_1 != 0);
-  if (__pyx_t_2) {
-
-    /* "_libnumpythia.pyx":448
- *         hepmc_writer = new HepMC.WriterAscii(write_to)
- *     if isinstance(find, BooleanFilter):
- *         find = FilterList(find)             # <<<<<<<<<<<<<<
- *     if find is not None and not isinstance(find, FilterList):
- *         raise TypeError("find must be a boolean expression of Filters")
- */
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 448, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_INCREF(__pyx_cur_scope->__pyx_v_find);
-    __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_find);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_cur_scope->__pyx_v_find);
-    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_FilterList), __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 448, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GOTREF(__pyx_cur_scope->__pyx_v_find);
-    __Pyx_DECREF_SET(__pyx_cur_scope->__pyx_v_find, __pyx_t_4);
-    __Pyx_GIVEREF(__pyx_t_4);
-    __pyx_t_4 = 0;
-
-    /* "_libnumpythia.pyx":447
- *     if not write_to.empty():
- *         hepmc_writer = new HepMC.WriterAscii(write_to)
- *     if isinstance(find, BooleanFilter):             # <<<<<<<<<<<<<<
- *         find = FilterList(find)
- *     if find is not None and not isinstance(find, FilterList):
- */
-  }
-
-  /* "_libnumpythia.pyx":449
- *     if isinstance(find, BooleanFilter):
- *         find = FilterList(find)
- *     if find is not None and not isinstance(find, FilterList):             # <<<<<<<<<<<<<<
- *         raise TypeError("find must be a boolean expression of Filters")
- *     if isinstance(gen_input, string_types):
- */
-  __pyx_t_1 = (__pyx_cur_scope->__pyx_v_find != Py_None);
-  __pyx_t_5 = (__pyx_t_1 != 0);
-  if (__pyx_t_5) {
-  } else {
-    __pyx_t_2 = __pyx_t_5;
-    goto __pyx_L8_bool_binop_done;
-  }
-  __pyx_t_5 = __Pyx_TypeCheck(__pyx_cur_scope->__pyx_v_find, __pyx_ptype_13_libnumpythia_FilterList); 
-  __pyx_t_1 = ((!(__pyx_t_5 != 0)) != 0);
-  __pyx_t_2 = __pyx_t_1;
-  __pyx_L8_bool_binop_done:;
-  if (__pyx_t_2) {
-
-    /* "_libnumpythia.pyx":450
- *         find = FilterList(find)
- *     if find is not None and not isinstance(find, FilterList):
- *         raise TypeError("find must be a boolean expression of Filters")             # <<<<<<<<<<<<<<
- *     if isinstance(gen_input, string_types):
- *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
- */
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 450, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 450, __pyx_L1_error)
-
-    /* "_libnumpythia.pyx":449
- *     if isinstance(find, BooleanFilter):
- *         find = FilterList(find)
- *     if find is not None and not isinstance(find, FilterList):             # <<<<<<<<<<<<<<
- *         raise TypeError("find must be a boolean expression of Filters")
- *     if isinstance(gen_input, string_types):
- */
-  }
-
-  /* "_libnumpythia.pyx":451
- *     if find is not None and not isinstance(find, FilterList):
- *         raise TypeError("find must be a boolean expression of Filters")
  *     if isinstance(gen_input, string_types):             # <<<<<<<<<<<<<<
  *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
  *             _gen_input = get_input('hepmc', gen_input, **kwargs)
  */
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_string_types); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 451, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyObject_IsInstance(__pyx_cur_scope->__pyx_v_gen_input, __pyx_t_4); if (unlikely(__pyx_t_2 == -1)) __PYX_ERR(0, 451, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_1 = (__pyx_t_2 != 0);
-  if (__pyx_t_1) {
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_string_types); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyObject_IsInstance(__pyx_cur_scope->__pyx_v_gen_input, __pyx_t_2); if (unlikely(__pyx_t_1 == -1)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = (__pyx_t_1 != 0);
+  if (__pyx_t_3) {
 
-    /* "_libnumpythia.pyx":452
- *         raise TypeError("find must be a boolean expression of Filters")
+    /* "_libnumpythia.pyx":483
+ *         hepmc_writer = new HepMC.WriterAscii(write_to)
  *     if isinstance(gen_input, string_types):
  *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):             # <<<<<<<<<<<<<<
  *             _gen_input = get_input('hepmc', gen_input, **kwargs)
  *         else:
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_fnmatch); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 452, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_fnmatch); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_path); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_path); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 452, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_splitext); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_splitext); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 452, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
-      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
-      if (likely(__pyx_t_8)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
-        __Pyx_INCREF(__pyx_t_8);
+    __pyx_t_7 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
+      if (likely(__pyx_t_7)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+        __Pyx_INCREF(__pyx_t_7);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_7, function);
+        __Pyx_DECREF_SET(__pyx_t_6, function);
       }
     }
-    if (!__pyx_t_8) {
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_cur_scope->__pyx_v_gen_input); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 452, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_6);
+    if (!__pyx_t_7) {
+      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_cur_scope->__pyx_v_gen_input); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
     } else {
       #if CYTHON_FAST_PYCALL
-      if (PyFunction_Check(__pyx_t_7)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_cur_scope->__pyx_v_gen_input};
-        __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 452, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __Pyx_GOTREF(__pyx_t_6);
+      if (PyFunction_Check(__pyx_t_6)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_cur_scope->__pyx_v_gen_input};
+        __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+        __Pyx_GOTREF(__pyx_t_5);
       } else
       #endif
       #if CYTHON_FAST_PYCCALL
-      if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_cur_scope->__pyx_v_gen_input};
-        __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 452, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __Pyx_GOTREF(__pyx_t_6);
+      if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_cur_scope->__pyx_v_gen_input};
+        __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+        __Pyx_GOTREF(__pyx_t_5);
       } else
       #endif
       {
-        __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 452, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_9);
-        __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_8); __pyx_t_8 = NULL;
+        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 483, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7); __pyx_t_7 = NULL;
         __Pyx_INCREF(__pyx_cur_scope->__pyx_v_gen_input);
         __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_gen_input);
-        PyTuple_SET_ITEM(__pyx_t_9, 0+1, __pyx_cur_scope->__pyx_v_gen_input);
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_9, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 452, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_cur_scope->__pyx_v_gen_input);
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_8, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 483, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
     }
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_GetItemInt(__pyx_t_6, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 452, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = NULL;
-    __pyx_t_10 = 0;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
-      if (likely(__pyx_t_6)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-        __Pyx_INCREF(__pyx_t_6);
+    __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_5, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_5 = NULL;
+    __pyx_t_9 = 0;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_5)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_5);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_3, function);
-        __pyx_t_10 = 1;
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_9 = 1;
       }
     }
     #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_7, __pyx_kp_s_hepmc_2};
-      __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 452, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (PyFunction_Check(__pyx_t_4)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_6, __pyx_kp_s_hepmc_2};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_7, __pyx_kp_s_hepmc_2};
-      __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 452, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_6, __pyx_kp_s_hepmc_2};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_9 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 452, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      if (__pyx_t_6) {
-        __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_6); __pyx_t_6 = NULL;
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 483, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      if (__pyx_t_5) {
+        __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_5); __pyx_t_5 = NULL;
       }
-      __Pyx_GIVEREF(__pyx_t_7);
-      PyTuple_SET_ITEM(__pyx_t_9, 0+__pyx_t_10, __pyx_t_7);
+      __Pyx_GIVEREF(__pyx_t_6);
+      PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_9, __pyx_t_6);
       __Pyx_INCREF(__pyx_kp_s_hepmc_2);
       __Pyx_GIVEREF(__pyx_kp_s_hepmc_2);
-      PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_10, __pyx_kp_s_hepmc_2);
-      __pyx_t_7 = 0;
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 452, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_9, __pyx_kp_s_hepmc_2);
+      __pyx_t_6 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 452, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (__pyx_t_1) {
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (__pyx_t_3) {
 
-      /* "_libnumpythia.pyx":453
+      /* "_libnumpythia.pyx":484
  *     if isinstance(gen_input, string_types):
  *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
  *             _gen_input = get_input('hepmc', gen_input, **kwargs)             # <<<<<<<<<<<<<<
  *         else:
  *             _gen_input = get_input('pythia', gen_input, **kwargs)
  */
-      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_get_input); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 453, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_get_input); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 484, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 484, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 453, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_n_s_hepmc);
       __Pyx_GIVEREF(__pyx_n_s_hepmc);
-      PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_hepmc);
+      PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_n_s_hepmc);
       __Pyx_INCREF(__pyx_cur_scope->__pyx_v_gen_input);
       __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_gen_input);
-      PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_cur_scope->__pyx_v_gen_input);
-      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, __pyx_cur_scope->__pyx_v_kwargs); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 453, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_9);
+      PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_cur_scope->__pyx_v_gen_input);
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_cur_scope->__pyx_v_kwargs); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 484, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (!(likely(((__pyx_t_9) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_9, __pyx_ptype_13_libnumpythia_MCInput))))) __PYX_ERR(0, 453, __pyx_L1_error)
-      __Pyx_GIVEREF(__pyx_t_9);
-      __pyx_cur_scope->__pyx_v__gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_9);
-      __pyx_t_9 = 0;
+      if (!(likely(((__pyx_t_8) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_8, __pyx_ptype_13_libnumpythia_MCInput))))) __PYX_ERR(0, 484, __pyx_L1_error)
+      __Pyx_GIVEREF(__pyx_t_8);
+      __pyx_cur_scope->__pyx_v__gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_8);
+      __pyx_t_8 = 0;
 
-      /* "_libnumpythia.pyx":452
- *         raise TypeError("find must be a boolean expression of Filters")
+      /* "_libnumpythia.pyx":483
+ *         hepmc_writer = new HepMC.WriterAscii(write_to)
  *     if isinstance(gen_input, string_types):
  *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):             # <<<<<<<<<<<<<<
  *             _gen_input = get_input('hepmc', gen_input, **kwargs)
  *         else:
  */
-      goto __pyx_L11;
+      goto __pyx_L7;
     }
 
-    /* "_libnumpythia.pyx":455
+    /* "_libnumpythia.pyx":486
  *             _gen_input = get_input('hepmc', gen_input, **kwargs)
  *         else:
  *             _gen_input = get_input('pythia', gen_input, **kwargs)             # <<<<<<<<<<<<<<
@@ -6921,38 +7318,38 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  *         if not isinstance(gen_input, MCInput):
  */
     /*else*/ {
-      __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_get_input); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 455, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 455, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_get_input); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 486, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 486, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_n_s_pythia);
       __Pyx_GIVEREF(__pyx_n_s_pythia);
-      PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_pythia);
+      PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_n_s_pythia);
       __Pyx_INCREF(__pyx_cur_scope->__pyx_v_gen_input);
       __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_gen_input);
-      PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_cur_scope->__pyx_v_gen_input);
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_3, __pyx_cur_scope->__pyx_v_kwargs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 455, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_13_libnumpythia_MCInput))))) __PYX_ERR(0, 455, __pyx_L1_error)
-      __Pyx_GIVEREF(__pyx_t_4);
-      __pyx_cur_scope->__pyx_v__gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_4);
-      __pyx_t_4 = 0;
+      PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_cur_scope->__pyx_v_gen_input);
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_4, __pyx_cur_scope->__pyx_v_kwargs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 486, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_13_libnumpythia_MCInput))))) __PYX_ERR(0, 486, __pyx_L1_error)
+      __Pyx_GIVEREF(__pyx_t_2);
+      __pyx_cur_scope->__pyx_v__gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_2);
+      __pyx_t_2 = 0;
     }
-    __pyx_L11:;
+    __pyx_L7:;
 
-    /* "_libnumpythia.pyx":451
- *     if find is not None and not isinstance(find, FilterList):
- *         raise TypeError("find must be a boolean expression of Filters")
+    /* "_libnumpythia.pyx":482
+ *     if not write_to.empty():
+ *         hepmc_writer = new HepMC.WriterAscii(write_to)
  *     if isinstance(gen_input, string_types):             # <<<<<<<<<<<<<<
  *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
  *             _gen_input = get_input('hepmc', gen_input, **kwargs)
  */
-    goto __pyx_L10;
+    goto __pyx_L6;
   }
 
-  /* "_libnumpythia.pyx":457
+  /* "_libnumpythia.pyx":488
  *             _gen_input = get_input('pythia', gen_input, **kwargs)
  *     else:
  *         if not isinstance(gen_input, MCInput):             # <<<<<<<<<<<<<<
@@ -6960,24 +7357,24 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  *         _gen_input = <MCInput> gen_input
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_TypeCheck(__pyx_cur_scope->__pyx_v_gen_input, __pyx_ptype_13_libnumpythia_MCInput); 
-    __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
-    if (__pyx_t_2) {
+    __pyx_t_3 = __Pyx_TypeCheck(__pyx_cur_scope->__pyx_v_gen_input, __pyx_ptype_13_libnumpythia_MCInput); 
+    __pyx_t_1 = ((!(__pyx_t_3 != 0)) != 0);
+    if (__pyx_t_1) {
 
-      /* "_libnumpythia.pyx":458
+      /* "_libnumpythia.pyx":489
  *     else:
  *         if not isinstance(gen_input, MCInput):
  *             raise TypeError("gen_input must be a string (filename) or MCInput instance")             # <<<<<<<<<<<<<<
  *         _gen_input = <MCInput> gen_input
  *     try:
  */
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 458, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_Raise(__pyx_t_4, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 489, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __PYX_ERR(0, 489, __pyx_L1_error)
 
-      /* "_libnumpythia.pyx":457
+      /* "_libnumpythia.pyx":488
  *             _gen_input = get_input('pythia', gen_input, **kwargs)
  *     else:
  *         if not isinstance(gen_input, MCInput):             # <<<<<<<<<<<<<<
@@ -6986,22 +7383,22 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  */
     }
 
-    /* "_libnumpythia.pyx":459
+    /* "_libnumpythia.pyx":490
  *         if not isinstance(gen_input, MCInput):
  *             raise TypeError("gen_input must be a string (filename) or MCInput instance")
  *         _gen_input = <MCInput> gen_input             # <<<<<<<<<<<<<<
  *     try:
  *         while ievent < events:
  */
-    __pyx_t_4 = __pyx_cur_scope->__pyx_v_gen_input;
-    __Pyx_INCREF(__pyx_t_4);
-    __Pyx_GIVEREF(__pyx_t_4);
-    __pyx_cur_scope->__pyx_v__gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_4);
-    __pyx_t_4 = 0;
+    __pyx_t_2 = __pyx_cur_scope->__pyx_v_gen_input;
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_2);
+    __pyx_cur_scope->__pyx_v__gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)__pyx_t_2);
+    __pyx_t_2 = 0;
   }
-  __pyx_L10:;
+  __pyx_L6:;
 
-  /* "_libnumpythia.pyx":460
+  /* "_libnumpythia.pyx":491
  *             raise TypeError("gen_input must be a string (filename) or MCInput instance")
  *         _gen_input = <MCInput> gen_input
  *     try:             # <<<<<<<<<<<<<<
@@ -7012,13 +7409,13 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
     {
       __Pyx_PyThreadState_declare
       __Pyx_PyThreadState_assign
-      __Pyx_ExceptionSave(&__pyx_t_11, &__pyx_t_12, &__pyx_t_13);
+      __Pyx_ExceptionSave(&__pyx_t_10, &__pyx_t_11, &__pyx_t_12);
+      __Pyx_XGOTREF(__pyx_t_10);
       __Pyx_XGOTREF(__pyx_t_11);
       __Pyx_XGOTREF(__pyx_t_12);
-      __Pyx_XGOTREF(__pyx_t_13);
       /*try:*/ {
 
-        /* "_libnumpythia.pyx":461
+        /* "_libnumpythia.pyx":492
  *         _gen_input = <MCInput> gen_input
  *     try:
  *         while ievent < events:             # <<<<<<<<<<<<<<
@@ -7026,30 +7423,30 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  *                 continue
  */
         while (1) {
-          __pyx_t_2 = ((__pyx_cur_scope->__pyx_v_ievent < __pyx_cur_scope->__pyx_v_events) != 0);
-          if (!__pyx_t_2) break;
+          __pyx_t_1 = ((__pyx_cur_scope->__pyx_v_ievent < __pyx_cur_scope->__pyx_v_events) != 0);
+          if (!__pyx_t_1) break;
 
-          /* "_libnumpythia.pyx":462
+          /* "_libnumpythia.pyx":493
  *     try:
  *         while ievent < events:
  *             if not _gen_input.get_next_event():             # <<<<<<<<<<<<<<
  *                 continue
  *             # We don't own event here. MCInput will delete it.
  */
-          __pyx_t_14 = ((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_cur_scope->__pyx_v__gen_input->__pyx_vtab)->get_next_event(__pyx_cur_scope->__pyx_v__gen_input); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 462, __pyx_L16_error)
-          __pyx_t_2 = ((!(__pyx_t_14 != 0)) != 0);
-          if (__pyx_t_2) {
+          __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_cur_scope->__pyx_v__gen_input->__pyx_vtab)->get_next_event(__pyx_cur_scope->__pyx_v__gen_input); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 493, __pyx_L12_error)
+          __pyx_t_1 = ((!(__pyx_t_13 != 0)) != 0);
+          if (__pyx_t_1) {
 
-            /* "_libnumpythia.pyx":463
+            /* "_libnumpythia.pyx":494
  *         while ievent < events:
  *             if not _gen_input.get_next_event():
  *                 continue             # <<<<<<<<<<<<<<
  *             # We don't own event here. MCInput will delete it.
  *             event = _gen_input.get_hepmc()
  */
-            goto __pyx_L24_continue;
+            goto __pyx_L20_continue;
 
-            /* "_libnumpythia.pyx":462
+            /* "_libnumpythia.pyx":493
  *     try:
  *         while ievent < events:
  *             if not _gen_input.get_next_event():             # <<<<<<<<<<<<<<
@@ -7058,257 +7455,83 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  */
           }
 
-          /* "_libnumpythia.pyx":465
+          /* "_libnumpythia.pyx":496
  *                 continue
  *             # We don't own event here. MCInput will delete it.
  *             event = _gen_input.get_hepmc()             # <<<<<<<<<<<<<<
  *             if hepmc_writer != NULL:
- *                 hepmc_writer.write_event(deref(event))
+ *                 hepmc_writer.write_event(deref(event.event))
  */
-          __pyx_cur_scope->__pyx_v_event = ((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_cur_scope->__pyx_v__gen_input->__pyx_vtab)->get_hepmc(__pyx_cur_scope->__pyx_v__gen_input);
+          __pyx_t_2 = ((PyObject *)((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_cur_scope->__pyx_v__gen_input->__pyx_vtab)->get_hepmc(__pyx_cur_scope->__pyx_v__gen_input)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 496, __pyx_L12_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_XGOTREF(((PyObject *)__pyx_cur_scope->__pyx_v_event));
+          __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_event, ((struct __pyx_obj_13_libnumpythia_GenEvent *)__pyx_t_2));
+          __Pyx_GIVEREF(__pyx_t_2);
+          __pyx_t_2 = 0;
 
-          /* "_libnumpythia.pyx":466
+          /* "_libnumpythia.pyx":497
  *             # We don't own event here. MCInput will delete it.
  *             event = _gen_input.get_hepmc()
  *             if hepmc_writer != NULL:             # <<<<<<<<<<<<<<
- *                 hepmc_writer.write_event(deref(event))
- * 
+ *                 hepmc_writer.write_event(deref(event.event))
+ *             yield event
  */
-          __pyx_t_2 = ((__pyx_cur_scope->__pyx_v_hepmc_writer != NULL) != 0);
-          if (__pyx_t_2) {
+          __pyx_t_1 = ((__pyx_cur_scope->__pyx_v_hepmc_writer != NULL) != 0);
+          if (__pyx_t_1) {
 
-            /* "_libnumpythia.pyx":467
+            /* "_libnumpythia.pyx":498
  *             event = _gen_input.get_hepmc()
  *             if hepmc_writer != NULL:
- *                 hepmc_writer.write_event(deref(event))             # <<<<<<<<<<<<<<
- * 
- *             if find is not None:
+ *                 hepmc_writer.write_event(deref(event.event))             # <<<<<<<<<<<<<<
+ *             yield event
+ *             if events > 0:
  */
-            __pyx_cur_scope->__pyx_v_hepmc_writer->write_event((*__pyx_cur_scope->__pyx_v_event));
+            __pyx_cur_scope->__pyx_v_hepmc_writer->write_event((*__pyx_cur_scope->__pyx_v_event->event));
 
-            /* "_libnumpythia.pyx":466
+            /* "_libnumpythia.pyx":497
  *             # We don't own event here. MCInput will delete it.
  *             event = _gen_input.get_hepmc()
  *             if hepmc_writer != NULL:             # <<<<<<<<<<<<<<
- *                 hepmc_writer.write_event(deref(event))
- * 
+ *                 hepmc_writer.write_event(deref(event.event))
+ *             yield event
  */
           }
 
-          /* "_libnumpythia.pyx":469
- *                 hepmc_writer.write_event(deref(event))
- * 
- *             if find is not None:             # <<<<<<<<<<<<<<
- *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
- *                 particles = search.results()
- */
-          __pyx_t_2 = (__pyx_cur_scope->__pyx_v_find != Py_None);
-          __pyx_t_1 = (__pyx_t_2 != 0);
-          if (__pyx_t_1) {
-
-            /* "_libnumpythia.pyx":470
- * 
- *             if find is not None:
- *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)             # <<<<<<<<<<<<<<
- *                 particles = search.results()
- *                 del search
- */
-            __pyx_cur_scope->__pyx_v_search = new HepMC::FindParticles((*__pyx_cur_scope->__pyx_v_event), __pyx_cur_scope->__pyx_v_select, ((struct __pyx_obj_13_libnumpythia_FilterList *)__pyx_cur_scope->__pyx_v_find)->_filterlist);
-
-            /* "_libnumpythia.pyx":471
- *             if find is not None:
- *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
- *                 particles = search.results()             # <<<<<<<<<<<<<<
- *                 del search
- *             else:
- */
-            __pyx_cur_scope->__pyx_v_particles = __pyx_cur_scope->__pyx_v_search->results();
-
-            /* "_libnumpythia.pyx":472
- *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
- *                 particles = search.results()
- *                 del search             # <<<<<<<<<<<<<<
- *             else:
- *                 particles = event.particles()
- */
-            delete __pyx_cur_scope->__pyx_v_search;
-
-            /* "_libnumpythia.pyx":469
- *                 hepmc_writer.write_event(deref(event))
- * 
- *             if find is not None:             # <<<<<<<<<<<<<<
- *                 search = new HepMC.FindParticles(deref(event), select, (<FilterList>find)._filterlist)
- *                 particles = search.results()
- */
-            goto __pyx_L28;
-          }
-
-          /* "_libnumpythia.pyx":474
- *                 del search
- *             else:
- *                 particles = event.particles()             # <<<<<<<<<<<<<<
- * 
- *             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
- */
-          /*else*/ {
-            __pyx_cur_scope->__pyx_v_particles = __pyx_cur_scope->__pyx_v_event->particles();
-          }
-          __pyx_L28:;
-
-          /* "_libnumpythia.pyx":476
- *                 particles = event.particles()
- * 
- *             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)             # <<<<<<<<<<<<<<
- *             numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
- *             if weighted:
- */
-          __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_empty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __pyx_t_4 = __Pyx_PyInt_FromSize_t(__pyx_cur_scope->__pyx_v_particles.size()); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_9);
-          __Pyx_GIVEREF(__pyx_t_4);
-          PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_4);
-          __pyx_t_4 = 0;
-          __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_GIVEREF(__pyx_t_9);
-          PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_9);
-          __pyx_t_9 = 0;
-          __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE_PARTICLE); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_7);
-          if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_7);
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (!(likely(((__pyx_t_7) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_7, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 476, __pyx_L16_error)
-          __Pyx_XGOTREF(((PyObject *)__pyx_cur_scope->__pyx_v_particle_array));
-          __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_particle_array, ((PyArrayObject *)__pyx_t_7));
-          __Pyx_GIVEREF(__pyx_t_7);
-          __pyx_t_7 = 0;
-
-          /* "_libnumpythia.pyx":477
- * 
- *             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
- *             numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)             # <<<<<<<<<<<<<<
- *             if weighted:
- *                 yield particle_array, gen_input.weights
- */
-          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_particle_array), __pyx_n_s_itemsize); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 477, __pyx_L16_error)
-          __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_15 = __Pyx_PyInt_As_unsigned_int(__pyx_t_7); if (unlikely((__pyx_t_15 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 477, __pyx_L16_error)
-          __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          hepmc_to_array(__pyx_cur_scope->__pyx_v_particles, ((char *)__pyx_cur_scope->__pyx_v_particle_array->data), ((unsigned int)__pyx_t_15));
-
-          /* "_libnumpythia.pyx":478
- *             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
- *             numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
- *             if weighted:             # <<<<<<<<<<<<<<
- *                 yield particle_array, gen_input.weights
- *             else:
- */
-          __pyx_t_1 = (__pyx_cur_scope->__pyx_v_weighted != 0);
-          if (__pyx_t_1) {
-
-            /* "_libnumpythia.pyx":479
- *             numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
- *             if weighted:
- *                 yield particle_array, gen_input.weights             # <<<<<<<<<<<<<<
- *             else:
- *                 yield particle_array
- */
-            __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_gen_input, __pyx_n_s_weights); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 479, __pyx_L16_error)
-            __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 479, __pyx_L16_error)
-            __Pyx_GOTREF(__pyx_t_9);
-            __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_v_particle_array));
-            __Pyx_GIVEREF(((PyObject *)__pyx_cur_scope->__pyx_v_particle_array));
-            PyTuple_SET_ITEM(__pyx_t_9, 0, ((PyObject *)__pyx_cur_scope->__pyx_v_particle_array));
-            __Pyx_GIVEREF(__pyx_t_7);
-            PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_t_7);
-            __pyx_t_7 = 0;
-            __pyx_r = __pyx_t_9;
-            __pyx_t_9 = 0;
-            __Pyx_XGIVEREF(__pyx_t_11);
-            __pyx_cur_scope->__pyx_t_0 = __pyx_t_11;
-            __Pyx_XGIVEREF(__pyx_t_12);
-            __pyx_cur_scope->__pyx_t_1 = __pyx_t_12;
-            __Pyx_XGIVEREF(__pyx_t_13);
-            __pyx_cur_scope->__pyx_t_2 = __pyx_t_13;
-            __Pyx_XGIVEREF(__pyx_r);
-            __Pyx_RefNannyFinishContext();
-            /* return from generator, yielding value */
-            __pyx_generator->resume_label = 1;
-            return __pyx_r;
-            __pyx_L30_resume_from_yield:;
-            __pyx_t_11 = __pyx_cur_scope->__pyx_t_0;
-            __pyx_cur_scope->__pyx_t_0 = 0;
-            __Pyx_XGOTREF(__pyx_t_11);
-            __pyx_t_12 = __pyx_cur_scope->__pyx_t_1;
-            __pyx_cur_scope->__pyx_t_1 = 0;
-            __Pyx_XGOTREF(__pyx_t_12);
-            __pyx_t_13 = __pyx_cur_scope->__pyx_t_2;
-            __pyx_cur_scope->__pyx_t_2 = 0;
-            __Pyx_XGOTREF(__pyx_t_13);
-            if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 479, __pyx_L16_error)
-
-            /* "_libnumpythia.pyx":478
- *             particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
- *             numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
- *             if weighted:             # <<<<<<<<<<<<<<
- *                 yield particle_array, gen_input.weights
- *             else:
- */
-            goto __pyx_L29;
-          }
-
-          /* "_libnumpythia.pyx":481
- *                 yield particle_array, gen_input.weights
- *             else:
- *                 yield particle_array             # <<<<<<<<<<<<<<
+          /* "_libnumpythia.pyx":499
+ *             if hepmc_writer != NULL:
+ *                 hepmc_writer.write_event(deref(event.event))
+ *             yield event             # <<<<<<<<<<<<<<
  *             if events > 0:
  *                 ievent += 1
  */
-          /*else*/ {
-            __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_v_particle_array));
-            __pyx_r = ((PyObject *)__pyx_cur_scope->__pyx_v_particle_array);
-            __Pyx_XGIVEREF(__pyx_t_11);
-            __pyx_cur_scope->__pyx_t_0 = __pyx_t_11;
-            __Pyx_XGIVEREF(__pyx_t_12);
-            __pyx_cur_scope->__pyx_t_1 = __pyx_t_12;
-            __Pyx_XGIVEREF(__pyx_t_13);
-            __pyx_cur_scope->__pyx_t_2 = __pyx_t_13;
-            __Pyx_XGIVEREF(__pyx_r);
-            __Pyx_RefNannyFinishContext();
-            /* return from generator, yielding value */
-            __pyx_generator->resume_label = 2;
-            return __pyx_r;
-            __pyx_L31_resume_from_yield:;
-            __pyx_t_11 = __pyx_cur_scope->__pyx_t_0;
-            __pyx_cur_scope->__pyx_t_0 = 0;
-            __Pyx_XGOTREF(__pyx_t_11);
-            __pyx_t_12 = __pyx_cur_scope->__pyx_t_1;
-            __pyx_cur_scope->__pyx_t_1 = 0;
-            __Pyx_XGOTREF(__pyx_t_12);
-            __pyx_t_13 = __pyx_cur_scope->__pyx_t_2;
-            __pyx_cur_scope->__pyx_t_2 = 0;
-            __Pyx_XGOTREF(__pyx_t_13);
-            if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 481, __pyx_L16_error)
-          }
-          __pyx_L29:;
+          __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_v_event));
+          __pyx_r = ((PyObject *)__pyx_cur_scope->__pyx_v_event);
+          __Pyx_XGIVEREF(__pyx_t_10);
+          __pyx_cur_scope->__pyx_t_0 = __pyx_t_10;
+          __Pyx_XGIVEREF(__pyx_t_11);
+          __pyx_cur_scope->__pyx_t_1 = __pyx_t_11;
+          __Pyx_XGIVEREF(__pyx_t_12);
+          __pyx_cur_scope->__pyx_t_2 = __pyx_t_12;
+          __Pyx_XGIVEREF(__pyx_r);
+          __Pyx_RefNannyFinishContext();
+          /* return from generator, yielding value */
+          __pyx_generator->resume_label = 1;
+          return __pyx_r;
+          __pyx_L24_resume_from_yield:;
+          __pyx_t_10 = __pyx_cur_scope->__pyx_t_0;
+          __pyx_cur_scope->__pyx_t_0 = 0;
+          __Pyx_XGOTREF(__pyx_t_10);
+          __pyx_t_11 = __pyx_cur_scope->__pyx_t_1;
+          __pyx_cur_scope->__pyx_t_1 = 0;
+          __Pyx_XGOTREF(__pyx_t_11);
+          __pyx_t_12 = __pyx_cur_scope->__pyx_t_2;
+          __pyx_cur_scope->__pyx_t_2 = 0;
+          __Pyx_XGOTREF(__pyx_t_12);
+          if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 499, __pyx_L12_error)
 
-          /* "_libnumpythia.pyx":482
- *             else:
- *                 yield particle_array
+          /* "_libnumpythia.pyx":500
+ *                 hepmc_writer.write_event(deref(event.event))
+ *             yield event
  *             if events > 0:             # <<<<<<<<<<<<<<
  *                 ievent += 1
  *     except:
@@ -7316,8 +7539,8 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
           __pyx_t_1 = ((__pyx_cur_scope->__pyx_v_events > 0) != 0);
           if (__pyx_t_1) {
 
-            /* "_libnumpythia.pyx":483
- *                 yield particle_array
+            /* "_libnumpythia.pyx":501
+ *             yield event
  *             if events > 0:
  *                 ievent += 1             # <<<<<<<<<<<<<<
  *     except:
@@ -7325,18 +7548,18 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  */
             __pyx_cur_scope->__pyx_v_ievent = (__pyx_cur_scope->__pyx_v_ievent + 1);
 
-            /* "_libnumpythia.pyx":482
- *             else:
- *                 yield particle_array
+            /* "_libnumpythia.pyx":500
+ *                 hepmc_writer.write_event(deref(event.event))
+ *             yield event
  *             if events > 0:             # <<<<<<<<<<<<<<
  *                 ievent += 1
  *     except:
  */
           }
-          __pyx_L24_continue:;
+          __pyx_L20_continue:;
         }
 
-        /* "_libnumpythia.pyx":460
+        /* "_libnumpythia.pyx":491
  *             raise TypeError("gen_input must be a string (filename) or MCInput instance")
  *         _gen_input = <MCInput> gen_input
  *     try:             # <<<<<<<<<<<<<<
@@ -7344,20 +7567,20 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  *             if not _gen_input.get_next_event():
  */
       }
+      __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-      goto __pyx_L23_try_end;
-      __pyx_L16_error:;
+      goto __pyx_L19_try_end;
+      __pyx_L12_error:;
       __Pyx_PyThreadState_assign
-      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "_libnumpythia.pyx":484
+      /* "_libnumpythia.pyx":502
  *             if events > 0:
  *                 ievent += 1
  *     except:             # <<<<<<<<<<<<<<
@@ -7366,28 +7589,28 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  */
       /*except:*/ {
         __Pyx_AddTraceback("_libnumpythia.generate", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_9, &__pyx_t_7, &__pyx_t_4) < 0) __PYX_ERR(0, 484, __pyx_L18_except_error)
-        __Pyx_GOTREF(__pyx_t_9);
-        __Pyx_GOTREF(__pyx_t_7);
+        if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_4, &__pyx_t_8) < 0) __PYX_ERR(0, 502, __pyx_L14_except_error)
+        __Pyx_GOTREF(__pyx_t_2);
         __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_GOTREF(__pyx_t_8);
 
-        /* "_libnumpythia.pyx":485
+        /* "_libnumpythia.pyx":503
  *                 ievent += 1
  *     except:
  *         raise             # <<<<<<<<<<<<<<
  *     finally:
  *         del hepmc_writer
  */
-        __Pyx_GIVEREF(__pyx_t_9);
-        __Pyx_GIVEREF(__pyx_t_7);
-        __Pyx_XGIVEREF(__pyx_t_4);
-        __Pyx_ErrRestoreWithState(__pyx_t_9, __pyx_t_7, __pyx_t_4);
-        __pyx_t_9 = 0; __pyx_t_7 = 0; __pyx_t_4 = 0; 
-        __PYX_ERR(0, 485, __pyx_L18_except_error)
+        __Pyx_GIVEREF(__pyx_t_2);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __Pyx_XGIVEREF(__pyx_t_8);
+        __Pyx_ErrRestoreWithState(__pyx_t_2, __pyx_t_4, __pyx_t_8);
+        __pyx_t_2 = 0; __pyx_t_4 = 0; __pyx_t_8 = 0; 
+        __PYX_ERR(0, 503, __pyx_L14_except_error)
       }
-      __pyx_L18_except_error:;
+      __pyx_L14_except_error:;
 
-      /* "_libnumpythia.pyx":460
+      /* "_libnumpythia.pyx":491
  *             raise TypeError("gen_input must be a string (filename) or MCInput instance")
  *         _gen_input = <MCInput> gen_input
  *     try:             # <<<<<<<<<<<<<<
@@ -7395,16 +7618,16 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
  *             if not _gen_input.get_next_event():
  */
       __Pyx_PyThreadState_assign
+      __Pyx_XGIVEREF(__pyx_t_10);
       __Pyx_XGIVEREF(__pyx_t_11);
       __Pyx_XGIVEREF(__pyx_t_12);
-      __Pyx_XGIVEREF(__pyx_t_13);
-      __Pyx_ExceptionReset(__pyx_t_11, __pyx_t_12, __pyx_t_13);
-      goto __pyx_L14_error;
-      __pyx_L23_try_end:;
+      __Pyx_ExceptionReset(__pyx_t_10, __pyx_t_11, __pyx_t_12);
+      goto __pyx_L10_error;
+      __pyx_L19_try_end:;
     }
   }
 
-  /* "_libnumpythia.pyx":487
+  /* "_libnumpythia.pyx":505
  *         raise
  *     finally:
  *         del hepmc_writer             # <<<<<<<<<<<<<<
@@ -7413,50 +7636,50 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
   /*finally:*/ {
     /*normal exit:*/{
       delete __pyx_cur_scope->__pyx_v_hepmc_writer;
-      goto __pyx_L15;
+      goto __pyx_L11;
     }
     /*exception exit:*/{
       __Pyx_PyThreadState_declare
-      __pyx_L14_error:;
-      __pyx_t_13 = 0; __pyx_t_12 = 0; __pyx_t_11 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0;
+      __pyx_L10_error:;
+      __pyx_t_12 = 0; __pyx_t_11 = 0; __pyx_t_10 = 0; __pyx_t_16 = 0; __pyx_t_17 = 0; __pyx_t_18 = 0;
       __Pyx_PyThreadState_assign
-      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (PY_MAJOR_VERSION >= 3) __Pyx_ExceptionSwap(&__pyx_t_18, &__pyx_t_19, &__pyx_t_20);
-      if ((PY_MAJOR_VERSION < 3) || unlikely(__Pyx_GetException(&__pyx_t_13, &__pyx_t_12, &__pyx_t_11) < 0)) __Pyx_ErrFetch(&__pyx_t_13, &__pyx_t_12, &__pyx_t_11);
-      __Pyx_XGOTREF(__pyx_t_13);
+      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+      if (PY_MAJOR_VERSION >= 3) __Pyx_ExceptionSwap(&__pyx_t_16, &__pyx_t_17, &__pyx_t_18);
+      if ((PY_MAJOR_VERSION < 3) || unlikely(__Pyx_GetException(&__pyx_t_12, &__pyx_t_11, &__pyx_t_10) < 0)) __Pyx_ErrFetch(&__pyx_t_12, &__pyx_t_11, &__pyx_t_10);
       __Pyx_XGOTREF(__pyx_t_12);
       __Pyx_XGOTREF(__pyx_t_11);
+      __Pyx_XGOTREF(__pyx_t_10);
+      __Pyx_XGOTREF(__pyx_t_16);
+      __Pyx_XGOTREF(__pyx_t_17);
       __Pyx_XGOTREF(__pyx_t_18);
-      __Pyx_XGOTREF(__pyx_t_19);
-      __Pyx_XGOTREF(__pyx_t_20);
-      __pyx_t_10 = __pyx_lineno; __pyx_t_16 = __pyx_clineno; __pyx_t_17 = __pyx_filename;
+      __pyx_t_9 = __pyx_lineno; __pyx_t_14 = __pyx_clineno; __pyx_t_15 = __pyx_filename;
       {
         delete __pyx_cur_scope->__pyx_v_hepmc_writer;
       }
       __Pyx_PyThreadState_assign
       if (PY_MAJOR_VERSION >= 3) {
+        __Pyx_XGIVEREF(__pyx_t_16);
+        __Pyx_XGIVEREF(__pyx_t_17);
         __Pyx_XGIVEREF(__pyx_t_18);
-        __Pyx_XGIVEREF(__pyx_t_19);
-        __Pyx_XGIVEREF(__pyx_t_20);
-        __Pyx_ExceptionReset(__pyx_t_18, __pyx_t_19, __pyx_t_20);
+        __Pyx_ExceptionReset(__pyx_t_16, __pyx_t_17, __pyx_t_18);
       }
-      __Pyx_XGIVEREF(__pyx_t_13);
       __Pyx_XGIVEREF(__pyx_t_12);
       __Pyx_XGIVEREF(__pyx_t_11);
-      __Pyx_ErrRestore(__pyx_t_13, __pyx_t_12, __pyx_t_11);
-      __pyx_t_13 = 0; __pyx_t_12 = 0; __pyx_t_11 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0;
-      __pyx_lineno = __pyx_t_10; __pyx_clineno = __pyx_t_16; __pyx_filename = __pyx_t_17;
+      __Pyx_XGIVEREF(__pyx_t_10);
+      __Pyx_ErrRestore(__pyx_t_12, __pyx_t_11, __pyx_t_10);
+      __pyx_t_12 = 0; __pyx_t_11 = 0; __pyx_t_10 = 0; __pyx_t_16 = 0; __pyx_t_17 = 0; __pyx_t_18 = 0;
+      __pyx_lineno = __pyx_t_9; __pyx_clineno = __pyx_t_14; __pyx_filename = __pyx_t_15;
       goto __pyx_L1_error;
     }
-    __pyx_L15:;
+    __pyx_L11:;
   }
 
-  /* "_libnumpythia.pyx":488
+  /* "_libnumpythia.pyx":506
  *     finally:
  *         del hepmc_writer
  *     _gen_input.finish()             # <<<<<<<<<<<<<<
@@ -7464,11 +7687,11 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
   ((struct __pyx_vtabstruct_13_libnumpythia_MCInput *)__pyx_cur_scope->__pyx_v__gen_input->__pyx_vtab)->finish(__pyx_cur_scope->__pyx_v__gen_input);
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "_libnumpythia.pyx":429
+  /* "_libnumpythia.pyx":467
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * def generate(object gen_input, int events=-1, object find=None,             # <<<<<<<<<<<<<<
- *              HepMC.FilterType select=ALL, string write_to='',
+ * def generate(object gen_input, int events=-1,             # <<<<<<<<<<<<<<
+ *              string write_to='',
  *              bool weighted=False, **kwargs):
  */
 
@@ -7476,12 +7699,12 @@ static PyObject *__pyx_gb_13_libnumpythia_4generator(__pyx_CoroutineObject *__py
   PyErr_SetNone(PyExc_StopIteration);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_9);
   __Pyx_AddTraceback("generate", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
@@ -7660,7 +7883,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  * 
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 218, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -7716,7 +7939,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  * 
  *             info.buf = PyArray_DATA(self)
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 222, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8025,7 +8248,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *                 if   t == NPY_BYTE:        f = "b"
  *                 elif t == NPY_UBYTE:       f = "B"
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 259, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 259, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8840,7 +9063,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  * 
  *         if ((child.byteorder == c'>' and little_endian) or
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 799, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 799, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8908,7 +9131,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             # One could encode it in the format string and have Cython
  *             # complain instead, BUT: < and > in format strings also imply
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 803, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 803, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9017,7 +9240,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  * 
  *             # Until ticket #99 is fixed, use integers to avoid warnings
  */
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 823, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 823, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_Raise(__pyx_t_4, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -9698,7 +9921,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
  * 
  * cdef inline int import_umath() except -1:
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 989, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 989, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -9829,7 +10052,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
  * 
  * cdef inline int import_ufunc() except -1:
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 995, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 995, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -9957,7 +10180,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 1001, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 1001, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -10805,6 +11028,97 @@ static PyTypeObject __pyx_type_13_libnumpythia_BooleanFilter = {
   0, /*tp_finalize*/
   #endif
 };
+static struct __pyx_vtabstruct_13_libnumpythia_GenEvent __pyx_vtable_13_libnumpythia_GenEvent;
+
+static PyObject *__pyx_tp_new_13_libnumpythia_GenEvent(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_13_libnumpythia_GenEvent *p;
+  PyObject *o;
+  if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
+    o = (*t->tp_alloc)(t, 0);
+  } else {
+    o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
+  }
+  if (unlikely(!o)) return 0;
+  p = ((struct __pyx_obj_13_libnumpythia_GenEvent *)o);
+  p->__pyx_vtab = __pyx_vtabptr_13_libnumpythia_GenEvent;
+  new((void*)&(p->event)) std::shared_ptr<HepMC::GenEvent> ();
+  return o;
+}
+
+static void __pyx_tp_dealloc_13_libnumpythia_GenEvent(PyObject *o) {
+  struct __pyx_obj_13_libnumpythia_GenEvent *p = (struct __pyx_obj_13_libnumpythia_GenEvent *)o;
+  #if PY_VERSION_HEX >= 0x030400a1
+  if (unlikely(Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
+    if (PyObject_CallFinalizerFromDealloc(o)) return;
+  }
+  #endif
+  __Pyx_call_destructor(p->event);
+  (*Py_TYPE(o)->tp_free)(o);
+}
+
+static PyMethodDef __pyx_methods_13_libnumpythia_GenEvent[] = {
+  {"select", (PyCFunction)__pyx_pw_13_libnumpythia_8GenEvent_1select, METH_VARARGS|METH_KEYWORDS, 0},
+  {"particles", (PyCFunction)__pyx_pw_13_libnumpythia_8GenEvent_3particles, METH_NOARGS, 0},
+  {0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_13_libnumpythia_GenEvent = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "_libnumpythia.GenEvent", /*tp_name*/
+  sizeof(struct __pyx_obj_13_libnumpythia_GenEvent), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_13_libnumpythia_GenEvent, /*tp_dealloc*/
+  0, /*tp_print*/
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
+  0, /*tp_doc*/
+  0, /*tp_traverse*/
+  0, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_13_libnumpythia_GenEvent, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_13_libnumpythia_GenEvent, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+};
 static struct __pyx_vtabstruct_13_libnumpythia_MCInput __pyx_vtable_13_libnumpythia_MCInput;
 
 static PyObject *__pyx_tp_new_13_libnumpythia_MCInput(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
@@ -11030,6 +11344,7 @@ static PyObject *__pyx_tp_new_13_libnumpythia_HepMCInput(PyTypeObject *t, PyObje
   p = ((struct __pyx_obj_13_libnumpythia_HepMCInput *)o);
   p->__pyx_base.__pyx_vtab = (struct __pyx_vtabstruct_13_libnumpythia_MCInput*)__pyx_vtabptr_13_libnumpythia_HepMCInput;
   new((void*)&(p->filename)) std::string();
+  new((void*)&(p->event)) std::shared_ptr<HepMC::GenEvent> ();
   if (unlikely(__pyx_pw_13_libnumpythia_10HepMCInput_1__cinit__(o, a, k) < 0)) goto bad;
   return o;
   bad:
@@ -11054,6 +11369,7 @@ static void __pyx_tp_dealloc_13_libnumpythia_HepMCInput(PyObject *o) {
     PyErr_Restore(etype, eval, etb);
   }
   __Pyx_call_destructor(p->filename);
+  __Pyx_call_destructor(p->event);
   PyObject_GC_Track(o);
   __pyx_tp_dealloc_13_libnumpythia_MCInput(o);
 }
@@ -11137,7 +11453,6 @@ static PyObject *__pyx_tp_new_13_libnumpythia___pyx_scope_struct__generate(PyTyp
     if (unlikely(!o)) return 0;
   }
   p = ((struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate *)o);
-  new((void*)&(p->__pyx_v_particles)) std::vector<HepMC::SmartPointer<HepMC::GenParticle> > ();
   new((void*)&(p->__pyx_v_write_to)) std::string();
   return o;
 }
@@ -11145,13 +11460,11 @@ static PyObject *__pyx_tp_new_13_libnumpythia___pyx_scope_struct__generate(PyTyp
 static void __pyx_tp_dealloc_13_libnumpythia___pyx_scope_struct__generate(PyObject *o) {
   struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate *p = (struct __pyx_obj_13_libnumpythia___pyx_scope_struct__generate *)o;
   PyObject_GC_UnTrack(o);
-  __Pyx_call_destructor(p->__pyx_v_particles);
   __Pyx_call_destructor(p->__pyx_v_write_to);
   Py_CLEAR(p->__pyx_v__gen_input);
-  Py_CLEAR(p->__pyx_v_find);
+  Py_CLEAR(p->__pyx_v_event);
   Py_CLEAR(p->__pyx_v_gen_input);
   Py_CLEAR(p->__pyx_v_kwargs);
-  Py_CLEAR(p->__pyx_v_particle_array);
   Py_CLEAR(p->__pyx_t_0);
   Py_CLEAR(p->__pyx_t_1);
   Py_CLEAR(p->__pyx_t_2);
@@ -11168,17 +11481,14 @@ static int __pyx_tp_traverse_13_libnumpythia___pyx_scope_struct__generate(PyObje
   if (p->__pyx_v__gen_input) {
     e = (*v)(((PyObject*)p->__pyx_v__gen_input), a); if (e) return e;
   }
-  if (p->__pyx_v_find) {
-    e = (*v)(p->__pyx_v_find, a); if (e) return e;
+  if (p->__pyx_v_event) {
+    e = (*v)(((PyObject*)p->__pyx_v_event), a); if (e) return e;
   }
   if (p->__pyx_v_gen_input) {
     e = (*v)(p->__pyx_v_gen_input, a); if (e) return e;
   }
   if (p->__pyx_v_kwargs) {
     e = (*v)(p->__pyx_v_kwargs, a); if (e) return e;
-  }
-  if (p->__pyx_v_particle_array) {
-    e = (*v)(((PyObject*)p->__pyx_v_particle_array), a); if (e) return e;
   }
   if (p->__pyx_t_0) {
     e = (*v)(p->__pyx_t_0, a); if (e) return e;
@@ -11198,17 +11508,14 @@ static int __pyx_tp_clear_13_libnumpythia___pyx_scope_struct__generate(PyObject 
   tmp = ((PyObject*)p->__pyx_v__gen_input);
   p->__pyx_v__gen_input = ((struct __pyx_obj_13_libnumpythia_MCInput *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
-  tmp = ((PyObject*)p->__pyx_v_find);
-  p->__pyx_v_find = Py_None; Py_INCREF(Py_None);
+  tmp = ((PyObject*)p->__pyx_v_event);
+  p->__pyx_v_event = ((struct __pyx_obj_13_libnumpythia_GenEvent *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   tmp = ((PyObject*)p->__pyx_v_gen_input);
   p->__pyx_v_gen_input = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   tmp = ((PyObject*)p->__pyx_v_kwargs);
   p->__pyx_v_kwargs = ((PyObject*)Py_None); Py_INCREF(Py_None);
-  Py_XDECREF(tmp);
-  tmp = ((PyObject*)p->__pyx_v_particle_array);
-  p->__pyx_v_particle_array = ((PyArrayObject *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   tmp = ((PyObject*)p->__pyx_t_0);
   p->__pyx_t_0 = Py_None; Py_INCREF(Py_None);
@@ -11349,9 +11656,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_STATUS, __pyx_k_STATUS, sizeof(__pyx_k_STATUS), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
-  {&__pyx_kp_b__25, __pyx_k__25, sizeof(__pyx_k__25), 0, 0, 0, 0},
-  {&__pyx_n_s__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 0, 1, 1},
-  {&__pyx_kp_s__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 0, 1, 0},
+  {&__pyx_kp_b__26, __pyx_k__26, sizeof(__pyx_k__26), 0, 0, 0, 0},
+  {&__pyx_n_s__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 0, 1, 1},
+  {&__pyx_kp_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 0},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
   {&__pyx_n_s_average, __pyx_k_average, sizeof(__pyx_k_average), 0, 0, 1, 1},
   {&__pyx_n_s_beam_ecm, __pyx_k_beam_ecm, sizeof(__pyx_k_beam_ecm), 0, 0, 1, 1},
@@ -11369,7 +11676,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
   {&__pyx_n_s_extern_six, __pyx_k_extern_six, sizeof(__pyx_k_extern_six), 0, 0, 1, 1},
   {&__pyx_n_s_filename, __pyx_k_filename, sizeof(__pyx_k_filename), 0, 0, 1, 1},
-  {&__pyx_n_s_find, __pyx_k_find, sizeof(__pyx_k_find), 0, 0, 1, 1},
   {&__pyx_kp_s_find_must_be_a_boolean_expressio, __pyx_k_find_must_be_a_boolean_expressio, sizeof(__pyx_k_find_must_be_a_boolean_expressio), 0, 0, 1, 0},
   {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
   {&__pyx_n_s_fnmatch, __pyx_k_fnmatch, sizeof(__pyx_k_fnmatch), 0, 0, 1, 1},
@@ -11394,6 +11700,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_lower, __pyx_k_lower, sizeof(__pyx_k_lower), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_mass, __pyx_k_mass, sizeof(__pyx_k_mass), 0, 0, 1, 1},
+  {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_kp_u_ndarray_is_not_C_contiguous, __pyx_k_ndarray_is_not_C_contiguous, sizeof(__pyx_k_ndarray_is_not_C_contiguous), 0, 1, 0, 0},
   {&__pyx_kp_u_ndarray_is_not_Fortran_contiguou, __pyx_k_ndarray_is_not_Fortran_contiguou, sizeof(__pyx_k_ndarray_is_not_Fortran_contiguou), 0, 1, 0, 0},
@@ -11408,8 +11715,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_os, __pyx_k_os, sizeof(__pyx_k_os), 0, 0, 1, 1},
   {&__pyx_n_s_pT, __pyx_k_pT, sizeof(__pyx_k_pT), 0, 0, 1, 1},
   {&__pyx_n_s_params_dict, __pyx_k_params_dict, sizeof(__pyx_k_params_dict), 0, 0, 1, 1},
-  {&__pyx_n_s_particle_array, __pyx_k_particle_array, sizeof(__pyx_k_particle_array), 0, 0, 1, 1},
-  {&__pyx_n_s_particles, __pyx_k_particles, sizeof(__pyx_k_particles), 0, 0, 1, 1},
   {&__pyx_n_s_path, __pyx_k_path, sizeof(__pyx_k_path), 0, 0, 1, 1},
   {&__pyx_n_s_pdgid, __pyx_k_pdgid, sizeof(__pyx_k_pdgid), 0, 0, 1, 1},
   {&__pyx_n_s_pdgid_pt_max, __pyx_k_pdgid_pt_max, sizeof(__pyx_k_pdgid_pt_max), 0, 0, 1, 1},
@@ -11431,8 +11736,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_replace, __pyx_k_replace, sizeof(__pyx_k_replace), 0, 0, 1, 1},
   {&__pyx_n_s_resource_filename, __pyx_k_resource_filename, sizeof(__pyx_k_resource_filename), 0, 0, 1, 1},
   {&__pyx_n_s_sample_size, __pyx_k_sample_size, sizeof(__pyx_k_sample_size), 0, 0, 1, 1},
-  {&__pyx_n_s_search, __pyx_k_search, sizeof(__pyx_k_search), 0, 0, 1, 1},
-  {&__pyx_n_s_select, __pyx_k_select, sizeof(__pyx_k_select), 0, 0, 1, 1},
+  {&__pyx_n_s_selection, __pyx_k_selection, sizeof(__pyx_k_selection), 0, 0, 1, 1},
   {&__pyx_n_s_send, __pyx_k_send, sizeof(__pyx_k_send), 0, 0, 1, 1},
   {&__pyx_n_s_shower, __pyx_k_shower, sizeof(__pyx_k_shower), 0, 0, 1, 1},
   {&__pyx_n_s_splitext, __pyx_k_splitext, sizeof(__pyx_k_splitext), 0, 0, 1, 1},
@@ -11443,22 +11747,22 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_tell, __pyx_k_tell, sizeof(__pyx_k_tell), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_throw, __pyx_k_throw, sizeof(__pyx_k_throw), 0, 0, 1, 1},
+  {&__pyx_kp_s_unable_to_convert_PYTHIA_event_t, __pyx_k_unable_to_convert_PYTHIA_event_t, sizeof(__pyx_k_unable_to_convert_PYTHIA_event_t), 0, 0, 1, 0},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_kp_s_unrecognized_parameters_in_kwarg, __pyx_k_unrecognized_parameters_in_kwarg, sizeof(__pyx_k_unrecognized_parameters_in_kwarg), 0, 0, 1, 0},
   {&__pyx_n_s_verbosity, __pyx_k_verbosity, sizeof(__pyx_k_verbosity), 0, 0, 1, 1},
   {&__pyx_n_s_weighted, __pyx_k_weighted, sizeof(__pyx_k_weighted), 0, 0, 1, 1},
-  {&__pyx_n_s_weights, __pyx_k_weights, sizeof(__pyx_k_weights), 0, 0, 1, 1},
   {&__pyx_n_s_write_to, __pyx_k_write_to, sizeof(__pyx_k_write_to), 0, 0, 1, 1},
   {&__pyx_n_s_xmldoc, __pyx_k_xmldoc, sizeof(__pyx_k_xmldoc), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 61, __pyx_L1_error)
-  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(0, 259, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 305, __pyx_L1_error)
-  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 389, __pyx_L1_error)
-  __pyx_builtin_IOError = __Pyx_GetBuiltinName(__pyx_n_s_IOError); if (!__pyx_builtin_IOError) __PYX_ERR(0, 414, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 419, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 348, __pyx_L1_error)
+  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 427, __pyx_L1_error)
+  __pyx_builtin_IOError = __Pyx_GetBuiltinName(__pyx_n_s_IOError); if (!__pyx_builtin_IOError) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 457, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 989, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -11469,107 +11773,118 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "_libnumpythia.pyx":61
+  /* "_libnumpythia.pyx":65
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
  *         return filterlist
  * 
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_can_only_combine_boolean_filters); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_can_only_combine_boolean_filters); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "_libnumpythia.pyx":86
+  /* "_libnumpythia.pyx":90
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
  *         return filterlist
  * 
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_can_only_combine_boolean_filters); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_can_only_combine_boolean_filters); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "_libnumpythia.pyx":249
+  /* "_libnumpythia.pyx":175
+ *         if not py2hepmc.fill_next_event(pythia, event):
+ *             del event;
+ *             raise RuntimeError("unable to convert PYTHIA event to HepMC")             # <<<<<<<<<<<<<<
+ *         wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
+ *         return wrapped_event
+ */
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_unable_to_convert_PYTHIA_event_t); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+
+  /* "_libnumpythia.pyx":183
+ *             selection = FilterList(selection)
+ *         elif not isinstance(selection, FilterList):
+ *             raise TypeError("find must be a boolean expression of Filters")             # <<<<<<<<<<<<<<
+ *         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
+ *         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+ */
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_find_must_be_a_boolean_expressio); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
+
+  /* "_libnumpythia.pyx":293
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))             # <<<<<<<<<<<<<<
  * 
  *         #if shower == 'vincia':
  */
-  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_n_s__4, __pyx_kp_s__5); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 249, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s__7, __pyx_kp_s__8); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "_libnumpythia.pyx":259
+  /* "_libnumpythia.pyx":303
  *         #else:
  *         if not self.pythia.init():
  *             raise RuntimeError("PYTHIA did not successfully initialize")             # <<<<<<<<<<<<<<
  * 
  *         self.cut_on_pdgid = cut_on_pdgid
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_PYTHIA_did_not_successfully_init); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 259, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_PYTHIA_did_not_successfully_init); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "_libnumpythia.pyx":302
+  /* "_libnumpythia.pyx":345
  *         # generate event and quit if failure
  *         if not self.pythia.next():
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")             # <<<<<<<<<<<<<<
  *         if self.num_weights > 0:
  *             self.weights = np.empty(self.num_weights, dtype=DTYPE)
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_PYTHIA_event_generation_aborted); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 302, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_PYTHIA_event_generation_aborted); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 345, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "_libnumpythia.pyx":389
+  /* "_libnumpythia.pyx":427
  *         cdef long long prev_location = 0
  *         filesize = os.path.getsize(self.filename)
  *         with open(self.filename, 'r') as infile:             # <<<<<<<<<<<<<<
  *             for line in infile:
  *                 if line[0] == 'E':
  */
-  __pyx_tuple__9 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 389, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_tuple__10 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 389, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_tuple__12 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 427, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_tuple__13 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 427, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "_libnumpythia.pyx":412
+  /* "_libnumpythia.pyx":450
  *     name = name.lower().strip()
  *     if name == 'pythia':
  *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')             # <<<<<<<<<<<<<<
  *         if not os.path.exists(filename):
  *             raise IOError("Pythia config not found: {0}".format(filename))
  */
-  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_numpythia, __pyx_kp_s_src_pythia8226_share); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 412, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-
-  /* "_libnumpythia.pyx":450
- *         find = FilterList(find)
- *     if find is not None and not isinstance(find, FilterList):
- *         raise TypeError("find must be a boolean expression of Filters")             # <<<<<<<<<<<<<<
- *     if isinstance(gen_input, string_types):
- *         if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
- */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_find_must_be_a_boolean_expressio); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 450, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(2, __pyx_n_s_numpythia, __pyx_kp_s_src_pythia8226_share); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 450, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
-  /* "_libnumpythia.pyx":458
+  /* "_libnumpythia.pyx":489
  *     else:
  *         if not isinstance(gen_input, MCInput):
  *             raise TypeError("gen_input must be a string (filename) or MCInput instance")             # <<<<<<<<<<<<<<
  *         _gen_input = <MCInput> gen_input
  *     try:
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_gen_input_must_be_a_string_filen); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 458, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_gen_input_must_be_a_string_filen); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 489, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":218
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
@@ -11578,9 +11893,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_C_contiguous); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(1, 218, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_C_contiguous); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(1, 218, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":222
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
@@ -11589,9 +11904,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             info.buf = PyArray_DATA(self)
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_Fortran_contiguou); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(1, 222, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_Fortran_contiguou); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 222, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":259
  *                 if ((descr.byteorder == c'>' and little_endian) or
@@ -11600,9 +11915,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 if   t == NPY_BYTE:        f = "b"
  *                 elif t == NPY_UBYTE:       f = "B"
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 259, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 259, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":799
  * 
@@ -11611,9 +11926,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if ((child.byteorder == c'>' and little_endian) or
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 799, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 799, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":803
  *         if ((child.byteorder == c'>' and little_endian) or
@@ -11622,9 +11937,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             # One could encode it in the format string and have Cython
  *             # complain instead, BUT: < and > in format strings also imply
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 803, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 803, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":823
  *             t = child.type_num
@@ -11633,9 +11948,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             # Until ticket #99 is fixed, use integers to avoid warnings
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor_2); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 823, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor_2); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 823, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":989
  *         _import_array()
@@ -11644,9 +11959,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_umath() except -1:
  */
-  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 989, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 989, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":995
  *         _import_umath()
@@ -11655,42 +11970,42 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_ufunc() except -1:
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 995, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
+  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(1, 995, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":1001
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(1, 1001, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__24);
-  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(1, 1001, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "_libnumpythia.pyx":405
+  /* "_libnumpythia.pyx":443
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def get_input(name, filename, **kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     name may be 'pythia' or 'hepmc'
  */
-  __pyx_tuple__26 = PyTuple_Pack(5, __pyx_n_s_name, __pyx_n_s_filename, __pyx_n_s_kwargs, __pyx_n_s_xmldoc, __pyx_n_s_gen_input); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 405, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__26);
-  __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_endw_workspace_numpythia_n, __pyx_n_s_get_input, 405, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(5, __pyx_n_s_name, __pyx_n_s_filename, __pyx_n_s_kwargs, __pyx_n_s_xmldoc, __pyx_n_s_gen_input); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__27);
+  __Pyx_GIVEREF(__pyx_tuple__27);
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_endw_workspace_numpythia_n, __pyx_n_s_get_input, 443, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 443, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":429
+  /* "_libnumpythia.pyx":467
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * def generate(object gen_input, int events=-1, object find=None,             # <<<<<<<<<<<<<<
- *              HepMC.FilterType select=ALL, string write_to='',
+ * def generate(object gen_input, int events=-1,             # <<<<<<<<<<<<<<
+ *              string write_to='',
  *              bool weighted=False, **kwargs):
  */
-  __pyx_tuple__28 = PyTuple_Pack(14, __pyx_n_s_gen_input, __pyx_n_s_events, __pyx_n_s_find, __pyx_n_s_select, __pyx_n_s_write_to, __pyx_n_s_weighted, __pyx_n_s_kwargs, __pyx_n_s_particle_array, __pyx_n_s_event, __pyx_n_s_hepmc_writer, __pyx_n_s_particles, __pyx_n_s_search, __pyx_n_s_gen_input_2, __pyx_n_s_ievent); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 429, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__28);
-  __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(6, 0, 14, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_endw_workspace_numpythia_n, __pyx_n_s_generate, 429, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(9, __pyx_n_s_gen_input, __pyx_n_s_events, __pyx_n_s_write_to, __pyx_n_s_weighted, __pyx_n_s_kwargs, __pyx_n_s_event, __pyx_n_s_hepmc_writer, __pyx_n_s_gen_input_2, __pyx_n_s_ievent); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 467, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__29);
+  __Pyx_GIVEREF(__pyx_tuple__29);
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(4, 0, 9, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_endw_workspace_numpythia_n, __pyx_n_s_generate, 467, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 467, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -11728,8 +12043,8 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   PyObject *__pyx_t_11 = NULL;
   PyObject *__pyx_t_12 = NULL;
   PyObject *__pyx_t_13 = NULL;
-  std::string __pyx_t_14;
-  enum HepMC::FilterType __pyx_t_15;
+  enum HepMC::FilterType __pyx_t_14;
+  std::string __pyx_t_15;
   __Pyx_RefNannyDeclarations
   #if CYTHON_REFNANNY
   __Pyx_RefNanny = __Pyx_RefNannyImportAPI("refnanny");
@@ -11813,66 +12128,74 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_13_libnumpythia_FilterList) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_FilterList) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
   __pyx_type_13_libnumpythia_FilterList.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "FilterList", (PyObject *)&__pyx_type_13_libnumpythia_FilterList) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "FilterList", (PyObject *)&__pyx_type_13_libnumpythia_FilterList) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
   __pyx_ptype_13_libnumpythia_FilterList = &__pyx_type_13_libnumpythia_FilterList;
   __pyx_vtabptr_13_libnumpythia_Filter = &__pyx_vtable_13_libnumpythia_Filter;
   __pyx_vtable_13_libnumpythia_Filter.init = (PyObject *(*)(struct __pyx_obj_13_libnumpythia_Filter *, HepMC::FilterBase const &, bool))__pyx_f_13_libnumpythia_6Filter_init;
-  if (PyType_Ready(&__pyx_type_13_libnumpythia_Filter) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_Filter) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
   __pyx_type_13_libnumpythia_Filter.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_Filter.tp_dict, __pyx_vtabptr_13_libnumpythia_Filter) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "Filter", (PyObject *)&__pyx_type_13_libnumpythia_Filter) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_Filter.tp_dict, __pyx_vtabptr_13_libnumpythia_Filter) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "Filter", (PyObject *)&__pyx_type_13_libnumpythia_Filter) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
   __pyx_ptype_13_libnumpythia_Filter = &__pyx_type_13_libnumpythia_Filter;
   __pyx_vtabptr_13_libnumpythia_IntegerFilter = &__pyx_vtable_13_libnumpythia_IntegerFilter;
   __pyx_vtable_13_libnumpythia_IntegerFilter.__pyx_base = *__pyx_vtabptr_13_libnumpythia_Filter;
   __pyx_type_13_libnumpythia_IntegerFilter.tp_base = __pyx_ptype_13_libnumpythia_Filter;
-  if (PyType_Ready(&__pyx_type_13_libnumpythia_IntegerFilter) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_IntegerFilter) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
   __pyx_type_13_libnumpythia_IntegerFilter.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_IntegerFilter.tp_dict, __pyx_vtabptr_13_libnumpythia_IntegerFilter) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "IntegerFilter", (PyObject *)&__pyx_type_13_libnumpythia_IntegerFilter) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_IntegerFilter.tp_dict, __pyx_vtabptr_13_libnumpythia_IntegerFilter) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "IntegerFilter", (PyObject *)&__pyx_type_13_libnumpythia_IntegerFilter) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
   __pyx_ptype_13_libnumpythia_IntegerFilter = &__pyx_type_13_libnumpythia_IntegerFilter;
   __pyx_vtabptr_13_libnumpythia_BooleanFilter = &__pyx_vtable_13_libnumpythia_BooleanFilter;
   __pyx_vtable_13_libnumpythia_BooleanFilter.__pyx_base = *__pyx_vtabptr_13_libnumpythia_Filter;
   __pyx_type_13_libnumpythia_BooleanFilter.tp_base = __pyx_ptype_13_libnumpythia_Filter;
-  if (PyType_Ready(&__pyx_type_13_libnumpythia_BooleanFilter) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_BooleanFilter) < 0) __PYX_ERR(0, 111, __pyx_L1_error)
   __pyx_type_13_libnumpythia_BooleanFilter.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_BooleanFilter.tp_dict, __pyx_vtabptr_13_libnumpythia_BooleanFilter) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "BooleanFilter", (PyObject *)&__pyx_type_13_libnumpythia_BooleanFilter) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_BooleanFilter.tp_dict, __pyx_vtabptr_13_libnumpythia_BooleanFilter) < 0) __PYX_ERR(0, 111, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "BooleanFilter", (PyObject *)&__pyx_type_13_libnumpythia_BooleanFilter) < 0) __PYX_ERR(0, 111, __pyx_L1_error)
   __pyx_ptype_13_libnumpythia_BooleanFilter = &__pyx_type_13_libnumpythia_BooleanFilter;
+  __pyx_vtabptr_13_libnumpythia_GenEvent = &__pyx_vtable_13_libnumpythia_GenEvent;
+  __pyx_vtable_13_libnumpythia_GenEvent.wrap = (struct __pyx_obj_13_libnumpythia_GenEvent *(*)(std::shared_ptr<HepMC::GenEvent>  &))__pyx_f_13_libnumpythia_8GenEvent_wrap;
+  __pyx_vtable_13_libnumpythia_GenEvent.wrap_pythia = (struct __pyx_obj_13_libnumpythia_GenEvent *(*)(Pythia8::Pythia &))__pyx_f_13_libnumpythia_8GenEvent_wrap_pythia;
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_GenEvent) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_type_13_libnumpythia_GenEvent.tp_print = 0;
+  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_GenEvent.tp_dict, __pyx_vtabptr_13_libnumpythia_GenEvent) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "GenEvent", (PyObject *)&__pyx_type_13_libnumpythia_GenEvent) < 0) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_ptype_13_libnumpythia_GenEvent = &__pyx_type_13_libnumpythia_GenEvent;
   __pyx_vtabptr_13_libnumpythia_MCInput = &__pyx_vtable_13_libnumpythia_MCInput;
   __pyx_vtable_13_libnumpythia_MCInput.get_num_weights = (int (*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_7MCInput_get_num_weights;
   __pyx_vtable_13_libnumpythia_MCInput.get_next_event = (bool (*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_7MCInput_get_next_event;
-  __pyx_vtable_13_libnumpythia_MCInput.get_hepmc = (HepMC::GenEvent *(*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_7MCInput_get_hepmc;
+  __pyx_vtable_13_libnumpythia_MCInput.get_hepmc = (struct __pyx_obj_13_libnumpythia_GenEvent *(*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_7MCInput_get_hepmc;
   __pyx_vtable_13_libnumpythia_MCInput.finish = (void (*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_7MCInput_finish;
-  if (PyType_Ready(&__pyx_type_13_libnumpythia_MCInput) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_MCInput) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
   __pyx_type_13_libnumpythia_MCInput.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_MCInput.tp_dict, __pyx_vtabptr_13_libnumpythia_MCInput) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "MCInput", (PyObject *)&__pyx_type_13_libnumpythia_MCInput) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_MCInput.tp_dict, __pyx_vtabptr_13_libnumpythia_MCInput) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "MCInput", (PyObject *)&__pyx_type_13_libnumpythia_MCInput) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
   __pyx_ptype_13_libnumpythia_MCInput = &__pyx_type_13_libnumpythia_MCInput;
   __pyx_vtabptr_13_libnumpythia_PythiaInput = &__pyx_vtable_13_libnumpythia_PythiaInput;
   __pyx_vtable_13_libnumpythia_PythiaInput.__pyx_base = *__pyx_vtabptr_13_libnumpythia_MCInput;
   __pyx_vtable_13_libnumpythia_PythiaInput.__pyx_base.get_num_weights = (int (*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_11PythiaInput_get_num_weights;
   __pyx_vtable_13_libnumpythia_PythiaInput.__pyx_base.get_next_event = (bool (*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_11PythiaInput_get_next_event;
-  __pyx_vtable_13_libnumpythia_PythiaInput.__pyx_base.get_hepmc = (HepMC::GenEvent *(*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_11PythiaInput_get_hepmc;
+  __pyx_vtable_13_libnumpythia_PythiaInput.__pyx_base.get_hepmc = (struct __pyx_obj_13_libnumpythia_GenEvent *(*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_11PythiaInput_get_hepmc;
   __pyx_vtable_13_libnumpythia_PythiaInput.__pyx_base.finish = (void (*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_11PythiaInput_finish;
   __pyx_type_13_libnumpythia_PythiaInput.tp_base = __pyx_ptype_13_libnumpythia_MCInput;
-  if (PyType_Ready(&__pyx_type_13_libnumpythia_PythiaInput) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_PythiaInput) < 0) __PYX_ERR(0, 228, __pyx_L1_error)
   __pyx_type_13_libnumpythia_PythiaInput.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_PythiaInput.tp_dict, __pyx_vtabptr_13_libnumpythia_PythiaInput) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "PythiaInput", (PyObject *)&__pyx_type_13_libnumpythia_PythiaInput) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_PythiaInput.tp_dict, __pyx_vtabptr_13_libnumpythia_PythiaInput) < 0) __PYX_ERR(0, 228, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "PythiaInput", (PyObject *)&__pyx_type_13_libnumpythia_PythiaInput) < 0) __PYX_ERR(0, 228, __pyx_L1_error)
   __pyx_ptype_13_libnumpythia_PythiaInput = &__pyx_type_13_libnumpythia_PythiaInput;
   __pyx_vtabptr_13_libnumpythia_HepMCInput = &__pyx_vtable_13_libnumpythia_HepMCInput;
   __pyx_vtable_13_libnumpythia_HepMCInput.__pyx_base = *__pyx_vtabptr_13_libnumpythia_MCInput;
   __pyx_vtable_13_libnumpythia_HepMCInput.__pyx_base.get_next_event = (bool (*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_10HepMCInput_get_next_event;
-  __pyx_vtable_13_libnumpythia_HepMCInput.__pyx_base.get_hepmc = (HepMC::GenEvent *(*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_10HepMCInput_get_hepmc;
+  __pyx_vtable_13_libnumpythia_HepMCInput.__pyx_base.get_hepmc = (struct __pyx_obj_13_libnumpythia_GenEvent *(*)(struct __pyx_obj_13_libnumpythia_MCInput *))__pyx_f_13_libnumpythia_10HepMCInput_get_hepmc;
   __pyx_type_13_libnumpythia_HepMCInput.tp_base = __pyx_ptype_13_libnumpythia_MCInput;
-  if (PyType_Ready(&__pyx_type_13_libnumpythia_HepMCInput) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia_HepMCInput) < 0) __PYX_ERR(0, 375, __pyx_L1_error)
   __pyx_type_13_libnumpythia_HepMCInput.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_HepMCInput.tp_dict, __pyx_vtabptr_13_libnumpythia_HepMCInput) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "HepMCInput", (PyObject *)&__pyx_type_13_libnumpythia_HepMCInput) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_13_libnumpythia_HepMCInput.tp_dict, __pyx_vtabptr_13_libnumpythia_HepMCInput) < 0) __PYX_ERR(0, 375, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "HepMCInput", (PyObject *)&__pyx_type_13_libnumpythia_HepMCInput) < 0) __PYX_ERR(0, 375, __pyx_L1_error)
   __pyx_ptype_13_libnumpythia_HepMCInput = &__pyx_type_13_libnumpythia_HepMCInput;
-  if (PyType_Ready(&__pyx_type_13_libnumpythia___pyx_scope_struct__generate) < 0) __PYX_ERR(0, 429, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_13_libnumpythia___pyx_scope_struct__generate) < 0) __PYX_ERR(0, 467, __pyx_L1_error)
   __pyx_type_13_libnumpythia___pyx_scope_struct__generate.tp_print = 0;
   __pyx_ptype_13_libnumpythia___pyx_scope_struct__generate = &__pyx_type_13_libnumpythia___pyx_scope_struct__generate;
   /*--- Type import code ---*/
@@ -11897,127 +12220,127 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "_libnumpythia.pyx":3
- * # cython: experimental_cpp_class_def=True, c_string_type=str, c_string_encoding=ascii
+  /* "_libnumpythia.pyx":7
+ * # Wrap GenEvent and yield that
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
  * np.import_array()
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":5
+  /* "_libnumpythia.pyx":9
  * import numpy as np
  * cimport numpy as np
  * np.import_array()             # <<<<<<<<<<<<<<
  * 
  * cimport cython
  */
-  __pyx_t_2 = __pyx_f_5numpy_import_array(); if (unlikely(__pyx_t_2 == -1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_5numpy_import_array(); if (unlikely(__pyx_t_2 == -1)) __PYX_ERR(0, 9, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":23
+  /* "_libnumpythia.pyx":27
  * 
  * from libcpp.memory cimport shared_ptr
  * import os             # <<<<<<<<<<<<<<
  * 
  * cimport pythia as Pythia
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_os, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_os, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_os, __pyx_t_1) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_os, __pyx_t_1) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":29
+  /* "_libnumpythia.pyx":33
  * cimport numpythia
  * 
  * from .extern.six import string_types             # <<<<<<<<<<<<<<
  * from pkg_resources import resource_filename
  * from fnmatch import fnmatch
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_string_types);
   __Pyx_GIVEREF(__pyx_n_s_string_types);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_string_types);
-  __pyx_t_3 = __Pyx_Import(__pyx_n_s_extern_six, __pyx_t_1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Import(__pyx_n_s_extern_six, __pyx_t_1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_string_types); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_string_types); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_string_types, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_string_types, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "_libnumpythia.pyx":30
+  /* "_libnumpythia.pyx":34
  * 
  * from .extern.six import string_types
  * from pkg_resources import resource_filename             # <<<<<<<<<<<<<<
  * from fnmatch import fnmatch
  * 
  */
-  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_resource_filename);
   __Pyx_GIVEREF(__pyx_n_s_resource_filename);
   PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_resource_filename);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_pkg_resources, __pyx_t_3, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_pkg_resources, __pyx_t_3, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_resource_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_resource_filename); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_resource_filename, __pyx_t_3) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_resource_filename, __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":31
+  /* "_libnumpythia.pyx":35
  * from .extern.six import string_types
  * from pkg_resources import resource_filename
  * from fnmatch import fnmatch             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "2to3.h":
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_fnmatch);
   __Pyx_GIVEREF(__pyx_n_s_fnmatch);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_fnmatch);
-  __pyx_t_3 = __Pyx_Import(__pyx_n_s_fnmatch, __pyx_t_1, -1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Import(__pyx_n_s_fnmatch, __pyx_t_1, -1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_fnmatch); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_fnmatch); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_fnmatch, __pyx_t_1) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_fnmatch, __pyx_t_1) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "_libnumpythia.pyx":36
+  /* "_libnumpythia.pyx":40
  *     pass
  * 
  * DTYPE = np.float64             # <<<<<<<<<<<<<<
  * ctypedef np.float64_t DTYPE_t
  * 
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE, __pyx_t_1) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE, __pyx_t_1) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":39
+  /* "_libnumpythia.pyx":43
  * ctypedef np.float64_t DTYPE_t
  * 
  * DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])             # <<<<<<<<<<<<<<
  * DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_E);
   __Pyx_GIVEREF(__pyx_n_s_E);
@@ -12025,9 +12348,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_n_s_px);
   __Pyx_GIVEREF(__pyx_n_s_px);
@@ -12035,9 +12358,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_n_s_py);
   __Pyx_GIVEREF(__pyx_n_s_py);
@@ -12045,9 +12368,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_n_s_pz);
   __Pyx_GIVEREF(__pyx_n_s_pz);
@@ -12055,7 +12378,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyList_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_3);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
@@ -12069,27 +12392,27 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __pyx_t_4 = 0;
   __pyx_t_5 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE_EP, __pyx_t_1) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE_EP, __pyx_t_1) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":40
+  /* "_libnumpythia.pyx":44
  * 
  * DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
  * DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])             # <<<<<<<<<<<<<<
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
  *                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_n_s_pT);
   __Pyx_GIVEREF(__pyx_n_s_pT);
@@ -12097,9 +12420,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_n_s_eta);
   __Pyx_GIVEREF(__pyx_n_s_eta);
@@ -12107,9 +12430,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_n_s_phi);
   __Pyx_GIVEREF(__pyx_n_s_phi);
@@ -12117,9 +12440,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_mass);
   __Pyx_GIVEREF(__pyx_n_s_mass);
@@ -12127,7 +12450,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyList_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_6);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_t_6);
@@ -12141,27 +12464,27 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __pyx_t_5 = 0;
   __pyx_t_4 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE_PTEPM, __pyx_t_1) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE_PTEPM, __pyx_t_1) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":41
+  /* "_libnumpythia.pyx":45
  * DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
  * DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),             # <<<<<<<<<<<<<<
  *                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
  *                            ('pdgid', np.int32), ('status', np.int32)])
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_E);
   __Pyx_GIVEREF(__pyx_n_s_E);
@@ -12169,9 +12492,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_n_s_px);
   __Pyx_GIVEREF(__pyx_n_s_px);
@@ -12179,9 +12502,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_n_s_py);
   __Pyx_GIVEREF(__pyx_n_s_py);
@@ -12189,9 +12512,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_n_s_pz);
   __Pyx_GIVEREF(__pyx_n_s_pz);
@@ -12199,9 +12522,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_n_s_mass);
   __Pyx_GIVEREF(__pyx_n_s_mass);
@@ -12210,16 +12533,16 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":42
+  /* "_libnumpythia.pyx":46
  * DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
  *                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),             # <<<<<<<<<<<<<<
  *                            ('pdgid', np.int32), ('status', np.int32)])
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_INCREF(__pyx_n_s_prodx);
   __Pyx_GIVEREF(__pyx_n_s_prodx);
@@ -12227,9 +12550,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_INCREF(__pyx_n_s_prody);
   __Pyx_GIVEREF(__pyx_n_s_prody);
@@ -12237,9 +12560,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_INCREF(__pyx_n_s_prodz);
   __Pyx_GIVEREF(__pyx_n_s_prodz);
@@ -12247,9 +12570,9 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_INCREF(__pyx_n_s_prodt);
   __Pyx_GIVEREF(__pyx_n_s_prodt);
@@ -12258,19 +12581,19 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_libnumpythia.pyx":43
+  /* "_libnumpythia.pyx":47
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
  *                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
  *                            ('pdgid', np.int32), ('status', np.int32)])             # <<<<<<<<<<<<<<
  * 
  * ALL = HepMC.FIND_ALL
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int32); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int32); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_pdgid);
   __Pyx_GIVEREF(__pyx_n_s_pdgid);
@@ -12278,12 +12601,12 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_12);
   __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_int32); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_int32); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(__pyx_n_s_status);
   __Pyx_GIVEREF(__pyx_n_s_status);
@@ -12292,14 +12615,14 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":41
+  /* "_libnumpythia.pyx":45
  * DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
  * DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),             # <<<<<<<<<<<<<<
  *                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
  *                            ('pdgid', np.int32), ('status', np.int32)])
  */
-  __pyx_t_13 = PyList_New(11); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_13 = PyList_New(11); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_GIVEREF(__pyx_t_3);
   PyList_SET_ITEM(__pyx_t_13, 0, __pyx_t_3);
@@ -12334,382 +12657,390 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __pyx_t_11 = 0;
   __pyx_t_1 = 0;
   __pyx_t_12 = 0;
-  __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_GIVEREF(__pyx_t_13);
   PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13);
   __pyx_t_13 = 0;
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_5numpy_dtype), __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE_PARTICLE, __pyx_t_13) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE_PARTICLE, __pyx_t_13) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":45
+  /* "_libnumpythia.pyx":49
  *                            ('pdgid', np.int32), ('status', np.int32)])
  * 
  * ALL = HepMC.FIND_ALL             # <<<<<<<<<<<<<<
  * FIRST = HepMC.FIND_FIRST
  * LAST = HepMC.FIND_LAST
  */
-  __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_ALL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_ALL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ALL, __pyx_t_13) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ALL, __pyx_t_13) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":46
+  /* "_libnumpythia.pyx":50
  * 
  * ALL = HepMC.FIND_ALL
  * FIRST = HepMC.FIND_FIRST             # <<<<<<<<<<<<<<
  * LAST = HepMC.FIND_LAST
  * 
  */
-  __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_FIRST); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_FIRST); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_FIRST, __pyx_t_13) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_FIRST, __pyx_t_13) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":47
+  /* "_libnumpythia.pyx":51
  * ALL = HepMC.FIND_ALL
  * FIRST = HepMC.FIND_FIRST
  * LAST = HepMC.FIND_LAST             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_LAST); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_LAST); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LAST, __pyx_t_13) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LAST, __pyx_t_13) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":116
+  /* "_libnumpythia.pyx":120
  * 
  * # filters with integer parameter
  * cpdef IntegerFilter STATUS = IntegerFilter()             # <<<<<<<<<<<<<<
  * STATUS.init(HepMC.STATUS, False)
  * cpdef IntegerFilter PDG_ID = IntegerFilter()
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_IntegerFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_IntegerFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_STATUS));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_STATUS, ((struct __pyx_obj_13_libnumpythia_IntegerFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":117
+  /* "_libnumpythia.pyx":121
  * # filters with integer parameter
  * cpdef IntegerFilter STATUS = IntegerFilter()
  * STATUS.init(HepMC.STATUS, False)             # <<<<<<<<<<<<<<
  * cpdef IntegerFilter PDG_ID = IntegerFilter()
  * PDG_ID.init(HepMC.PDG_ID, False)
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *)__pyx_v_13_libnumpythia_STATUS->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_STATUS), HepMC::STATUS, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *)__pyx_v_13_libnumpythia_STATUS->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_STATUS), HepMC::STATUS, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":118
+  /* "_libnumpythia.pyx":122
  * cpdef IntegerFilter STATUS = IntegerFilter()
  * STATUS.init(HepMC.STATUS, False)
  * cpdef IntegerFilter PDG_ID = IntegerFilter()             # <<<<<<<<<<<<<<
  * PDG_ID.init(HepMC.PDG_ID, False)
  * cpdef IntegerFilter ABS_PDG_ID = IntegerFilter()
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_IntegerFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_IntegerFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_PDG_ID));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_PDG_ID, ((struct __pyx_obj_13_libnumpythia_IntegerFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":119
+  /* "_libnumpythia.pyx":123
  * STATUS.init(HepMC.STATUS, False)
  * cpdef IntegerFilter PDG_ID = IntegerFilter()
  * PDG_ID.init(HepMC.PDG_ID, False)             # <<<<<<<<<<<<<<
  * cpdef IntegerFilter ABS_PDG_ID = IntegerFilter()
  * ABS_PDG_ID.init(HepMC.ABS_PDG_ID, False)
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *)__pyx_v_13_libnumpythia_PDG_ID->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_PDG_ID), HepMC::PDG_ID, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *)__pyx_v_13_libnumpythia_PDG_ID->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_PDG_ID), HepMC::PDG_ID, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":120
+  /* "_libnumpythia.pyx":124
  * cpdef IntegerFilter PDG_ID = IntegerFilter()
  * PDG_ID.init(HepMC.PDG_ID, False)
  * cpdef IntegerFilter ABS_PDG_ID = IntegerFilter()             # <<<<<<<<<<<<<<
  * ABS_PDG_ID.init(HepMC.ABS_PDG_ID, False)
  * 
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_IntegerFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_IntegerFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_ABS_PDG_ID));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_ABS_PDG_ID, ((struct __pyx_obj_13_libnumpythia_IntegerFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":121
+  /* "_libnumpythia.pyx":125
  * PDG_ID.init(HepMC.PDG_ID, False)
  * cpdef IntegerFilter ABS_PDG_ID = IntegerFilter()
  * ABS_PDG_ID.init(HepMC.ABS_PDG_ID, False)             # <<<<<<<<<<<<<<
  * 
  * # filters with boolean parameter
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *)__pyx_v_13_libnumpythia_ABS_PDG_ID->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_ABS_PDG_ID), HepMC::ABS_PDG_ID, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *)__pyx_v_13_libnumpythia_ABS_PDG_ID->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_ABS_PDG_ID), HepMC::ABS_PDG_ID, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":124
+  /* "_libnumpythia.pyx":128
  * 
  * # filters with boolean parameter
  * cpdef BooleanFilter HAS_END_VERTEX = BooleanFilter()             # <<<<<<<<<<<<<<
  * HAS_END_VERTEX.init(HepMC.HAS_END_VERTEX, False)
  * cpdef BooleanFilter HAS_PRODUCTION_VERTEX = BooleanFilter()
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_HAS_END_VERTEX));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_HAS_END_VERTEX, ((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":125
+  /* "_libnumpythia.pyx":129
  * # filters with boolean parameter
  * cpdef BooleanFilter HAS_END_VERTEX = BooleanFilter()
  * HAS_END_VERTEX.init(HepMC.HAS_END_VERTEX, False)             # <<<<<<<<<<<<<<
  * cpdef BooleanFilter HAS_PRODUCTION_VERTEX = BooleanFilter()
  * HAS_PRODUCTION_VERTEX.init(HepMC.HAS_PRODUCTION_VERTEX, False)
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_HAS_END_VERTEX->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_HAS_END_VERTEX), HepMC::HAS_END_VERTEX, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_HAS_END_VERTEX->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_HAS_END_VERTEX), HepMC::HAS_END_VERTEX, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 129, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":126
+  /* "_libnumpythia.pyx":130
  * cpdef BooleanFilter HAS_END_VERTEX = BooleanFilter()
  * HAS_END_VERTEX.init(HepMC.HAS_END_VERTEX, False)
  * cpdef BooleanFilter HAS_PRODUCTION_VERTEX = BooleanFilter()             # <<<<<<<<<<<<<<
  * HAS_PRODUCTION_VERTEX.init(HepMC.HAS_PRODUCTION_VERTEX, False)
  * cpdef BooleanFilter HAS_SAME_PDG_ID_DAUGHTER = BooleanFilter()
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX, ((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":127
+  /* "_libnumpythia.pyx":131
  * HAS_END_VERTEX.init(HepMC.HAS_END_VERTEX, False)
  * cpdef BooleanFilter HAS_PRODUCTION_VERTEX = BooleanFilter()
  * HAS_PRODUCTION_VERTEX.init(HepMC.HAS_PRODUCTION_VERTEX, False)             # <<<<<<<<<<<<<<
  * cpdef BooleanFilter HAS_SAME_PDG_ID_DAUGHTER = BooleanFilter()
  * HAS_SAME_PDG_ID_DAUGHTER.init(HepMC.HAS_SAME_PDG_ID_DAUGHTER, False)
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX), HepMC::HAS_PRODUCTION_VERTEX, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX), HepMC::HAS_PRODUCTION_VERTEX, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":128
+  /* "_libnumpythia.pyx":132
  * cpdef BooleanFilter HAS_PRODUCTION_VERTEX = BooleanFilter()
  * HAS_PRODUCTION_VERTEX.init(HepMC.HAS_PRODUCTION_VERTEX, False)
  * cpdef BooleanFilter HAS_SAME_PDG_ID_DAUGHTER = BooleanFilter()             # <<<<<<<<<<<<<<
  * HAS_SAME_PDG_ID_DAUGHTER.init(HepMC.HAS_SAME_PDG_ID_DAUGHTER, False)
  * cpdef BooleanFilter IS_STABLE = BooleanFilter()
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER, ((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":129
+  /* "_libnumpythia.pyx":133
  * HAS_PRODUCTION_VERTEX.init(HepMC.HAS_PRODUCTION_VERTEX, False)
  * cpdef BooleanFilter HAS_SAME_PDG_ID_DAUGHTER = BooleanFilter()
  * HAS_SAME_PDG_ID_DAUGHTER.init(HepMC.HAS_SAME_PDG_ID_DAUGHTER, False)             # <<<<<<<<<<<<<<
  * cpdef BooleanFilter IS_STABLE = BooleanFilter()
  * IS_STABLE.init(HepMC.IS_STABLE, False)
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER), HepMC::HAS_SAME_PDG_ID_DAUGHTER, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER), HepMC::HAS_SAME_PDG_ID_DAUGHTER, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":130
+  /* "_libnumpythia.pyx":134
  * cpdef BooleanFilter HAS_SAME_PDG_ID_DAUGHTER = BooleanFilter()
  * HAS_SAME_PDG_ID_DAUGHTER.init(HepMC.HAS_SAME_PDG_ID_DAUGHTER, False)
  * cpdef BooleanFilter IS_STABLE = BooleanFilter()             # <<<<<<<<<<<<<<
  * IS_STABLE.init(HepMC.IS_STABLE, False)
  * cpdef BooleanFilter IS_BEAM = BooleanFilter()
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_IS_STABLE));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_IS_STABLE, ((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":131
+  /* "_libnumpythia.pyx":135
  * HAS_SAME_PDG_ID_DAUGHTER.init(HepMC.HAS_SAME_PDG_ID_DAUGHTER, False)
  * cpdef BooleanFilter IS_STABLE = BooleanFilter()
  * IS_STABLE.init(HepMC.IS_STABLE, False)             # <<<<<<<<<<<<<<
  * cpdef BooleanFilter IS_BEAM = BooleanFilter()
  * IS_BEAM.init(HepMC.IS_BEAM, False)
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_IS_STABLE->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_IS_STABLE), HepMC::IS_STABLE, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_IS_STABLE->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_IS_STABLE), HepMC::IS_STABLE, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":132
+  /* "_libnumpythia.pyx":136
  * cpdef BooleanFilter IS_STABLE = BooleanFilter()
  * IS_STABLE.init(HepMC.IS_STABLE, False)
  * cpdef BooleanFilter IS_BEAM = BooleanFilter()             # <<<<<<<<<<<<<<
  * IS_BEAM.init(HepMC.IS_BEAM, False)
  * 
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_XGOTREF(((PyObject *)__pyx_v_13_libnumpythia_IS_BEAM));
   __Pyx_DECREF_SET(__pyx_v_13_libnumpythia_IS_BEAM, ((struct __pyx_obj_13_libnumpythia_BooleanFilter *)__pyx_t_13));
   __Pyx_GIVEREF(__pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":133
+  /* "_libnumpythia.pyx":137
  * IS_STABLE.init(HepMC.IS_STABLE, False)
  * cpdef BooleanFilter IS_BEAM = BooleanFilter()
  * IS_BEAM.init(HepMC.IS_BEAM, False)             # <<<<<<<<<<<<<<
  * 
  * FILTERS = {
  */
-  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_IS_BEAM->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_IS_BEAM), HepMC::IS_BEAM, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_IS_BEAM->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_IS_BEAM), HepMC::IS_BEAM, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":136
+  /* "_libnumpythia.pyx":140
  * 
  * FILTERS = {
  *     'STATUS': STATUS,             # <<<<<<<<<<<<<<
  *     'PDG_ID': PDG_ID,
  *     'ABS_PDG_ID': ABS_PDG_ID,
  */
-  __pyx_t_13 = PyDict_New(); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_13 = PyDict_New(); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_STATUS, ((PyObject *)__pyx_v_13_libnumpythia_STATUS)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_STATUS, ((PyObject *)__pyx_v_13_libnumpythia_STATUS)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":137
+  /* "_libnumpythia.pyx":141
  * FILTERS = {
  *     'STATUS': STATUS,
  *     'PDG_ID': PDG_ID,             # <<<<<<<<<<<<<<
  *     'ABS_PDG_ID': ABS_PDG_ID,
  *     'HAS_END_VERTEX': HAS_END_VERTEX,
  */
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_PDG_ID, ((PyObject *)__pyx_v_13_libnumpythia_PDG_ID)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_PDG_ID, ((PyObject *)__pyx_v_13_libnumpythia_PDG_ID)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":138
+  /* "_libnumpythia.pyx":142
  *     'STATUS': STATUS,
  *     'PDG_ID': PDG_ID,
  *     'ABS_PDG_ID': ABS_PDG_ID,             # <<<<<<<<<<<<<<
  *     'HAS_END_VERTEX': HAS_END_VERTEX,
  *     'HAS_PRODUCTION_VERTEX': HAS_PRODUCTION_VERTEX,
  */
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_ABS_PDG_ID, ((PyObject *)__pyx_v_13_libnumpythia_ABS_PDG_ID)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_ABS_PDG_ID, ((PyObject *)__pyx_v_13_libnumpythia_ABS_PDG_ID)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":139
+  /* "_libnumpythia.pyx":143
  *     'PDG_ID': PDG_ID,
  *     'ABS_PDG_ID': ABS_PDG_ID,
  *     'HAS_END_VERTEX': HAS_END_VERTEX,             # <<<<<<<<<<<<<<
  *     'HAS_PRODUCTION_VERTEX': HAS_PRODUCTION_VERTEX,
  *     'HAS_SAME_PDG_ID_DAUGHTER': HAS_SAME_PDG_ID_DAUGHTER,
  */
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_HAS_END_VERTEX, ((PyObject *)__pyx_v_13_libnumpythia_HAS_END_VERTEX)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_HAS_END_VERTEX, ((PyObject *)__pyx_v_13_libnumpythia_HAS_END_VERTEX)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":140
+  /* "_libnumpythia.pyx":144
  *     'ABS_PDG_ID': ABS_PDG_ID,
  *     'HAS_END_VERTEX': HAS_END_VERTEX,
  *     'HAS_PRODUCTION_VERTEX': HAS_PRODUCTION_VERTEX,             # <<<<<<<<<<<<<<
  *     'HAS_SAME_PDG_ID_DAUGHTER': HAS_SAME_PDG_ID_DAUGHTER,
  *     'IS_STABLE': IS_STABLE,
  */
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_HAS_PRODUCTION_VERTEX, ((PyObject *)__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_HAS_PRODUCTION_VERTEX, ((PyObject *)__pyx_v_13_libnumpythia_HAS_PRODUCTION_VERTEX)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":141
+  /* "_libnumpythia.pyx":145
  *     'HAS_END_VERTEX': HAS_END_VERTEX,
  *     'HAS_PRODUCTION_VERTEX': HAS_PRODUCTION_VERTEX,
  *     'HAS_SAME_PDG_ID_DAUGHTER': HAS_SAME_PDG_ID_DAUGHTER,             # <<<<<<<<<<<<<<
  *     'IS_STABLE': IS_STABLE,
  *     'IS_BEAM': IS_BEAM,
  */
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_HAS_SAME_PDG_ID_DAUGHTER, ((PyObject *)__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_HAS_SAME_PDG_ID_DAUGHTER, ((PyObject *)__pyx_v_13_libnumpythia_HAS_SAME_PDG_ID_DAUGHTER)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":142
+  /* "_libnumpythia.pyx":146
  *     'HAS_PRODUCTION_VERTEX': HAS_PRODUCTION_VERTEX,
  *     'HAS_SAME_PDG_ID_DAUGHTER': HAS_SAME_PDG_ID_DAUGHTER,
  *     'IS_STABLE': IS_STABLE,             # <<<<<<<<<<<<<<
  *     'IS_BEAM': IS_BEAM,
  * }
  */
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_IS_STABLE, ((PyObject *)__pyx_v_13_libnumpythia_IS_STABLE)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_IS_STABLE, ((PyObject *)__pyx_v_13_libnumpythia_IS_STABLE)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "_libnumpythia.pyx":143
+  /* "_libnumpythia.pyx":147
  *     'HAS_SAME_PDG_ID_DAUGHTER': HAS_SAME_PDG_ID_DAUGHTER,
  *     'IS_STABLE': IS_STABLE,
  *     'IS_BEAM': IS_BEAM,             # <<<<<<<<<<<<<<
  * }
  * 
  */
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_IS_BEAM, ((PyObject *)__pyx_v_13_libnumpythia_IS_BEAM)) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_FILTERS, __pyx_t_13) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_IS_BEAM, ((PyObject *)__pyx_v_13_libnumpythia_IS_BEAM)) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_FILTERS, __pyx_t_13) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":199
+  /* "_libnumpythia.pyx":179
+ *         return wrapped_event
+ * 
+ *     def select(self, object selection, HepMC.FilterType mode=ALL):             # <<<<<<<<<<<<<<
+ *         if isinstance(selection, BooleanFilter):
+ *             selection = FilterList(selection)
+ */
+  __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_ALL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_13);
+  __pyx_t_14 = ((enum HepMC::FilterType)__Pyx_PyInt_As_enum__HepMC_3a__3a_FilterType(__pyx_t_13)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+  __pyx_k__4 = __pyx_t_14;
+
+  /* "_libnumpythia.pyx":244
  *                   float pdgid_pt_min=-1, float pdgid_pt_max=-1,
  *                   object params_dict=None, int verbosity=1,
  *                   string shower='',             # <<<<<<<<<<<<<<
  *                   **kwargs):
  * 
  */
-  __pyx_t_14 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b__25); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L1_error)
-  __pyx_k__3 = __pyx_t_14;
+  __pyx_t_15 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b__26); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_k__6 = __pyx_t_15;
 
-  /* "_libnumpythia.pyx":405
+  /* "_libnumpythia.pyx":443
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def get_input(name, filename, **kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     name may be 'pythia' or 'hepmc'
  */
-  __pyx_t_13 = PyCFunction_NewEx(&__pyx_mdef_13_libnumpythia_1get_input, NULL, __pyx_n_s_libnumpythia); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_t_13 = PyCFunction_NewEx(&__pyx_mdef_13_libnumpythia_1get_input, NULL, __pyx_n_s_libnumpythia); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 443, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_input, __pyx_t_13) < 0) __PYX_ERR(0, 405, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_input, __pyx_t_13) < 0) __PYX_ERR(0, 443, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "_libnumpythia.pyx":430
+  /* "_libnumpythia.pyx":468
  * @cython.wraparound(False)
- * def generate(object gen_input, int events=-1, object find=None,
- *              HepMC.FilterType select=ALL, string write_to='',             # <<<<<<<<<<<<<<
+ * def generate(object gen_input, int events=-1,
+ *              string write_to='',             # <<<<<<<<<<<<<<
  *              bool weighted=False, **kwargs):
  *     """
  */
-  __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_ALL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 430, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_15 = ((enum HepMC::FilterType)__Pyx_PyInt_As_enum__HepMC_3a__3a_FilterType(__pyx_t_13)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_k__12 = __pyx_t_15;
-  __pyx_t_14 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b__25); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 430, __pyx_L1_error)
-  __pyx_k__13 = __pyx_t_14;
+  __pyx_t_15 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b__26); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 468, __pyx_L1_error)
+  __pyx_k__15 = __pyx_t_15;
 
-  /* "_libnumpythia.pyx":429
+  /* "_libnumpythia.pyx":467
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * def generate(object gen_input, int events=-1, object find=None,             # <<<<<<<<<<<<<<
- *              HepMC.FilterType select=ALL, string write_to='',
+ * def generate(object gen_input, int events=-1,             # <<<<<<<<<<<<<<
+ *              string write_to='',
  *              bool weighted=False, **kwargs):
  */
-  __pyx_t_13 = PyCFunction_NewEx(&__pyx_mdef_13_libnumpythia_3generate, NULL, __pyx_n_s_libnumpythia); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_13 = PyCFunction_NewEx(&__pyx_mdef_13_libnumpythia_3generate, NULL, __pyx_n_s_libnumpythia); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 467, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_generate, __pyx_t_13) < 0) __PYX_ERR(0, 429, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_generate, __pyx_t_13) < 0) __PYX_ERR(0, 467, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
   /* "_libnumpythia.pyx":1
  * # cython: experimental_cpp_class_def=True, c_string_type=str, c_string_encoding=ascii             # <<<<<<<<<<<<<<
  * 
- * import numpy as np
+ * # TODO:
  */
   __pyx_t_13 = PyDict_New(); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
@@ -13023,34 +13354,39 @@ bad:
 }
 #endif
 
-/* RaiseArgTupleInvalid */
-  static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
+/* GetModuleGlobalName */
+  static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
+    PyObject *result;
+#if !CYTHON_AVOID_BORROWED_REFS
+    result = PyDict_GetItem(__pyx_d, name);
+    if (likely(result)) {
+        Py_INCREF(result);
     } else {
-        num_expected = num_max;
-        more_or_less = "at most";
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    if (!result) {
+        PyErr_Clear();
+#endif
+        result = __Pyx_GetBuiltinName(name);
     }
-    if (exact) {
-        more_or_less = "exactly";
+    return result;
+}
+
+/* ExtTypeTest */
+    static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
+    if (unlikely(!type)) {
+        PyErr_SetString(PyExc_SystemError, "Missing type object");
+        return 0;
     }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
+    if (likely(PyObject_TypeCheck(obj, type)))
+        return 1;
+    PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
+                 Py_TYPE(obj)->tp_name, type->tp_name);
+    return 0;
 }
 
 /* RaiseDoubleKeywords */
-  static void __Pyx_RaiseDoubleKeywordsError(
+    static void __Pyx_RaiseDoubleKeywordsError(
     const char* func_name,
     PyObject* kw_name)
 {
@@ -13064,7 +13400,7 @@ bad:
 }
 
 /* ParseKeywords */
-  static int __Pyx_ParseOptionalKeywords(
+    static int __Pyx_ParseOptionalKeywords(
     PyObject *kwds,
     PyObject **argnames[],
     PyObject *kwds2,
@@ -13165,8 +13501,34 @@ bad:
     return -1;
 }
 
+/* RaiseArgTupleInvalid */
+    static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
+}
+
 /* PyCFunctionFastCall */
-  #if CYTHON_FAST_PYCCALL
+    #if CYTHON_FAST_PYCCALL
 static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
     PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
     PyCFunction meth = PyCFunction_GET_FUNCTION(func);
@@ -13184,7 +13546,7 @@ static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, P
 #endif  // CYTHON_FAST_PYCCALL
 
 /* PyFunctionFastCall */
-  #if CYTHON_FAST_PYCALL
+    #if CYTHON_FAST_PYCALL
 #include "frameobject.h"
 static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
                                                PyObject *globals) {
@@ -13304,7 +13666,7 @@ done:
 #endif  // CYTHON_FAST_PYCALL
 
 /* PyObjectCallMethO */
-  #if CYTHON_COMPILING_IN_CPYTHON
+    #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
     PyObject *self, *result;
     PyCFunction cfunc;
@@ -13324,7 +13686,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 #endif
 
 /* PyObjectCallOneArg */
-  #if CYTHON_COMPILING_IN_CPYTHON
+    #if CYTHON_COMPILING_IN_CPYTHON
 static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
     PyObject *result;
     PyObject *args = PyTuple_New(1);
@@ -13368,7 +13730,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 #endif
 
 /* PyObjectCallNoArg */
-    #if CYTHON_COMPILING_IN_CPYTHON
+      #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
 #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(func)) {
@@ -13389,20 +13751,20 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
 #endif
 
 /* RaiseTooManyValuesToUnpack */
-      static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {
+        static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {
     PyErr_Format(PyExc_ValueError,
                  "too many values to unpack (expected %" CYTHON_FORMAT_SSIZE_T "d)", expected);
 }
 
 /* RaiseNeedMoreValuesToUnpack */
-      static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index) {
+        static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index) {
     PyErr_Format(PyExc_ValueError,
                  "need more than %" CYTHON_FORMAT_SSIZE_T "d value%.1s to unpack",
                  index, (index == 1) ? "" : "s");
 }
 
 /* IterFinish */
-      static CYTHON_INLINE int __Pyx_IterFinish(void) {
+        static CYTHON_INLINE int __Pyx_IterFinish(void) {
 #if CYTHON_FAST_THREAD_STATE
     PyThreadState *tstate = PyThreadState_GET();
     PyObject* exc_type = tstate->curexc_type;
@@ -13437,7 +13799,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
 }
 
 /* UnpackItemEndCheck */
-      static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected) {
+        static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected) {
     if (unlikely(retval)) {
         Py_DECREF(retval);
         __Pyx_RaiseTooManyValuesError(expected);
@@ -13449,7 +13811,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
 }
 
 /* UnpackUnboundCMethod */
-      static int __Pyx_TryUnpackUnboundCMethod(__Pyx_CachedCFunction* target) {
+        static int __Pyx_TryUnpackUnboundCMethod(__Pyx_CachedCFunction* target) {
     PyObject *method;
     method = __Pyx_PyObject_GetAttrStr(target->type, *target->method_name);
     if (unlikely(!method))
@@ -13469,7 +13831,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
 }
 
 /* CallUnboundCMethod0 */
-      static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObject* self) {
+        static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObject* self) {
     PyObject *args, *result = NULL;
     if (unlikely(!cfunc->method) && unlikely(__Pyx_TryUnpackUnboundCMethod(cfunc) < 0)) return NULL;
 #if CYTHON_ASSUME_SAFE_MACROS
@@ -13488,42 +13850,11 @@ bad:
 }
 
 /* py_dict_items */
-      static CYTHON_INLINE PyObject* __Pyx_PyDict_Items(PyObject* d) {
+        static CYTHON_INLINE PyObject* __Pyx_PyDict_Items(PyObject* d) {
     if (PY_MAJOR_VERSION >= 3)
         return __Pyx_CallUnboundCMethod0(&__pyx_umethod_PyDict_Type_items, d);
     else
         return PyDict_Items(d);
-}
-
-/* GetModuleGlobalName */
-      static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
-    PyObject *result;
-#if !CYTHON_AVOID_BORROWED_REFS
-    result = PyDict_GetItem(__pyx_d, name);
-    if (likely(result)) {
-        Py_INCREF(result);
-    } else {
-#else
-    result = PyObject_GetItem(__pyx_d, name);
-    if (!result) {
-        PyErr_Clear();
-#endif
-        result = __Pyx_GetBuiltinName(name);
-    }
-    return result;
-}
-
-/* ExtTypeTest */
-        static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
-    if (unlikely(!type)) {
-        PyErr_SetString(PyExc_SystemError, "Missing type object");
-        return 0;
-    }
-    if (likely(PyObject_TypeCheck(obj, type)))
-        return 1;
-    PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
-                 Py_TYPE(obj)->tp_name, type->tp_name);
-    return 0;
 }
 
 /* GetItemInt */
@@ -15035,195 +15366,6 @@ raise_neg_overflow:
 }
 
 /* CIntFromPy */
-            static CYTHON_INLINE PY_LONG_LONG __Pyx_PyInt_As_PY_LONG_LONG(PyObject *x) {
-    const PY_LONG_LONG neg_one = (PY_LONG_LONG) -1, const_zero = (PY_LONG_LONG) 0;
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if (sizeof(PY_LONG_LONG) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (PY_LONG_LONG) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (PY_LONG_LONG) 0;
-                case  1: __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, digit, digits[0])
-                case 2:
-                    if (8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) >= 2 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) (((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) >= 3 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) (((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) >= 4 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) (((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
-                        }
-                    }
-                    break;
-            }
-#endif
-#if CYTHON_COMPILING_IN_CPYTHON
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-#else
-            {
-                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-                if (unlikely(result < 0))
-                    return (PY_LONG_LONG) -1;
-                if (unlikely(result == 1))
-                    goto raise_neg_overflow;
-            }
-#endif
-            if (sizeof(PY_LONG_LONG) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned long, PyLong_AsUnsignedLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(PY_LONG_LONG) <= sizeof(unsigned PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-#endif
-            }
-        } else {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (PY_LONG_LONG) 0;
-                case -1: __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, sdigit, (sdigit) (-(sdigit)digits[0]))
-                case  1: __PYX_VERIFY_RETURN_INT(PY_LONG_LONG,  digit, +digits[0])
-                case -2:
-                    if (8 * sizeof(PY_LONG_LONG) - 1 > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case 2:
-                    if (8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) ((((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case -3:
-                    if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) ((((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case -4:
-                    if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                            return (PY_LONG_LONG) ((((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-            }
-#endif
-            if (sizeof(PY_LONG_LONG) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, long, PyLong_AsLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(PY_LONG_LONG) <= sizeof(PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, PY_LONG_LONG, PyLong_AsLongLong(x))
-#endif
-            }
-        }
-        {
-#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
-            PyErr_SetString(PyExc_RuntimeError,
-                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
-#else
-            PY_LONG_LONG val;
-            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
- #if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
- #endif
-            if (likely(v)) {
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                int ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                              bytes, sizeof(val),
-                                              is_little, !is_unsigned);
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-#endif
-            return (PY_LONG_LONG) -1;
-        }
-    } else {
-        PY_LONG_LONG val;
-        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
-        if (!tmp) return (PY_LONG_LONG) -1;
-        val = __Pyx_PyInt_As_PY_LONG_LONG(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to PY_LONG_LONG");
-    return (PY_LONG_LONG) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to PY_LONG_LONG");
-    return (PY_LONG_LONG) -1;
-}
-
-/* CIntFromPy */
             static CYTHON_INLINE unsigned int __Pyx_PyInt_As_unsigned_int(PyObject *x) {
     const unsigned int neg_one = (unsigned int) -1, const_zero = (unsigned int) 0;
     const int is_unsigned = neg_one > const_zero;
@@ -15410,6 +15552,195 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to unsigned int");
     return (unsigned int) -1;
+}
+
+/* CIntFromPy */
+            static CYTHON_INLINE PY_LONG_LONG __Pyx_PyInt_As_PY_LONG_LONG(PyObject *x) {
+    const PY_LONG_LONG neg_one = (PY_LONG_LONG) -1, const_zero = (PY_LONG_LONG) 0;
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(PY_LONG_LONG) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (PY_LONG_LONG) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (PY_LONG_LONG) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) >= 2 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) (((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) >= 3 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) (((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) >= 4 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) (((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (PY_LONG_LONG) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(PY_LONG_LONG) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(PY_LONG_LONG) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (PY_LONG_LONG) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(PY_LONG_LONG,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(PY_LONG_LONG) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) ((((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) ((((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                            return (PY_LONG_LONG) ((((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(PY_LONG_LONG) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(PY_LONG_LONG) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            PY_LONG_LONG val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (PY_LONG_LONG) -1;
+        }
+    } else {
+        PY_LONG_LONG val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (PY_LONG_LONG) -1;
+        val = __Pyx_PyInt_As_PY_LONG_LONG(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to PY_LONG_LONG");
+    return (PY_LONG_LONG) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to PY_LONG_LONG");
+    return (PY_LONG_LONG) -1;
 }
 
 /* CIntFromPy */

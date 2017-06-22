@@ -2,9 +2,14 @@ from libcpp.vector cimport vector
 from libcpp.string cimport string
 from libcpp cimport bool
 
+cimport pythia as Pythia
+
 cdef extern from "HepMC/Data/SmartPointer.h" namespace "HepMC":
     cdef cppclass SmartPointer[T]:
-        pass
+        SmartPointer(T*)
+        SmartPointer(const SmartPointer[T]&)
+        SmartPointer()
+        T& operator*()
 
 cdef extern from "HepMC/Units.h" namespace "HepMC::Units":
     cdef enum MomentumUnit "HepMC::Units::MomentumUnit":
@@ -44,6 +49,8 @@ cdef extern from "HepMC/GenParticle.h" namespace "HepMC":
 
 cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
     cdef cppclass GenEvent:
+        GenEvent()
+        GenEvent(MomentumUnit momentum, LengthUnit length)
         vector[SmartPointer[GenParticle]]& particles()
 
 cdef extern from "HepMC/ReaderAscii.h" namespace "HepMC":
@@ -115,3 +122,9 @@ cdef extern from "HepMC/Search/FindParticles.h" namespace "HepMC":
         FindParticles(GenEvent&, FilterType)
         FindParticles(GenEvent&, FilterType, FilterList)
         vector[SmartPointer[GenParticle]] results()
+
+
+cdef extern from "HepMC/Pythia8ToHepMC3.h" namespace "HepMC":
+    cdef cppclass Pythia8ToHepMC3:
+        void set_print_inconsistency(bool)
+        bool fill_next_event(Pythia.Pythia&, GenEvent*)
