@@ -26,7 +26,7 @@ source code.
                (ABS_PDG_ID != 12) & (ABS_PDG_ID != 14) & (ABS_PDG_ID != 16))
 
    # generate events while writing to ascii hepmc
-   for event in hepmc_write('events.hepmc', pythia.generate(events=1)):
+   for event in hepmc_write('events.hepmc', pythia(events=1)):
       array1 = event.select(selection)
 
    # read the same event back from ascii hepmc
