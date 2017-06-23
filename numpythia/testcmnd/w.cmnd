@@ -1,3 +1,5 @@
+Beams:eCM = 13000.
+
 // WZ production
 WeakDoubleBoson:ffbar2ZW = on      ! q qbar -> Z0 W+-
 

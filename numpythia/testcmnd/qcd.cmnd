@@ -1,3 +1,5 @@
+Beams:eCM = 13000.
+
 HardQCD:all = on
 
 // Automated Variations of Shower Parameters for Uncertainty Bands

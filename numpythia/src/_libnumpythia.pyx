@@ -190,63 +190,25 @@ cdef class GenEvent:
         return particles_to_array(deref(self.event).particles())
 
 
-cdef class MCInput:
+cdef class _Pythia:
     cdef np.ndarray weights
-
-    cdef int get_num_weights(self):
-        return 0
-
-    property weighted:
-        def __get__(self):
-            return self.get_num_weights() > 0
-
-    property num_weights:
-        def __get__(self):
-            return self.get_num_weights()
-
-    cdef bool get_next_event(self) except *:
-        return False
-
-    cdef GenEvent get_hepmc(self):
-        pass
-
-    """
-    cdef void to_pseudojet(self, vector[PseudoJet]& particles, float eta_max):
-        pass
-
-    cdef void to_delphes(self, Delphes* modular_delphes,
-                         TObjArray* delphes_all_particles,
-                         TObjArray* delphes_stable_particles,
-                         TObjArray* delphes_partons):
-        pass
-    """
-
-    cdef void finish(self):
-        pass
-
-
-cdef class PythiaInput(MCInput):
-
     cdef Pythia.Pythia* pythia
     #cdef Pythia.VinciaPlugin* vincia_plugin
     cdef Pythia.UserHooks* userhooks
     cdef int verbosity
-    cdef int cut_on_pdgid
-    cdef float pdgid_pt_min
-    cdef float pdgid_pt_max
     cdef string shower
 
-    def __cinit__(self, string config, string xmldoc,
-                  int random_state=0, float beam_ecm=13000.,
-                  int cut_on_pdgid=0,
-                  float pdgid_pt_min=-1, float pdgid_pt_max=-1,
-                  object params_dict=None, int verbosity=1,
+    def __cinit__(self, string config,
+                  int random_state=0,
+                  object params_dict=None,
+                  int verbosity=1,
                   string shower='',
                   **kwargs):
 
         cdef int i
         cdef double mPDF
 
+        xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
         self.pythia = new Pythia.Pythia(xmldoc, False)
 
         # Initialize pointers to NULL
@@ -282,7 +244,6 @@ cdef class PythiaInput(MCInput):
         self.pythia.readFile(config)
 
         # __init__ arguments will always override the config
-        self.pythia.readString('Beams:eCM = {0}'.format(beam_ecm))
         self.pythia.readString('Random:setSeed = on')
         self.pythia.readString('Random:seed = {0}'.format(random_state))
 
@@ -302,9 +263,6 @@ cdef class PythiaInput(MCInput):
         if not self.pythia.init():
             raise RuntimeError("PYTHIA did not successfully initialize")
 
-        self.cut_on_pdgid = cut_on_pdgid
-        self.pdgid_pt_min = pdgid_pt_min
-        self.pdgid_pt_max = pdgid_pt_max
         self.verbosity = verbosity
         self.shower = shower
 
@@ -343,9 +301,9 @@ cdef class PythiaInput(MCInput):
         # generate event and quit if failure
         if not self.pythia.next():
             raise RuntimeError("PYTHIA event generation aborted prematurely")
-        if self.num_weights > 0:
-            self.weights = np.empty(self.num_weights, dtype=DTYPE)
-            for iweight in range(self.num_weights):
+        if self.get_num_weights() > 0:
+            self.weights = np.empty(self.get_num_weights(), dtype=DTYPE)
+            for iweight in range(self.get_num_weights()):
                 self.weights[iweight] = self.pythia.info.weight(iweight)
         return True
 
@@ -367,48 +325,54 @@ cdef class PythiaInput(MCInput):
                           partons)
     """
 
-    cdef void finish(self):
+    def generate(self, int events=-1):
+        cdef int ievent = 0;
+        if events < 0:
+            ievent = events - 1
+        while ievent < events:
+            if not self.get_next_event():
+                continue
+            yield self.get_hepmc()
+            if events > 0:
+                ievent += 1
         if self.verbosity > 0:
             self.pythia.stat()
 
 
-cdef class HepMCInput(MCInput):
+cdef class WriterAscii:
+    cdef HepMC.WriterAscii* hepmc_writer
 
+    def __cinit__(self, string filename):
+        self.hepmc_writer = new HepMC.WriterAscii(filename)
+
+    def __dealloc__(self):
+        self.hepmc_writer.close()
+        del self.hepmc_writer
+
+    def write(self, GenEvent event):
+        self.hepmc_writer.write_event(deref(event.event))
+
+
+cdef class ReaderAscii:
     cdef string filename
     cdef HepMC.ReaderAscii* hepmc_reader
     cdef shared_ptr[HepMC.GenEvent] event
-    #cdef TDatabasePDG *pdg
 
     def __cinit__(self, string filename):
         self.filename = filename
         self.hepmc_reader = new HepMC.ReaderAscii(filename)
-        #self.pdg = TDatabasePDG_Instance()
 
     def __dealloc__(self):
+        self.hepmc_reader.close()
         del self.hepmc_reader
 
-    cdef bool get_next_event(self) except *:
-        self.event.reset(new HepMC.GenEvent())
-        return self.hepmc_reader.read_event(deref(self.event))
-
-    cdef GenEvent get_hepmc(self):
-        return GenEvent.wrap(self.event)
-
-    """
-    cdef void to_pseudojet(self, vector[PseudoJet]& particles, float eta_max):
-        hepmc_to_pseudojet(self.event[0], particles, eta_max)
-
-    cdef void to_delphes(self, Delphes* delphes,
-                         TObjArray* all_particles,
-                         TObjArray* stable_particles,
-                         TObjArray* partons):
-        # convert Pythia particles into Delphes candidates
-        hepmc_to_delphes(self.event, self.pdg,
-                         delphes,
-                         all_particles,
-                         stable_particles,
-                         partons)
-    """
+    def __iter__(self):
+        while not self.hepmc_reader.failed():
+            self.event.reset(new HepMC.GenEvent())
+            self.hepmc_reader.read_event(deref(self.event))
+            if self.hepmc_reader.failed():
+                break
+            yield GenEvent.wrap(self.event)
 
     def estimate_num_events(self, int sample_size=1000):
         """
@@ -436,71 +400,3 @@ cdef class HepMCInput(MCInput):
             else:
                 return num_found
         return long(filesize / np.average(sizes))
-
-
-@cython.boundscheck(False)
-@cython.wraparound(False)
-def get_input(name, filename, **kwargs):
-    """
-    name may be 'pythia' or 'hepmc'
-    filename may be the pythia config file or a HepMC file
-    """
-    name = name.lower().strip()
-    if name == 'pythia':
-        xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
-        if not os.path.exists(filename):
-            raise IOError("Pythia config not found: {0}".format(filename))
-        gen_input = PythiaInput(filename, xmldoc, **kwargs)
-    elif name == 'hepmc':
-        gen_input = HepMCInput(filename)
-        if kwargs:
-            raise ValueError(
-                "unrecognized parameters in kwargs: {0}".format(kwargs))
-    else:
-        raise ValueError(
-            "no generator input available with name '{0}'".format(name))
-    return gen_input
-
-
-@cython.boundscheck(False)
-@cython.wraparound(False)
-def generate(object gen_input, int events=-1,
-             string write_to='',
-             bool weighted=False, **kwargs):
-    """
-    Generate events (or read HepMC) and yield numpy arrays of particles
-    If weights are enabled, this function will yield the particles and weights array
-    """
-    cdef GenEvent event
-    cdef HepMC.WriterAscii* hepmc_writer = NULL
-    cdef MCInput _gen_input
-    cdef int ievent = 0;
-    if events < 0:
-        ievent = events - 1
-    if not write_to.empty():
-        hepmc_writer = new HepMC.WriterAscii(write_to)
-    if isinstance(gen_input, string_types):
-        if fnmatch(os.path.splitext(gen_input)[1], '.hepmc*'):
-            _gen_input = get_input('hepmc', gen_input, **kwargs)
-        else:
-            _gen_input = get_input('pythia', gen_input, **kwargs)
-    else:
-        if not isinstance(gen_input, MCInput):
-            raise TypeError("gen_input must be a string (filename) or MCInput instance")
-        _gen_input = <MCInput> gen_input
-    try:
-        while ievent < events:
-            if not _gen_input.get_next_event():
-                continue
-            # We don't own event here. MCInput will delete it.
-            event = _gen_input.get_hepmc()
-            if hepmc_writer != NULL:
-                hepmc_writer.write_event(deref(event.event))
-            yield event
-            if events > 0:
-                ievent += 1
-    except:
-        raise
-    finally:
-        del hepmc_writer
-    _gen_input.finish()

@@ -1,8 +1,19 @@
-from numpythia import generate, STATUS, HAS_END_VERTEX, ABS_PDG_ID
+from numpythia import Pythia, hepmc_write, hepmc_read
+from numpythia import STATUS, HAS_END_VERTEX, ABS_PDG_ID
 from numpythia.testcmnd import get_cmnd
+from numpy.testing import assert_array_equal
 
-for event in generate(get_cmnd('w'), events=1, random_state=1):
-    array = event.select(
-        (STATUS == 1) & ~HAS_END_VERTEX &
-        (ABS_PDG_ID != 12) & (ABS_PDG_ID != 14) & (ABS_PDG_ID != 16))
-    print(array)
+pythia = Pythia(get_cmnd('w'), random_state=1)
+
+selection = ((STATUS == 1) & ~HAS_END_VERTEX &
+             (ABS_PDG_ID != 12) & (ABS_PDG_ID != 14) & (ABS_PDG_ID != 16))
+
+# generate events while writing to ascii hepmc
+for event in hepmc_write('events.hepmc', pythia.generate(events=1)):
+    array1 = event.select(selection)
+
+# read the same event back from ascii hepmc
+for event in hepmc_read('events.hepmc'):
+    array2 = event.select(selection)
+
+assert_array_equal(array1, array2)

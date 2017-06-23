@@ -55,13 +55,16 @@ cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
 
 cdef extern from "HepMC/ReaderAscii.h" namespace "HepMC":
     cdef cppclass ReaderAscii:
-        ReaderAscii(string filename)
+        ReaderAscii(string& filename)
         bool read_event(GenEvent&)
+        void close()
+        bool failed()
 
 cdef extern from "HepMC/WriterAscii.h" namespace "HepMC":
     cdef cppclass WriterAscii:
-        WriterAscii(string filename)
+        WriterAscii(string& filename)
         void write_event(GenEvent&)
+        void close()
 
 cdef extern from "HepMC/Search/FilterBase.h" namespace "HepMC":
     cdef cppclass FilterBase:

@@ -1,5 +1,4 @@
-from ._libnumpythia import generate, get_input
-from ._libnumpythia import PythiaInput, HepMCInput
+from ._libnumpythia import _Pythia as Pythia, ReaderAscii, WriterAscii
 from ._libnumpythia import FILTERS, ALL, FIRST, LAST
 import logging
 
@@ -8,6 +7,19 @@ locals().update(FILTERS)
 log = logging.getLogger(__name__)
 
 __all__ = [
-    'generate', 'get_input',
-    'PythiaInput', 'HepMCInput',
+    'Pythia',
+    'hepmc_read',
+    'hepmc_write',
 ]
+
+
+def hepmc_read(filename):
+    reader = ReaderAscii(filename)
+    for event in reader:
+        yield event
+
+def hepmc_write(filename, source):
+    writer = WriterAscii(filename)
+    for event in source:
+        writer.write(event)
+        yield event
