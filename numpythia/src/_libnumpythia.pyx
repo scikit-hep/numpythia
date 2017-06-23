@@ -176,7 +176,9 @@ cdef class GenEvent:
         wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
         return wrapped_event
 
-    def select(self, object selection, HepMC.FilterType mode=ALL):
+    def particles(self, object selection=None, HepMC.FilterType mode=ALL):
+        if selection is None:
+            return particles_to_array(deref(self.event).particles())
         if isinstance(selection, BooleanFilter):
             selection = FilterList(selection)
         elif not isinstance(selection, FilterList):
@@ -185,9 +187,6 @@ cdef class GenEvent:
         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
         del search
         return particles_to_array(particles)
-
-    def particles(self):
-        return particles_to_array(deref(self.event).particles())
 
 
 cdef class _Pythia:
@@ -324,6 +323,10 @@ cdef class _Pythia:
                           stable_particles,
                           partons)
     """
+
+    def __iter__(self):
+        for event in self():
+            yield event
 
     def __call__(self, int events=-1):
         cdef int ievent = 0;
