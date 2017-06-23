@@ -325,7 +325,7 @@ cdef class _Pythia:
                           partons)
     """
 
-    def generate(self, int events=-1):
+    def __call__(self, int events=-1):
         cdef int ievent = 0;
         if events < 0:
             ievent = events - 1
