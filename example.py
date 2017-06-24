@@ -1,5 +1,5 @@
 from numpythia import Pythia, hepmc_write, hepmc_read
-from numpythia import STATUS, HAS_END_VERTEX, ABS_PDG_ID
+from numpythia import STATUS, HAS_END_VERTEX, ABS_PDG_ID, FIRST, DESCENDANTS
 from numpythia.testcmnd import get_cmnd
 from numpy.testing import assert_array_equal
 
@@ -11,6 +11,10 @@ selection = ((STATUS == 1) & ~HAS_END_VERTEX &
 # generate events while writing to ascii hepmc
 for event in hepmc_write('events.hepmc', pythia(events=1)):
     array1 = event.particles(selection)
+
+    # find W and descendants
+    array_w = event.particles(ABS_PDG_ID == 24, FIRST, return_hepmc=True).find(selection, DESCENDANTS)
+    print(array_w)
 
 # read the same event back from ascii hepmc
 for event in hepmc_read('events.hepmc'):

@@ -50,6 +50,12 @@ ALL = HepMC.FIND_ALL
 FIRST = HepMC.FIND_FIRST
 LAST = HepMC.FIND_LAST
 
+ANCESTORS = HepMC.ANCESTORS
+DESCENDANTS = HepMC.DESCENDANTS
+PARENTS = HepMC.PARENTS
+CHILDREN = HepMC.CHILDREN
+PRODUCTION_SIBLINGS = HepMC.PRODUCTION_SIBLINGS
+
 
 cdef class FilterList:
     cdef HepMC.FilterList _filterlist
@@ -154,6 +160,35 @@ cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenPar
     return particle_array
 
 
+cdef class GenParticle:
+    cdef HepMC.SmartPointer[HepMC.GenParticle] particle
+
+    @staticmethod
+    cdef inline GenParticle wrap(HepMC.SmartPointer[HepMC.GenParticle]& particle):
+        cdef GenParticle wrapped_particle = GenParticle()
+        wrapped_particle.particle = particle
+        return wrapped_particle
+
+    def find(self, object selection, HepMC.Relationship mode=DESCENDANTS, bool return_hepmc=False):
+        if isinstance(selection, BooleanFilter):
+            selection = FilterList(selection)
+        elif not isinstance(selection, FilterList):
+            raise TypeError("find must be a boolean expression of Filters")
+        cdef HepMC.FindParticles* search = new HepMC.FindParticles(self.particle, mode, (<FilterList> selection)._filterlist)
+        cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+        del search
+        if return_hepmc:
+            return vector_to_list(particles)
+        return particles_to_array(particles)
+
+
+cdef inline list vector_to_list(vector[HepMC.SmartPointer[HepMC.GenParticle]]& particles):
+    py_particles = []
+    for particle in particles:
+        py_particles.append(GenParticle.wrap(particle))
+    return py_particles
+
+
 cdef class GenEvent:
     cdef shared_ptr[HepMC.GenEvent] event
 
@@ -176,8 +211,14 @@ cdef class GenEvent:
         wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
         return wrapped_event
 
-    def particles(self, object selection=None, HepMC.FilterType mode=ALL):
+    def particles(self, object selection=None, HepMC.FilterType mode=ALL, bool return_hepmc=False):
+        cdef list py_particles
         if selection is None:
+            if return_hepmc:
+                py_particles = vector_to_list(deref(self.event).particles())
+                if mode == FIRST or mode == LAST:
+                    return py_particles[0] if py_particles else None
+                return py_particles
             return particles_to_array(deref(self.event).particles())
         if isinstance(selection, BooleanFilter):
             selection = FilterList(selection)
@@ -186,6 +227,11 @@ cdef class GenEvent:
         cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
         del search
+        if return_hepmc:
+            py_particles = vector_to_list(particles)
+            if mode == FIRST or mode == LAST:
+                return py_particles[0] if py_particles else None
+            return py_particles
         return particles_to_array(particles)
 
 

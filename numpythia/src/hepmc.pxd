@@ -4,6 +4,14 @@ from libcpp cimport bool
 
 cimport pythia as Pythia
 
+cdef extern from "HepMC/Common.h" namespace "HepMC":
+    cdef enum Relationship "HepMC::Relationship":
+        ANCESTORS,
+        DESCENDANTS,
+        PARENTS,
+        CHILDREN,
+        PRODUCTION_SIBLINGS
+
 cdef extern from "HepMC/Data/SmartPointer.h" namespace "HepMC":
     cdef cppclass SmartPointer[T]:
         SmartPointer(T*)
@@ -124,8 +132,8 @@ cdef extern from "HepMC/Search/FindParticles.h" namespace "HepMC":
     cdef cppclass FindParticles:
         FindParticles(GenEvent&, FilterType)
         FindParticles(GenEvent&, FilterType, FilterList)
+        FindParticles(SmartPointer[GenParticle]&, Relationship, FilterList)
         vector[SmartPointer[GenParticle]] results()
-
 
 cdef extern from "HepMC/Pythia8ToHepMC3.h" namespace "HepMC":
     cdef cppclass Pythia8ToHepMC3:
