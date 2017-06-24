@@ -27,11 +27,11 @@ source code.
 
    # generate events while writing to ascii hepmc
    for event in hepmc_write('events.hepmc', pythia(events=1)):
-      array1 = event.select(selection)
+      array1 = event.particles(selection)
 
    # read the same event back from ascii hepmc
    for event in hepmc_read('events.hepmc'):
-      array2 = event.select(selection)
+      array2 = event.particles(selection)
 
    assert_array_equal(array1, array2)
 
