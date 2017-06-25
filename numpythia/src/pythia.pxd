@@ -8,6 +8,7 @@ cdef extern from "Pythia8/Pythia.h" namespace "Pythia8":
     cdef cppclass Info:
         int nWeights()
         double weight(int)
+        string weightLabel(int)
 
     cdef cppclass Settings:
         void addFlag(string, bool) 
