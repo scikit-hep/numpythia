@@ -343,32 +343,6 @@ cdef class _Pythia:
         #del self.vincia_plugin
         del self.userhooks
 
-    cdef int get_num_weights(self):
-        """
-        Accessing the nominal and uncertainty event weights
-
-        http://home.thep.lu.se/Pythia/pythia82html/EventInformation.html
-
-        The weight assigned to the current event. Is normally 1 and thus
-        uninteresting. However, there are several cases where one may have
-        nontrivial event weights.
-
-        http://home.thep.lu.se/Pythia/pythia82html/Variations.html
-
-        During the event generation, uncertainty weights will be calculated for
-        each variation. The resulting alternative weights for the event are
-        accessible through the Pythia::info.weight(int iWeight=0) method. The
-        baseline weight for each event (normally unity for an ordinary
-        unweighted event sample) is not modified and corresponds to iWeight =
-        0. The uncertainty-variation weights are thus enumerated starting from
-        iWeight = 1 for the first variation up to N for the last variation, in
-        the order they were specified in UncertaintyBands:List.
-
-        The total number of variations that have been defined, N, can be
-        queried using Pythia::info.nWeights().
-        """
-        return self.pythia.info.nWeights()
-
     cdef bool get_next_event(self) except *:
         # generate event and quit if failure
         if not self.pythia.next():

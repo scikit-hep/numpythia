@@ -27,7 +27,8 @@ public:
                        m_convert_gluon_to_0(false),
                        m_store_pdf(true),
                        m_store_proc(true),
-                       m_store_xsec(true) {}
+                       m_store_xsec(true),
+                       m_store_weights(true){}
 
     virtual ~Pythia8ToHepMC3() {}
 
@@ -48,6 +49,7 @@ public:
     bool store_pdf()            const { return m_store_pdf;            }
     bool store_proc()           const { return m_store_proc;           }
     bool store_xsec()           const { return m_store_xsec;           }
+    bool store_weights()        const { return m_store_weights;        }
 
     // Set values for some switches
     void set_print_inconsistency(bool b = true)  { m_print_inconsistency  = b; }
@@ -57,6 +59,7 @@ public:
     void set_store_pdf(bool b = true)            { m_store_pdf            = b; }
     void set_store_proc(bool b = true)           { m_store_proc           = b; }
     void set_store_xsec(bool b = true)           { m_store_xsec           = b; }
+    void set_store_weights(bool b = true)        { m_store_weights        = b; }
 
 private:
 
@@ -76,6 +79,7 @@ private:
     bool m_store_pdf;
     bool m_store_proc;
     bool m_store_xsec;
+    bool m_store_weights;
 };
 
 } // namespace HepMC
