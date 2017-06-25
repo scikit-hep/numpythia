@@ -181,6 +181,31 @@ cdef class GenParticle:
             return vector_to_list(particles)
         return particles_to_array(particles)
 
+    @property
+    def pid(self):
+        return deref(self.particle).pid()
+
+    @property
+    def status(self):
+        return deref(self.particle).status()
+
+    """
+    def parents(self, object selection=None, bool return_hepmc=False):
+        if return_hepmc:
+            return vector_to_list(deref(self.particle).parents())
+
+    def children(self, object selection=None, bool return_hepmc=False):
+        if return_hepmc:
+            return vector_to_list(deref(self.particle).children())
+
+    def ancestors(self, object selection=None, bool return_hepmc=False):
+        if return_hepmc:
+            return vector_to_list(deref(self.particle).ancestors())
+
+    def descendants(self, object selection=None, bool return_hepmc=False):
+        if return_hepmc:
+            return vector_to_list(deref(self.particle).descendants())
+    """
 
 cdef inline list vector_to_list(vector[HepMC.SmartPointer[HepMC.GenParticle]]& particles):
     py_particles = []
@@ -191,25 +216,28 @@ cdef inline list vector_to_list(vector[HepMC.SmartPointer[HepMC.GenParticle]]& p
 
 cdef class GenEvent:
     cdef shared_ptr[HepMC.GenEvent] event
+    cdef public np.ndarray weights
 
     @staticmethod
     cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):
         cdef GenEvent wrapped_event = GenEvent()
+        cdef vector[double] weights = deref(event).weights()
+        cdef np.ndarray weights_array = np.empty(weights.size(), dtype=np.float64)
+        for iweight in range(weights.size()):
+            weights_array[iweight] = weights[iweight]
         wrapped_event.event = event
+        wrapped_event.weights = weights_array
         return wrapped_event
 
     @staticmethod
     cdef inline GenEvent wrap_pythia(Pythia.Pythia& pythia):
-        cdef GenEvent wrapped_event = GenEvent()
         cdef HepMC.Pythia8ToHepMC3 py2hepmc
         # Suppress warnings
         py2hepmc.set_print_inconsistency(False)
-        cdef HepMC.GenEvent* event = new HepMC.GenEvent(HepMC.GEV, HepMC.MM)
-        if not py2hepmc.fill_next_event(pythia, event):
-            del event;
+        cdef shared_ptr[HepMC.GenEvent] event = shared_ptr[HepMC.GenEvent](new HepMC.GenEvent(HepMC.GEV, HepMC.MM))
+        if not py2hepmc.fill_next_event(pythia, &deref(event)):
             raise RuntimeError("unable to convert PYTHIA event to HepMC")
-        wrapped_event.event = shared_ptr[HepMC.GenEvent](event)
-        return wrapped_event
+        return GenEvent.wrap(event)
 
     def particles(self, object selection=None, HepMC.FilterType mode=ALL, bool return_hepmc=False):
         cdef list py_particles
@@ -236,7 +264,6 @@ cdef class GenEvent:
 
 
 cdef class _Pythia:
-    cdef np.ndarray weights
     cdef Pythia.Pythia* pythia
     #cdef Pythia.VinciaPlugin* vincia_plugin
     cdef Pythia.UserHooks* userhooks
@@ -346,10 +373,6 @@ cdef class _Pythia:
         # generate event and quit if failure
         if not self.pythia.next():
             raise RuntimeError("PYTHIA event generation aborted prematurely")
-        if self.get_num_weights() > 0:
-            self.weights = np.empty(self.get_num_weights(), dtype=DTYPE)
-            for iweight in range(self.get_num_weights()):
-                self.weights[iweight] = self.pythia.info.weight(iweight)
         return True
 
     cdef GenEvent get_hepmc(self):

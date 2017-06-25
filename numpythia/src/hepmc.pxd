@@ -60,6 +60,8 @@ cdef extern from "HepMC/GenEvent.h" namespace "HepMC":
         GenEvent()
         GenEvent(MomentumUnit momentum, LengthUnit length)
         vector[SmartPointer[GenParticle]]& particles()
+        vector[double] weights()
+        vector[string] weight_names()
 
 cdef extern from "HepMC/ReaderAscii.h" namespace "HepMC":
     cdef cppclass ReaderAscii:

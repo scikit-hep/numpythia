@@ -11,7 +11,7 @@ selection = ((STATUS == 1) & ~HAS_END_VERTEX &
 # generate events while writing to ascii hepmc
 for event in hepmc_write('events.hepmc', pythia(events=1)):
     array1 = event.particles(selection)
-
+    print(event.weights)
     # find W and descendants
     array_w = event.particles(ABS_PDG_ID == 24, FIRST, return_hepmc=True).find(selection, DESCENDANTS)
     print(array_w)
