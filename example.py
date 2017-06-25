@@ -4,6 +4,7 @@ from numpythia.testcmnd import get_cmnd
 from numpy.testing import assert_array_equal
 
 pythia = Pythia(get_cmnd('w'), random_state=1)
+print(pythia.weight_labels)
 
 selection = ((STATUS == 1) & ~HAS_END_VERTEX &
              (ABS_PDG_ID != 12) & (ABS_PDG_ID != 14) & (ABS_PDG_ID != 16))

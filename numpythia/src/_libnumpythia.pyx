@@ -343,6 +343,18 @@ cdef class _Pythia:
         #del self.vincia_plugin
         del self.userhooks
 
+    @property
+    def nweights(self):
+        return self.pythia.info.nWeights()
+
+    @property
+    def weight_labels(self):
+        cdef list labels = []
+        cdef int iweight
+        for iweight in range(self.pythia.info.nWeights()):
+            labels.append(self.pythia.info.weightLabel(iweight))
+        return labels
+
     cdef bool get_next_event(self) except *:
         # generate event and quit if failure
         if not self.pythia.next():
