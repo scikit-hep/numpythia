@@ -189,6 +189,46 @@ cdef class GenParticle:
     def status(self):
         return deref(self.particle).status()
 
+    @property
+    def e(self):
+        return deref(self.particle).momentum().e()
+
+    @property
+    def px(self):
+        return deref(self.particle).momentum().px()
+
+    @property
+    def py(self):
+        return deref(self.particle).momentum().py()
+
+    @property
+    def pz(self):
+        return deref(self.particle).momentum().pz()
+
+    @property
+    def pt(self):
+        return deref(self.particle).momentum().pt()
+
+    @property
+    def eta(self):
+        return deref(self.particle).momentum().eta()
+
+    @property
+    def phi(self):
+        return deref(self.particle).momentum().phi()
+
+    @property
+    def mass(self):
+        return deref(self.particle).momentum().m()
+
+    @property
+    def theta(self):
+        return deref(self.particle).momentum().theta()
+
+    @property
+    def rap(self):
+        return deref(self.particle).momentum().rap()
+
     """
     def parents(self, object selection=None, bool return_hepmc=False):
         if return_hepmc:
@@ -206,6 +246,10 @@ cdef class GenParticle:
         if return_hepmc:
             return vector_to_list(deref(self.particle).descendants())
     """
+    def __repr__(self):
+        return "{0}(e={1:.3f}, px={2:.3f}, py={3:.3f}, pz={4:.3f}, mass={5:.3f}, pid={6:d}, status={7:d})".format(
+            self.__class__.__name__, self.e, self.px, self.py, self.pz, self.mass, self.pid, self.status)
+
 
 cdef inline list vector_to_list(vector[HepMC.SmartPointer[HepMC.GenParticle]]& particles):
     py_particles = []

@@ -39,9 +39,11 @@ cdef extern from "HepMC/FourVector.h" namespace "HepMC":
         double e()
         double m()
         double perp()
+        double pt()
         double phi()
         double eta()
         double theta()
+        double rap()
 
 cdef extern from "HepMC/GenVertex.h" namespace "HepMC":
     cdef cppclass GenVertex:
