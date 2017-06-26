@@ -324,7 +324,7 @@ cdef class _Pythia:
         cdef int i
         cdef double mPDF
 
-        xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
+        xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')
         self.pythia = new Pythia.Pythia(xmldoc, False)
 
         # Initialize pointers to NULL

@@ -89,14 +89,14 @@ def recursive_glob(path, pattern):
 libnumpythia = Extension(
     'numpythia._libnumpythia',
     sources=['numpythia/src/_libnumpythia.cpp'] +
-        recursive_glob('numpythia/src/hepmc3.0.0/src', '*.cc') +
-        recursive_glob('numpythia/src/pythia8226/src', '*.cc'),
+        recursive_glob('numpythia/src/extern/hepmc3.0.0/src', '*.cc') +
+        recursive_glob('numpythia/src/extern/pythia8226/src', '*.cc'),
     depends=[],
     language='c++',
     include_dirs=[
         'numpythia/src',
-        'numpythia/src/hepmc3.0.0/include',
-        'numpythia/src/pythia8226/include',
+        'numpythia/src/extern/hepmc3.0.0/include',
+        'numpythia/src/extern/pythia8226/include',
     ],
     extra_compile_args=[
         '-Wno-unused-function',
@@ -105,7 +105,7 @@ libnumpythia = Extension(
     define_macros=[
         ('XMLDIR', '""'),
     ],
-    )
+)
 
 
 class build_ext(_build_ext):
@@ -195,7 +195,7 @@ setup(
     package_data={
         'numpythia': [
             'testcmnd/*.cmnd',
-            'src/pythia8226/share/*',
+            'src/extern/pythia8226/share/*',
         ],
     },
     ext_modules=[libnumpythia],

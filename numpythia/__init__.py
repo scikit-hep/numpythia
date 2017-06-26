@@ -13,6 +13,9 @@ __all__ = [
     'hepmc_write',
 ]
 
+PYTHIA_VERSION = '8.226'
+HEPMC_VERSION = '3.0.0'
+
 
 def hepmc_read(filename):
     reader = ReaderAscii(filename)

@@ -2087,7 +2087,6 @@ static const char __pyx_k_Random_setSeed_on[] = "Random:setSeed = on";
 static const char __pyx_k_resource_filename[] = "resource_filename";
 static const char __pyx_k_ReaderAscii___iter[] = "ReaderAscii.__iter__";
 static const char __pyx_k_PRODUCTION_SIBLINGS[] = "PRODUCTION_SIBLINGS";
-static const char __pyx_k_src_pythia8226_share[] = "src/pythia8226/share";
 static const char __pyx_k_HAS_PRODUCTION_VERTEX[] = "HAS_PRODUCTION_VERTEX";
 static const char __pyx_k_Init_showProcesses_on[] = "Init:showProcesses = on";
 static const char __pyx_k_Next_numberShowInfo_0[] = "Next:numberShowInfo = 0";
@@ -2100,6 +2099,7 @@ static const char __pyx_k_Next_numberShowProcess_0[] = "Next:numberShowProcess =
 static const char __pyx_k_Next_numberShowProcess_1[] = "Next:numberShowProcess = 1";
 static const char __pyx_k_Init_showChangedSettings_on[] = "Init:showChangedSettings = on";
 static const char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
+static const char __pyx_k_src_extern_pythia8226_share[] = "src/extern/pythia8226/share";
 static const char __pyx_k_Init_showChangedSettings_off[] = "Init:showChangedSettings = off";
 static const char __pyx_k_0_e_1_3f_px_2_3f_py_3_3f_pz_4_3[] = "{0}(e={1:.3f}, px={2:.3f}, py={3:.3f}, pz={4:.3f}, mass={5:.3f}, pid={6:d}, status={7:d})";
 static const char __pyx_k_Init_showChangedParticleData_on[] = "Init:showChangedParticleData = on";
@@ -2238,7 +2238,7 @@ static PyObject *__pyx_n_s_sample_size;
 static PyObject *__pyx_n_s_selection;
 static PyObject *__pyx_n_s_send;
 static PyObject *__pyx_n_s_shower;
-static PyObject *__pyx_kp_s_src_pythia8226_share;
+static PyObject *__pyx_kp_s_src_extern_pythia8226_share;
 static PyObject *__pyx_n_s_status;
 static PyObject *__pyx_n_s_string_types;
 static PyObject *__pyx_n_s_tell;
@@ -5577,7 +5577,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
   /* "_libnumpythia.pyx":327
  *         cdef double mPDF
  * 
- *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')             # <<<<<<<<<<<<<<
+ *         xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')             # <<<<<<<<<<<<<<
  *         self.pythia = new Pythia.Pythia(xmldoc, False)
  * 
  */
@@ -5591,7 +5591,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
   /* "_libnumpythia.pyx":328
  * 
- *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')
+ *         xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')
  *         self.pythia = new Pythia.Pythia(xmldoc, False)             # <<<<<<<<<<<<<<
  * 
  *         # Initialize pointers to NULL
@@ -12777,7 +12777,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_selection, __pyx_k_selection, sizeof(__pyx_k_selection), 0, 0, 1, 1},
   {&__pyx_n_s_send, __pyx_k_send, sizeof(__pyx_k_send), 0, 0, 1, 1},
   {&__pyx_n_s_shower, __pyx_k_shower, sizeof(__pyx_k_shower), 0, 0, 1, 1},
-  {&__pyx_kp_s_src_pythia8226_share, __pyx_k_src_pythia8226_share, sizeof(__pyx_k_src_pythia8226_share), 0, 0, 1, 0},
+  {&__pyx_kp_s_src_extern_pythia8226_share, __pyx_k_src_extern_pythia8226_share, sizeof(__pyx_k_src_extern_pythia8226_share), 0, 0, 1, 0},
   {&__pyx_n_s_status, __pyx_k_status, sizeof(__pyx_k_status), 0, 0, 1, 1},
   {&__pyx_n_s_string_types, __pyx_k_string_types, sizeof(__pyx_k_string_types), 0, 0, 1, 1},
   {&__pyx_n_s_tell, __pyx_k_tell, sizeof(__pyx_k_tell), 0, 0, 1, 1},
@@ -12862,11 +12862,11 @@ static int __Pyx_InitCachedConstants(void) {
   /* "_libnumpythia.pyx":327
  *         cdef double mPDF
  * 
- *         xmldoc = resource_filename('numpythia', 'src/pythia8226/share')             # <<<<<<<<<<<<<<
+ *         xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')             # <<<<<<<<<<<<<<
  *         self.pythia = new Pythia.Pythia(xmldoc, False)
  * 
  */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_numpythia, __pyx_kp_s_src_pythia8226_share); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_numpythia, __pyx_kp_s_src_extern_pythia8226_share); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 327, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
