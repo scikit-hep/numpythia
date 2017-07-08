@@ -160,7 +160,8 @@ cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenPar
     return particle_array
 
 
-cdef inline object find(HepMC.SmartPointer[HepMC.GenParticle]& particle, object selection, HepMC.Relationship mode, bool return_hepmc):
+cdef inline object particle_find(HepMC.SmartPointer[HepMC.GenParticle]& particle, object selection,
+                                 HepMC.Relationship mode, bool return_hepmc):
     cdef HepMC.FindParticles* search
     if selection is None:
         search = new HepMC.FindParticles(particle, mode)
@@ -177,6 +178,31 @@ cdef inline object find(HepMC.SmartPointer[HepMC.GenParticle]& particle, object 
     return particles_to_array(particles)
 
 
+cdef inline object event_find(shared_ptr[HepMC.GenEvent]& event, object selection,
+                              HepMC.FilterType mode, bool return_hepmc):
+    cdef list py_particles
+    if selection is None:
+        if return_hepmc:
+            py_particles = vector_to_list(deref(event).particles())
+            if mode == FIRST or mode == LAST:
+                return py_particles[0] if py_particles else None
+            return py_particles
+        return particles_to_array(deref(event).particles())
+    if isinstance(selection, BooleanFilter):
+        selection = FilterList(selection)
+    elif not isinstance(selection, FilterList):
+        raise TypeError("find must be a boolean expression of Filters")
+    cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(event), mode, (<FilterList> selection)._filterlist)
+    cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+    del search
+    if return_hepmc:
+        py_particles = vector_to_list(particles)
+        if mode == FIRST or mode == LAST:
+            return py_particles[0] if py_particles else None
+        return py_particles
+    return particles_to_array(particles)
+
+
 cdef class GenParticle:
     cdef HepMC.SmartPointer[HepMC.GenParticle] particle
 
@@ -187,19 +213,19 @@ cdef class GenParticle:
         return wrapped_particle
 
     def parents(self, object selection=None, bool return_hepmc=False):
-        return find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)
+        return particle_find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)
 
     def children(self, object selection=None, bool return_hepmc=False):
-        return find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)
+        return particle_find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)
 
     def ancestors(self, object selection=None, bool return_hepmc=False):
-        return find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)
+        return particle_find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)
 
     def descendants(self, object selection=None, bool return_hepmc=False):
-        return find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
+        return particle_find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
 
     def siblings(self, object selection=None, bool return_hepmc=False):
-        return find(self.particle, selection, mode=SIBLINGS, return_hepmc=return_hepmc)
+        return particle_find(self.particle, selection, mode=SIBLINGS, return_hepmc=return_hepmc)
 
     @property
     def pid(self):
@@ -286,28 +312,14 @@ cdef class GenEvent:
             raise RuntimeError("unable to convert PYTHIA event to HepMC")
         return GenEvent.wrap(event)
 
-    def particles(self, object selection=None, HepMC.FilterType mode=ALL, bool return_hepmc=False):
-        cdef list py_particles
-        if selection is None:
-            if return_hepmc:
-                py_particles = vector_to_list(deref(self.event).particles())
-                if mode == FIRST or mode == LAST:
-                    return py_particles[0] if py_particles else None
-                return py_particles
-            return particles_to_array(deref(self.event).particles())
-        if isinstance(selection, BooleanFilter):
-            selection = FilterList(selection)
-        elif not isinstance(selection, FilterList):
-            raise TypeError("find must be a boolean expression of Filters")
-        cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(self.event), mode, (<FilterList> selection)._filterlist)
-        cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
-        del search
-        if return_hepmc:
-            py_particles = vector_to_list(particles)
-            if mode == FIRST or mode == LAST:
-                return py_particles[0] if py_particles else None
-            return py_particles
-        return particles_to_array(particles)
+    def all(self, object selection=None, bool return_hepmc=False):
+        return event_find(self.event, selection, ALL, return_hepmc)
+
+    def first(self, object selection=None, bool return_hepmc=True):
+        return event_find(self.event, selection, FIRST, return_hepmc)
+
+    def last(self, object selection=None, bool return_hepmc=True):
+        return event_find(self.event, selection, LAST, return_hepmc)
 
 
 cdef class _Pythia:

@@ -1,5 +1,5 @@
 from ._libnumpythia import _Pythia as Pythia, ReaderAscii, WriterAscii
-from ._libnumpythia import FILTERS, ALL, FIRST, LAST
+from ._libnumpythia import FILTERS
 import logging
 
 locals().update(FILTERS)
