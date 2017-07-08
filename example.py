@@ -1,5 +1,5 @@
 from numpythia import Pythia, hepmc_write, hepmc_read
-from numpythia import STATUS, HAS_END_VERTEX, ABS_PDG_ID, FIRST, DESCENDANTS
+from numpythia import STATUS, HAS_END_VERTEX, ABS_PDG_ID, FIRST
 from numpythia.testcmnd import get_cmnd
 from numpy.testing import assert_array_equal
 

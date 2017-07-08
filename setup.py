@@ -179,7 +179,7 @@ else:
 
 setup(
     name='numpythia',
-    version='0.2.0',
+    version='0.3.0',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
     maintainer='Noel Dawe',
@@ -217,7 +217,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: C++',
         'Programming Language :: Cython',
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
     ],
     **setuptools_options
 )

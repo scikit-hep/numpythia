@@ -54,7 +54,7 @@ ANCESTORS = HepMC.ANCESTORS
 DESCENDANTS = HepMC.DESCENDANTS
 PARENTS = HepMC.PARENTS
 CHILDREN = HepMC.CHILDREN
-PRODUCTION_SIBLINGS = HepMC.PRODUCTION_SIBLINGS
+SIBLINGS = HepMC.PRODUCTION_SIBLINGS
 
 
 cdef class FilterList:
@@ -160,6 +160,23 @@ cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenPar
     return particle_array
 
 
+cdef inline object find(HepMC.SmartPointer[HepMC.GenParticle]& particle, object selection, HepMC.Relationship mode, bool return_hepmc):
+    cdef HepMC.FindParticles* search
+    if selection is None:
+        search = new HepMC.FindParticles(particle, mode)
+    else:
+        if isinstance(selection, BooleanFilter):
+            selection = FilterList(selection)
+        elif not isinstance(selection, FilterList):
+            raise TypeError("find must be a boolean expression of Filters")
+        search = new HepMC.FindParticles(particle, mode, (<FilterList> selection)._filterlist)
+    cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
+    del search
+    if return_hepmc:
+        return vector_to_list(particles)
+    return particles_to_array(particles)
+
+
 cdef class GenParticle:
     cdef HepMC.SmartPointer[HepMC.GenParticle] particle
 
@@ -169,33 +186,20 @@ cdef class GenParticle:
         wrapped_particle.particle = particle
         return wrapped_particle
 
-    def find(self, object selection, HepMC.Relationship mode=DESCENDANTS, bool return_hepmc=False):
-        cdef HepMC.FindParticles* search
-        if selection is None:
-            search = new HepMC.FindParticles(self.particle, mode)
-        else:
-            if isinstance(selection, BooleanFilter):
-                selection = FilterList(selection)
-            elif not isinstance(selection, FilterList):
-                raise TypeError("find must be a boolean expression of Filters")
-            search = new HepMC.FindParticles(self.particle, mode, (<FilterList> selection)._filterlist)
-        cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
-        del search
-        if return_hepmc:
-            return vector_to_list(particles)
-        return particles_to_array(particles)
-
     def parents(self, object selection=None, bool return_hepmc=False):
-        return self.find(selection, mode=PARENTS, return_hepmc=return_hepmc)
+        return find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)
 
     def children(self, object selection=None, bool return_hepmc=False):
-        return self.find(selection, mode=CHILDREN, return_hepmc=return_hepmc)
+        return find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)
 
     def ancestors(self, object selection=None, bool return_hepmc=False):
-        return self.find(selection, mode=ANCESTORS, return_hepmc=return_hepmc)
+        return find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)
 
     def descendants(self, object selection=None, bool return_hepmc=False):
-        return self.find(selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
+        return find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
+
+    def siblings(self, object selection=None, bool return_hepmc=False):
+        return find(self.particle, selection, mode=SIBLINGS, return_hepmc=return_hepmc)
 
     @property
     def pid(self):
