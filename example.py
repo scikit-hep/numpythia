@@ -14,7 +14,7 @@ for event in hepmc_write('events.hepmc', pythia(events=1)):
     array1 = event.particles(selection)
     print(event.weights)
     # find W and descendants
-    array_w = event.particles(ABS_PDG_ID == 24, FIRST, return_hepmc=True).find(selection, DESCENDANTS)
+    array_w = event.particles(ABS_PDG_ID == 24, FIRST, return_hepmc=True).descendants(selection)
     print(array_w)
 
 # read the same event back from ascii hepmc

@@ -136,6 +136,7 @@ cdef extern from "HepMC/Search/FindParticles.h" namespace "HepMC":
     cdef cppclass FindParticles:
         FindParticles(GenEvent&, FilterType)
         FindParticles(GenEvent&, FilterType, FilterList)
+        FindParticles(SmartPointer[GenParticle]&, Relationship)
         FindParticles(SmartPointer[GenParticle]&, Relationship, FilterList)
         vector[SmartPointer[GenParticle]] results()
 

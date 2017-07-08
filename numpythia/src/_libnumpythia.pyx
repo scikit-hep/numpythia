@@ -170,16 +170,32 @@ cdef class GenParticle:
         return wrapped_particle
 
     def find(self, object selection, HepMC.Relationship mode=DESCENDANTS, bool return_hepmc=False):
-        if isinstance(selection, BooleanFilter):
-            selection = FilterList(selection)
-        elif not isinstance(selection, FilterList):
-            raise TypeError("find must be a boolean expression of Filters")
-        cdef HepMC.FindParticles* search = new HepMC.FindParticles(self.particle, mode, (<FilterList> selection)._filterlist)
+        cdef HepMC.FindParticles* search
+        if selection is None:
+            search = new HepMC.FindParticles(self.particle, mode)
+        else:
+            if isinstance(selection, BooleanFilter):
+                selection = FilterList(selection)
+            elif not isinstance(selection, FilterList):
+                raise TypeError("find must be a boolean expression of Filters")
+            search = new HepMC.FindParticles(self.particle, mode, (<FilterList> selection)._filterlist)
         cdef vector[HepMC.SmartPointer[HepMC.GenParticle]] particles = search.results()
         del search
         if return_hepmc:
             return vector_to_list(particles)
         return particles_to_array(particles)
+
+    def parents(self, object selection=None, bool return_hepmc=False):
+        return self.find(selection, mode=PARENTS, return_hepmc=return_hepmc)
+
+    def children(self, object selection=None, bool return_hepmc=False):
+        return self.find(selection, mode=CHILDREN, return_hepmc=return_hepmc)
+
+    def ancestors(self, object selection=None, bool return_hepmc=False):
+        return self.find(selection, mode=ANCESTORS, return_hepmc=return_hepmc)
+
+    def descendants(self, object selection=None, bool return_hepmc=False):
+        return self.find(selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
 
     @property
     def pid(self):
@@ -229,23 +245,6 @@ cdef class GenParticle:
     def rap(self):
         return deref(self.particle).momentum().rap()
 
-    """
-    def parents(self, object selection=None, bool return_hepmc=False):
-        if return_hepmc:
-            return vector_to_list(deref(self.particle).parents())
-
-    def children(self, object selection=None, bool return_hepmc=False):
-        if return_hepmc:
-            return vector_to_list(deref(self.particle).children())
-
-    def ancestors(self, object selection=None, bool return_hepmc=False):
-        if return_hepmc:
-            return vector_to_list(deref(self.particle).ancestors())
-
-    def descendants(self, object selection=None, bool return_hepmc=False):
-        if return_hepmc:
-            return vector_to_list(deref(self.particle).descendants())
-    """
     def __repr__(self):
         return "{0}(e={1:.3f}, px={2:.3f}, py={3:.3f}, pz={4:.3f}, mass={5:.3f}, pid={6:d}, status={7:d})".format(
             self.__class__.__name__, self.e, self.px, self.py, self.pz, self.mass, self.pid, self.status)
