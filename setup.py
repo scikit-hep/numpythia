@@ -179,7 +179,7 @@ else:
 
 setup(
     name='numpythia',
-    version='0.3.0',
+    version='0.3.1',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
     maintainer='Noel Dawe',
