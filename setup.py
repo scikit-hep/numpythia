@@ -82,8 +82,8 @@ sys.path.insert(0, local_path)
 def recursive_glob(path, pattern):
     matches = []
     for root, dirnames, filenames in os.walk(path):
-	for filename in fnmatch.filter(filenames, pattern):
-	    matches.append(os.path.join(root, filename))
+        for filename in fnmatch.filter(filenames, pattern):
+            matches.append(os.path.join(root, filename))
     return matches
 
 libnumpythia = Extension(
