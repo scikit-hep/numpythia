@@ -99,6 +99,7 @@ libnumpythia = Extension(
         'numpythia/src/extern/pythia8226/include',
     ],
     extra_compile_args=[
+        '-std=c++11',  # for HepMC
         '-Wno-unused-function',
         '-Wno-write-strings',
     ],
@@ -179,7 +180,7 @@ else:
 
 setup(
     name='numpythia',
-    version='0.3.1',
+    version='0.3.2',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
     maintainer='Noel Dawe',
