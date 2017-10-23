@@ -327,7 +327,7 @@ cdef class _Pythia:
     cdef Pythia.UserHooks* userhooks
     cdef int verbosity
 
-    def __cinit__(self, string config,
+    def __cinit__(self, string config="",
                   int random_state=0,
                   int verbosity=1,
                   object params=None,
@@ -359,8 +359,9 @@ cdef class _Pythia:
             self.pythia.readString("Next:numberShowProcess = 0")
             self.pythia.readString("Next:numberShowEvent = 0")
 
-        # Read config
-        self.pythia.readFile(config)
+        if not config.empty():
+            # Read config
+            self.pythia.readFile(config)
 
         # __init__ arguments will always override the config
         self.pythia.readString('Random:setSeed = on')
