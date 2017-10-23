@@ -324,26 +324,19 @@ cdef class GenEvent:
 
 cdef class _Pythia:
     cdef Pythia.Pythia* pythia
-    #cdef Pythia.VinciaPlugin* vincia_plugin
     cdef Pythia.UserHooks* userhooks
     cdef int verbosity
-    cdef string shower
 
     def __cinit__(self, string config,
                   int random_state=0,
-                  object params_dict=None,
                   int verbosity=1,
-                  string shower='',
+                  object params=None,
                   **kwargs):
-
-        cdef int i
-        cdef double mPDF
 
         xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')
         self.pythia = new Pythia.Pythia(xmldoc, False)
 
         # Initialize pointers to NULL
-        #self.vincia_plugin = NULL
         self.userhooks = NULL
 
         if verbosity > 0:
@@ -366,11 +359,6 @@ cdef class _Pythia:
             self.pythia.readString("Next:numberShowProcess = 0")
             self.pythia.readString("Next:numberShowEvent = 0")
 
-        # next read user config that may override options above
-        #if shower == 'vincia':
-            #self.vincia_plugin = new VinciaPlugin(self.pythia, config)
-
-        #else:  # default Pythia shower
         # Read config
         self.pythia.readFile(config)
 
@@ -378,28 +366,19 @@ cdef class _Pythia:
         self.pythia.readString('Random:setSeed = on')
         self.pythia.readString('Random:seed = {0}'.format(random_state))
 
-        if params_dict is not None:
-            for param, value in params_dict.items():
+        if params is not None:
+            for param, value in params.items():
                 self.pythia.readString('{0} = {1}'.format(param, value))
         for param, value in kwargs.items():
             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
 
-        #if shower == 'vincia':
-            ## vincia calls pythia's init
-            ## but we lose the bool return value of Pythia's init
-            ## if init fails there, pythia.next() will anyway abort
-            ## TODO: follow this up with Skands et al
-            #success = self.vincia_plugin.init()
-        #else:
         if not self.pythia.init():
             raise RuntimeError("PYTHIA did not successfully initialize")
 
         self.verbosity = verbosity
-        self.shower = shower
 
     def __dealloc__(self):
         del self.pythia
-        #del self.vincia_plugin
         del self.userhooks
 
     @property
