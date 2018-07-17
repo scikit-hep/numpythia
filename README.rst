@@ -6,6 +6,9 @@ numpythia: The interface between PYTHIA and NumPy
 .. image:: https://img.shields.io/pypi/v/numpythia.svg
    :target: https://pypi.python.org/pypi/numpythia
 
+.. image:: https://coveralls.io/repos/github/scikit-hep/numpythia/badge.svg?branch=master
+   :target: https://coveralls.io/github/scikit-hep/numpythia?branch=master
+
 numpythia provides an interface between `PYTHIA
 <http://home.thep.lu.se/~torbjorn/Pythia.html>`_ and `NumPy
 <http://www.numpy.org/>`_ allowing you to generate events as NumPy arrays of

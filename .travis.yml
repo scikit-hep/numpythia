@@ -1,0 +1,41 @@
+language: python
+
+os:
+  - linux
+
+python:
+  - 2.6
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+
+addons:
+  apt:
+    packages:
+      - python-numpy
+      - python3-numpy
+      - python-setuptools
+
+install:
+  - pip install --upgrade pip
+  - pip install coveralls
+
+script:
+  coverage run --source=numpythia setup.py test
+
+after_success:
+  coveralls
+
+notifications:
+  slack: scikit-hep:b6cgBXwccPoaCNLn5VKFJFVy
+
+deploy:
+  provider: pypi
+  user: eduardorodrigues
+  password:
+    secure: "lC01yhLc1zCkH3MzoPy5xn7++HQrRq4WT8p/PizDwrh25PfMYb+yJzoiVwt30YMYEOlMa/CW5jpe6hx1uuRRMs0L43hQLDNRoMLX7J5pzSvSeAYHr4IKuULPRRYq8qbgmlmLr8AzrZxlvKbpAQSdFHNT7G9YkWARLOny8e3N8cSg2Z3QGGOLPEg5ju8Fr8UxiERh2kSGmplZsZu4HykmwX8eu7fE6bktWeOO6ideF4SFKHOVEX3CaVu8hBf1T1yyqc/PvCKCEMzcWEbqFhtWgxyi+OmwIrUoEujDi3eYtjuxYJk+KLPKpyB5VrC5zW3iTHpFfLfAH5T2mVeU3lPcoIzNWlTGPtZJk4akre+ikG4vmMToZMJpk3aOeGCx6Gq6VV81F7eu7Wu8MZRo6NI32mv3FBRiXIMkq15kTUg4WRoPgLAjIEod6fVE3vDJFphCMfHsDodu7yZS26Lqpa5avf38TVmcRbhjuZR2HgD0avTF2i7pt07h67hzkes0lxpqaXvDeYnZwM6uUXmvYje3mtedfB5psn2i6lJrxkPnHwFMN42BMRw3ZXzemc4aEQa6tf16wC/xH3MDpjlhbcRQDxOUyBhr31/PJYxTE6OPS/PDIwRGqxk6vdD/dBhk68/cDtdACt0lqVQwjl79nAFhAEjQaPbBjdokcUE452BJ954="
+  on:
+    tags: true
+    branch: master
+    python: 2.7
