@@ -3,8 +3,8 @@
 import sys
 
 # Check Python version
-if sys.version_info < (2, 6):
-    sys.exit("numpythia only supports python 2.6 and above")
+if sys.version_info < (2, 7):
+    sys.exit("numpythia only supports python 2.7 and above")
 
 if sys.version_info[0] < 3:
     import __builtin__ as builtins
