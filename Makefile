@@ -2,7 +2,7 @@
 
 PYTHON := $(shell which python)
 CYTHON := $(shell which cython)
-NOSETESTS := $(shell which nosetests)
+PYTESTS := $(shell which pytest)
 
 CYTHON_PYX := numpythia/src/_libnumpythia.pyx
 CYTHON_CPP := $(CYTHON_PYX:.pyx=.cpp)
@@ -35,7 +35,7 @@ inplace:
 	@CC="ccache gcc" $(PYTHON) setup.py build_ext -i
 
 test: inplace
-	@$(NOSETESTS) -s -v numpythia
+	@$(PYTESTS) -s -v numpythia
 
 sdist: clean
 	@$(PYTHON) setup.py sdist
