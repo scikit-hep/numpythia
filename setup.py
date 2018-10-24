@@ -190,7 +190,6 @@ setup(
     packages=[
         'numpythia',
         'numpythia.extern',
-        'numpythia.tests',
         'numpythia.testcmnd',
     ],
     package_data={

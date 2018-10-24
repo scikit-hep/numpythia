@@ -11,3 +11,4 @@ dist
 *.png
 *.html
 *.hepmc*
+.pytest_cache/*

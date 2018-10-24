@@ -18,10 +18,12 @@ addons:
 
 install:
   - pip install --upgrade pip
-  - pip install coveralls
+  - pip install coveralls pytest pytest-cov
 
+before_script:
+  pip install -e .
 script:
-  coverage run --source=numpythia setup.py test
+  pytest --cov=numpythia tests/
 
 after_success:
   coveralls
