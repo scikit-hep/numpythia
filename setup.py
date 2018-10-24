@@ -165,6 +165,8 @@ except ImportError:
     build_requires = ['numpy']
 else:
     build_requires = []
+# Take Python 2-3 compatibility package 'six' from outside (https://github.com/benjaminp/six)
+build_requires.append('six')
 
 if use_setuptools:
     setuptools_options = dict(
@@ -189,7 +191,6 @@ setup(
     url='http://github.com/ndawe/numpythia',
     packages=[
         'numpythia',
-        'numpythia.extern',
         'numpythia.testcmnd',
     ],
     package_data={

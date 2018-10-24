@@ -755,7 +755,7 @@ static const char *__pyx_f[] = {
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":725
  * # in Cython to enable them only on the right systems.
- * 
+ *
  * ctypedef npy_int8       int8_t             # <<<<<<<<<<<<<<
  * ctypedef npy_int16      int16_t
  * ctypedef npy_int32      int32_t
@@ -763,7 +763,7 @@ static const char *__pyx_f[] = {
 typedef npy_int8 __pyx_t_5numpy_int8_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":726
- * 
+ *
  * ctypedef npy_int8       int8_t
  * ctypedef npy_int16      int16_t             # <<<<<<<<<<<<<<
  * ctypedef npy_int32      int32_t
@@ -791,7 +791,7 @@ typedef npy_int64 __pyx_t_5numpy_int64_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":732
  * #ctypedef npy_int128     int128_t
- * 
+ *
  * ctypedef npy_uint8      uint8_t             # <<<<<<<<<<<<<<
  * ctypedef npy_uint16     uint16_t
  * ctypedef npy_uint32     uint32_t
@@ -799,7 +799,7 @@ typedef npy_int64 __pyx_t_5numpy_int64_t;
 typedef npy_uint8 __pyx_t_5numpy_uint8_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":733
- * 
+ *
  * ctypedef npy_uint8      uint8_t
  * ctypedef npy_uint16     uint16_t             # <<<<<<<<<<<<<<
  * ctypedef npy_uint32     uint32_t
@@ -827,7 +827,7 @@ typedef npy_uint64 __pyx_t_5numpy_uint64_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":739
  * #ctypedef npy_uint128    uint128_t
- * 
+ *
  * ctypedef npy_float32    float32_t             # <<<<<<<<<<<<<<
  * ctypedef npy_float64    float64_t
  * #ctypedef npy_float80    float80_t
@@ -835,7 +835,7 @@ typedef npy_uint64 __pyx_t_5numpy_uint64_t;
 typedef npy_float32 __pyx_t_5numpy_float32_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":740
- * 
+ *
  * ctypedef npy_float32    float32_t
  * ctypedef npy_float64    float64_t             # <<<<<<<<<<<<<<
  * #ctypedef npy_float80    float80_t
@@ -857,7 +857,7 @@ typedef npy_long __pyx_t_5numpy_int_t;
  * ctypedef npy_long       int_t
  * ctypedef npy_longlong   long_t             # <<<<<<<<<<<<<<
  * ctypedef npy_longlong   longlong_t
- * 
+ *
  */
 typedef npy_longlong __pyx_t_5numpy_long_t;
 
@@ -865,14 +865,14 @@ typedef npy_longlong __pyx_t_5numpy_long_t;
  * ctypedef npy_long       int_t
  * ctypedef npy_longlong   long_t
  * ctypedef npy_longlong   longlong_t             # <<<<<<<<<<<<<<
- * 
+ *
  * ctypedef npy_ulong      uint_t
  */
 typedef npy_longlong __pyx_t_5numpy_longlong_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":753
  * ctypedef npy_longlong   longlong_t
- * 
+ *
  * ctypedef npy_ulong      uint_t             # <<<<<<<<<<<<<<
  * ctypedef npy_ulonglong  ulong_t
  * ctypedef npy_ulonglong  ulonglong_t
@@ -880,11 +880,11 @@ typedef npy_longlong __pyx_t_5numpy_longlong_t;
 typedef npy_ulong __pyx_t_5numpy_uint_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":754
- * 
+ *
  * ctypedef npy_ulong      uint_t
  * ctypedef npy_ulonglong  ulong_t             # <<<<<<<<<<<<<<
  * ctypedef npy_ulonglong  ulonglong_t
- * 
+ *
  */
 typedef npy_ulonglong __pyx_t_5numpy_ulong_t;
 
@@ -892,32 +892,32 @@ typedef npy_ulonglong __pyx_t_5numpy_ulong_t;
  * ctypedef npy_ulong      uint_t
  * ctypedef npy_ulonglong  ulong_t
  * ctypedef npy_ulonglong  ulonglong_t             # <<<<<<<<<<<<<<
- * 
+ *
  * ctypedef npy_intp       intp_t
  */
 typedef npy_ulonglong __pyx_t_5numpy_ulonglong_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":757
  * ctypedef npy_ulonglong  ulonglong_t
- * 
+ *
  * ctypedef npy_intp       intp_t             # <<<<<<<<<<<<<<
  * ctypedef npy_uintp      uintp_t
- * 
+ *
  */
 typedef npy_intp __pyx_t_5numpy_intp_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":758
- * 
+ *
  * ctypedef npy_intp       intp_t
  * ctypedef npy_uintp      uintp_t             # <<<<<<<<<<<<<<
- * 
+ *
  * ctypedef npy_double     float_t
  */
 typedef npy_uintp __pyx_t_5numpy_uintp_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":760
  * ctypedef npy_uintp      uintp_t
- * 
+ *
  * ctypedef npy_double     float_t             # <<<<<<<<<<<<<<
  * ctypedef npy_double     double_t
  * ctypedef npy_longdouble longdouble_t
@@ -925,11 +925,11 @@ typedef npy_uintp __pyx_t_5numpy_uintp_t;
 typedef npy_double __pyx_t_5numpy_float_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":761
- * 
+ *
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t             # <<<<<<<<<<<<<<
  * ctypedef npy_longdouble longdouble_t
- * 
+ *
  */
 typedef npy_double __pyx_t_5numpy_double_t;
 
@@ -937,16 +937,16 @@ typedef npy_double __pyx_t_5numpy_double_t;
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t
  * ctypedef npy_longdouble longdouble_t             # <<<<<<<<<<<<<<
- * 
+ *
  * ctypedef npy_cfloat      cfloat_t
  */
 typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 
 /* "_libnumpythia.pyx":41
- * 
+ *
  * DTYPE = np.float64
  * ctypedef np.float64_t DTYPE_t             # <<<<<<<<<<<<<<
- * 
+ *
  * DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
  */
 typedef __pyx_t_5numpy_float64_t __pyx_t_13_libnumpythia_DTYPE_t;
@@ -991,7 +991,7 @@ struct __pyx_obj_13_libnumpythia___pyx_scope_struct_2___iter__;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":764
  * ctypedef npy_longdouble longdouble_t
- * 
+ *
  * ctypedef npy_cfloat      cfloat_t             # <<<<<<<<<<<<<<
  * ctypedef npy_cdouble     cdouble_t
  * ctypedef npy_clongdouble clongdouble_t
@@ -999,11 +999,11 @@ struct __pyx_obj_13_libnumpythia___pyx_scope_struct_2___iter__;
 typedef npy_cfloat __pyx_t_5numpy_cfloat_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":765
- * 
+ *
  * ctypedef npy_cfloat      cfloat_t
  * ctypedef npy_cdouble     cdouble_t             # <<<<<<<<<<<<<<
  * ctypedef npy_clongdouble clongdouble_t
- * 
+ *
  */
 typedef npy_cdouble __pyx_t_5numpy_cdouble_t;
 
@@ -1011,26 +1011,26 @@ typedef npy_cdouble __pyx_t_5numpy_cdouble_t;
  * ctypedef npy_cfloat      cfloat_t
  * ctypedef npy_cdouble     cdouble_t
  * ctypedef npy_clongdouble clongdouble_t             # <<<<<<<<<<<<<<
- * 
+ *
  * ctypedef npy_cdouble     complex_t
  */
 typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":768
  * ctypedef npy_clongdouble clongdouble_t
- * 
+ *
  * ctypedef npy_cdouble     complex_t             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline object PyArray_MultiIterNew1(a):
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
 /* "_libnumpythia.pyx":60
- * 
- * 
+ *
+ *
  * cdef class FilterList:             # <<<<<<<<<<<<<<
  *     cdef HepMC.FilterList _filterlist
- * 
+ *
  */
 struct __pyx_obj_13_libnumpythia_FilterList {
   PyObject_HEAD
@@ -1040,7 +1040,7 @@ struct __pyx_obj_13_libnumpythia_FilterList {
 
 /* "_libnumpythia.pyx":74
  *         return filterlist
- * 
+ *
  * cdef class Filter:             # <<<<<<<<<<<<<<
  *     cdef bool own
  *     cdef const HepMC.FilterBase* _filter
@@ -1055,7 +1055,7 @@ struct __pyx_obj_13_libnumpythia_Filter {
 
 /* "_libnumpythia.pyx":99
  *         return filterlist
- * 
+ *
  * cdef class IntegerFilter(Filter):             # <<<<<<<<<<<<<<
  *     def __richcmp__(IntegerFilter self, int value, int op):
  *         result = BooleanFilter()
@@ -1067,7 +1067,7 @@ struct __pyx_obj_13_libnumpythia_IntegerFilter {
 
 /* "_libnumpythia.pyx":117
  *         return result
- * 
+ *
  * cdef class BooleanFilter(Filter):             # <<<<<<<<<<<<<<
  *     def __invert__(self):
  *         result = BooleanFilter()
@@ -1078,11 +1078,11 @@ struct __pyx_obj_13_libnumpythia_BooleanFilter {
 
 
 /* "_libnumpythia.pyx":206
- * 
- * 
+ *
+ *
  * cdef class GenParticle:             # <<<<<<<<<<<<<<
  *     cdef HepMC.SmartPointer[HepMC.GenParticle] particle
- * 
+ *
  */
 struct __pyx_obj_13_libnumpythia_GenParticle {
   PyObject_HEAD
@@ -1092,8 +1092,8 @@ struct __pyx_obj_13_libnumpythia_GenParticle {
 
 
 /* "_libnumpythia.pyx":290
- * 
- * 
+ *
+ *
  * cdef class GenEvent:             # <<<<<<<<<<<<<<
  *     cdef shared_ptr[HepMC.GenEvent] event
  *     cdef public np.ndarray weights
@@ -1107,8 +1107,8 @@ struct __pyx_obj_13_libnumpythia_GenEvent {
 
 
 /* "_libnumpythia.pyx":325
- * 
- * 
+ *
+ *
  * cdef class _Pythia:             # <<<<<<<<<<<<<<
  *     cdef Pythia.Pythia* pythia
  *     cdef Pythia.UserHooks* userhooks
@@ -1123,11 +1123,11 @@ struct __pyx_obj_13_libnumpythia__Pythia {
 
 
 /* "_libnumpythia.pyx":439
- * 
- * 
+ *
+ *
  * cdef class WriterAscii:             # <<<<<<<<<<<<<<
  *     cdef HepMC.WriterAscii* hepmc_writer
- * 
+ *
  */
 struct __pyx_obj_13_libnumpythia_WriterAscii {
   PyObject_HEAD
@@ -1136,8 +1136,8 @@ struct __pyx_obj_13_libnumpythia_WriterAscii {
 
 
 /* "_libnumpythia.pyx":453
- * 
- * 
+ *
+ *
  * cdef class ReaderAscii:             # <<<<<<<<<<<<<<
  *     cdef string filename
  *     cdef HepMC.ReaderAscii* hepmc_reader
@@ -1152,7 +1152,7 @@ struct __pyx_obj_13_libnumpythia_ReaderAscii {
 
 /* "_libnumpythia.pyx":421
  *     """
- * 
+ *
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         for event in self():
  *             yield event
@@ -1169,7 +1169,7 @@ struct __pyx_obj_13_libnumpythia___pyx_scope_struct____iter__ {
 
 /* "_libnumpythia.pyx":425
  *             yield event
- * 
+ *
  *     def __call__(self, int events=-1):             # <<<<<<<<<<<<<<
  *         cdef int ievent = 0;
  *         if events < 0:
@@ -1184,7 +1184,7 @@ struct __pyx_obj_13_libnumpythia___pyx_scope_struct_1___call__ {
 
 /* "_libnumpythia.pyx":466
  *         del self.hepmc_reader
- * 
+ *
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         while not self.hepmc_reader.failed():
  *             self.event.reset(new HepMC.GenEvent())
@@ -1198,7 +1198,7 @@ struct __pyx_obj_13_libnumpythia___pyx_scope_struct_2___iter__ {
 
 /* "_libnumpythia.pyx":74
  *         return filterlist
- * 
+ *
  * cdef class Filter:             # <<<<<<<<<<<<<<
  *     cdef bool own
  *     cdef const HepMC.FilterBase* _filter
@@ -1212,7 +1212,7 @@ static struct __pyx_vtabstruct_13_libnumpythia_Filter *__pyx_vtabptr_13_libnumpy
 
 /* "_libnumpythia.pyx":99
  *         return filterlist
- * 
+ *
  * cdef class IntegerFilter(Filter):             # <<<<<<<<<<<<<<
  *     def __richcmp__(IntegerFilter self, int value, int op):
  *         result = BooleanFilter()
@@ -1226,7 +1226,7 @@ static struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *__pyx_vtabptr_13_l
 
 /* "_libnumpythia.pyx":117
  *         return result
- * 
+ *
  * cdef class BooleanFilter(Filter):             # <<<<<<<<<<<<<<
  *     def __invert__(self):
  *         result = BooleanFilter()
@@ -1239,11 +1239,11 @@ static struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *__pyx_vtabptr_13_l
 
 
 /* "_libnumpythia.pyx":206
- * 
- * 
+ *
+ *
  * cdef class GenParticle:             # <<<<<<<<<<<<<<
  *     cdef HepMC.SmartPointer[HepMC.GenParticle] particle
- * 
+ *
  */
 
 struct __pyx_vtabstruct_13_libnumpythia_GenParticle {
@@ -1254,8 +1254,8 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenParticle *__pyx_f_13_li
 
 
 /* "_libnumpythia.pyx":290
- * 
- * 
+ *
+ *
  * cdef class GenEvent:             # <<<<<<<<<<<<<<
  *     cdef shared_ptr[HepMC.GenEvent] event
  *     cdef public np.ndarray weights
@@ -1271,8 +1271,8 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
 
 
 /* "_libnumpythia.pyx":325
- * 
- * 
+ *
+ *
  * cdef class _Pythia:             # <<<<<<<<<<<<<<
  *     cdef Pythia.Pythia* pythia
  *     cdef Pythia.UserHooks* userhooks
@@ -2136,7 +2136,7 @@ static const char __pyx_k_selection[] = "selection";
 static const char __pyx_k_verbosity[] = "verbosity";
 static const char __pyx_k_ABS_PDG_ID[] = "ABS_PDG_ID";
 static const char __pyx_k_ValueError[] = "ValueError";
-static const char __pyx_k_extern_six[] = "extern.six";
+static const char __pyx_k_six[] = "six";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_DESCENDANTS[] = "DESCENDANTS";
 static const char __pyx_k_DTYPE_PTEPM[] = "DTYPE_PTEPM";
@@ -2265,7 +2265,7 @@ static PyObject *__pyx_n_s_enter;
 static PyObject *__pyx_n_s_eta;
 static PyObject *__pyx_n_s_events;
 static PyObject *__pyx_n_s_exit;
-static PyObject *__pyx_n_s_extern_six;
+static PyObject *__pyx_n_s_six;
 static PyObject *__pyx_n_s_filename;
 static PyObject *__pyx_kp_s_find_must_be_a_boolean_expressio;
 static PyObject *__pyx_n_s_float64;
@@ -2451,7 +2451,7 @@ static PyObject *__pyx_tuple__41;
 
 /* "_libnumpythia.pyx":63
  *     cdef HepMC.FilterList _filterlist
- * 
+ *
  *     def __and__(FilterList self, other):             # <<<<<<<<<<<<<<
  *         filterlist = FilterList()
  *         filterlist._filterlist.extend(self._filterlist)
@@ -2485,7 +2485,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
   __Pyx_RefNannySetupContext("__and__", 0);
 
   /* "_libnumpythia.pyx":64
- * 
+ *
  *     def __and__(FilterList self, other):
  *         filterlist = FilterList()             # <<<<<<<<<<<<<<
  *         filterlist._filterlist.extend(self._filterlist)
@@ -2512,7 +2512,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  *             filterlist._filterlist.append(deref(static_cast["const HepMC.Filter*"]((<BooleanFilter> other)._filter)))
  *         elif isinstance(other, FilterList):
  */
-  __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_BooleanFilter); 
+  __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_BooleanFilter);
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
@@ -2542,7 +2542,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)
  *         else:
  */
-  __pyx_t_3 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_FilterList); 
+  __pyx_t_3 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_FilterList);
   __pyx_t_2 = (__pyx_t_3 != 0);
   if (__pyx_t_2) {
 
@@ -2570,7 +2570,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
  *         return filterlist
- * 
+ *
  */
   /*else*/ {
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
@@ -2585,7 +2585,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
  *         else:
  *             raise TypeError("can only combine boolean filters")
  *         return filterlist             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef class Filter:
  */
   __Pyx_XDECREF(__pyx_r);
@@ -2595,7 +2595,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList___and__(struct __pyx_obj_
 
   /* "_libnumpythia.pyx":63
  *     cdef HepMC.FilterList _filterlist
- * 
+ *
  *     def __and__(FilterList self, other):             # <<<<<<<<<<<<<<
  *         filterlist = FilterList()
  *         filterlist._filterlist.extend(self._filterlist)
@@ -2722,7 +2722,7 @@ static PyObject *__pyx_pf_13_libnumpythia_10FilterList_4__setstate_cython__(CYTH
 
 /* "_libnumpythia.pyx":78
  *     cdef const HepMC.FilterBase* _filter
- * 
+ *
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):             # <<<<<<<<<<<<<<
  *         self._filter = &_filter
  *         self.own = own
@@ -2734,11 +2734,11 @@ static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnum
   __Pyx_RefNannySetupContext("init", 0);
 
   /* "_libnumpythia.pyx":79
- * 
+ *
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):
  *         self._filter = &_filter             # <<<<<<<<<<<<<<
  *         self.own = own
- * 
+ *
  */
   __pyx_v_self->_filter = (&__pyx_v__filter);
 
@@ -2746,14 +2746,14 @@ static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnum
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):
  *         self._filter = &_filter
  *         self.own = own             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __dealloc__(self):
  */
   __pyx_v_self->own = __pyx_v_own;
 
   /* "_libnumpythia.pyx":78
  *     cdef const HepMC.FilterBase* _filter
- * 
+ *
  *     cdef init(self, const HepMC.FilterBase& _filter, bool own):             # <<<<<<<<<<<<<<
  *         self._filter = &_filter
  *         self.own = own
@@ -2768,7 +2768,7 @@ static PyObject *__pyx_f_13_libnumpythia_6Filter_init(struct __pyx_obj_13_libnum
 
 /* "_libnumpythia.pyx":82
  *         self.own = own
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         if self.own:
  *             del self._filter
@@ -2791,11 +2791,11 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
   /* "_libnumpythia.pyx":83
- * 
+ *
  *     def __dealloc__(self):
  *         if self.own:             # <<<<<<<<<<<<<<
  *             del self._filter
- * 
+ *
  */
   __pyx_t_1 = (__pyx_v_self->own != 0);
   if (__pyx_t_1) {
@@ -2804,23 +2804,23 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
  *     def __dealloc__(self):
  *         if self.own:
  *             del self._filter             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __and__(Filter self, other):
  */
     delete __pyx_v_self->_filter;
 
     /* "_libnumpythia.pyx":83
- * 
+ *
  *     def __dealloc__(self):
  *         if self.own:             # <<<<<<<<<<<<<<
  *             del self._filter
- * 
+ *
  */
   }
 
   /* "_libnumpythia.pyx":82
  *         self.own = own
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         if self.own:
  *             del self._filter
@@ -2832,7 +2832,7 @@ static void __pyx_pf_13_libnumpythia_6Filter___dealloc__(struct __pyx_obj_13_lib
 
 /* "_libnumpythia.pyx":86
  *             del self._filter
- * 
+ *
  *     def __and__(Filter self, other):             # <<<<<<<<<<<<<<
  *         filterlist = FilterList()
  *         if isinstance(other, BooleanFilter):
@@ -2866,7 +2866,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
   __Pyx_RefNannySetupContext("__and__", 0);
 
   /* "_libnumpythia.pyx":87
- * 
+ *
  *     def __and__(Filter self, other):
  *         filterlist = FilterList()             # <<<<<<<<<<<<<<
  *         if isinstance(other, BooleanFilter):
@@ -2884,7 +2884,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  *             filterlist._filterlist = HepMC.FilterList(
  *                 deref(static_cast["const HepMC.Filter*"](self._filter)),
  */
-  __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_BooleanFilter); 
+  __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_BooleanFilter);
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
@@ -2914,7 +2914,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  *             filterlist._filterlist = HepMC.FilterList(deref(static_cast["const HepMC.Filter*"](self._filter)))
  *             filterlist._filterlist.extend((<FilterList> other)._filterlist)
  */
-  __pyx_t_3 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_FilterList); 
+  __pyx_t_3 = __Pyx_TypeCheck(__pyx_v_other, __pyx_ptype_13_libnumpythia_FilterList);
   __pyx_t_2 = (__pyx_t_3 != 0);
   if (__pyx_t_2) {
 
@@ -2951,7 +2951,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
  *         return filterlist
- * 
+ *
  */
   /*else*/ {
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
@@ -2966,7 +2966,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
  *         else:
  *             raise TypeError("can only combine boolean filters")
  *         return filterlist             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef class IntegerFilter(Filter):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -2976,7 +2976,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_2__and__(struct __pyx_obj_13_l
 
   /* "_libnumpythia.pyx":86
  *             del self._filter
- * 
+ *
  *     def __and__(Filter self, other):             # <<<<<<<<<<<<<<
  *         filterlist = FilterList()
  *         if isinstance(other, BooleanFilter):
@@ -3102,7 +3102,7 @@ static PyObject *__pyx_pf_13_libnumpythia_6Filter_6__setstate_cython__(CYTHON_UN
 }
 
 /* "_libnumpythia.pyx":100
- * 
+ *
  * cdef class IntegerFilter(Filter):
  *     def __richcmp__(IntegerFilter self, int value, int op):             # <<<<<<<<<<<<<<
  *         result = BooleanFilter()
@@ -3326,7 +3326,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  *             result._filter = new HepMC.Filter(deref(self._filter) >= value)
  *         result.own = True             # <<<<<<<<<<<<<<
  *         return result
- * 
+ *
  */
   __pyx_v_result->__pyx_base.own = 1;
 
@@ -3334,7 +3334,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
  *             result._filter = new HepMC.Filter(deref(self._filter) >= value)
  *         result.own = True
  *         return result             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef class BooleanFilter(Filter):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -3343,7 +3343,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter___richcmp__(struct __p
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":100
- * 
+ *
  * cdef class IntegerFilter(Filter):
  *     def __richcmp__(IntegerFilter self, int value, int op):             # <<<<<<<<<<<<<<
  *         result = BooleanFilter()
@@ -3470,7 +3470,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13IntegerFilter_4__setstate_cython__(C
 }
 
 /* "_libnumpythia.pyx":118
- * 
+ *
  * cdef class BooleanFilter(Filter):
  *     def __invert__(self):             # <<<<<<<<<<<<<<
  *         result = BooleanFilter()
@@ -3523,7 +3523,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
  *         result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](self._filter)))
  *         result.own = True             # <<<<<<<<<<<<<<
  *         return result
- * 
+ *
  */
   __pyx_v_result->__pyx_base.own = 1;
 
@@ -3531,7 +3531,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
  *         result._filter = new HepMC.Filter(not deref(static_cast["const HepMC.Filter*"](self._filter)))
  *         result.own = True
  *         return result             # <<<<<<<<<<<<<<
- * 
+ *
  * # filters with integer parameter
  */
   __Pyx_XDECREF(__pyx_r);
@@ -3540,7 +3540,7 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter___invert__(struct __py
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":118
- * 
+ *
  * cdef class BooleanFilter(Filter):
  *     def __invert__(self):             # <<<<<<<<<<<<<<
  *         result = BooleanFilter()
@@ -3667,8 +3667,8 @@ static PyObject *__pyx_pf_13_libnumpythia_13BooleanFilter_4__setstate_cython__(C
 }
 
 /* "_libnumpythia.pyx":157
- * 
- * 
+ *
+ *
  * cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):             # <<<<<<<<<<<<<<
  *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
  *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
@@ -3686,7 +3686,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_f_13_libnumpythia_particles_to_array(s
   __Pyx_RefNannySetupContext("particles_to_array", 0);
 
   /* "_libnumpythia.pyx":158
- * 
+ *
  * cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):
  *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)             # <<<<<<<<<<<<<<
  *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
@@ -3729,7 +3729,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_f_13_libnumpythia_particles_to_array(s
  *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
  *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)             # <<<<<<<<<<<<<<
  *     return particle_array
- * 
+ *
  */
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_particle_array), __pyx_n_s_itemsize); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -3741,8 +3741,8 @@ static CYTHON_INLINE PyArrayObject *__pyx_f_13_libnumpythia_particles_to_array(s
  *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
  *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
  *     return particle_array             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
   __Pyx_INCREF(((PyObject *)__pyx_v_particle_array));
@@ -3750,8 +3750,8 @@ static CYTHON_INLINE PyArrayObject *__pyx_f_13_libnumpythia_particles_to_array(s
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":157
- * 
- * 
+ *
+ *
  * cdef inline np.ndarray particles_to_array(vector[HepMC.SmartPointer[HepMC.GenParticle]] particles):             # <<<<<<<<<<<<<<
  *     cdef np.ndarray particle_array = np.empty((particles.size(),), dtype=DTYPE_PARTICLE)
  *     numpythia.hepmc_to_array(particles, <char*> particle_array.data, <unsigned int> particle_array.itemsize)
@@ -3773,8 +3773,8 @@ static CYTHON_INLINE PyArrayObject *__pyx_f_13_libnumpythia_particles_to_array(s
 }
 
 /* "_libnumpythia.pyx":163
- * 
- * 
+ *
+ *
  * cdef inline object particle_find(HepMC.SmartPointer[HepMC.GenParticle]& particle, object selection,             # <<<<<<<<<<<<<<
  *                                  HepMC.Relationship mode, bool return_hepmc):
  *     cdef HepMC.FindParticles* search
@@ -3830,7 +3830,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_particle_find(HepMC::Smar
  *         elif not isinstance(selection, FilterList):
  */
   /*else*/ {
-    __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_BooleanFilter); 
+    __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_BooleanFilter);
     __pyx_t_1 = (__pyx_t_2 != 0);
     if (__pyx_t_1) {
 
@@ -3869,7 +3869,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_particle_find(HepMC::Smar
  *             raise TypeError("find must be a boolean expression of Filters")
  *         search = new HepMC.FindParticles(particle, mode, (<FilterList> selection)._filterlist)
  */
-    __pyx_t_1 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_FilterList); 
+    __pyx_t_1 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_FilterList);
     __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
     if (__pyx_t_2) {
 
@@ -3940,7 +3940,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_particle_find(HepMC::Smar
  *     if return_hepmc:
  *         return vector_to_list(particles)             # <<<<<<<<<<<<<<
  *     return particles_to_array(particles)
- * 
+ *
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_4 = __pyx_f_13_libnumpythia_vector_to_list(__pyx_v_particles); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 177, __pyx_L1_error)
@@ -3962,8 +3962,8 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_particle_find(HepMC::Smar
  *     if return_hepmc:
  *         return vector_to_list(particles)
  *     return particles_to_array(particles)             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_4 = ((PyObject *)__pyx_f_13_libnumpythia_particles_to_array(__pyx_v_particles)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 178, __pyx_L1_error)
@@ -3973,8 +3973,8 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_particle_find(HepMC::Smar
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":163
- * 
- * 
+ *
+ *
  * cdef inline object particle_find(HepMC.SmartPointer[HepMC.GenParticle]& particle, object selection,             # <<<<<<<<<<<<<<
  *                                  HepMC.Relationship mode, bool return_hepmc):
  *     cdef HepMC.FindParticles* search
@@ -3994,8 +3994,8 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_particle_find(HepMC::Smar
 }
 
 /* "_libnumpythia.pyx":181
- * 
- * 
+ *
+ *
  * cdef inline object event_find(shared_ptr[HepMC.GenEvent]& event, object selection,             # <<<<<<<<<<<<<<
  *                               HepMC.FilterType mode, bool return_hepmc):
  *     cdef list py_particles
@@ -4168,7 +4168,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_event_find(std::shared_pt
  *         selection = FilterList(selection)
  *     elif not isinstance(selection, FilterList):
  */
-  __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_BooleanFilter); 
+  __pyx_t_2 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_BooleanFilter);
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
@@ -4207,7 +4207,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_event_find(std::shared_pt
  *         raise TypeError("find must be a boolean expression of Filters")
  *     cdef HepMC.FindParticles* search = new HepMC.FindParticles(deref(event), mode, (<FilterList> selection)._filterlist)
  */
-  __pyx_t_1 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_FilterList); 
+  __pyx_t_1 = __Pyx_TypeCheck(__pyx_v_selection, __pyx_ptype_13_libnumpythia_FilterList);
   __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_2) {
 
@@ -4357,7 +4357,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_event_find(std::shared_pt
  *             return py_particles[0] if py_particles else None
  *         return py_particles             # <<<<<<<<<<<<<<
  *     return particles_to_array(particles)
- * 
+ *
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(__pyx_v_py_particles);
@@ -4377,8 +4377,8 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_event_find(std::shared_pt
  *             return py_particles[0] if py_particles else None
  *         return py_particles
  *     return particles_to_array(particles)             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_4 = ((PyObject *)__pyx_f_13_libnumpythia_particles_to_array(__pyx_v_particles)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 203, __pyx_L1_error)
@@ -4388,8 +4388,8 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_event_find(std::shared_pt
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":181
- * 
- * 
+ *
+ *
  * cdef inline object event_find(shared_ptr[HepMC.GenEvent]& event, object selection,             # <<<<<<<<<<<<<<
  *                               HepMC.FilterType mode, bool return_hepmc):
  *     cdef list py_particles
@@ -4411,7 +4411,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_event_find(std::shared_pt
 }
 
 /* "_libnumpythia.pyx":210
- * 
+ *
  *     @staticmethod
  *     cdef inline GenParticle wrap(HepMC.SmartPointer[HepMC.GenParticle]& particle):             # <<<<<<<<<<<<<<
  *         cdef GenParticle wrapped_particle = GenParticle()
@@ -4442,7 +4442,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenParticle *__pyx_f_13_li
  *         cdef GenParticle wrapped_particle = GenParticle()
  *         wrapped_particle.particle = particle             # <<<<<<<<<<<<<<
  *         return wrapped_particle
- * 
+ *
  */
   __pyx_v_wrapped_particle->particle = __pyx_v_particle;
 
@@ -4450,7 +4450,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenParticle *__pyx_f_13_li
  *         cdef GenParticle wrapped_particle = GenParticle()
  *         wrapped_particle.particle = particle
  *         return wrapped_particle             # <<<<<<<<<<<<<<
- * 
+ *
  *     def parents(self, object selection=None, bool return_hepmc=False):
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
@@ -4459,7 +4459,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenParticle *__pyx_f_13_li
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":210
- * 
+ *
  *     @staticmethod
  *     cdef inline GenParticle wrap(HepMC.SmartPointer[HepMC.GenParticle]& particle):             # <<<<<<<<<<<<<<
  *         cdef GenParticle wrapped_particle = GenParticle()
@@ -4480,10 +4480,10 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenParticle *__pyx_f_13_li
 
 /* "_libnumpythia.pyx":215
  *         return wrapped_particle
- * 
+ *
  *     def parents(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -4566,10 +4566,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_parents(struct __pyx_obj
   __Pyx_RefNannySetupContext("parents", 0);
 
   /* "_libnumpythia.pyx":216
- * 
+ *
  *     def parents(self, object selection=None, bool return_hepmc=False):
  *         return particle_find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def children(self, object selection=None, bool return_hepmc=False):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -4585,10 +4585,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_parents(struct __pyx_obj
 
   /* "_libnumpythia.pyx":215
  *         return wrapped_particle
- * 
+ *
  *     def parents(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -4604,10 +4604,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_parents(struct __pyx_obj
 
 /* "_libnumpythia.pyx":218
  *         return particle_find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)
- * 
+ *
  *     def children(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -4690,10 +4690,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2children(struct __pyx_o
   __Pyx_RefNannySetupContext("children", 0);
 
   /* "_libnumpythia.pyx":219
- * 
+ *
  *     def children(self, object selection=None, bool return_hepmc=False):
  *         return particle_find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def ancestors(self, object selection=None, bool return_hepmc=False):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -4709,10 +4709,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2children(struct __pyx_o
 
   /* "_libnumpythia.pyx":218
  *         return particle_find(self.particle, selection, mode=PARENTS, return_hepmc=return_hepmc)
- * 
+ *
  *     def children(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -4728,10 +4728,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2children(struct __pyx_o
 
 /* "_libnumpythia.pyx":221
  *         return particle_find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)
- * 
+ *
  *     def ancestors(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -4814,10 +4814,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_4ancestors(struct __pyx_
   __Pyx_RefNannySetupContext("ancestors", 0);
 
   /* "_libnumpythia.pyx":222
- * 
+ *
  *     def ancestors(self, object selection=None, bool return_hepmc=False):
  *         return particle_find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def descendants(self, object selection=None, bool return_hepmc=False):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -4833,10 +4833,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_4ancestors(struct __pyx_
 
   /* "_libnumpythia.pyx":221
  *         return particle_find(self.particle, selection, mode=CHILDREN, return_hepmc=return_hepmc)
- * 
+ *
  *     def ancestors(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -4852,10 +4852,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_4ancestors(struct __pyx_
 
 /* "_libnumpythia.pyx":224
  *         return particle_find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)
- * 
+ *
  *     def descendants(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -4938,10 +4938,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_6descendants(struct __py
   __Pyx_RefNannySetupContext("descendants", 0);
 
   /* "_libnumpythia.pyx":225
- * 
+ *
  *     def descendants(self, object selection=None, bool return_hepmc=False):
  *         return particle_find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def siblings(self, object selection=None, bool return_hepmc=False):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -4957,10 +4957,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_6descendants(struct __py
 
   /* "_libnumpythia.pyx":224
  *         return particle_find(self.particle, selection, mode=ANCESTORS, return_hepmc=return_hepmc)
- * 
+ *
  *     def descendants(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -4976,10 +4976,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_6descendants(struct __py
 
 /* "_libnumpythia.pyx":227
  *         return particle_find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
- * 
+ *
  *     def siblings(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=SIBLINGS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5062,10 +5062,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_8siblings(struct __pyx_o
   __Pyx_RefNannySetupContext("siblings", 0);
 
   /* "_libnumpythia.pyx":228
- * 
+ *
  *     def siblings(self, object selection=None, bool return_hepmc=False):
  *         return particle_find(self.particle, selection, mode=SIBLINGS, return_hepmc=return_hepmc)             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5081,10 +5081,10 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_8siblings(struct __pyx_o
 
   /* "_libnumpythia.pyx":227
  *         return particle_find(self.particle, selection, mode=DESCENDANTS, return_hepmc=return_hepmc)
- * 
+ *
  *     def siblings(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return particle_find(self.particle, selection, mode=SIBLINGS, return_hepmc=return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -5099,11 +5099,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_8siblings(struct __pyx_o
 }
 
 /* "_libnumpythia.pyx":231
- * 
+ *
  *     @property
  *     def pid(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).pid()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5129,7 +5129,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3pid___get__(struct __py
  *     @property
  *     def pid(self):
  *         return deref(self.particle).pid()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5140,11 +5140,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3pid___get__(struct __py
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":231
- * 
+ *
  *     @property
  *     def pid(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).pid()
- * 
+ *
  */
 
   /* function exit code */
@@ -5159,11 +5159,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3pid___get__(struct __py
 }
 
 /* "_libnumpythia.pyx":235
- * 
+ *
  *     @property
  *     def status(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).status()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5189,7 +5189,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_6status___get__(struct _
  *     @property
  *     def status(self):
  *         return deref(self.particle).status()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5200,11 +5200,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_6status___get__(struct _
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":235
- * 
+ *
  *     @property
  *     def status(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).status()
- * 
+ *
  */
 
   /* function exit code */
@@ -5219,11 +5219,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_6status___get__(struct _
 }
 
 /* "_libnumpythia.pyx":239
- * 
+ *
  *     @property
  *     def e(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().e()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5249,7 +5249,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_1e___get__(struct __pyx_
  *     @property
  *     def e(self):
  *         return deref(self.particle).momentum().e()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5260,11 +5260,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_1e___get__(struct __pyx_
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":239
- * 
+ *
  *     @property
  *     def e(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().e()
- * 
+ *
  */
 
   /* function exit code */
@@ -5279,11 +5279,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_1e___get__(struct __pyx_
 }
 
 /* "_libnumpythia.pyx":243
- * 
+ *
  *     @property
  *     def px(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().px()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5309,7 +5309,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2px___get__(struct __pyx
  *     @property
  *     def px(self):
  *         return deref(self.particle).momentum().px()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5320,11 +5320,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2px___get__(struct __pyx
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":243
- * 
+ *
  *     @property
  *     def px(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().px()
- * 
+ *
  */
 
   /* function exit code */
@@ -5339,11 +5339,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2px___get__(struct __pyx
 }
 
 /* "_libnumpythia.pyx":247
- * 
+ *
  *     @property
  *     def py(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().py()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5369,7 +5369,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2py___get__(struct __pyx
  *     @property
  *     def py(self):
  *         return deref(self.particle).momentum().py()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5380,11 +5380,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2py___get__(struct __pyx
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":247
- * 
+ *
  *     @property
  *     def py(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().py()
- * 
+ *
  */
 
   /* function exit code */
@@ -5399,11 +5399,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2py___get__(struct __pyx
 }
 
 /* "_libnumpythia.pyx":251
- * 
+ *
  *     @property
  *     def pz(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().pz()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5429,7 +5429,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2pz___get__(struct __pyx
  *     @property
  *     def pz(self):
  *         return deref(self.particle).momentum().pz()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5440,11 +5440,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2pz___get__(struct __pyx
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":251
- * 
+ *
  *     @property
  *     def pz(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().pz()
- * 
+ *
  */
 
   /* function exit code */
@@ -5459,11 +5459,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2pz___get__(struct __pyx
 }
 
 /* "_libnumpythia.pyx":255
- * 
+ *
  *     @property
  *     def pt(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().pt()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5489,7 +5489,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2pt___get__(struct __pyx
  *     @property
  *     def pt(self):
  *         return deref(self.particle).momentum().pt()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5500,11 +5500,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2pt___get__(struct __pyx
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":255
- * 
+ *
  *     @property
  *     def pt(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().pt()
- * 
+ *
  */
 
   /* function exit code */
@@ -5519,11 +5519,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_2pt___get__(struct __pyx
 }
 
 /* "_libnumpythia.pyx":259
- * 
+ *
  *     @property
  *     def eta(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().eta()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5549,7 +5549,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3eta___get__(struct __py
  *     @property
  *     def eta(self):
  *         return deref(self.particle).momentum().eta()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5560,11 +5560,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3eta___get__(struct __py
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":259
- * 
+ *
  *     @property
  *     def eta(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().eta()
- * 
+ *
  */
 
   /* function exit code */
@@ -5579,11 +5579,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3eta___get__(struct __py
 }
 
 /* "_libnumpythia.pyx":263
- * 
+ *
  *     @property
  *     def phi(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().phi()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5609,7 +5609,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3phi___get__(struct __py
  *     @property
  *     def phi(self):
  *         return deref(self.particle).momentum().phi()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5620,11 +5620,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3phi___get__(struct __py
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":263
- * 
+ *
  *     @property
  *     def phi(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().phi()
- * 
+ *
  */
 
   /* function exit code */
@@ -5639,11 +5639,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3phi___get__(struct __py
 }
 
 /* "_libnumpythia.pyx":267
- * 
+ *
  *     @property
  *     def mass(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().m()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5669,7 +5669,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_4mass___get__(struct __p
  *     @property
  *     def mass(self):
  *         return deref(self.particle).momentum().m()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5680,11 +5680,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_4mass___get__(struct __p
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":267
- * 
+ *
  *     @property
  *     def mass(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().m()
- * 
+ *
  */
 
   /* function exit code */
@@ -5699,11 +5699,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_4mass___get__(struct __p
 }
 
 /* "_libnumpythia.pyx":271
- * 
+ *
  *     @property
  *     def theta(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().theta()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5729,7 +5729,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_5theta___get__(struct __
  *     @property
  *     def theta(self):
  *         return deref(self.particle).momentum().theta()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5740,11 +5740,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_5theta___get__(struct __
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":271
- * 
+ *
  *     @property
  *     def theta(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().theta()
- * 
+ *
  */
 
   /* function exit code */
@@ -5759,11 +5759,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_5theta___get__(struct __
 }
 
 /* "_libnumpythia.pyx":275
- * 
+ *
  *     @property
  *     def rap(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().rap()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -5789,7 +5789,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3rap___get__(struct __py
  *     @property
  *     def rap(self):
  *         return deref(self.particle).momentum().rap()             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __repr__(self):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5800,11 +5800,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3rap___get__(struct __py
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":275
- * 
+ *
  *     @property
  *     def rap(self):             # <<<<<<<<<<<<<<
  *         return deref(self.particle).momentum().rap()
- * 
+ *
  */
 
   /* function exit code */
@@ -5820,7 +5820,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_3rap___get__(struct __py
 
 /* "_libnumpythia.pyx":278
  *         return deref(self.particle).momentum().rap()
- * 
+ *
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return "{0}(e={1:.3f}, px={2:.3f}, py={3:.3f}, pz={4:.3f}, mass={5:.3f}, pid={6:d}, status={7:d})".format(
  *             self.__class__.__name__, self.e, self.px, self.py, self.pz, self.mass, self.pid, self.status)
@@ -5858,11 +5858,11 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_10__repr__(struct __pyx_
   __Pyx_RefNannySetupContext("__repr__", 0);
 
   /* "_libnumpythia.pyx":279
- * 
+ *
  *     def __repr__(self):
  *         return "{0}(e={1:.3f}, px={2:.3f}, py={3:.3f}, pz={4:.3f}, mass={5:.3f}, pid={6:d}, status={7:d})".format(             # <<<<<<<<<<<<<<
  *             self.__class__.__name__, self.e, self.px, self.py, self.pz, self.mass, self.pid, self.status)
- * 
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_e_1_3f_px_2_3f_py_3_3f_pz_4_3, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 279, __pyx_L1_error)
@@ -5872,8 +5872,8 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_10__repr__(struct __pyx_
  *     def __repr__(self):
  *         return "{0}(e={1:.3f}, px={2:.3f}, py={3:.3f}, pz={4:.3f}, mass={5:.3f}, pid={6:d}, status={7:d})".format(
  *             self.__class__.__name__, self.e, self.px, self.py, self.pz, self.mass, self.pid, self.status)             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -5979,7 +5979,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_10__repr__(struct __pyx_
 
   /* "_libnumpythia.pyx":278
  *         return deref(self.particle).momentum().rap()
- * 
+ *
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return "{0}(e={1:.3f}, px={2:.3f}, py={3:.3f}, pz={4:.3f}, mass={5:.3f}, pid={6:d}, status={7:d})".format(
  *             self.__class__.__name__, self.e, self.px, self.py, self.pz, self.mass, self.pid, self.status)
@@ -6115,8 +6115,8 @@ static PyObject *__pyx_pf_13_libnumpythia_11GenParticle_14__setstate_cython__(CY
 }
 
 /* "_libnumpythia.pyx":283
- * 
- * 
+ *
+ *
  * cdef inline list vector_to_list(vector[HepMC.SmartPointer[HepMC.GenParticle]]& particles):             # <<<<<<<<<<<<<<
  *     py_particles = []
  *     for particle in particles:
@@ -6134,7 +6134,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_vector_to_list(std::vecto
   __Pyx_RefNannySetupContext("vector_to_list", 0);
 
   /* "_libnumpythia.pyx":284
- * 
+ *
  * cdef inline list vector_to_list(vector[HepMC.SmartPointer[HepMC.GenParticle]]& particles):
  *     py_particles = []             # <<<<<<<<<<<<<<
  *     for particle in particles:
@@ -6164,7 +6164,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_vector_to_list(std::vecto
  *     for particle in particles:
  *         py_particles.append(GenParticle.wrap(particle))             # <<<<<<<<<<<<<<
  *     return py_particles
- * 
+ *
  */
     __pyx_t_1 = ((PyObject *)__pyx_f_13_libnumpythia_11GenParticle_wrap(__pyx_v_particle)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -6184,8 +6184,8 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_vector_to_list(std::vecto
  *     for particle in particles:
  *         py_particles.append(GenParticle.wrap(particle))
  *     return py_particles             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_py_particles);
@@ -6193,8 +6193,8 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_vector_to_list(std::vecto
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":283
- * 
- * 
+ *
+ *
  * cdef inline list vector_to_list(vector[HepMC.SmartPointer[HepMC.GenParticle]]& particles):             # <<<<<<<<<<<<<<
  *     py_particles = []
  *     for particle in particles:
@@ -6213,7 +6213,7 @@ static CYTHON_INLINE PyObject *__pyx_f_13_libnumpythia_vector_to_list(std::vecto
 }
 
 /* "_libnumpythia.pyx":295
- * 
+ *
  *     @staticmethod
  *     cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):             # <<<<<<<<<<<<<<
  *         cdef GenEvent wrapped_event = GenEvent()
@@ -6332,7 +6332,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
  *         wrapped_event.event = event
  *         wrapped_event.weights = weights_array             # <<<<<<<<<<<<<<
  *         return wrapped_event
- * 
+ *
  */
   __Pyx_INCREF(((PyObject *)__pyx_v_weights_array));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_weights_array));
@@ -6344,7 +6344,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
  *         wrapped_event.event = event
  *         wrapped_event.weights = weights_array
  *         return wrapped_event             # <<<<<<<<<<<<<<
- * 
+ *
  *     @staticmethod
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
@@ -6353,7 +6353,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":295
- * 
+ *
  *     @staticmethod
  *     cdef inline GenEvent wrap(shared_ptr[HepMC.GenEvent]& event):             # <<<<<<<<<<<<<<
  *         cdef GenEvent wrapped_event = GenEvent()
@@ -6378,7 +6378,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
 }
 
 /* "_libnumpythia.pyx":306
- * 
+ *
  *     @staticmethod
  *     cdef inline GenEvent wrap_pythia(Pythia.Pythia& pythia):             # <<<<<<<<<<<<<<
  *         cdef HepMC.Pythia8ToHepMC3 py2hepmc
@@ -6427,7 +6427,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
  *         if not py2hepmc.fill_next_event(pythia, &deref(event)):
  *             raise RuntimeError("unable to convert PYTHIA event to HepMC")             # <<<<<<<<<<<<<<
  *         return GenEvent.wrap(event)
- * 
+ *
  */
     __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 312, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
@@ -6448,7 +6448,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
  *         if not py2hepmc.fill_next_event(pythia, &deref(event)):
  *             raise RuntimeError("unable to convert PYTHIA event to HepMC")
  *         return GenEvent.wrap(event)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def all(self, object selection=None, bool return_hepmc=False):
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
@@ -6459,7 +6459,7 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":306
- * 
+ *
  *     @staticmethod
  *     cdef inline GenEvent wrap_pythia(Pythia.Pythia& pythia):             # <<<<<<<<<<<<<<
  *         cdef HepMC.Pythia8ToHepMC3 py2hepmc
@@ -6479,10 +6479,10 @@ static CYTHON_INLINE struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnu
 
 /* "_libnumpythia.pyx":315
  *         return GenEvent.wrap(event)
- * 
+ *
  *     def all(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return event_find(self.event, selection, ALL, return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -6565,10 +6565,10 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_all(struct __pyx_obj_13_libn
   __Pyx_RefNannySetupContext("all", 0);
 
   /* "_libnumpythia.pyx":316
- * 
+ *
  *     def all(self, object selection=None, bool return_hepmc=False):
  *         return event_find(self.event, selection, ALL, return_hepmc)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def first(self, object selection=None, bool return_hepmc=True):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -6584,10 +6584,10 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_all(struct __pyx_obj_13_libn
 
   /* "_libnumpythia.pyx":315
  *         return GenEvent.wrap(event)
- * 
+ *
  *     def all(self, object selection=None, bool return_hepmc=False):             # <<<<<<<<<<<<<<
  *         return event_find(self.event, selection, ALL, return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -6603,10 +6603,10 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_all(struct __pyx_obj_13_libn
 
 /* "_libnumpythia.pyx":318
  *         return event_find(self.event, selection, ALL, return_hepmc)
- * 
+ *
  *     def first(self, object selection=None, bool return_hepmc=True):             # <<<<<<<<<<<<<<
  *         return event_find(self.event, selection, FIRST, return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -6689,10 +6689,10 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_2first(struct __pyx_obj_13_l
   __Pyx_RefNannySetupContext("first", 0);
 
   /* "_libnumpythia.pyx":319
- * 
+ *
  *     def first(self, object selection=None, bool return_hepmc=True):
  *         return event_find(self.event, selection, FIRST, return_hepmc)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def last(self, object selection=None, bool return_hepmc=True):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -6708,10 +6708,10 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_2first(struct __pyx_obj_13_l
 
   /* "_libnumpythia.pyx":318
  *         return event_find(self.event, selection, ALL, return_hepmc)
- * 
+ *
  *     def first(self, object selection=None, bool return_hepmc=True):             # <<<<<<<<<<<<<<
  *         return event_find(self.event, selection, FIRST, return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -6727,10 +6727,10 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_2first(struct __pyx_obj_13_l
 
 /* "_libnumpythia.pyx":321
  *         return event_find(self.event, selection, FIRST, return_hepmc)
- * 
+ *
  *     def last(self, object selection=None, bool return_hepmc=True):             # <<<<<<<<<<<<<<
  *         return event_find(self.event, selection, LAST, return_hepmc)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -6813,11 +6813,11 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_4last(struct __pyx_obj_13_li
   __Pyx_RefNannySetupContext("last", 0);
 
   /* "_libnumpythia.pyx":322
- * 
+ *
  *     def last(self, object selection=None, bool return_hepmc=True):
  *         return event_find(self.event, selection, LAST, return_hepmc)             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_LAST); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
@@ -6832,10 +6832,10 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_4last(struct __pyx_obj_13_li
 
   /* "_libnumpythia.pyx":321
  *         return event_find(self.event, selection, FIRST, return_hepmc)
- * 
+ *
  *     def last(self, object selection=None, bool return_hepmc=True):             # <<<<<<<<<<<<<<
  *         return event_find(self.event, selection, LAST, return_hepmc)
- * 
+ *
  */
 
   /* function exit code */
@@ -6853,7 +6853,7 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_4last(struct __pyx_obj_13_li
  * cdef class GenEvent:
  *     cdef shared_ptr[HepMC.GenEvent] event
  *     cdef public np.ndarray weights             # <<<<<<<<<<<<<<
- * 
+ *
  *     @staticmethod
  */
 
@@ -7063,7 +7063,7 @@ static PyObject *__pyx_pf_13_libnumpythia_8GenEvent_8__setstate_cython__(CYTHON_
 
 /* "_libnumpythia.pyx":330
  *     cdef int verbosity
- * 
+ *
  *     def __cinit__(self, string config="",             # <<<<<<<<<<<<<<
  *                   int random_state=0,
  *                   int verbosity=1,
@@ -7091,7 +7091,7 @@ static int __pyx_pw_13_libnumpythia_7_Pythia_1__cinit__(PyObject *__pyx_v_self, 
  *                   int verbosity=1,
  *                   object params=None,             # <<<<<<<<<<<<<<
  *                   **kwargs):
- * 
+ *
  */
     values[3] = ((PyObject *)Py_None);
     if (unlikely(__pyx_kwds)) {
@@ -7182,7 +7182,7 @@ static int __pyx_pw_13_libnumpythia_7_Pythia_1__cinit__(PyObject *__pyx_v_self, 
 
   /* "_libnumpythia.pyx":330
  *     cdef int verbosity
- * 
+ *
  *     def __cinit__(self, string config="",             # <<<<<<<<<<<<<<
  *                   int random_state=0,
  *                   int verbosity=1,
@@ -7217,10 +7217,10 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
   /* "_libnumpythia.pyx":336
  *                   **kwargs):
- * 
+ *
  *         xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')             # <<<<<<<<<<<<<<
  *         self.pythia = new Pythia.Pythia(xmldoc, False)
- * 
+ *
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_resource_filename); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7231,27 +7231,27 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
   __pyx_t_2 = 0;
 
   /* "_libnumpythia.pyx":337
- * 
+ *
  *         xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')
  *         self.pythia = new Pythia.Pythia(xmldoc, False)             # <<<<<<<<<<<<<<
- * 
+ *
  *         # Initialize pointers to NULL
  */
   __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_v_xmldoc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 337, __pyx_L1_error)
   __pyx_v_self->pythia = new Pythia8::Pythia(__pyx_t_3, 0);
 
   /* "_libnumpythia.pyx":340
- * 
+ *
  *         # Initialize pointers to NULL
  *         self.userhooks = NULL             # <<<<<<<<<<<<<<
- * 
+ *
  *         if verbosity > 0:
  */
   __pyx_v_self->userhooks = NULL;
 
   /* "_libnumpythia.pyx":342
  *         self.userhooks = NULL
- * 
+ *
  *         if verbosity > 0:             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showProcesses = on")
  *             self.pythia.readString("Init:showChangedSettings = on")
@@ -7260,7 +7260,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
   if (__pyx_t_4) {
 
     /* "_libnumpythia.pyx":343
- * 
+ *
  *         if verbosity > 0:
  *             self.pythia.readString("Init:showProcesses = on")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showChangedSettings = on")
@@ -7281,7 +7281,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
     /* "_libnumpythia.pyx":342
  *         self.userhooks = NULL
- * 
+ *
  *         if verbosity > 0:             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showProcesses = on")
  *             self.pythia.readString("Init:showChangedSettings = on")
@@ -7294,7 +7294,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *         else:
  *             self.pythia.readString("Init:showProcesses = off")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showChangedSettings = off")
- * 
+ *
  */
   /*else*/ {
     __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showProcesses_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 346, __pyx_L1_error)
@@ -7304,7 +7304,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *         else:
  *             self.pythia.readString("Init:showProcesses = off")
  *             self.pythia.readString("Init:showChangedSettings = off")             # <<<<<<<<<<<<<<
- * 
+ *
  *         if verbosity > 1:
  */
     __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Init_showChangedSettings_off); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 347, __pyx_L1_error)
@@ -7314,7 +7314,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
   /* "_libnumpythia.pyx":349
  *             self.pythia.readString("Init:showChangedSettings = off")
- * 
+ *
  *         if verbosity > 1:             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showMultipartonInteractions = on")
  *             self.pythia.readString("Init:showChangedParticleData = on")
@@ -7323,7 +7323,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
   if (__pyx_t_4) {
 
     /* "_libnumpythia.pyx":350
- * 
+ *
  *         if verbosity > 1:
  *             self.pythia.readString("Init:showMultipartonInteractions = on")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showChangedParticleData = on")
@@ -7374,7 +7374,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
     /* "_libnumpythia.pyx":349
  *             self.pythia.readString("Init:showChangedSettings = off")
- * 
+ *
  *         if verbosity > 1:             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Init:showMultipartonInteractions = on")
  *             self.pythia.readString("Init:showChangedParticleData = on")
@@ -7418,7 +7418,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *             self.pythia.readString("Next:numberShowInfo = 0")
  *             self.pythia.readString("Next:numberShowProcess = 0")             # <<<<<<<<<<<<<<
  *             self.pythia.readString("Next:numberShowEvent = 0")
- * 
+ *
  */
     __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowProcess_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 359, __pyx_L1_error)
     __pyx_v_self->pythia->readString(__pyx_t_3);
@@ -7427,7 +7427,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *             self.pythia.readString("Next:numberShowInfo = 0")
  *             self.pythia.readString("Next:numberShowProcess = 0")
  *             self.pythia.readString("Next:numberShowEvent = 0")             # <<<<<<<<<<<<<<
- * 
+ *
  *         if not config.empty():
  */
     __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Next_numberShowEvent_0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 360, __pyx_L1_error)
@@ -7437,7 +7437,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
   /* "_libnumpythia.pyx":362
  *             self.pythia.readString("Next:numberShowEvent = 0")
- * 
+ *
  *         if not config.empty():             # <<<<<<<<<<<<<<
  *             # Read config
  *             self.pythia.readFile(config)
@@ -7449,14 +7449,14 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *         if not config.empty():
  *             # Read config
  *             self.pythia.readFile(config)             # <<<<<<<<<<<<<<
- * 
+ *
  *         # __init__ arguments will always override the config
  */
     __pyx_v_self->pythia->readFile(__pyx_v_config);
 
     /* "_libnumpythia.pyx":362
  *             self.pythia.readString("Next:numberShowEvent = 0")
- * 
+ *
  *         if not config.empty():             # <<<<<<<<<<<<<<
  *             # Read config
  *             self.pythia.readFile(config)
@@ -7464,11 +7464,11 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
   }
 
   /* "_libnumpythia.pyx":367
- * 
+ *
  *         # __init__ arguments will always override the config
  *         self.pythia.readString('Random:setSeed = on')             # <<<<<<<<<<<<<<
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))
- * 
+ *
  */
   __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_kp_b_Random_setSeed_on); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 367, __pyx_L1_error)
   __pyx_v_self->pythia->readString(__pyx_t_3);
@@ -7477,7 +7477,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *         # __init__ arguments will always override the config
  *         self.pythia.readString('Random:setSeed = on')
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))             # <<<<<<<<<<<<<<
- * 
+ *
  *         if params is not None:
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Random_seed_0, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L1_error)
@@ -7536,7 +7536,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
   /* "_libnumpythia.pyx":370
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))
- * 
+ *
  *         if params is not None:             # <<<<<<<<<<<<<<
  *             for param, value in params.items():
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
@@ -7546,7 +7546,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
   if (__pyx_t_8) {
 
     /* "_libnumpythia.pyx":371
- * 
+ *
  *         if params is not None:
  *             for param, value in params.items():             # <<<<<<<<<<<<<<
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
@@ -7626,11 +7626,11 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
-          __pyx_t_7 = PyTuple_GET_ITEM(sequence, 0); 
-          __pyx_t_5 = PyTuple_GET_ITEM(sequence, 1); 
+          __pyx_t_7 = PyTuple_GET_ITEM(sequence, 0);
+          __pyx_t_5 = PyTuple_GET_ITEM(sequence, 1);
         } else {
-          __pyx_t_7 = PyList_GET_ITEM(sequence, 0); 
-          __pyx_t_5 = PyList_GET_ITEM(sequence, 1); 
+          __pyx_t_7 = PyList_GET_ITEM(sequence, 0);
+          __pyx_t_5 = PyList_GET_ITEM(sequence, 1);
         }
         __Pyx_INCREF(__pyx_t_7);
         __Pyx_INCREF(__pyx_t_5);
@@ -7726,7 +7726,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
       __pyx_v_self->pythia->readString(__pyx_t_3);
 
       /* "_libnumpythia.pyx":371
- * 
+ *
  *         if params is not None:
  *             for param, value in params.items():             # <<<<<<<<<<<<<<
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
@@ -7737,7 +7737,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
     /* "_libnumpythia.pyx":370
  *         self.pythia.readString('Random:seed = {0}'.format(random_state))
- * 
+ *
  *         if params is not None:             # <<<<<<<<<<<<<<
  *             for param, value in params.items():
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
@@ -7749,7 +7749,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():             # <<<<<<<<<<<<<<
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
- * 
+ *
  */
   __pyx_t_1 = __Pyx_PyDict_Items(__pyx_v_kwargs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7807,11 +7807,11 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
-        __pyx_t_5 = PyTuple_GET_ITEM(sequence, 0); 
-        __pyx_t_6 = PyTuple_GET_ITEM(sequence, 1); 
+        __pyx_t_5 = PyTuple_GET_ITEM(sequence, 0);
+        __pyx_t_6 = PyTuple_GET_ITEM(sequence, 1);
       } else {
-        __pyx_t_5 = PyList_GET_ITEM(sequence, 0); 
-        __pyx_t_6 = PyList_GET_ITEM(sequence, 1); 
+        __pyx_t_5 = PyList_GET_ITEM(sequence, 0);
+        __pyx_t_6 = PyList_GET_ITEM(sequence, 1);
       }
       __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_t_6);
@@ -7852,7 +7852,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))             # <<<<<<<<<<<<<<
- * 
+ *
  *         if not self.pythia.init():
  */
     __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_1, __pyx_n_s_format); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 374, __pyx_L1_error)
@@ -7918,26 +7918,26 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():             # <<<<<<<<<<<<<<
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
- * 
+ *
  */
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "_libnumpythia.pyx":376
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
- * 
+ *
  *         if not self.pythia.init():             # <<<<<<<<<<<<<<
  *             raise RuntimeError("PYTHIA did not successfully initialize")
- * 
+ *
  */
   __pyx_t_8 = ((!(__pyx_v_self->pythia->init() != 0)) != 0);
   if (__pyx_t_8) {
 
     /* "_libnumpythia.pyx":377
- * 
+ *
  *         if not self.pythia.init():
  *             raise RuntimeError("PYTHIA did not successfully initialize")             # <<<<<<<<<<<<<<
- * 
+ *
  *         self.verbosity = verbosity
  */
     __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 377, __pyx_L1_error)
@@ -7948,25 +7948,25 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
     /* "_libnumpythia.pyx":376
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))
- * 
+ *
  *         if not self.pythia.init():             # <<<<<<<<<<<<<<
  *             raise RuntimeError("PYTHIA did not successfully initialize")
- * 
+ *
  */
   }
 
   /* "_libnumpythia.pyx":379
  *             raise RuntimeError("PYTHIA did not successfully initialize")
- * 
+ *
  *         self.verbosity = verbosity             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __dealloc__(self):
  */
   __pyx_v_self->verbosity = __pyx_v_verbosity;
 
   /* "_libnumpythia.pyx":330
  *     cdef int verbosity
- * 
+ *
  *     def __cinit__(self, string config="",             # <<<<<<<<<<<<<<
  *                   int random_state=0,
  *                   int verbosity=1,
@@ -7994,7 +7994,7 @@ static int __pyx_pf_13_libnumpythia_7_Pythia___cinit__(struct __pyx_obj_13_libnu
 
 /* "_libnumpythia.pyx":381
  *         self.verbosity = verbosity
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.pythia
  *         del self.userhooks
@@ -8016,11 +8016,11 @@ static void __pyx_pf_13_libnumpythia_7_Pythia_2__dealloc__(struct __pyx_obj_13_l
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
   /* "_libnumpythia.pyx":382
- * 
+ *
  *     def __dealloc__(self):
  *         del self.pythia             # <<<<<<<<<<<<<<
  *         del self.userhooks
- * 
+ *
  */
   delete __pyx_v_self->pythia;
 
@@ -8028,14 +8028,14 @@ static void __pyx_pf_13_libnumpythia_7_Pythia_2__dealloc__(struct __pyx_obj_13_l
  *     def __dealloc__(self):
  *         del self.pythia
  *         del self.userhooks             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   delete __pyx_v_self->userhooks;
 
   /* "_libnumpythia.pyx":381
  *         self.verbosity = verbosity
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.pythia
  *         del self.userhooks
@@ -8046,11 +8046,11 @@ static void __pyx_pf_13_libnumpythia_7_Pythia_2__dealloc__(struct __pyx_obj_13_l
 }
 
 /* "_libnumpythia.pyx":386
- * 
+ *
  *     @property
  *     def nweights(self):             # <<<<<<<<<<<<<<
  *         return self.pythia.info.nWeights()
- * 
+ *
  */
 
 /* Python wrapper */
@@ -8076,7 +8076,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_8nweights___get__(struct __py
  *     @property
  *     def nweights(self):
  *         return self.pythia.info.nWeights()             # <<<<<<<<<<<<<<
- * 
+ *
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
@@ -8087,11 +8087,11 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_8nweights___get__(struct __py
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":386
- * 
+ *
  *     @property
  *     def nweights(self):             # <<<<<<<<<<<<<<
  *         return self.pythia.info.nWeights()
- * 
+ *
  */
 
   /* function exit code */
@@ -8106,7 +8106,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_8nweights___get__(struct __py
 }
 
 /* "_libnumpythia.pyx":390
- * 
+ *
  *     @property
  *     def weight_labels(self):             # <<<<<<<<<<<<<<
  *         cdef list labels = []
@@ -8165,7 +8165,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_13weight_labels___get__(struc
  *         for iweight in range(self.pythia.info.nWeights()):
  *             labels.append(self.pythia.info.weightLabel(iweight))             # <<<<<<<<<<<<<<
  *         return labels
- * 
+ *
  */
     __pyx_t_1 = __pyx_convert_PyStr_string_to_py_std__in_string(__pyx_v_self->pythia->info.weightLabel(__pyx_v_iweight)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 394, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -8177,7 +8177,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_13weight_labels___get__(struc
  *         for iweight in range(self.pythia.info.nWeights()):
  *             labels.append(self.pythia.info.weightLabel(iweight))
  *         return labels             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef bool get_next_event(self) except *:
  */
   __Pyx_XDECREF(__pyx_r);
@@ -8186,7 +8186,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_13weight_labels___get__(struc
   goto __pyx_L0;
 
   /* "_libnumpythia.pyx":390
- * 
+ *
  *     @property
  *     def weight_labels(self):             # <<<<<<<<<<<<<<
  *         cdef list labels = []
@@ -8207,7 +8207,7 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_13weight_labels___get__(struc
 
 /* "_libnumpythia.pyx":397
  *         return labels
- * 
+ *
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
  *         # generate event and quit if failure
  *         if not self.pythia.next():
@@ -8235,7 +8235,7 @@ static bool __pyx_f_13_libnumpythia_7_Pythia_get_next_event(struct __pyx_obj_13_
  *         if not self.pythia.next():
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")             # <<<<<<<<<<<<<<
  *         return True
- * 
+ *
  */
     __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
@@ -8256,7 +8256,7 @@ static bool __pyx_f_13_libnumpythia_7_Pythia_get_next_event(struct __pyx_obj_13_
  *         if not self.pythia.next():
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")
  *         return True             # <<<<<<<<<<<<<<
- * 
+ *
  *     cdef GenEvent get_hepmc(self):
  */
   __pyx_r = 1;
@@ -8264,7 +8264,7 @@ static bool __pyx_f_13_libnumpythia_7_Pythia_get_next_event(struct __pyx_obj_13_
 
   /* "_libnumpythia.pyx":397
  *         return labels
- * 
+ *
  *     cdef bool get_next_event(self) except *:             # <<<<<<<<<<<<<<
  *         # generate event and quit if failure
  *         if not self.pythia.next():
@@ -8282,10 +8282,10 @@ static bool __pyx_f_13_libnumpythia_7_Pythia_get_next_event(struct __pyx_obj_13_
 
 /* "_libnumpythia.pyx":403
  *         return True
- * 
+ *
  *     cdef GenEvent get_hepmc(self):             # <<<<<<<<<<<<<<
  *         return GenEvent.wrap_pythia(deref(self.pythia))
- * 
+ *
  */
 
 static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_7_Pythia_get_hepmc(struct __pyx_obj_13_libnumpythia__Pythia *__pyx_v_self) {
@@ -8295,10 +8295,10 @@ static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_7_Pyth
   __Pyx_RefNannySetupContext("get_hepmc", 0);
 
   /* "_libnumpythia.pyx":404
- * 
+ *
  *     cdef GenEvent get_hepmc(self):
  *         return GenEvent.wrap_pythia(deref(self.pythia))             # <<<<<<<<<<<<<<
- * 
+ *
  *     """
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
@@ -8310,10 +8310,10 @@ static struct __pyx_obj_13_libnumpythia_GenEvent *__pyx_f_13_libnumpythia_7_Pyth
 
   /* "_libnumpythia.pyx":403
  *         return True
- * 
+ *
  *     cdef GenEvent get_hepmc(self):             # <<<<<<<<<<<<<<
  *         return GenEvent.wrap_pythia(deref(self.pythia))
- * 
+ *
  */
 
   /* function exit code */
@@ -8330,7 +8330,7 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_6generator(__pyx_CoroutineObj
 
 /* "_libnumpythia.pyx":421
  *     """
- * 
+ *
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         for event in self():
  *             yield event
@@ -8404,11 +8404,11 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_6generator(__pyx_CoroutineObj
   if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 421, __pyx_L1_error)
 
   /* "_libnumpythia.pyx":422
- * 
+ *
  *     def __iter__(self):
  *         for event in self():             # <<<<<<<<<<<<<<
  *             yield event
- * 
+ *
  */
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_v_self));
   __pyx_t_2 = ((PyObject *)__pyx_cur_scope->__pyx_v_self); __pyx_t_3 = NULL;
@@ -8478,7 +8478,7 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_6generator(__pyx_CoroutineObj
  *     def __iter__(self):
  *         for event in self():
  *             yield event             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __call__(self, int events=-1):
  */
     __Pyx_INCREF(__pyx_cur_scope->__pyx_v_event);
@@ -8501,11 +8501,11 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_6generator(__pyx_CoroutineObj
     if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 423, __pyx_L1_error)
 
     /* "_libnumpythia.pyx":422
- * 
+ *
  *     def __iter__(self):
  *         for event in self():             # <<<<<<<<<<<<<<
  *             yield event
- * 
+ *
  */
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8513,7 +8513,7 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_6generator(__pyx_CoroutineObj
 
   /* "_libnumpythia.pyx":421
  *     """
- * 
+ *
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         for event in self():
  *             yield event
@@ -8538,7 +8538,7 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_9generator1(__pyx_CoroutineOb
 
 /* "_libnumpythia.pyx":425
  *             yield event
- * 
+ *
  *     def __call__(self, int events=-1):             # <<<<<<<<<<<<<<
  *         cdef int ievent = 0;
  *         if events < 0:
@@ -8657,7 +8657,7 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_9generator1(__pyx_CoroutineOb
   if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 425, __pyx_L1_error)
 
   /* "_libnumpythia.pyx":426
- * 
+ *
  *     def __call__(self, int events=-1):
  *         cdef int ievent = 0;             # <<<<<<<<<<<<<<
  *         if events < 0:
@@ -8787,7 +8787,7 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_9generator1(__pyx_CoroutineOb
  *                 ievent += 1
  *         if self.verbosity > 0:             # <<<<<<<<<<<<<<
  *             self.pythia.stat()
- * 
+ *
  */
   __pyx_t_1 = ((__pyx_cur_scope->__pyx_v_self->verbosity > 0) != 0);
   if (__pyx_t_1) {
@@ -8796,8 +8796,8 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_9generator1(__pyx_CoroutineOb
  *                 ievent += 1
  *         if self.verbosity > 0:
  *             self.pythia.stat()             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
     __pyx_cur_scope->__pyx_v_self->pythia->stat();
 
@@ -8806,14 +8806,14 @@ static PyObject *__pyx_gb_13_libnumpythia_7_Pythia_9generator1(__pyx_CoroutineOb
  *                 ievent += 1
  *         if self.verbosity > 0:             # <<<<<<<<<<<<<<
  *             self.pythia.stat()
- * 
+ *
  */
   }
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
   /* "_libnumpythia.pyx":425
  *             yield event
- * 
+ *
  *     def __call__(self, int events=-1):             # <<<<<<<<<<<<<<
  *         cdef int ievent = 0;
  *         if events < 0:
@@ -8942,10 +8942,10 @@ static PyObject *__pyx_pf_13_libnumpythia_7_Pythia_12__setstate_cython__(CYTHON_
 
 /* "_libnumpythia.pyx":442
  *     cdef HepMC.WriterAscii* hepmc_writer
- * 
+ *
  *     def __cinit__(self, string filename):             # <<<<<<<<<<<<<<
  *         self.hepmc_writer = new HepMC.WriterAscii(filename)
- * 
+ *
  */
 
 /* Python wrapper */
@@ -9004,20 +9004,20 @@ static int __pyx_pf_13_libnumpythia_11WriterAscii___cinit__(struct __pyx_obj_13_
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "_libnumpythia.pyx":443
- * 
+ *
  *     def __cinit__(self, string filename):
  *         self.hepmc_writer = new HepMC.WriterAscii(filename)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __dealloc__(self):
  */
   __pyx_v_self->hepmc_writer = new HepMC::WriterAscii(__pyx_v_filename);
 
   /* "_libnumpythia.pyx":442
  *     cdef HepMC.WriterAscii* hepmc_writer
- * 
+ *
  *     def __cinit__(self, string filename):             # <<<<<<<<<<<<<<
  *         self.hepmc_writer = new HepMC.WriterAscii(filename)
- * 
+ *
  */
 
   /* function exit code */
@@ -9028,7 +9028,7 @@ static int __pyx_pf_13_libnumpythia_11WriterAscii___cinit__(struct __pyx_obj_13_
 
 /* "_libnumpythia.pyx":445
  *         self.hepmc_writer = new HepMC.WriterAscii(filename)
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         self.hepmc_writer.close()
  *         del self.hepmc_writer
@@ -9050,11 +9050,11 @@ static void __pyx_pf_13_libnumpythia_11WriterAscii_2__dealloc__(struct __pyx_obj
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
   /* "_libnumpythia.pyx":446
- * 
+ *
  *     def __dealloc__(self):
  *         self.hepmc_writer.close()             # <<<<<<<<<<<<<<
  *         del self.hepmc_writer
- * 
+ *
  */
   __pyx_v_self->hepmc_writer->close();
 
@@ -9062,14 +9062,14 @@ static void __pyx_pf_13_libnumpythia_11WriterAscii_2__dealloc__(struct __pyx_obj
  *     def __dealloc__(self):
  *         self.hepmc_writer.close()
  *         del self.hepmc_writer             # <<<<<<<<<<<<<<
- * 
+ *
  *     def write(self, GenEvent event):
  */
   delete __pyx_v_self->hepmc_writer;
 
   /* "_libnumpythia.pyx":445
  *         self.hepmc_writer = new HepMC.WriterAscii(filename)
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         self.hepmc_writer.close()
  *         del self.hepmc_writer
@@ -9081,10 +9081,10 @@ static void __pyx_pf_13_libnumpythia_11WriterAscii_2__dealloc__(struct __pyx_obj
 
 /* "_libnumpythia.pyx":449
  *         del self.hepmc_writer
- * 
+ *
  *     def write(self, GenEvent event):             # <<<<<<<<<<<<<<
  *         self.hepmc_writer.write_event(deref(event.event))
- * 
+ *
  */
 
 /* Python wrapper */
@@ -9111,20 +9111,20 @@ static PyObject *__pyx_pf_13_libnumpythia_11WriterAscii_4write(struct __pyx_obj_
   __Pyx_RefNannySetupContext("write", 0);
 
   /* "_libnumpythia.pyx":450
- * 
+ *
  *     def write(self, GenEvent event):
  *         self.hepmc_writer.write_event(deref(event.event))             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __pyx_v_self->hepmc_writer->write_event((*__pyx_v_event->event));
 
   /* "_libnumpythia.pyx":449
  *         del self.hepmc_writer
- * 
+ *
  *     def write(self, GenEvent event):             # <<<<<<<<<<<<<<
  *         self.hepmc_writer.write_event(deref(event.event))
- * 
+ *
  */
 
   /* function exit code */
@@ -9243,7 +9243,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11WriterAscii_8__setstate_cython__(CYT
 
 /* "_libnumpythia.pyx":458
  *     cdef shared_ptr[HepMC.GenEvent] event
- * 
+ *
  *     def __cinit__(self, string filename):             # <<<<<<<<<<<<<<
  *         self.filename = filename
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)
@@ -9305,11 +9305,11 @@ static int __pyx_pf_13_libnumpythia_11ReaderAscii___cinit__(struct __pyx_obj_13_
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "_libnumpythia.pyx":459
- * 
+ *
  *     def __cinit__(self, string filename):
  *         self.filename = filename             # <<<<<<<<<<<<<<
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)
- * 
+ *
  */
   __pyx_v_self->filename = __pyx_v_filename;
 
@@ -9317,14 +9317,14 @@ static int __pyx_pf_13_libnumpythia_11ReaderAscii___cinit__(struct __pyx_obj_13_
  *     def __cinit__(self, string filename):
  *         self.filename = filename
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __dealloc__(self):
  */
   __pyx_v_self->hepmc_reader = new HepMC::ReaderAscii(__pyx_v_filename);
 
   /* "_libnumpythia.pyx":458
  *     cdef shared_ptr[HepMC.GenEvent] event
- * 
+ *
  *     def __cinit__(self, string filename):             # <<<<<<<<<<<<<<
  *         self.filename = filename
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)
@@ -9338,7 +9338,7 @@ static int __pyx_pf_13_libnumpythia_11ReaderAscii___cinit__(struct __pyx_obj_13_
 
 /* "_libnumpythia.pyx":462
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         self.hepmc_reader.close()
  *         del self.hepmc_reader
@@ -9360,11 +9360,11 @@ static void __pyx_pf_13_libnumpythia_11ReaderAscii_2__dealloc__(struct __pyx_obj
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
   /* "_libnumpythia.pyx":463
- * 
+ *
  *     def __dealloc__(self):
  *         self.hepmc_reader.close()             # <<<<<<<<<<<<<<
  *         del self.hepmc_reader
- * 
+ *
  */
   __pyx_v_self->hepmc_reader->close();
 
@@ -9372,14 +9372,14 @@ static void __pyx_pf_13_libnumpythia_11ReaderAscii_2__dealloc__(struct __pyx_obj
  *     def __dealloc__(self):
  *         self.hepmc_reader.close()
  *         del self.hepmc_reader             # <<<<<<<<<<<<<<
- * 
+ *
  *     def __iter__(self):
  */
   delete __pyx_v_self->hepmc_reader;
 
   /* "_libnumpythia.pyx":462
  *         self.hepmc_reader = new HepMC.ReaderAscii(filename)
- * 
+ *
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         self.hepmc_reader.close()
  *         del self.hepmc_reader
@@ -9392,7 +9392,7 @@ static PyObject *__pyx_gb_13_libnumpythia_11ReaderAscii_6generator2(__pyx_Corout
 
 /* "_libnumpythia.pyx":466
  *         del self.hepmc_reader
- * 
+ *
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         while not self.hepmc_reader.failed():
  *             self.event.reset(new HepMC.GenEvent())
@@ -9463,7 +9463,7 @@ static PyObject *__pyx_gb_13_libnumpythia_11ReaderAscii_6generator2(__pyx_Corout
   if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 466, __pyx_L1_error)
 
   /* "_libnumpythia.pyx":467
- * 
+ *
  *     def __iter__(self):
  *         while not self.hepmc_reader.failed():             # <<<<<<<<<<<<<<
  *             self.event.reset(new HepMC.GenEvent())
@@ -9506,7 +9506,7 @@ static PyObject *__pyx_gb_13_libnumpythia_11ReaderAscii_6generator2(__pyx_Corout
  *             if self.hepmc_reader.failed():
  *                 break             # <<<<<<<<<<<<<<
  *             yield GenEvent.wrap(self.event)
- * 
+ *
  */
       goto __pyx_L5_break;
 
@@ -9523,7 +9523,7 @@ static PyObject *__pyx_gb_13_libnumpythia_11ReaderAscii_6generator2(__pyx_Corout
  *             if self.hepmc_reader.failed():
  *                 break
  *             yield GenEvent.wrap(self.event)             # <<<<<<<<<<<<<<
- * 
+ *
  *     def estimate_num_events(self, int sample_size=1000):
  */
     __pyx_t_2 = ((PyObject *)__pyx_f_13_libnumpythia_8GenEvent_wrap(__pyx_cur_scope->__pyx_v_self->event)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 472, __pyx_L1_error)
@@ -9543,7 +9543,7 @@ static PyObject *__pyx_gb_13_libnumpythia_11ReaderAscii_6generator2(__pyx_Corout
 
   /* "_libnumpythia.pyx":466
  *         del self.hepmc_reader
- * 
+ *
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         while not self.hepmc_reader.failed():
  *             self.event.reset(new HepMC.GenEvent())
@@ -9565,7 +9565,7 @@ static PyObject *__pyx_gb_13_libnumpythia_11ReaderAscii_6generator2(__pyx_Corout
 
 /* "_libnumpythia.pyx":474
  *             yield GenEvent.wrap(self.event)
- * 
+ *
  *     def estimate_num_events(self, int sample_size=1000):             # <<<<<<<<<<<<<<
  *         """
  *         Getting the exact number of events in a HepMC file is too expensive
@@ -10108,7 +10108,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11ReaderAscii_7estimate_num_events(str
             __Pyx_GIVEREF(__pyx_t_3);
             __Pyx_XGIVEREF(__pyx_t_1);
             __Pyx_ErrRestoreWithState(__pyx_t_4, __pyx_t_3, __pyx_t_1);
-            __pyx_t_4 = 0; __pyx_t_3 = 0; __pyx_t_1 = 0; 
+            __pyx_t_4 = 0; __pyx_t_3 = 0; __pyx_t_1 = 0;
             __PYX_ERR(0, 488, __pyx_L9_except_error)
           }
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -10244,7 +10244,7 @@ static PyObject *__pyx_pf_13_libnumpythia_11ReaderAscii_7estimate_num_events(str
 
   /* "_libnumpythia.pyx":474
  *             yield GenEvent.wrap(self.event)
- * 
+ *
  *     def estimate_num_events(self, int sample_size=1000):             # <<<<<<<<<<<<<<
  *         """
  *         Getting the exact number of events in a HepMC file is too expensive
@@ -10425,9 +10425,9 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":203
  *             # of flags
- * 
+ *
  *             if info == NULL: return             # <<<<<<<<<<<<<<
- * 
+ *
  *             cdef int copy_shape, i, ndim
  */
   __pyx_t_1 = ((__pyx_v_info == NULL) != 0);
@@ -10437,11 +10437,11 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
   }
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":206
- * 
+ *
  *             cdef int copy_shape, i, ndim
  *             cdef int endian_detector = 1             # <<<<<<<<<<<<<<
  *             cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)
- * 
+ *
  */
   __pyx_v_endian_detector = 1;
 
@@ -10449,23 +10449,23 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *             cdef int copy_shape, i, ndim
  *             cdef int endian_detector = 1
  *             cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)             # <<<<<<<<<<<<<<
- * 
+ *
  *             ndim = PyArray_NDIM(self)
  */
   __pyx_v_little_endian = ((((char *)(&__pyx_v_endian_detector))[0]) != 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":209
  *             cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)
- * 
+ *
  *             ndim = PyArray_NDIM(self)             # <<<<<<<<<<<<<<
- * 
+ *
  *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
  */
   __pyx_v_ndim = PyArray_NDIM(__pyx_v_self);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":211
  *             ndim = PyArray_NDIM(self)
- * 
+ *
  *             if sizeof(npy_intp) != sizeof(Py_ssize_t):             # <<<<<<<<<<<<<<
  *                 copy_shape = 1
  *             else:
@@ -10474,7 +10474,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
   if (__pyx_t_1) {
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":212
- * 
+ *
  *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
  *                 copy_shape = 1             # <<<<<<<<<<<<<<
  *             else:
@@ -10484,7 +10484,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":211
  *             ndim = PyArray_NDIM(self)
- * 
+ *
  *             if sizeof(npy_intp) != sizeof(Py_ssize_t):             # <<<<<<<<<<<<<<
  *                 copy_shape = 1
  *             else:
@@ -10496,7 +10496,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *                 copy_shape = 1
  *             else:
  *                 copy_shape = 0             # <<<<<<<<<<<<<<
- * 
+ *
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
  */
   /*else*/ {
@@ -10506,7 +10506,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":216
  *                 copy_shape = 0
- * 
+ *
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)             # <<<<<<<<<<<<<<
  *                 and not PyArray_CHKFLAGS(self, NPY_C_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not C contiguous")
@@ -10519,11 +10519,11 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
   }
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":217
- * 
+ *
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
  *                 and not PyArray_CHKFLAGS(self, NPY_C_CONTIGUOUS)):             # <<<<<<<<<<<<<<
  *                 raise ValueError(u"ndarray is not C contiguous")
- * 
+ *
  */
   __pyx_t_2 = ((!(PyArray_CHKFLAGS(__pyx_v_self, NPY_C_CONTIGUOUS) != 0)) != 0);
   __pyx_t_1 = __pyx_t_2;
@@ -10531,7 +10531,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":216
  *                 copy_shape = 0
- * 
+ *
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)             # <<<<<<<<<<<<<<
  *                 and not PyArray_CHKFLAGS(self, NPY_C_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not C contiguous")
@@ -10542,7 +10542,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
  *                 and not PyArray_CHKFLAGS(self, NPY_C_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not C contiguous")             # <<<<<<<<<<<<<<
- * 
+ *
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  */
     __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__33, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 218, __pyx_L1_error)
@@ -10553,7 +10553,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":216
  *                 copy_shape = 0
- * 
+ *
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)             # <<<<<<<<<<<<<<
  *                 and not PyArray_CHKFLAGS(self, NPY_C_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not C contiguous")
@@ -10562,7 +10562,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":220
  *                 raise ValueError(u"ndarray is not C contiguous")
- * 
+ *
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)             # <<<<<<<<<<<<<<
  *                 and not PyArray_CHKFLAGS(self, NPY_F_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not Fortran contiguous")
@@ -10575,11 +10575,11 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
   }
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":221
- * 
+ *
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  *                 and not PyArray_CHKFLAGS(self, NPY_F_CONTIGUOUS)):             # <<<<<<<<<<<<<<
  *                 raise ValueError(u"ndarray is not Fortran contiguous")
- * 
+ *
  */
   __pyx_t_2 = ((!(PyArray_CHKFLAGS(__pyx_v_self, NPY_F_CONTIGUOUS) != 0)) != 0);
   __pyx_t_1 = __pyx_t_2;
@@ -10587,7 +10587,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":220
  *                 raise ValueError(u"ndarray is not C contiguous")
- * 
+ *
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)             # <<<<<<<<<<<<<<
  *                 and not PyArray_CHKFLAGS(self, NPY_F_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not Fortran contiguous")
@@ -10598,7 +10598,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  *                 and not PyArray_CHKFLAGS(self, NPY_F_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not Fortran contiguous")             # <<<<<<<<<<<<<<
- * 
+ *
  *             info.buf = PyArray_DATA(self)
  */
     __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__34, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 222, __pyx_L1_error)
@@ -10609,7 +10609,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":220
  *                 raise ValueError(u"ndarray is not C contiguous")
- * 
+ *
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)             # <<<<<<<<<<<<<<
  *                 and not PyArray_CHKFLAGS(self, NPY_F_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not Fortran contiguous")
@@ -10618,7 +10618,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":224
  *                 raise ValueError(u"ndarray is not Fortran contiguous")
- * 
+ *
  *             info.buf = PyArray_DATA(self)             # <<<<<<<<<<<<<<
  *             info.ndim = ndim
  *             if copy_shape:
@@ -10626,7 +10626,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
   __pyx_v_info->buf = PyArray_DATA(__pyx_v_self);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":225
- * 
+ *
  *             info.buf = PyArray_DATA(self)
  *             info.ndim = ndim             # <<<<<<<<<<<<<<
  *             if copy_shape:
@@ -10737,7 +10737,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *             info.suboffsets = NULL
  *             info.itemsize = PyArray_ITEMSIZE(self)             # <<<<<<<<<<<<<<
  *             info.readonly = not PyArray_ISWRITEABLE(self)
- * 
+ *
  */
   __pyx_v_info->itemsize = PyArray_ITEMSIZE(__pyx_v_self);
 
@@ -10745,13 +10745,13 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *             info.suboffsets = NULL
  *             info.itemsize = PyArray_ITEMSIZE(self)
  *             info.readonly = not PyArray_ISWRITEABLE(self)             # <<<<<<<<<<<<<<
- * 
+ *
  *             cdef int t
  */
   __pyx_v_info->readonly = (!(PyArray_ISWRITEABLE(__pyx_v_self) != 0));
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":242
- * 
+ *
  *             cdef int t
  *             cdef char* f = NULL             # <<<<<<<<<<<<<<
  *             cdef dtype descr = self.descr
@@ -10764,7 +10764,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *             cdef char* f = NULL
  *             cdef dtype descr = self.descr             # <<<<<<<<<<<<<<
  *             cdef int offset
- * 
+ *
  */
   __pyx_t_3 = ((PyObject *)__pyx_v_self->descr);
   __Pyx_INCREF(__pyx_t_3);
@@ -10773,16 +10773,16 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":246
  *             cdef int offset
- * 
+ *
  *             cdef bint hasfields = PyDataType_HASFIELDS(descr)             # <<<<<<<<<<<<<<
- * 
+ *
  *             if not hasfields and not copy_shape:
  */
   __pyx_v_hasfields = PyDataType_HASFIELDS(__pyx_v_descr);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":248
  *             cdef bint hasfields = PyDataType_HASFIELDS(descr)
- * 
+ *
  *             if not hasfields and not copy_shape:             # <<<<<<<<<<<<<<
  *                 # do not call releasebuffer
  *                 info.obj = None
@@ -10813,7 +10813,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":248
  *             cdef bint hasfields = PyDataType_HASFIELDS(descr)
- * 
+ *
  *             if not hasfields and not copy_shape:             # <<<<<<<<<<<<<<
  *                 # do not call releasebuffer
  *                 info.obj = None
@@ -10825,7 +10825,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *             else:
  *                 # need to call releasebuffer
  *                 info.obj = self             # <<<<<<<<<<<<<<
- * 
+ *
  *             if not hasfields:
  */
   /*else*/ {
@@ -10839,7 +10839,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":255
  *                 info.obj = self
- * 
+ *
  *             if not hasfields:             # <<<<<<<<<<<<<<
  *                 t = descr.type_num
  *                 if ((descr.byteorder == c'>' and little_endian) or
@@ -10848,7 +10848,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
   if (__pyx_t_1) {
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":256
- * 
+ *
  *             if not hasfields:
  *                 t = descr.type_num             # <<<<<<<<<<<<<<
  *                 if ((descr.byteorder == c'>' and little_endian) or
@@ -11161,7 +11161,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":255
  *                 info.obj = self
- * 
+ *
  *             if not hasfields:             # <<<<<<<<<<<<<<
  *                 t = descr.type_num
  *                 if ((descr.byteorder == c'>' and little_endian) or
@@ -11210,7 +11210,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *                                       info.format + _buffer_format_string_len,
  *                                       &offset)
  *                 f[0] = c'\0' # Terminate format string             # <<<<<<<<<<<<<<
- * 
+ *
  *         def __releasebuffer__(ndarray self, Py_buffer* info):
  */
     (__pyx_v_f[0]) = '\x00';
@@ -11250,7 +11250,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":290
  *                 f[0] = c'\0' # Terminate format string
- * 
+ *
  *         def __releasebuffer__(ndarray self, Py_buffer* info):             # <<<<<<<<<<<<<<
  *             if PyArray_HASFIELDS(self):
  *                 stdlib.free(info.format)
@@ -11273,7 +11273,7 @@ static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_s
   __Pyx_RefNannySetupContext("__releasebuffer__", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":291
- * 
+ *
  *         def __releasebuffer__(ndarray self, Py_buffer* info):
  *             if PyArray_HASFIELDS(self):             # <<<<<<<<<<<<<<
  *                 stdlib.free(info.format)
@@ -11292,7 +11292,7 @@ static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_s
     free(__pyx_v_info->format);
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":291
- * 
+ *
  *         def __releasebuffer__(ndarray self, Py_buffer* info):
  *             if PyArray_HASFIELDS(self):             # <<<<<<<<<<<<<<
  *                 stdlib.free(info.format)
@@ -11315,7 +11315,7 @@ static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_s
  *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
  *                 stdlib.free(info.strides)             # <<<<<<<<<<<<<<
  *                 # info.shape was stored after info.strides in the same block
- * 
+ *
  */
     free(__pyx_v_info->strides);
 
@@ -11330,7 +11330,7 @@ static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_s
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":290
  *                 f[0] = c'\0' # Terminate format string
- * 
+ *
  *         def __releasebuffer__(ndarray self, Py_buffer* info):             # <<<<<<<<<<<<<<
  *             if PyArray_HASFIELDS(self):
  *                 stdlib.free(info.format)
@@ -11342,10 +11342,10 @@ static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_s
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":770
  * ctypedef npy_cdouble     complex_t
- * 
+ *
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(1, <void*>a)
- * 
+ *
  */
 
 static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__pyx_v_a) {
@@ -11355,10 +11355,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew1", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":771
- * 
+ *
  * cdef inline object PyArray_MultiIterNew1(a):
  *     return PyArray_MultiIterNew(1, <void*>a)             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline object PyArray_MultiIterNew2(a, b):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -11370,10 +11370,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":770
  * ctypedef npy_cdouble     complex_t
- * 
+ *
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(1, <void*>a)
- * 
+ *
  */
 
   /* function exit code */
@@ -11389,10 +11389,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":773
  *     return PyArray_MultiIterNew(1, <void*>a)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
- * 
+ *
  */
 
 static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__pyx_v_a, PyObject *__pyx_v_b) {
@@ -11402,10 +11402,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew2", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":774
- * 
+ *
  * cdef inline object PyArray_MultiIterNew2(a, b):
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline object PyArray_MultiIterNew3(a, b, c):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -11417,10 +11417,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":773
  *     return PyArray_MultiIterNew(1, <void*>a)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
- * 
+ *
  */
 
   /* function exit code */
@@ -11436,10 +11436,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":776
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
- * 
+ *
  */
 
 static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c) {
@@ -11449,10 +11449,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew3", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":777
- * 
+ *
  * cdef inline object PyArray_MultiIterNew3(a, b, c):
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -11464,10 +11464,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":776
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
- * 
+ *
  */
 
   /* function exit code */
@@ -11483,10 +11483,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":779
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
- * 
+ *
  */
 
 static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d) {
@@ -11496,10 +11496,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew4", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":780
- * 
+ *
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):
  */
   __Pyx_XDECREF(__pyx_r);
@@ -11511,10 +11511,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":779
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
- * 
+ *
  */
 
   /* function exit code */
@@ -11530,10 +11530,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":782
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
- * 
+ *
  */
 
 static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_e) {
@@ -11543,10 +11543,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew5", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":783
- * 
+ *
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline char* _util_dtypestring(dtype descr, char* f, char* end, int* offset) except NULL:
  */
   __Pyx_XDECREF(__pyx_r);
@@ -11558,10 +11558,10 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":782
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
- * 
+ *
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
- * 
+ *
  */
 
   /* function exit code */
@@ -11577,7 +11577,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":785
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
- * 
+ *
  * cdef inline char* _util_dtypestring(dtype descr, char* f, char* end, int* offset) except NULL:             # <<<<<<<<<<<<<<
  *     # Recursive utility function used in __getbuffer__ to get format
  *     # string. The new location in the format string is returned.
@@ -11605,7 +11605,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
   __Pyx_RefNannySetupContext("_util_dtypestring", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":790
- * 
+ *
  *     cdef dtype child
  *     cdef int endian_detector = 1             # <<<<<<<<<<<<<<
  *     cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)
@@ -11618,13 +11618,13 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *     cdef int endian_detector = 1
  *     cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)             # <<<<<<<<<<<<<<
  *     cdef tuple fields
- * 
+ *
  */
   __pyx_v_little_endian = ((((char *)(&__pyx_v_endian_detector))[0]) != 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":794
  *     cdef tuple fields
- * 
+ *
  *     for childname in descr.names:             # <<<<<<<<<<<<<<
  *         fields = descr.fields[childname]
  *         child, new_offset = fields
@@ -11646,11 +11646,11 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
     __pyx_t_3 = 0;
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":795
- * 
+ *
  *     for childname in descr.names:
  *         fields = descr.fields[childname]             # <<<<<<<<<<<<<<
  *         child, new_offset = fields
- * 
+ *
  */
     if (unlikely(__pyx_v_descr->fields == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -11666,7 +11666,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *     for childname in descr.names:
  *         fields = descr.fields[childname]
  *         child, new_offset = fields             # <<<<<<<<<<<<<<
- * 
+ *
  *         if (end - f) - <int>(new_offset - offset[0]) < 15:
  */
     if (likely(__pyx_v_fields != Py_None)) {
@@ -11682,8 +11682,8 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
         __PYX_ERR(2, 796, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0); 
-      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1); 
+      __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0);
+      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1);
       __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_t_4);
       #else
@@ -11703,10 +11703,10 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":798
  *         child, new_offset = fields
- * 
+ *
  *         if (end - f) - <int>(new_offset - offset[0]) < 15:             # <<<<<<<<<<<<<<
  *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
+ *
  */
     __pyx_t_4 = __Pyx_PyInt_From_int((__pyx_v_offset[0])); if (unlikely(!__pyx_t_4)) __PYX_ERR(2, 798, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -11719,10 +11719,10 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
     if (__pyx_t_6) {
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":799
- * 
+ *
  *         if (end - f) - <int>(new_offset - offset[0]) < 15:
  *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")             # <<<<<<<<<<<<<<
- * 
+ *
  *         if ((child.byteorder == c'>' and little_endian) or
  */
       __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__36, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 799, __pyx_L1_error)
@@ -11733,16 +11733,16 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":798
  *         child, new_offset = fields
- * 
+ *
  *         if (end - f) - <int>(new_offset - offset[0]) < 15:             # <<<<<<<<<<<<<<
  *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
+ *
  */
     }
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":801
  *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
+ *
  *         if ((child.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
  *             (child.byteorder == c'<' and not little_endian)):
  *             raise ValueError(u"Non-native byte order not supported")
@@ -11761,7 +11761,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
     __pyx_L8_next_or:;
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":802
- * 
+ *
  *         if ((child.byteorder == c'>' and little_endian) or
  *             (child.byteorder == c'<' and not little_endian)):             # <<<<<<<<<<<<<<
  *             raise ValueError(u"Non-native byte order not supported")
@@ -11779,7 +11779,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":801
  *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
+ *
  *         if ((child.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
  *             (child.byteorder == c'<' and not little_endian)):
  *             raise ValueError(u"Non-native byte order not supported")
@@ -11801,7 +11801,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":801
  *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
+ *
  *         if ((child.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
  *             (child.byteorder == c'<' and not little_endian)):
  *             raise ValueError(u"Non-native byte order not supported")
@@ -11809,7 +11809,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
     }
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":813
- * 
+ *
  *         # Output padding bytes
  *         while offset[0] < new_offset:             # <<<<<<<<<<<<<<
  *             f[0] = 120 # "x"; pad byte
@@ -11838,7 +11838,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             f[0] = 120 # "x"; pad byte
  *             f += 1             # <<<<<<<<<<<<<<
  *             offset[0] += 1
- * 
+ *
  */
       __pyx_v_f = (__pyx_v_f + 1);
 
@@ -11846,7 +11846,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             f[0] = 120 # "x"; pad byte
  *             f += 1
  *             offset[0] += 1             # <<<<<<<<<<<<<<
- * 
+ *
  *         offset[0] += child.itemsize
  */
       __pyx_t_8 = 0;
@@ -11855,9 +11855,9 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":818
  *             offset[0] += 1
- * 
+ *
  *         offset[0] += child.itemsize             # <<<<<<<<<<<<<<
- * 
+ *
  *         if not PyDataType_HASFIELDS(child):
  */
     __pyx_t_8 = 0;
@@ -11865,7 +11865,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":820
  *         offset[0] += child.itemsize
- * 
+ *
  *         if not PyDataType_HASFIELDS(child):             # <<<<<<<<<<<<<<
  *             t = child.type_num
  *             if end - f < 5:
@@ -11874,7 +11874,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
     if (__pyx_t_6) {
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":821
- * 
+ *
  *         if not PyDataType_HASFIELDS(child):
  *             t = child.type_num             # <<<<<<<<<<<<<<
  *             if end - f < 5:
@@ -11890,7 +11890,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             t = child.type_num
  *             if end - f < 5:             # <<<<<<<<<<<<<<
  *                 raise RuntimeError(u"Format string allocated too short.")
- * 
+ *
  */
       __pyx_t_6 = (((__pyx_v_end - __pyx_v_f) < 5) != 0);
       if (__pyx_t_6) {
@@ -11899,7 +11899,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             t = child.type_num
  *             if end - f < 5:
  *                 raise RuntimeError(u"Format string allocated too short.")             # <<<<<<<<<<<<<<
- * 
+ *
  *             # Until ticket #99 is fixed, use integers to avoid warnings
  */
         __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__38, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(2, 823, __pyx_L1_error)
@@ -11913,12 +11913,12 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             t = child.type_num
  *             if end - f < 5:             # <<<<<<<<<<<<<<
  *                 raise RuntimeError(u"Format string allocated too short.")
- * 
+ *
  */
       }
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":826
- * 
+ *
  *             # Until ticket #99 is fixed, use integers to avoid warnings
  *             if   t == NPY_BYTE:        f[0] =  98 #"b"             # <<<<<<<<<<<<<<
  *             elif t == NPY_UBYTE:       f[0] =  66 #"B"
@@ -12264,7 +12264,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":820
  *         offset[0] += child.itemsize
- * 
+ *
  *         if not PyDataType_HASFIELDS(child):             # <<<<<<<<<<<<<<
  *             t = child.type_num
  *             if end - f < 5:
@@ -12277,7 +12277,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             # so don't output it
  *             f = _util_dtypestring(child, f, end, offset)             # <<<<<<<<<<<<<<
  *     return f
- * 
+ *
  */
     /*else*/ {
       __pyx_t_9 = __pyx_f_5numpy__util_dtypestring(__pyx_v_child, __pyx_v_f, __pyx_v_end, __pyx_v_offset); if (unlikely(__pyx_t_9 == NULL)) __PYX_ERR(2, 849, __pyx_L1_error)
@@ -12287,7 +12287,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":794
  *     cdef tuple fields
- * 
+ *
  *     for childname in descr.names:             # <<<<<<<<<<<<<<
  *         fields = descr.fields[childname]
  *         child, new_offset = fields
@@ -12299,15 +12299,15 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             # so don't output it
  *             f = _util_dtypestring(child, f, end, offset)
  *     return f             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __pyx_r = __pyx_v_f;
   goto __pyx_L0;
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":785
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
- * 
+ *
  * cdef inline char* _util_dtypestring(dtype descr, char* f, char* end, int* offset) except NULL:             # <<<<<<<<<<<<<<
  *     # Recursive utility function used in __getbuffer__ to get format
  *     # string. The new location in the format string is returned.
@@ -12331,8 +12331,8 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
 }
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":966
- * 
- * 
+ *
+ *
  * cdef inline void set_array_base(ndarray arr, object base):             # <<<<<<<<<<<<<<
  *      cdef PyObject* baseptr
  *      if base is None:
@@ -12401,7 +12401,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
  *          baseptr = <PyObject*>base
  *      Py_XDECREF(arr.base)             # <<<<<<<<<<<<<<
  *      arr.base = baseptr
- * 
+ *
  */
   Py_XDECREF(__pyx_v_arr->base);
 
@@ -12409,14 +12409,14 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
  *          baseptr = <PyObject*>base
  *      Py_XDECREF(arr.base)
  *      arr.base = baseptr             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline object get_array_base(ndarray arr):
  */
   __pyx_v_arr->base = __pyx_v_baseptr;
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":966
- * 
- * 
+ *
+ *
  * cdef inline void set_array_base(ndarray arr, object base):             # <<<<<<<<<<<<<<
  *      cdef PyObject* baseptr
  *      if base is None:
@@ -12428,7 +12428,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":976
  *      arr.base = baseptr
- * 
+ *
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
  *     if arr.base is NULL:
  *         return None
@@ -12441,7 +12441,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   __Pyx_RefNannySetupContext("get_array_base", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":977
- * 
+ *
  * cdef inline object get_array_base(ndarray arr):
  *     if arr.base is NULL:             # <<<<<<<<<<<<<<
  *         return None
@@ -12463,7 +12463,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
     goto __pyx_L0;
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":977
- * 
+ *
  * cdef inline object get_array_base(ndarray arr):
  *     if arr.base is NULL:             # <<<<<<<<<<<<<<
  *         return None
@@ -12475,8 +12475,8 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
  *         return None
  *     else:
  *         return <object>arr.base             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
@@ -12487,7 +12487,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":976
  *      arr.base = baseptr
- * 
+ *
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
  *     if arr.base is NULL:
  *         return None
@@ -12566,7 +12566,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
  *         _import_array()
  *     except Exception:             # <<<<<<<<<<<<<<
  *         raise ImportError("numpy.core.multiarray failed to import")
- * 
+ *
  */
     __pyx_t_4 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_4) {
@@ -12580,7 +12580,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
  *         _import_array()
  *     except Exception:
  *         raise ImportError("numpy.core.multiarray failed to import")             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline int import_umath() except -1:
  */
       __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__39, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 989, __pyx_L5_except_error)
@@ -12633,7 +12633,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":991
  *         raise ImportError("numpy.core.multiarray failed to import")
- * 
+ *
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
  *     try:
  *         _import_umath()
@@ -12653,7 +12653,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
   __Pyx_RefNannySetupContext("import_umath", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":992
- * 
+ *
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
  *         _import_umath()
@@ -12678,7 +12678,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
       __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == -1)) __PYX_ERR(2, 993, __pyx_L3_error)
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":992
- * 
+ *
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
  *         _import_umath()
@@ -12697,7 +12697,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
  *         _import_umath()
  *     except Exception:             # <<<<<<<<<<<<<<
  *         raise ImportError("numpy.core.umath failed to import")
- * 
+ *
  */
     __pyx_t_4 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_4) {
@@ -12711,7 +12711,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline int import_ufunc() except -1:
  */
       __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__40, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 995, __pyx_L5_except_error)
@@ -12724,7 +12724,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __pyx_L5_except_error:;
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":992
- * 
+ *
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
  *         _import_umath()
@@ -12741,7 +12741,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":991
  *         raise ImportError("numpy.core.multiarray failed to import")
- * 
+ *
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
  *     try:
  *         _import_umath()
@@ -12764,7 +12764,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
 
 /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":997
  *         raise ImportError("numpy.core.umath failed to import")
- * 
+ *
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
  *     try:
  *         _import_umath()
@@ -12784,7 +12784,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
   __Pyx_RefNannySetupContext("import_ufunc", 0);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":998
- * 
+ *
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
  *         _import_umath()
@@ -12809,7 +12809,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
       __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == -1)) __PYX_ERR(2, 999, __pyx_L3_error)
 
       /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":998
- * 
+ *
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
  *         _import_umath()
@@ -12852,7 +12852,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     __pyx_L5_except_error:;
 
     /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":998
- * 
+ *
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
  *         _import_umath()
@@ -12869,7 +12869,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":997
  *         raise ImportError("numpy.core.umath failed to import")
- * 
+ *
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
  *     try:
  *         _import_umath()
@@ -12891,7 +12891,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
 }
 
 /* "string.from_py":13
- * 
+ *
  * @cname("__pyx_convert_string_from_py_std__in_string")
  * cdef string __pyx_convert_string_from_py_std__in_string(object o) except *:             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t length
@@ -12911,7 +12911,7 @@ static std::string __pyx_convert_string_from_py_std__in_string(PyObject *__pyx_v
  *     cdef Py_ssize_t length
  *     cdef const char* data = __Pyx_PyObject_AsStringAndSize(o, &length)             # <<<<<<<<<<<<<<
  *     return string(data, length)
- * 
+ *
  */
   __pyx_t_1 = __Pyx_PyObject_AsStringAndSize(__pyx_v_o, (&__pyx_v_length)); if (unlikely(__pyx_t_1 == NULL)) __PYX_ERR(1, 15, __pyx_L1_error)
   __pyx_v_data = __pyx_t_1;
@@ -12920,14 +12920,14 @@ static std::string __pyx_convert_string_from_py_std__in_string(PyObject *__pyx_v
  *     cdef Py_ssize_t length
  *     cdef const char* data = __Pyx_PyObject_AsStringAndSize(o, &length)
  *     return string(data, length)             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __pyx_r = std::string(__pyx_v_data, __pyx_v_length);
   goto __pyx_L0;
 
   /* "string.from_py":13
- * 
+ *
  * @cname("__pyx_convert_string_from_py_std__in_string")
  * cdef string __pyx_convert_string_from_py_std__in_string(object o) except *:             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t length
@@ -12944,7 +12944,7 @@ static std::string __pyx_convert_string_from_py_std__in_string(PyObject *__pyx_v
 }
 
 /* "string.to_py":31
- * 
+ *
  * @cname("__pyx_convert_PyObject_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyObject_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyObject_FromStringAndSize(s.data(), s.size())
@@ -12972,7 +12972,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_std__in_strin
   goto __pyx_L0;
 
   /* "string.to_py":31
- * 
+ *
  * @cname("__pyx_convert_PyObject_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyObject_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyObject_FromStringAndSize(s.data(), s.size())
@@ -12991,7 +12991,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_std__in_strin
 }
 
 /* "string.to_py":37
- * 
+ *
  * @cname("__pyx_convert_PyUnicode_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyUnicode_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyUnicode_FromStringAndSize(s.data(), s.size())
@@ -13019,7 +13019,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_std__in_stri
   goto __pyx_L0;
 
   /* "string.to_py":37
- * 
+ *
  * @cname("__pyx_convert_PyUnicode_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyUnicode_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyUnicode_FromStringAndSize(s.data(), s.size())
@@ -13038,7 +13038,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_std__in_stri
 }
 
 /* "string.to_py":43
- * 
+ *
  * @cname("__pyx_convert_PyStr_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyStr_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyStr_FromStringAndSize(s.data(), s.size())
@@ -13066,7 +13066,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyStr_string_to_py_std__in_string(s
   goto __pyx_L0;
 
   /* "string.to_py":43
- * 
+ *
  * @cname("__pyx_convert_PyStr_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyStr_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyStr_FromStringAndSize(s.data(), s.size())
@@ -13085,7 +13085,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyStr_string_to_py_std__in_string(s
 }
 
 /* "string.to_py":49
- * 
+ *
  * @cname("__pyx_convert_PyBytes_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyBytes_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyBytes_FromStringAndSize(s.data(), s.size())
@@ -13113,7 +13113,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyBytes_string_to_py_std__in_string
   goto __pyx_L0;
 
   /* "string.to_py":49
- * 
+ *
  * @cname("__pyx_convert_PyBytes_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyBytes_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyBytes_FromStringAndSize(s.data(), s.size())
@@ -13132,11 +13132,11 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyBytes_string_to_py_std__in_string
 }
 
 /* "string.to_py":55
- * 
+ *
  * @cname("__pyx_convert_PyByteArray_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyByteArray_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyByteArray_FromStringAndSize(s.data(), s.size())
- * 
+ *
  */
 
 static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_std__in_string(std::string const &__pyx_v_s) {
@@ -13149,7 +13149,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_std__in_st
  * @cname("__pyx_convert_PyByteArray_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyByteArray_string_to_py_std__in_string(const string& s):
  *     return __Pyx_PyByteArray_FromStringAndSize(s.data(), s.size())             # <<<<<<<<<<<<<<
- * 
+ *
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __Pyx_PyByteArray_FromStringAndSize(__pyx_v_s.data(), __pyx_v_s.size()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
@@ -13159,11 +13159,11 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_std__in_st
   goto __pyx_L0;
 
   /* "string.to_py":55
- * 
+ *
  * @cname("__pyx_convert_PyByteArray_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyByteArray_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyByteArray_FromStringAndSize(s.data(), s.size())
- * 
+ *
  */
 
   /* function exit code */
@@ -14727,7 +14727,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_eta, __pyx_k_eta, sizeof(__pyx_k_eta), 0, 0, 1, 1},
   {&__pyx_n_s_events, __pyx_k_events, sizeof(__pyx_k_events), 0, 0, 1, 1},
   {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
-  {&__pyx_n_s_extern_six, __pyx_k_extern_six, sizeof(__pyx_k_extern_six), 0, 0, 1, 1},
+  {&__pyx_n_s_six, __pyx_k_six, sizeof(__pyx_k_six), 0, 0, 1, 1},
   {&__pyx_n_s_filename, __pyx_k_filename, sizeof(__pyx_k_filename), 0, 0, 1, 1},
   {&__pyx_kp_s_find_must_be_a_boolean_expressio, __pyx_k_find_must_be_a_boolean_expressio, sizeof(__pyx_k_find_must_be_a_boolean_expressio), 0, 0, 1, 0},
   {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
@@ -14819,7 +14819,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
  *         return filterlist
- * 
+ *
  */
   __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_can_only_combine_boolean_filters); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
@@ -14849,7 +14849,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         else:
  *             raise TypeError("can only combine boolean filters")             # <<<<<<<<<<<<<<
  *         return filterlist
- * 
+ *
  */
   __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_can_only_combine_boolean_filters); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
@@ -14958,7 +14958,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         if not py2hepmc.fill_next_event(pythia, &deref(event)):
  *             raise RuntimeError("unable to convert PYTHIA event to HepMC")             # <<<<<<<<<<<<<<
  *         return GenEvent.wrap(event)
- * 
+ *
  */
   __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_unable_to_convert_PYTHIA_event_t); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
@@ -14985,10 +14985,10 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "_libnumpythia.pyx":336
  *                   **kwargs):
- * 
+ *
  *         xmldoc = resource_filename('numpythia', 'src/extern/pythia8226/share')             # <<<<<<<<<<<<<<
  *         self.pythia = new Pythia.Pythia(xmldoc, False)
- * 
+ *
  */
   __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_numpythia, __pyx_kp_s_src_extern_pythia8226_share); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
@@ -14998,7 +14998,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                 self.pythia.readString('{0} = {1}'.format(param, value))
  *         for param, value in kwargs.items():
  *             self.pythia.readString('{0} = {1}'.format(param.replace('_', ':'), value))             # <<<<<<<<<<<<<<
- * 
+ *
  *         if not self.pythia.init():
  */
   __pyx_tuple__22 = PyTuple_Pack(2, __pyx_n_s__20, __pyx_kp_s__21); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 374, __pyx_L1_error)
@@ -15006,10 +15006,10 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__22);
 
   /* "_libnumpythia.pyx":377
- * 
+ *
  *         if not self.pythia.init():
  *             raise RuntimeError("PYTHIA did not successfully initialize")             # <<<<<<<<<<<<<<
- * 
+ *
  *         self.verbosity = verbosity
  */
   __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_PYTHIA_did_not_successfully_init); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 377, __pyx_L1_error)
@@ -15021,7 +15021,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         if not self.pythia.next():
  *             raise RuntimeError("PYTHIA event generation aborted prematurely")             # <<<<<<<<<<<<<<
  *         return True
- * 
+ *
  */
   __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_PYTHIA_event_generation_aborted); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
@@ -15102,7 +15102,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
  *                 and not PyArray_CHKFLAGS(self, NPY_C_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not C contiguous")             # <<<<<<<<<<<<<<
- * 
+ *
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  */
   __pyx_tuple__33 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_C_contiguous); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(2, 218, __pyx_L1_error)
@@ -15113,7 +15113,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  *                 and not PyArray_CHKFLAGS(self, NPY_F_CONTIGUOUS)):
  *                 raise ValueError(u"ndarray is not Fortran contiguous")             # <<<<<<<<<<<<<<
- * 
+ *
  *             info.buf = PyArray_DATA(self)
  */
   __pyx_tuple__34 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_Fortran_contiguou); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(2, 222, __pyx_L1_error)
@@ -15132,10 +15132,10 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__35);
 
   /* "../../.local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":799
- * 
+ *
  *         if (end - f) - <int>(new_offset - offset[0]) < 15:
  *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")             # <<<<<<<<<<<<<<
- * 
+ *
  *         if ((child.byteorder == c'>' and little_endian) or
  */
   __pyx_tuple__36 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(2, 799, __pyx_L1_error)
@@ -15157,7 +15157,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             t = child.type_num
  *             if end - f < 5:
  *                 raise RuntimeError(u"Format string allocated too short.")             # <<<<<<<<<<<<<<
- * 
+ *
  *             # Until ticket #99 is fixed, use integers to avoid warnings
  */
   __pyx_tuple__38 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor_2); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(2, 823, __pyx_L1_error)
@@ -15168,7 +15168,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         _import_array()
  *     except Exception:
  *         raise ImportError("numpy.core.multiarray failed to import")             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline int import_umath() except -1:
  */
   __pyx_tuple__39 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(2, 989, __pyx_L1_error)
@@ -15179,7 +15179,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef inline int import_ufunc() except -1:
  */
   __pyx_tuple__40 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(2, 995, __pyx_L1_error)
@@ -15392,7 +15392,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __pyx_type_13_libnumpythia___pyx_scope_struct_2___iter__.tp_print = 0;
   __pyx_ptype_13_libnumpythia___pyx_scope_struct_2___iter__ = &__pyx_type_13_libnumpythia___pyx_scope_struct_2___iter__;
   /*--- Type import code ---*/
-  __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
+  __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type",
   #if CYTHON_COMPILING_IN_PYPY
   sizeof(PyTypeObject),
   #else
@@ -15415,7 +15415,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":7
  * # Wrap GenEvent and yield that
- * 
+ *
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
  * np.import_array()
@@ -15429,16 +15429,16 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * import numpy as np
  * cimport numpy as np
  * np.import_array()             # <<<<<<<<<<<<<<
- * 
+ *
  * cimport cython
  */
   __pyx_t_2 = __pyx_f_5numpy_import_array(); if (unlikely(__pyx_t_2 == -1)) __PYX_ERR(0, 9, __pyx_L1_error)
 
   /* "_libnumpythia.pyx":27
- * 
+ *
  * from libcpp.memory cimport shared_ptr
  * import os             # <<<<<<<<<<<<<<
- * 
+ *
  * cimport pythia as Pythia
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_os, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
@@ -15448,8 +15448,8 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":33
  * cimport numpythia
- * 
- * from .extern.six import string_types             # <<<<<<<<<<<<<<
+ *
+ * from six import string_types             # <<<<<<<<<<<<<<
  * from pkg_resources import resource_filename
  * from fnmatch import fnmatch
  */
@@ -15458,7 +15458,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_INCREF(__pyx_n_s_string_types);
   __Pyx_GIVEREF(__pyx_n_s_string_types);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_string_types);
-  __pyx_t_3 = __Pyx_Import(__pyx_n_s_extern_six, __pyx_t_1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Import(__pyx_n_s_six, __pyx_t_1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_string_types); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
@@ -15468,11 +15468,11 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "_libnumpythia.pyx":34
- * 
- * from .extern.six import string_types
+ *
+ * from six import string_types
  * from pkg_resources import resource_filename             # <<<<<<<<<<<<<<
  * from fnmatch import fnmatch
- * 
+ *
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -15489,10 +15489,10 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_libnumpythia.pyx":35
- * from .extern.six import string_types
+ * from six import string_types
  * from pkg_resources import resource_filename
  * from fnmatch import fnmatch             # <<<<<<<<<<<<<<
- * 
+ *
  * cdef extern from "2to3.h":
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
@@ -15511,10 +15511,10 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":40
  *     pass
- * 
+ *
  * DTYPE = np.float64             # <<<<<<<<<<<<<<
  * ctypedef np.float64_t DTYPE_t
- * 
+ *
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -15526,7 +15526,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":43
  * ctypedef np.float64_t DTYPE_t
- * 
+ *
  * DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])             # <<<<<<<<<<<<<<
  * DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
@@ -15597,7 +15597,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_libnumpythia.pyx":44
- * 
+ *
  * DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
  * DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])             # <<<<<<<<<<<<<<
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
@@ -15731,7 +15731,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
  *                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),             # <<<<<<<<<<<<<<
  *                            ('pdgid', np.int32), ('status', np.int32)])
- * 
+ *
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DTYPE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -15778,7 +15778,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
  *                            ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
  *                            ('pdgid', np.int32), ('status', np.int32)])             # <<<<<<<<<<<<<<
- * 
+ *
  * ALL = HepMC.FIND_ALL
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
@@ -15863,7 +15863,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":49
  *                            ('pdgid', np.int32), ('status', np.int32)])
- * 
+ *
  * ALL = HepMC.FIND_ALL             # <<<<<<<<<<<<<<
  * FIRST = HepMC.FIND_FIRST
  * LAST = HepMC.FIND_LAST
@@ -15874,11 +15874,11 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
   /* "_libnumpythia.pyx":50
- * 
+ *
  * ALL = HepMC.FIND_ALL
  * FIRST = HepMC.FIND_FIRST             # <<<<<<<<<<<<<<
  * LAST = HepMC.FIND_LAST
- * 
+ *
  */
   __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_FIRST); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
@@ -15889,7 +15889,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * ALL = HepMC.FIND_ALL
  * FIRST = HepMC.FIND_FIRST
  * LAST = HepMC.FIND_LAST             # <<<<<<<<<<<<<<
- * 
+ *
  * ANCESTORS = HepMC.ANCESTORS
  */
   __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_FilterType(HepMC::FIND_LAST); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 51, __pyx_L1_error)
@@ -15899,7 +15899,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":53
  * LAST = HepMC.FIND_LAST
- * 
+ *
  * ANCESTORS = HepMC.ANCESTORS             # <<<<<<<<<<<<<<
  * DESCENDANTS = HepMC.DESCENDANTS
  * PARENTS = HepMC.PARENTS
@@ -15910,7 +15910,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
   /* "_libnumpythia.pyx":54
- * 
+ *
  * ANCESTORS = HepMC.ANCESTORS
  * DESCENDANTS = HepMC.DESCENDANTS             # <<<<<<<<<<<<<<
  * PARENTS = HepMC.PARENTS
@@ -15938,7 +15938,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * PARENTS = HepMC.PARENTS
  * CHILDREN = HepMC.CHILDREN             # <<<<<<<<<<<<<<
  * SIBLINGS = HepMC.PRODUCTION_SIBLINGS
- * 
+ *
  */
   __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_Relationship(HepMC::CHILDREN); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
@@ -15949,8 +15949,8 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * PARENTS = HepMC.PARENTS
  * CHILDREN = HepMC.CHILDREN
  * SIBLINGS = HepMC.PRODUCTION_SIBLINGS             # <<<<<<<<<<<<<<
- * 
- * 
+ *
+ *
  */
   __pyx_t_13 = __Pyx_PyInt_From_enum__HepMC_3a__3a_Relationship(HepMC::PRODUCTION_SIBLINGS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
@@ -15958,7 +15958,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
   /* "_libnumpythia.pyx":126
- * 
+ *
  * # filters with integer parameter
  * cpdef IntegerFilter STATUS = IntegerFilter()             # <<<<<<<<<<<<<<
  * STATUS.init(HepMC.STATUS, False)
@@ -16012,7 +16012,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * PDG_ID.init(HepMC.PDG_ID, False)
  * cpdef IntegerFilter ABS_PDG_ID = IntegerFilter()             # <<<<<<<<<<<<<<
  * ABS_PDG_ID.init(HepMC.ABS_PDG_ID, False)
- * 
+ *
  */
   __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_IntegerFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
@@ -16025,7 +16025,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * PDG_ID.init(HepMC.PDG_ID, False)
  * cpdef IntegerFilter ABS_PDG_ID = IntegerFilter()
  * ABS_PDG_ID.init(HepMC.ABS_PDG_ID, False)             # <<<<<<<<<<<<<<
- * 
+ *
  * # filters with boolean parameter
  */
   __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_IntegerFilter *)__pyx_v_13_libnumpythia_ABS_PDG_ID->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_ABS_PDG_ID), HepMC::ABS_PDG_ID, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 131, __pyx_L1_error)
@@ -16033,7 +16033,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
   /* "_libnumpythia.pyx":134
- * 
+ *
  * # filters with boolean parameter
  * cpdef BooleanFilter HAS_END_VERTEX = BooleanFilter()             # <<<<<<<<<<<<<<
  * HAS_END_VERTEX.init(HepMC.HAS_END_VERTEX, False)
@@ -16137,7 +16137,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * IS_STABLE.init(HepMC.IS_STABLE, False)
  * cpdef BooleanFilter IS_BEAM = BooleanFilter()             # <<<<<<<<<<<<<<
  * IS_BEAM.init(HepMC.IS_BEAM, False)
- * 
+ *
  */
   __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_13_libnumpythia_BooleanFilter), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
@@ -16150,7 +16150,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  * IS_STABLE.init(HepMC.IS_STABLE, False)
  * cpdef BooleanFilter IS_BEAM = BooleanFilter()
  * IS_BEAM.init(HepMC.IS_BEAM, False)             # <<<<<<<<<<<<<<
- * 
+ *
  * FILTERS = {
  */
   __pyx_t_13 = ((struct __pyx_vtabstruct_13_libnumpythia_BooleanFilter *)__pyx_v_13_libnumpythia_IS_BEAM->__pyx_base.__pyx_vtab)->__pyx_base.init(((struct __pyx_obj_13_libnumpythia_Filter *)__pyx_v_13_libnumpythia_IS_BEAM), HepMC::IS_BEAM, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 143, __pyx_L1_error)
@@ -16158,7 +16158,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
   /* "_libnumpythia.pyx":146
- * 
+ *
  * FILTERS = {
  *     'STATUS': STATUS,             # <<<<<<<<<<<<<<
  *     'PDG_ID': PDG_ID,
@@ -16227,7 +16227,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
  *     'IS_STABLE': IS_STABLE,
  *     'IS_BEAM': IS_BEAM,             # <<<<<<<<<<<<<<
  * }
- * 
+ *
  */
   if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_IS_BEAM, ((PyObject *)__pyx_v_13_libnumpythia_IS_BEAM)) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_FILTERS, __pyx_t_13) < 0) __PYX_ERR(0, 145, __pyx_L1_error)
@@ -16235,7 +16235,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":330
  *     cdef int verbosity
- * 
+ *
  *     def __cinit__(self, string config="",             # <<<<<<<<<<<<<<
  *                   int random_state=0,
  *                   int verbosity=1,
@@ -16245,7 +16245,7 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
 
   /* "_libnumpythia.pyx":1
  * # cython: experimental_cpp_class_def=True, c_string_type=str, c_string_encoding=ascii             # <<<<<<<<<<<<<<
- * 
+ *
  * # TODO:
  */
   __pyx_t_13 = PyDict_New(); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -16254,11 +16254,11 @@ PyMODINIT_FUNC PyInit__libnumpythia(void)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
   /* "string.to_py":55
- * 
+ *
  * @cname("__pyx_convert_PyByteArray_string_to_py_std__in_string")
  * cdef inline object __pyx_convert_PyByteArray_string_to_py_std__in_string(const string& s):             # <<<<<<<<<<<<<<
  *     return __Pyx_PyByteArray_FromStringAndSize(s.data(), s.size())
- * 
+ *
  */
 
   /*--- Wrapped vars code ---*/

@@ -30,7 +30,7 @@ cimport pythia as Pythia
 cimport hepmc as HepMC
 cimport numpythia
 
-from .extern.six import string_types
+from six import string_types
 from pkg_resources import resource_filename
 from fnmatch import fnmatch
 
