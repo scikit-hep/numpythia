@@ -16,6 +16,24 @@ particle four-momenta. By default numpythia only depends on NumPy and builds
 internal copies of the PYTHIA and `HepMC <http://hepmc.web.cern.ch/hepmc/>`_
 source code.
 
+Python versions supported:
+
+.. image:: https://img.shields.io/badge/python-2.7-blue.svg
+   :target: https://badge.fury.io/py/scikit-hep
+
+.. image:: https://img.shields.io/badge/python-3.4-blue.svg
+   :target: https://badge.fury.io/py/scikit-hep
+
+.. image:: https://img.shields.io/badge/python-3.5-blue.svg
+   :target: https://badge.fury.io/py/scikit-hep
+
+.. image:: https://img.shields.io/badge/python-3.6-blue.svg
+   :target: https://badge.fury.io/py/scikit-hep
+
+
+Getting started
+---------------
+
 .. code-block:: python
 
    from numpythia import Pythia, hepmc_write, hepmc_read
