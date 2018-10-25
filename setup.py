@@ -11,60 +11,16 @@ if sys.version_info[0] < 3:
 else:
     import builtins
 
-try:
-    # Try to use setuptools if installed
-    from setuptools import setup, Extension
-    from pkg_resources import parse_version, get_distribution
+from setuptools import setup, Extension, find_packages
+from pkg_resources import parse_version, get_distribution
 
-    if get_distribution('setuptools').parsed_version < parse_version('0.7'):
-        # setuptools is too old (before merge with distribute)
-        raise ImportError
-
-    from setuptools.command.build_ext import build_ext as _build_ext
-    from setuptools.command.install import install as _install
-    use_setuptools = True
-
-except ImportError:
-    # Use distutils instead
-    from distutils.core import setup, Extension
-    from distutils.command.build_ext import build_ext as _build_ext
-    from distutils.command.install import install as _install
-    use_setuptools = False
+from setuptools.command.build_ext import build_ext as _build_ext
+from setuptools.command.install import install as _install
 
 import os
 import fnmatch
 import platform
 import subprocess
-from distutils.sysconfig import customize_compiler
-
-# monkey-patch distutils for parallel compilation
-def parallelCCompile(self, sources, output_dir=None, macros=None,
-                     include_dirs=None, debug=0, extra_preargs=None,
-                     extra_postargs=None, depends=None):
-    macros, objects, extra_postargs, pp_opts, build = self._setup_compile(
-        output_dir, macros, include_dirs, sources, depends, extra_postargs)
-    cc_args = self._get_cc_args(pp_opts, debug, extra_preargs)
-    import multiprocessing
-    import multiprocessing.pool
-    N = multiprocessing.cpu_count()
-    def _single_compile(obj):
-        try:
-            src, ext = build[obj]
-        except KeyError:
-            return
-        self._compile(obj, src, ext, cc_args, extra_postargs, pp_opts)
-    # convert to list, imap is evaluated on-demand
-    pool = multiprocessing.pool.ThreadPool(N)
-    try:
-        list(pool.imap(_single_compile, objects))
-    except:
-        pool.close()
-        pool.join()
-        raise
-    return objects
-
-import distutils.ccompiler
-distutils.ccompiler.CCompiler.compile = parallelCCompile
 
 # Prevent setup from trying to create hard links
 # which are not allowed on AFS between directories.
@@ -131,13 +87,6 @@ class build_ext(_build_ext):
         libnumpythia.include_dirs.append(numpy.get_include())
 
     def build_extensions(self):
-        # Remove the "-Wstrict-prototypes" compiler option, which isn't valid
-        # for C++.
-        customize_compiler(self.compiler)
-        try:
-            self.compiler.compiler_so.remove('-Wstrict-prototypes')
-        except (AttributeError, ValueError):
-            pass
         _build_ext.build_extensions(self)
 
 
@@ -157,28 +106,6 @@ class install(_install):
         _install.finalize_options(self)
 
 
-# Only add numpy to *_requires lists if not already installed to prevent
-# pip from trying to upgrade an existing numpy and failing.
-try:
-    import numpy
-except ImportError:
-    build_requires = ['numpy']
-else:
-    build_requires = []
-# Take Python 2-3 compatibility package 'six' from outside (https://github.com/benjaminp/six)
-build_requires.append('six')
-
-if use_setuptools:
-    setuptools_options = dict(
-        setup_requires=build_requires,
-        install_requires=build_requires,
-        extras_require={
-            'with-numpy': ('numpy',),
-        },
-        zip_safe=False,
-    )
-else:
-    setuptools_options = dict()
 
 setup(
     name='numpythia',
@@ -220,5 +147,6 @@ setup(
         'Programming Language :: Cython',
         'Development Status :: 4 - Beta',
     ],
-    **setuptools_options
+    install_requires=['numpy', 'six'],
+    zip_safe=False,
 )
