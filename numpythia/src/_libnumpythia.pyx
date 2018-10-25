@@ -1,4 +1,7 @@
-# cython: experimental_cpp_class_def=True, c_string_type=str, c_string_encoding=ascii
+# distutils: language = c++
+# cython: c_string_type=str, c_string_encoding=ascii
+# cython: language_level=2
+# cython: embed_signature=True
 
 # TODO:
 # Wrap HepMC Writer and remove write_to
