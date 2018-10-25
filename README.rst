@@ -1,13 +1,16 @@
 .. -*- mode: rst -*-
 
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1471493.svg
-   :target: https://doi.org/10.5281/zenodo.1471493
-
 numpythia: The interface between PYTHIA and NumPy
 =================================================
 
 .. image:: https://img.shields.io/pypi/v/numpythia.svg
    :target: https://pypi.python.org/pypi/numpythia
+
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1471493.svg
+  :target: https://doi.org/10.5281/zenodo.1471493
+
+.. image:: https://travis-ci.org/scikit-hep/numpythia.svg?branch=master
+   :target: https://travis-ci.org/scikit-hep/numpythia
 
 .. image:: https://coveralls.io/repos/github/scikit-hep/numpythia/badge.svg?branch=master
    :target: https://coveralls.io/github/scikit-hep/numpythia?branch=master
@@ -19,20 +22,12 @@ particle four-momenta. By default numpythia only depends on NumPy and builds
 internal copies of the PYTHIA and `HepMC <http://hepmc.web.cern.ch/hepmc/>`_
 source code.
 
-Python versions supported:
+Strict dependencies
+-------------------
 
-.. image:: https://img.shields.io/badge/python-2.7-blue.svg
-   :target: https://badge.fury.io/py/scikit-hep
-
-.. image:: https://img.shields.io/badge/python-3.4-blue.svg
-   :target: https://badge.fury.io/py/scikit-hep
-
-.. image:: https://img.shields.io/badge/python-3.5-blue.svg
-   :target: https://badge.fury.io/py/scikit-hep
-
-.. image:: https://img.shields.io/badge/python-3.6-blue.svg
-   :target: https://badge.fury.io/py/scikit-hep
-
+- `Python <http://docs.python-guide.org/en/latest/starting/installation/>`__ (2.7+, 3.4+)
+- `Numpy <https://scipy.org/install.html>`__
+- `six <https://six.readthedocs.io/>`__
 
 Getting started
 ---------------
