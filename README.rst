@@ -1,5 +1,8 @@
 .. -*- mode: rst -*-
 
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1471493.svg
+   :target: https://doi.org/10.5281/zenodo.1471493
+
 numpythia: The interface between PYTHIA and NumPy
 =================================================
 
