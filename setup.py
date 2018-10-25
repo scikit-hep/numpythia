@@ -182,7 +182,7 @@ else:
 
 setup(
     name='numpythia',
-    version='0.3.3',
+    version='1.0.0',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
     maintainer='the Scikit-HEP admins',
@@ -218,7 +218,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: C++',
         'Programming Language :: Cython',
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
     ],
     **setuptools_options
 )
