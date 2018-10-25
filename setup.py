@@ -188,7 +188,7 @@ setup(
     maintainer='Noel Dawe',
     maintainer_email='noel@dawe.me',
     license='GPLv3',
-    url='http://github.com/ndawe/numpythia',
+    url='http://github.com/scikit-hep/numpythia',
     packages=[
         'numpythia',
         'numpythia.testcmnd',
