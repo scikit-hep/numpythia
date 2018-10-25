@@ -185,8 +185,8 @@ setup(
     version='0.3.3',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
-    maintainer='Noel Dawe',
-    maintainer_email='noel@dawe.me',
+    maintainer='the Scikit-HEP admins',
+    maintainer_email='scikit-hep-admins@googlegroups.com',
     license='GPLv3',
     url='http://github.com/scikit-hep/numpythia',
     packages=[
