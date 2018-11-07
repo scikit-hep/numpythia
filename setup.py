@@ -182,7 +182,7 @@ else:
 
 setup(
     name='numpythia',
-    version='1.0.0',
+    version='1.0.1',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
     maintainer='the Scikit-HEP admins',
