@@ -6,8 +6,8 @@ numpythia: The interface between PYTHIA and NumPy
 .. image:: https://img.shields.io/pypi/v/numpythia.svg
    :target: https://pypi.python.org/pypi/numpythia
 
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1471493.svg
-  :target: https://doi.org/10.5281/zenodo.1471493
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1471492.svg
+  :target: https://doi.org/10.5281/zenodo.1471492
 
 .. image:: https://travis-ci.org/scikit-hep/numpythia.svg?branch=master
    :target: https://travis-ci.org/scikit-hep/numpythia
@@ -16,11 +16,22 @@ numpythia: The interface between PYTHIA and NumPy
    :target: https://coveralls.io/github/scikit-hep/numpythia?branch=master
 
 numpythia provides an interface between `PYTHIA
-<http://home.thep.lu.se/~torbjorn/Pythia.html>`_ and `NumPy
+<http://home.thep.lu.se/Pythia/>`_ and `NumPy
 <http://www.numpy.org/>`_ allowing you to generate events as NumPy arrays of
 particle four-momenta. By default numpythia only depends on NumPy and builds
 internal copies of the PYTHIA and `HepMC <http://hepmc.web.cern.ch/hepmc/>`_
 source code.
+
+Standalone Installation
+-----------------------
+
+To simply use the built-in PYTHIA and HepMC::
+
+   pip install --user -v numpythia
+
+And you're good to go!
+
+Support for building against an external PYTHIA is on the wishlist.
 
 Strict dependencies
 -------------------
@@ -62,17 +73,31 @@ The dtype of any array of particle information is:
              ('prodx', 'f8'), ('prody', 'f8'), ('prodz', 'f8'), ('prodt', 'f8'),
              ('pdgid', 'i4'), ('status', 'i4')])
 
-Also see `pyjet <https://github.com/ndawe/pyjet>`_ for jet clustering.
+Also see `pyjet <https://github.com/scikit-hep/pyjet>`_ for jet clustering.
 
+Tutorial
+--------
 
-Standalone Installation
------------------------
+PYTHIA settings can be passed in one of three ways: through the `**kwargs` arguments of the constructor `Pythia(..., **kwargs)`
 
-To simply use the built-in PYTHIA and HepMC::
+.. code-block:: python
 
-   pip install --user -v numpythia
+   pythia = Pythia(..., Beams_eCM=13000.)
 
-And you're good to go!
+or as a dictionary
 
-Support for building against an external PYTHIA, Delphes, and much more will
-come soon.
+.. code-block:: python
+
+   pythia = Pythia(..., params={'Beams:eCM':  13000.})
+
+or via a Python command file
+
+.. code-block:: python
+
+   pythia = Pythia(config='path/to/config.cmd')
+
+The full list of settings can be found on the  `PYTHIA homepage <http://home.thep.lu.se/Pythia/>`_.
+
+Note that the ":" in settings names is replaced by a "_"  if using `kwargs`.
+`kwargs` take precedence over `params` and they both take precedence over `config`.
+Example config files can be found under the `numpythia.testcmnd` directory.
