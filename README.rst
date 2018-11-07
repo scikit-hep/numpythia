@@ -27,7 +27,7 @@ Standalone Installation
 
 To simply use the built-in PYTHIA and HepMC::
 
-   pip install --user -v numpythia
+   pip install -v numpythia
 
 And you're good to go!
 
@@ -78,19 +78,19 @@ Also see `pyjet <https://github.com/scikit-hep/pyjet>`_ for jet clustering.
 Tutorial
 --------
 
-PYTHIA settings can be passed in one of three ways: through the `**kwargs` arguments of the constructor `Pythia(..., **kwargs)`
+PYTHIA settings can be passed in one of three ways: through the `**kwargs` arguments of the constructor `Pythia(..., **kwargs)`:
 
 .. code-block:: python
 
    pythia = Pythia(..., Beams_eCM=13000.)
 
-or as a dictionary
+Or as a dictionary:
 
 .. code-block:: python
 
    pythia = Pythia(..., params={'Beams:eCM':  13000.})
 
-or via a Python command file
+Or via a Python command file:
 
 .. code-block:: python
 
