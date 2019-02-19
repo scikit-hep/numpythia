@@ -78,6 +78,9 @@ Also see `pyjet <https://github.com/scikit-hep/pyjet>`_ for jet clustering.
 Tutorial
 --------
 
+Setting PYTHIA
+~~~~~~~~~~~~~~
+
 PYTHIA settings can be passed in one of three ways: through the `**kwargs` arguments of the constructor `Pythia(..., **kwargs)`:
 
 .. code-block:: python
@@ -102,10 +105,13 @@ Note that the ":" in settings names is replaced by a "_"  if using `kwargs`.
 `kwargs` take precedence over `params` and they both take precedence over `config`.
 Example config files can be found under the `numpythia.testcmnd` directory.
 
+Generate events
+~~~~~~~~~~~~~~~
+
 To generate events do
 
 .. code-block:: python
 
    events = pythia(events=100)
 
-where events is generator of ```GenEvent```
+where events is generator of ``GenEvent``.
