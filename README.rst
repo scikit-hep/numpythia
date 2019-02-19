@@ -121,7 +121,7 @@ To generate events do
 where **events** is a generator of ``GenEvent`` containing all the generated particles.
 
 Generated particles can be accessed through the ``all``, ``first`` and ``last``
-methods which have two optionnal arguments ``selection`` and ``return_hepmc``.
+methods which have two optional arguments ``selection`` and ``return_hepmc``.
 Selection is a filter or a combination of filters with bitwise operations (as
 shown in the *getting started* example) applied on the particles in the event.
 The available filters are
@@ -137,7 +137,7 @@ The available filters are
    >>> for e in events:
    >>>     array = e.all(selection)
 
-returns an array of particles, with the dtype descibed above. ``return_hepmc` is
+returns an array of particles, with the dtype described above. ``return_hepmc` is
 by default set to ``True`` for ``first`` and ``last``:
 
 .. code-block:: python
