@@ -117,7 +117,7 @@ To generate events do
    >>> events
    <generator at 0x10cf06f78>
 
-where *events* is a generator of ``GenEvent`` containing all the generated particles.
+where **events** is a generator of ``GenEvent`` containing all the generated particles.
 
 Generated particles can be accessed through the ``all``, ``first`` and ``last``
 methods which have two optionnal arguments ``selection`` and ``return_hepmc``.
@@ -129,14 +129,14 @@ The available filters are
     STATUS, PDG_ID, ABS_PDG_ID, HAS_END_VERTEX, HAS_PRODUCTION_VERTEX,
     HAS_SAME_PDG_ID_DAUGHTER, IS_STABLE, IS_BEAM
 
-The "return_hepmc" is by default set to ``False`` when using ``all``:
+``return_hepmc`` is by default set to ``False`` when using ``all``:
 
 .. code-block:: python
 
    >>> for e in events:
    >>>     array = e.all(selection)
 
-returns an array of particles, with the dtype descibed above. "return_hepmc" is
+returns an array of particles, with the dtype descibed above. ``return_hepmc` is
 by default set to ``True`` for ``first`` and ``last``:
 
 .. code-block:: python
@@ -146,3 +146,15 @@ by default set to ``True`` for ``first`` and ``last``:
     >>>     gen_part_l = e.last(selection)
 
 returns a ``GenParticle``.
+
+Generated particle
+~~~~~~~~~~~~~~~~~~
+
+``GenParticle`` is the numpythia interface of
+`HepMC::GenParticle <http://lcgapp.cern.ch/project/simu/HepMC/205/html/classHepMC_1_1GenParticle.html>`_,
+and has the following attributes
+
+.. code-block:: python
+    pid, status, e, px, py, pz, pt, eta, phi, mass, theta, rap
+
+  
