@@ -45,8 +45,11 @@ ctypedef np.float64_t DTYPE_t
 
 DTYPE_EP = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE)])
 DTYPE_PTEPM = np.dtype([('pT', DTYPE), ('eta', DTYPE), ('phi', DTYPE), ('mass', DTYPE)])
-DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE), ('mass', DTYPE),
-                           ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE), ('prodt', DTYPE),
+DTYPE_PARTICLE = np.dtype([('E', DTYPE), ('px', DTYPE), ('py', DTYPE), ('pz', DTYPE),
+                           ('pT', DTYPE), ('mass', DTYPE), ('rap', DTYPE),
+                           ('eta', DTYPE), ('theta', DTYPE), ('phi', DTYPE),
+                           ('prodx', DTYPE), ('prody', DTYPE), ('prodz', DTYPE),
+                           ('prodt', DTYPE),
                            ('pdgid', np.int32), ('status', np.int32)])
 
 ALL = HepMC.FIND_ALL
