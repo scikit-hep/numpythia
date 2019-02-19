@@ -117,16 +117,27 @@ To generate events do
    >>> events
    <generator at 0x10cf06f78>
 
-where events is generator of ``GenEvent`` containing all the generated particles.
+where *events* is a generator of ``GenEvent`` containing all the generated particles.
 
-Generated particles can be accessed through the following methods:
+Generated particles can be accessed through the ``all``, ``first`` and ``last``
+methods which have two optionnal arguments ``selection`` and ``return_hepmc``.
+Selection is a filter or a combination of filters with bitwise operations (as
+shown in the *getting started* example) applied on the particles in the event.
+The available filters are
+
+.. code-block:: python
+    STATUS, PDG_ID, ABS_PDG_ID, HAS_END_VERTEX, HAS_PRODUCTION_VERTEX,
+    HAS_SAME_PDG_ID_DAUGHTER, IS_STABLE, IS_BEAM
+
+The "return_hepmc" is by default set to ``False`` when using ``all``:
 
 .. code-block:: python
 
    >>> for e in events:
    >>>     array = e.all(selection)
 
-returning an array of particles, with the dtype descibed above, or
+returns an array of particles, with the dtype descibed above. "return_hepmc" is
+by default set to ``True`` for ``first`` and ``last``:
 
 .. code-block:: python
 
@@ -134,4 +145,4 @@ returning an array of particles, with the dtype descibed above, or
     >>>     gen_part_f = e.first(selection)
     >>>     gen_part_l = e.last(selection)
 
-returning a ``GenParticle``.
+returns a ``GenParticle``.
