@@ -155,6 +155,9 @@ Generated particle
 and has the following attributes
 
 .. code-block:: python
+
     pid, status, e, px, py, pz, pt, eta, phi, mass, theta, rap
 
-  
+``GenParticle`` also has the following methods ``parents``, ``children``, ``ancestors``,
+``descendants`` and ``siblings`` both with the two optional arguments ``selection``
+and ``return_hepmc`` described before.
