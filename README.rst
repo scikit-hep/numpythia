@@ -101,3 +101,11 @@ The full list of settings can be found on the  `PYTHIA homepage <http://home.the
 Note that the ":" in settings names is replaced by a "_"  if using `kwargs`.
 `kwargs` take precedence over `params` and they both take precedence over `config`.
 Example config files can be found under the `numpythia.testcmnd` directory.
+
+To generate events do
+
+.. code-block:: python
+
+   events = pythia(events=100)
+
+where events is generator of ```GenEvent```
