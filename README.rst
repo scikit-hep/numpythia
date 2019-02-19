@@ -69,9 +69,10 @@ The dtype of any array of particle information is:
 
 .. code-block:: python
 
-   np.dtype([('E', 'f8'), ('px', 'f8'), ('py', 'f8'), ('pz', 'f8'), ('mass', 'f8'),
-             ('prodx', 'f8'), ('prody', 'f8'), ('prodz', 'f8'), ('prodt', 'f8'),
-             ('pdgid', 'i4'), ('status', 'i4')])
+   np.dtype([('E', 'f8'), ('px', 'f8'), ('py', 'f8'), ('pz', 'f8'), ('pt', 'f8'),
+             ('mass', 'f8'), ('rap', 'f8'), ('eta', 'f8'), ('theta', 'f8'),
+             ('phi', 'f8'), ('prodx', 'f8'), ('prody', 'f8'), ('prodz', 'f8'),
+             ('prodt', 'f8'), ('pdgid', 'i4'), ('status', 'i4')])
 
 Also see `pyjet <https://github.com/scikit-hep/pyjet>`_ for jet clustering.
 
@@ -112,6 +113,25 @@ To generate events do
 
 .. code-block:: python
 
-   events = pythia(events=100)
+   >>> events = pythia(events=100)
+   >>> events
+   <generator at 0x10cf06f78>
 
-where events is generator of ``GenEvent``.
+where events is generator of ``GenEvent`` containing all the generated particles.
+
+Generated particles can be accessed through the following methods:
+
+.. code-block:: python
+
+   >>> for e in events:
+   >>>     array = e.all(selection)
+
+returning an array of particles, with the dtype descibed above, or
+
+.. code-block:: python
+
+    >>> for e in events:
+    >>>     gen_part_f = e.first(selection)
+    >>>     gen_part_l = e.last(selection)
+
+returning a ``GenParticle``.
