@@ -160,4 +160,10 @@ and has the following attributes
 
 ``GenParticle`` also has the following methods ``parents``, ``children``, ``ancestors``,
 ``descendants`` and ``siblings`` both with the two optional arguments ``selection``
-and ``return_hepmc`` described before.
+and ``return_hepmc`` described before. For instance:
+
+.. code-block:: python
+
+    >>> for e in events:
+    >>>     w = e.last((ABS_PDG_ID == 24) & HAS_END_VERTEX))
+    >>>     w.children()
