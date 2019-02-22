@@ -127,6 +127,7 @@ shown in the *getting started* example) applied on the particles in the event.
 The available filters are
 
 .. code-block:: python
+
     STATUS, PDG_ID, ABS_PDG_ID, HAS_END_VERTEX, HAS_PRODUCTION_VERTEX,
     HAS_SAME_PDG_ID_DAUGHTER, IS_STABLE, IS_BEAM
 
