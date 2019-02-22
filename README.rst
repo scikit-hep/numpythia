@@ -138,7 +138,7 @@ The available filters are
    >>> for e in events:
    >>>     array = e.all(selection)
 
-returns an array of particles, with the dtype described above. ``return_hepmc` is
+returns an array of particles, with the dtype described above. ``return_hepmc`` is
 by default set to ``True`` for ``first`` and ``last``:
 
 .. code-block:: python
