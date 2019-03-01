@@ -27,7 +27,7 @@
 
 void hepmc_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> >& particles,
                     char* array, unsigned int rowbytes) {
-    HepMC::FourVector momentum, prod_vertex, end_vertex;
+    HepMC::FourVector momentum, prod_vertex;
     char* row;
     double* double_fields;
     int* int_fields;
