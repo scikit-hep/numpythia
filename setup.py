@@ -148,5 +148,6 @@ setup(
         'Development Status :: 5 - Production/Stable',
     ],
     install_requires=['numpy', 'six'],
+    tests_require=['pytest'],
     zip_safe=False,
 )
