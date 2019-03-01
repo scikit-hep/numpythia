@@ -42,13 +42,18 @@ void hepmc_to_array(std::vector<HepMC::SmartPointer<HepMC::GenParticle> >& parti
         double_fields[1] = momentum.px();
         double_fields[2] = momentum.py();
         double_fields[3] = momentum.pz();
-        double_fields[4] = momentum.m();
-        double_fields[5] = prod_vertex.x();
-        double_fields[6] = prod_vertex.y();
-        double_fields[7] = prod_vertex.z();
-        double_fields[8] = prod_vertex.t();
+        double_fields[4] = momentum.pt();
+        double_fields[5] = momentum.m();
+        double_fields[6] = momentum.rap();
+        double_fields[7] = momentum.eta();
+        double_fields[8] = momentum.theta();
+        double_fields[9] = momentum.phi();
+        double_fields[10] = prod_vertex.x();
+        double_fields[11] = prod_vertex.y();
+        double_fields[12] = prod_vertex.z();
+        double_fields[13] = prod_vertex.t();
         // integers
-        int_fields = (int*)&row[9 * sizeof(double)];
+        int_fields = (int*)&row[14 * sizeof(double)];
         int_fields[0] = particle->pid();
         int_fields[1] = particle->status();
         ++i;
