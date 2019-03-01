@@ -1,5 +1,9 @@
 language: python
 
+branches:
+  only:
+    - master
+
 os:
   - linux
 
@@ -18,10 +22,12 @@ addons:
 
 install:
   - pip install --upgrade pip
-  - pip install coveralls pytest pytest-cov
+  - pip install --upgrade pytest
+  - pip install coveralls pytest-cov
 
 before_script:
   pip install -e .
+
 script:
   pytest --cov=numpythia tests/
 
