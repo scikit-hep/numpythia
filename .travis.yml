@@ -22,7 +22,7 @@ addons:
 
 install:
   - pip install --upgrade pip
-  - pip install --upgrade pytest
+  - pip install --upgrade pytest Cython
   - pip install coveralls pytest-cov
 
 before_script:

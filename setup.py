@@ -42,9 +42,14 @@ def recursive_glob(path, pattern):
             matches.append(os.path.join(root, filename))
     return matches
 
-libnumpythia = Extension(
+import os.path
+lib_numpythia_source = 'numpythia/src/_libnumpythia'
+USE_CYTHON = not os.path.isfile(lib_numpythia_source + '.cpp')
+lib_numpythia_source += '.pyx' if USE_CYTHON else '.cpp'
+
+libnumpythia = [Extension(
     'numpythia._libnumpythia',
-    sources=['numpythia/src/_libnumpythia.cpp'] +
+    sources=[lib_numpythia_source] +
         recursive_glob('numpythia/src/extern/hepmc3.0.0/src', '*.cc') +
         recursive_glob('numpythia/src/extern/pythia8226/src', '*.cc'),
     depends=[],
@@ -62,8 +67,11 @@ libnumpythia = Extension(
     define_macros=[
         ('XMLDIR', '""'),
     ],
-)
+)]
 
+if USE_CYTHON:
+    from Cython.Build import cythonize
+    libnumpythia = cythonize(libnumpythia)
 
 class build_ext(_build_ext):
     user_options = _build_ext.user_options + [
@@ -84,7 +92,7 @@ class build_ext(_build_ext):
         except AttributeError:
             pass
         import numpy
-        libnumpythia.include_dirs.append(numpy.get_include())
+        libnumpythia[0].include_dirs.append(numpy.get_include())
 
     def build_extensions(self):
         _build_ext.build_extensions(self)
@@ -126,7 +134,7 @@ setup(
             'src/extern/pythia8226/share/*',
         ],
     },
-    ext_modules=[libnumpythia],
+    ext_modules=libnumpythia,
     cmdclass={
         'build_ext': build_ext,
         'install': install,
