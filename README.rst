@@ -33,7 +33,7 @@ And you're good to go!
 
 Support for building against an external PYTHIA is on the wishlist.
 
-Note that if you are using a Mac OSX system, then installation _may_ require setting an
+Note that if you are using a Mac OSX system, then installation may require setting an
 environment variable as `explained here <https://github.com/pytorch/pytorch/issues/1434>`_.
 
 Strict dependencies
