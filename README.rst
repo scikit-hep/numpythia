@@ -42,7 +42,7 @@ Strict dependencies
 - `Python <http://docs.python-guide.org/en/latest/starting/installation/>`__ (2.7+, 3.4+)
 - `Numpy <https://scipy.org/install.html>`__
 - `six <https://six.readthedocs.io/>`__
-- Only for the development version (from github): `Cython <https://cython.org/>`__
+- Only for source builds: `Cython <https://cython.org/>`__
 
 Getting started
 ---------------
