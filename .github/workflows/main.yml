@@ -1,0 +1,29 @@
+name: Main
+
+on: [push]
+
+env:
+  NPY_NUM_BUILD_JOBS: 2
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+        - 2.7
+        - 3.5
+        - 3.8
+    name: Dev ${{ matrix.python-version }}
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Build and get requirements
+      run: pip install .[dev]
+    - name: Test
+      run: pytest

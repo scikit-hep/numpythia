@@ -1,6 +1,8 @@
 MANIFEST
 build
 dist
+*env*
+pip-wheel-metadata/*
 *.pyc
 *.tar.gz
 *.egg

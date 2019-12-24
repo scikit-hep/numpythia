@@ -1,39 +1,20 @@
 #!/usr/bin/env python
 
 import sys
-
-# Check Python version
-if sys.version_info < (2, 7):
-    sys.exit("numpythia only supports python 2.7 and above")
-
-if sys.version_info[0] < 3:
-    import __builtin__ as builtins
-else:
-    import builtins
+import os
+import fnmatch
+import numpy # Either pre-existing or required by PEP 517/518 style build (pyproject.toml, pip 10+)
 
 from setuptools import setup, Extension, find_packages
-from pkg_resources import parse_version, get_distribution
-
 from setuptools.command.build_ext import build_ext as _build_ext
 from setuptools.command.install import install as _install
 
-import os
-import fnmatch
-import platform
-import subprocess
-
-# Prevent setup from trying to create hard links
-# which are not allowed on AFS between directories.
-# This is a hack to force copying.
-try:
-    del os.link
-except AttributeError:
-    pass
+# Use -j N or set the environment variable NPY_NUM_BUILD_JOBS
+# from numpy.distutils.ccompiler import CCompiler_compile
+# import distutils.ccompiler
+# distutils.ccompiler.CCompiler.compile = CCompiler_compile
 
 local_path = os.path.dirname(os.path.abspath(__file__))
-# setup.py can be called from outside the source directory
-os.chdir(local_path)
-sys.path.insert(0, local_path)
 
 def recursive_glob(path, pattern):
     matches = []
@@ -42,14 +23,9 @@ def recursive_glob(path, pattern):
             matches.append(os.path.join(root, filename))
     return matches
 
-import os.path
-lib_numpythia_source = 'numpythia/src/_libnumpythia'
-USE_CYTHON = not os.path.isfile(lib_numpythia_source + '.cpp')
-lib_numpythia_source += '.pyx' if USE_CYTHON else '.cpp'
-
-libnumpythia = [Extension(
+libnumpythia = Extension(
     'numpythia._libnumpythia',
-    sources=[lib_numpythia_source] +
+    sources=['numpythia/src/_libnumpythia.pyx'] +
         recursive_glob('numpythia/src/extern/hepmc3.0.0/src', '*.cc') +
         recursive_glob('numpythia/src/extern/pythia8226/src', '*.cc'),
     depends=[],
@@ -67,11 +43,7 @@ libnumpythia = [Extension(
     define_macros=[
         ('XMLDIR', '""'),
     ],
-)]
-
-if USE_CYTHON:
-    from Cython.Build import cythonize
-    libnumpythia = cythonize(libnumpythia)
+)
 
 class build_ext(_build_ext):
     user_options = _build_ext.user_options + [
@@ -84,15 +56,8 @@ class build_ext(_build_ext):
 
     def finalize_options(self):
         global libnumpythia
-        #global external_fastjet
         _build_ext.finalize_options(self)
-        # Prevent numpy from thinking it is still in its setup process
-        try:
-            del builtins.__NUMPY_SETUP__
-        except AttributeError:
-            pass
-        import numpy
-        libnumpythia[0].include_dirs.append(numpy.get_include())
+        libnumpythia.include_dirs.append(numpy.get_include())
 
     def build_extensions(self):
         _build_ext.build_extensions(self)
@@ -114,6 +79,7 @@ class install(_install):
         _install.finalize_options(self)
 
 
+extras_require = {"dev": ["pytest"]}
 
 setup(
     name='numpythia',
@@ -124,17 +90,14 @@ setup(
     maintainer_email='scikit-hep-admins@googlegroups.com',
     license='GPLv3',
     url='http://github.com/scikit-hep/numpythia',
-    packages=[
-        'numpythia',
-        'numpythia.testcmnd',
-    ],
+    packages=find_packages(exclude='tests'),
     package_data={
         'numpythia': [
             'testcmnd/*.cmnd',
             'src/extern/pythia8226/share/*',
         ],
     },
-    ext_modules=libnumpythia,
+    ext_modules=[libnumpythia],
     cmdclass={
         'build_ext': build_ext,
         'install': install,
@@ -150,12 +113,19 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Programming Language :: C++',
         'Programming Language :: Cython',
         'Development Status :: 5 - Production/Stable',
     ],
+    tests_require=extras_require["dev"],
+    extras_require=extras_require,
     install_requires=['numpy', 'six'],
-    tests_require=['pytest'],
+    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     zip_safe=False,
 )

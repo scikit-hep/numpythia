@@ -1,0 +1,42 @@
+name: Main
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+        - 2.7
+        - 3.5
+        - 3.8
+    name: Dev ${{ matrix.python-version }}
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Build and get requirements
+      run: pip install .[dev]
+    - name: Test
+      run: pytest
+
+  preexisting:
+    name: External FastJet
+    runs-on: ubuntu-latest
+    container: python:3.8
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install FastJet
+      run: apt-get update && apt-get install -y libfastjet-dev libfastjetplugins-dev libfastjettools-dev libcgal-dev
+    - name: Get requirements
+      run: pip install pytest numpy Cython 
+    - name: Build
+      run: python setup.py install --external-fastjet
+    - name: Test
+      run: pytest
