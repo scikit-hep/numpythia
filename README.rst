@@ -9,11 +9,13 @@ numpythia: The interface between PYTHIA and NumPy
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1471492.svg
   :target: https://doi.org/10.5281/zenodo.1471492
 
-.. image:: https://travis-ci.org/scikit-hep/numpythia.svg?branch=master
-   :target: https://travis-ci.org/scikit-hep/numpythia
+.. image:: https://github.com/scikit-hep/numpythia/workflows/Main/badge.svg?branch=master
+   :target: https://github.com/scikit-hep/numpythia/actions
+   :alt: Test status
 
-.. image:: https://coveralls.io/repos/github/scikit-hep/numpythia/badge.svg?branch=master
-   :target: https://coveralls.io/github/scikit-hep/numpythia?branch=master
+.. image:: https://dev.azure.com/scikit-hep/numpythia/_apis/build/status/scikit-hep.pyjet?branchName=master
+   :target: https://dev.azure.com/scikit-hep/numpythia/_build/latest?definitionId=9&branchName=master
+   :alt: Wheel builds
 
 numpythia provides an interface between `PYTHIA
 <http://home.thep.lu.se/Pythia/>`_ and `NumPy
@@ -42,7 +44,7 @@ Strict dependencies
 - `Python <http://docs.python-guide.org/en/latest/starting/installation/>`__ (2.7+, 3.4+)
 - `Numpy <https://scipy.org/install.html>`__
 - `six <https://six.readthedocs.io/>`__
-- Only for source builds: `Cython <https://cython.org/>`__
+- Source builds: `Cython <https://cython.org/>`__ and a compiler.
 
 Getting started
 ---------------
