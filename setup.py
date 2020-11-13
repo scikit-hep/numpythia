@@ -79,7 +79,7 @@ class install(_install):
         _install.finalize_options(self)
 
 
-extras_require = {"dev": ["pytest"]}
+extras_require = {"dev": ["pytest"], "test": ["pytest"]}
 
 setup(
     name='numpythia',
