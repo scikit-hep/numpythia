@@ -13,7 +13,7 @@ __all__ = [
 ]
 
 PYTHIA_VERSION = '8.226'
-HEPMC_VERSION = '3.0.0'
+HEPMC_VERSION = '3.2.0'
 
 
 def hepmc_read(filename):

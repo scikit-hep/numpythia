@@ -26,13 +26,13 @@ def recursive_glob(path, pattern):
 libnumpythia = Extension(
     'numpythia._libnumpythia',
     sources=['numpythia/src/_libnumpythia.pyx'] +
-        recursive_glob('numpythia/src/extern/hepmc3.0.0/src', '*.cc') +
+        recursive_glob('numpythia/src/extern/hepmc3.2.0/src', '*.cc') +
         recursive_glob('numpythia/src/extern/pythia8226/src', '*.cc'),
     depends=[],
     language='c++',
     include_dirs=[
         'numpythia/src',
-        'numpythia/src/extern/hepmc3.0.0/include',
+        'numpythia/src/extern/hepmc3.2.0/include',
         'numpythia/src/extern/pythia8226/include',
     ],
     extra_compile_args=[
