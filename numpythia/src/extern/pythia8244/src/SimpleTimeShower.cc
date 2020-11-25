@@ -5901,8 +5901,7 @@ void SimpleTimeShower::list() const {
        << setw(7) << dipEnd[i].iRecoiler   << setw(12) << dipEnd[i].pTmax
        << setw(5) << dipEnd[i].colType     << setw(5) << dipEnd[i].chgType
        << setw(5) << dipEnd[i].gamType     << setw(5) << dipEnd[i].weakType
-       << setw(5) << dipEnd[i].isOctetOnium
-       //<< setw(5) << dipEnd[i].isHiddenValley
+       << setw(5) << dipEnd[i].isOctetOnium << setw(5) << dipEnd[i].isHiddenValley
        << setw(5) << dipEnd[i].isrType
        << setw(5) << dipEnd[i].system      << setw(5) << dipEnd[i].systemRec
        << setw(5) << dipEnd[i].MEtype      << setw(7) << dipEnd[i].iMEpartner

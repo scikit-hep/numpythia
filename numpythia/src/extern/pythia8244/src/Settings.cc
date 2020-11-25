@@ -1773,7 +1773,7 @@ bool Settings::onlySoftQCD() {
     "photoncollision", "photonparton", "onia:all", "charmonium:all",
     "bottomonium:all", "top", "fourthbottom", "fourthtop", "fourthpair",
     "higgssm", "higgsbsm", "susy", "newgaugeboson", "leftrightsymmetry",
-    "leptoquark", "excitedfermion", "contactinteractions",// "hiddenvalley",
+    "leptoquark", "excitedfermion", "contactinteractions", "hiddenvalley",
     "extradimensions", "dm:" };
   int sizeList = 26;
   string flagExclude[2] = { "extradimensionsg*:vlvl", "higgssm:nlowidths"};
