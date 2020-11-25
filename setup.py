@@ -94,7 +94,7 @@ setup(
     package_data={
         'numpythia': [
             'testcmnd/*.cmnd',
-            'src/extern/pythia8244/share/*',
+            'src/extern/pythia8244/share/Pythia8/xmldoc/*',
         ],
     },
     ext_modules=[libnumpythia],
