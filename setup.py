@@ -27,13 +27,13 @@ libnumpythia = Extension(
     'numpythia._libnumpythia',
     sources=['numpythia/src/_libnumpythia.pyx'] +
         recursive_glob('numpythia/src/extern/hepmc3.0.0/src', '*.cc') +
-        recursive_glob('numpythia/src/extern/pythia8226/src', '*.cc'),
+        recursive_glob('numpythia/src/extern/pythia8244/src', '*.cc'),
     depends=[],
     language='c++',
     include_dirs=[
         'numpythia/src',
         'numpythia/src/extern/hepmc3.0.0/include',
-        'numpythia/src/extern/pythia8226/include',
+        'numpythia/src/extern/pythia8244/include',
     ],
     extra_compile_args=[
         '-std=c++11',  # for HepMC
@@ -94,7 +94,7 @@ setup(
     package_data={
         'numpythia': [
             'testcmnd/*.cmnd',
-            'src/extern/pythia8226/share/*',
+            'src/extern/pythia8244/share/*',
         ],
     },
     ext_modules=[libnumpythia],
