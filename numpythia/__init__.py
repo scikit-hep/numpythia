@@ -12,7 +12,7 @@ __all__ = [
     'hepmc_write',
 ]
 
-PYTHIA_VERSION = '8.226'
+PYTHIA_VERSION = '8.244'
 HEPMC_VERSION = '3.0.0'
 
 
