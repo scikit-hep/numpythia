@@ -17,7 +17,7 @@
 #include "Pythia8/FragmentationFlavZpT.h"
 #include "Pythia8/FragmentationSystems.h"
 #include "Pythia8/HadronScatter.h"
-//#include "Pythia8/HiddenValleyFragmentation.h"
+#include "Pythia8/HiddenValleyFragmentation.h"
 #include "Pythia8/Info.h"
 #include "Pythia8/JunctionSplitting.h"
 #include "Pythia8/MiniStringFragmentation.h"
