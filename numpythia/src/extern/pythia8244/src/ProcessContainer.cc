@@ -2657,6 +2657,7 @@ bool SetupContainers::init(vector<ProcessContainer*>& containerPtrs,
   }
 
   // Set spin of particles in the Hidden Valley scenario.
+  /*
   int spinFv = settings.mode("HiddenValley:spinFv");
   for (int i = 1; i < 7; ++i) {
     if (particleDataPtr->spinType( 4900000 + i) != spinFv + 1)
@@ -2799,6 +2800,7 @@ bool SetupContainers::init(vector<ProcessContainer*>& containerPtrs,
     sigmaPtr = new Sigma1ffbar2Zv();
     containerPtrs.push_back( new ProcessContainer(sigmaPtr) );
   }
+  */
 
   // Set up requested objects for RS extra-dimensional G* processes.
   bool extraDimGstars = settings.flag("ExtraDimensionsG*:all");
