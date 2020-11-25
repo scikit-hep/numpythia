@@ -107,8 +107,8 @@ bool HadronLevel::init(Info* infoPtrIn, Settings& settings,
     hadronScatter.init(infoPtr, settings, rndmPtr, particleDataPtr);
 
   // Initialize Hidden-Valley fragmentation, if necessary.
-  useHiddenValley = hiddenvalleyFrag.init(infoPtr, settings,
-    particleDataPtr, rndmPtr);
+  //useHiddenValley = hiddenvalleyFrag.init(infoPtr, settings,
+  //  particleDataPtr, rndmPtr);
 
   // Send flavour and z selection pointers to R-hadron machinery.
   rHadronsPtr->fragPtrs( &flavSel, &zSel);
@@ -134,7 +134,7 @@ bool HadronLevel::next( Event& event) {
   event.savePartonLevelSize();
 
   // Do Hidden-Valley fragmentation, if necessary.
-  if (useHiddenValley) hiddenvalleyFrag.fragment(event);
+  //if (useHiddenValley) hiddenvalleyFrag.fragment(event);
 
   // Colour-octet onia states must be decayed to singlet + gluon.
   if (!decayOctetOnia(event)) return false;
