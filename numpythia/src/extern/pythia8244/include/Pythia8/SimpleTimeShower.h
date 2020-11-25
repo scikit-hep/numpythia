@@ -27,7 +27,7 @@ public:
   TimeDipoleEnd() : iRadiator(-1), iRecoiler(-1), pTmax(0.), colType(0),
     chgType(0), gamType(0), weakType(0), isrType(0), system(0), systemRec(0),
     MEtype(0), iMEpartner(-1), weakPol(0), isOctetOnium(false),
-    //isHiddenValley(false),
+    isHiddenValley(false),
     colvType(0), MEmix(0.), MEorder(true),
     MEsplit(true), MEgluinoRec(false), isFlexible(false), flavour(), iAunt(),
     mRad(), m2Rad(), mRec(), m2Rec(), mDip(), m2Dip(), m2DipCorr(), pT2(),
@@ -36,7 +36,7 @@ public:
     int colIn = 0, int chgIn = 0, int gamIn = 0, int weakTypeIn = 0,
     int isrIn = 0, int systemIn = 0, int MEtypeIn = 0, int iMEpartnerIn = -1,
     int weakPolIn = 0, bool isOctetOniumIn = false,
-    //bool isHiddenValleyIn = false,
+    bool isHiddenValleyIn = false,
     int colvTypeIn = 0, double MEmixIn = 0.,
     bool MEorderIn = true, bool MEsplitIn = true, bool MEgluinoRecIn = false,
     bool isFlexibleIn = false) :
@@ -44,7 +44,7 @@ public:
     colType(colIn), chgType(chgIn), gamType(gamIn), weakType(weakTypeIn),
     isrType(isrIn), system(systemIn), systemRec(systemIn), MEtype(MEtypeIn),
     iMEpartner(iMEpartnerIn), weakPol(weakPolIn), isOctetOnium(isOctetOniumIn),
-    //isHiddenValley(isHiddenValleyIn),
+    isHiddenValley(isHiddenValleyIn),
     colvType(colvTypeIn), MEmix(MEmixIn),
     MEorder (MEorderIn), MEsplit(MEsplitIn), MEgluinoRec(MEgluinoRecIn),
     isFlexible(isFlexibleIn), flavour(), iAunt(), mRad(), m2Rad(), mRec(),
@@ -56,7 +56,7 @@ public:
   double pTmax;
   int    colType, chgType, gamType, weakType, isrType, system, systemRec,
          MEtype, iMEpartner, weakPol;
-  bool   isOctetOnium;//, isHiddenValley;
+  bool   isOctetOnium, isHiddenValley;
   int    colvType;
   double MEmix;
   bool   MEorder, MEsplit, MEgluinoRec, isFlexible;

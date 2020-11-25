@@ -216,7 +216,6 @@ void SimpleTimeShower::init( BeamParticle* beamAPtrIn,
     && settingsPtr->flag("MultipartonInteractions:allowRescatter");
 
   // Hidden Valley scenario with further shower activity.
-  /*
   doHVshower         = settingsPtr->flag("HiddenValley:FSR");
   nCHV               = settingsPtr->mode("HiddenValley:Ngauge");
   alphaHVfix         = settingsPtr->parm("HiddenValley:alphaFSR");
@@ -237,7 +236,6 @@ void SimpleTimeShower::init( BeamParticle* beamAPtrIn,
                       "pTmin too low, raised to " + newPTcolCut.str() );
   }
   pT2hvCut           = pThvCut * pThvCut;
-  */
 
   // Possibility of two predetermined hard emissions in event.
   doSecondHard      = settingsPtr->flag("SecondHard:generate");
@@ -3726,12 +3724,12 @@ bool SimpleTimeShower::branch( Event& event, bool isInterleaved) {
     dipSel->iRecoiler = iEmt;
     dipSel->pTmax     = pTsel;
     for (int i = 0; i < int(dipEnd.size()); ++i)
-    /*if (dipEnd[i].iRadiator == iRecBef && dipEnd[i].iRecoiler == iRadBef
+    if (dipEnd[i].iRadiator == iRecBef && dipEnd[i].iRecoiler == iRadBef
       && dipEnd[i].isHiddenValley) {
       dipEnd[i].iRadiator = iRec;
       dipEnd[i].iRecoiler = iEmt;
       dipEnd[i].pTmax     = pTsel;
-    }*/
+    }
     int colvType = (dipSel->colvType > 0) ? 2 : -2 ;
     dipEnd.push_back( TimeDipoleEnd(iEmt, iRec, pTsel,
       0, 0, 0, 0, isrTypeSave, iSysSel, 0, -1, 0, false, true, colvType) );
@@ -4501,12 +4499,11 @@ void SimpleTimeShower::findMEtype( Event& event, TimeDipoleEnd& dip) {
   int iMother2 = event[dip.iRadiator].mother2();
 
   // Allow ME corrections for Hidden Valley pair in 2 -> 2.
-  //if (dip.isHiddenValley && event[dip.iRecoiler].id()
-  //  == -event[dip.iRadiator].id());
+  if (dip.isHiddenValley && event[dip.iRecoiler].id()
+    == -event[dip.iRadiator].id());
 
   // Allow ME corrections for all weak branchings.
-  //else if (dip.weakType != 0);
-  if (dip.weakType != 0);
+  else if (dip.weakType != 0);
 
   // Else optionally no ME corrections in 2 -> n processes.
   else if (!doMEextended) {
