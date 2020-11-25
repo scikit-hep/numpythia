@@ -95,6 +95,7 @@ Pythia::Pythia(string xmlDir, bool printBanner) :
   // Read in files with all flags, modes, parms and words.
   settings.initPtr( &info);
   string initFile = xmlPath + "Index.xml";
+  cout << "\n MY TEST: initFile = " << initFile << endl;
   isConstructed = settings.init( initFile);
   if (!isConstructed) {
     info.errorMsg("Abort from Pythia::Pythia: settings unavailable");

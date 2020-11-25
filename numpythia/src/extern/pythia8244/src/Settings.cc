@@ -44,10 +44,12 @@ bool Settings::init(string startFile, bool append) {
 
   // Loop over files. Open them for read.
   for (int i = 0; i < int(files.size()); ++i) {
+    cout << "\n MY TEST: files = " << files.size() << endl;
     const char* cstring = files[i].c_str();
     ifstream is(cstring);
 
     // Check that instream is OK.
+    cout << "\n MY TEST: files[i] = " << files[i] << endl;
     if (!is.good()) {
       cout << "\n PYTHIA Error: settings file " << files[i]
            << " not found" << endl;
