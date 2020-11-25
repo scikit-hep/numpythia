@@ -46,9 +46,8 @@ public:
     allowRH(), closePacking(), mStringMin(), eNormJunction(), widthSepBE(),
     doHadronScatter(), hsAfterDecay(), hadronScatMode(), infoPtr(),
     particleDataPtr(), rndmPtr(), userHooksPtr(), couplingsPtr(),
-    doRopes(), doShoving(), doFlavour(), doVertex(), doBuffon(), rHadronsPtr()//,
-    //useHiddenValley()
-    {}
+    doRopes(), doShoving(), doFlavour(), doVertex(), doBuffon(), rHadronsPtr(),
+    useHiddenValley() {}
 
   // Initialize HadronLevel classes as required.
   bool init(Info* infoPtrIn, Settings& settings,
@@ -143,8 +142,8 @@ private:
   RHadrons*  rHadronsPtr;
 
   // Special class for Hidden-Valley hadronization. Not always used.
-  //HiddenValleyFragmentation hiddenvalleyFrag;
-  //bool useHiddenValley;
+  HiddenValleyFragmentation hiddenvalleyFrag;
+  bool useHiddenValley;
 
   // Special case: colour-octet onium decays, to be done initially.
   bool decayOctetOnia(Event& event);

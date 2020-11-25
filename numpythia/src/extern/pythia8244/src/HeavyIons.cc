@@ -138,7 +138,7 @@ void HeavyIons::clearProcessLevel(Pythia & pyt) {
   pyt.settings.init(path + "LeftRightSymmetryProcesses.xml", true);
   pyt.settings.init(path + "LeptoquarkProcesses.xml", true);
   pyt.settings.init(path + "CompositenessProcesses.xml", true);
-  //pyt.settings.init(path + "HiddenValleyProcesses.xml", true);
+  pyt.settings.init(path + "HiddenValleyProcesses.xml", true);
   pyt.settings.init(path + "ExtraDimensionalProcesses.xml", true);
   pyt.settings.init(path + "DarkMatterProcesses.xml", true);
   pyt.settings.init(path + "ASecondHardProcess.xml", true);
