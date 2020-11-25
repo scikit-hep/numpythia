@@ -339,7 +339,7 @@ cdef class _Pythia:
                   object params=None,
                   **kwargs):
 
-        xmldoc = resource_filename('numpythia', 'src/extern/pythia8244/share/Pythia8/xmldoc/')
+        xmldoc = resource_filename('numpythia', 'src/extern/pythia8244/share/Pythia8/xmldoc')
         self.pythia = new Pythia.Pythia(xmldoc, False)
 
         # Initialize pointers to NULL

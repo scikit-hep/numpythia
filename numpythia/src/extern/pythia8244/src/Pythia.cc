@@ -74,6 +74,8 @@ Pythia::Pythia(string xmlDir, bool printBanner) :
   // Initialise / reset pointers and global variables.
   initPtrs();
 
+  cout << "\n MY TEST: xmlDir = " << xmlDir << endl;
+
   // Find path to data files, i.e. xmldoc directory location.
   // Environment variable takes precedence, then constructor input,
   // and finally the pre-processor constant XMLDIR.
@@ -87,10 +89,13 @@ Pythia::Pythia(string xmlDir, bool printBanner) :
     if (xmlDir[ xmlDir.length() - 1 ] != '/') xmlDir += "/";
     xmlPath = xmlDir;
     ifstream xmlFile((xmlPath + "Index.xml").c_str());
+    cout << "\n MY TEST: xmlFile = " << (xmlPath + "Index.xml").c_str() << endl;
     if (!xmlFile.good()) xmlPath = XMLDIR;
     xmlFile.close();
   }
+  cout << "\n MY TEST: xmlPath = " << xmlPath << endl;
   if (xmlPath[ xmlPath.length() - 1 ] != '/') xmlPath += "/";
+  cout << "\n MY TEST: xmlPath = " << xmlPath << endl;
 
   // Read in files with all flags, modes, parms and words.
   settings.initPtr( &info);
