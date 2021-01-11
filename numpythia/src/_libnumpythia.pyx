@@ -32,6 +32,7 @@ import os
 cimport pythia as Pythia
 cimport hepmc as HepMC
 cimport numpythia
+from analysis cimport Sphericity
 
 from six import string_types
 from pkg_resources import resource_filename
@@ -62,6 +63,16 @@ PARENTS = HepMC.PARENTS
 CHILDREN = HepMC.CHILDREN
 SIBLINGS = HepMC.PRODUCTION_SIBLINGS
 
+cdef class sphericity:
+    cdef Sphericity sph
+
+    def __cinit__(self):
+        sph = Sphericity(2.0, 2)
+
+    sph.analyze(Pythia.Event)
+
+    #def __dealloc__(self):
+    #    del sph 
 
 cdef class FilterList:
     cdef HepMC.FilterList _filterlist
@@ -440,7 +451,6 @@ cdef class _Pythia:
                 ievent += 1
         if self.verbosity > 0:
             self.pythia.stat()
-
 
 cdef class WriterAscii:
     cdef HepMC.WriterAscii* hepmc_writer
