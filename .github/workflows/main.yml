@@ -1,6 +1,13 @@
 name: Main
 
-on: [push]
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+      - develop
 
 env:
   NPY_NUM_BUILD_JOBS: 2
@@ -19,11 +26,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+  
     - name: Setup python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Build and get requirements
       run: pip install .[dev]
+      
     - name: Test
       run: pytest
