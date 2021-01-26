@@ -32,7 +32,6 @@ import os
 cimport pythia as Pythia
 cimport hepmc as HepMC
 cimport numpythia
-from analysis cimport Sphericity
 
 from six import string_types
 from pkg_resources import resource_filename
@@ -63,16 +62,69 @@ PARENTS = HepMC.PARENTS
 CHILDREN = HepMC.CHILDREN
 SIBLINGS = HepMC.PRODUCTION_SIBLINGS
 
-cdef class sphericity:
-    cdef Sphericity sph
+cdef class Sphericity:
+    cdef Pythia.Sphericity* c_this
+    cdef bool own
 
-    def __cinit__(self):
-        sph = Sphericity(2.0, 2)
+    def __cinit__(self, double power=2., int select=2):
+        """
+        argument power (default = 2.) : is the power r defined above, i.e. 
+        argumentoption 2. : gives Sphericity, and 
+        argumentoption 1. : gives the linear form. 
 
-    sph.analyze(Pythia.Event)
+        argument select (default = 2) : tells which particles are analyzed, 
+        argumentoption 1 : all final-state particles, 
+        argumentoption 2 : all observable final-state particles, i.e. excluding neutrinos and other particles without strong or electromagnetic interactions (the isVisible() particle method), and 
+        argumentoption 3 : only charged final-state particles.
+        """
+        self.c_this = new Pythia.Sphericity(power, select)
+        self.own = True
 
-    #def __dealloc__(self):
-    #    del sph 
+    # Event may not be wrapped?
+    # def analyze(self, const Pythia.Event& event):
+    #     return self.c_this.analyze(event)
+
+    def sphericity(self):   
+        """
+        gives the sphericity (or equivalent if r is not 2),
+        """
+        return self.c_this.sphericity()
+
+    def aplanarity(self):
+        """
+        gives the aplanarity (with the same comment),
+        """
+        return self.c_this.aplanarity()
+
+    def eigenValue(self, int i):
+        """
+        gives one of the three eigenvalues for i = 1, 2 or 3, in descending order,
+        """
+        return self.c_this.eigenValue(i)
+
+    # Guessing Vec4 may not be wrapped
+    # def eventAxis(self, int i): 
+    #     """
+    #     gives the matching normalized eigenvector, as a Vec4 with vanishing time/energy component.
+    #     """
+    # return self.c_this.eventAxis(i)
+
+    def list(self):  
+        """
+        provides a listing of the above information.
+        """
+        self.c_this.list()
+
+    def nError(self):   
+        """
+        There is also one method that returns information accumulated for all the events analyzed so far.
+        """
+        return self.c_this.nError()
+
+    def __dealloc__(self):
+        if self.own:
+            del self.c_this
+
 
 cdef class FilterList:
     cdef HepMC.FilterList _filterlist
