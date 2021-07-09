@@ -58,6 +58,17 @@ cdef extern from "Pythia8/Pythia.h" namespace "Pythia8":
         bool setShowerPtr(TimeShower*, TimeShower*, SpaceShower*)
         bool setUserHooksPtr(UserHooks*)
 
+    cdef cppclass Sphericity:
+        Sphericity(double, int)
+        bool analyze(const Event& event)
+
+        double sphericity()
+        double aplanarity()
+        double eigenValue(int)
+        # Vec4 eventAxis(int) 
+        void list()  
+        int nError()   
+
 #cdef extern from "Vincia/Vincia.h" namespace "Vincia":
     #cdef cppclass VinciaPlugin:
         #VinciaPlugin(Pythia*, string)
