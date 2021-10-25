@@ -44,7 +44,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: joerick/cibuildwheel@v2.1.2
+    - uses: joerick/cibuildwheel@v2.2.0
 
     - name: Show files
       run: ls -lh wheelhouse
