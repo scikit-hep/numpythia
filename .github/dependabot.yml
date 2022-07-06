@@ -4,8 +4,4 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
-    ignore:
-      # Offical actions have moving tags like v1
-      # that are used, so they don't need updates here
-      - dependency-name: "actions/*"
+      interval: "monthly"
