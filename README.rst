@@ -41,7 +41,7 @@ environment variable as `explained here <https://github.com/pytorch/pytorch/issu
 Strict dependencies
 -------------------
 
-- `Python <http://docs.python-guide.org/en/latest/starting/installation/>`__ (2.7+, 3.4+)
+- `Python <http://docs.python-guide.org/en/latest/starting/installation/>`__ (2.7+, 3.6+)
 - `Numpy <https://scipy.org/install.html>`__
 - `six <https://six.readthedocs.io/>`__
 - Source builds: `Cython <https://cython.org/>`__ and a compiler.
