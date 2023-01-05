@@ -1,4 +1,14 @@
 .. -*- mode: rst -*-
+***************************************************************
+:warning:numpythia is deprecated and unmaintained:warning:
+***************************************************************
+
+``numpythia`` has not been actively maintained for a couple of years. This is mostly due to the emergence of new alternatives which are both faster and more flexible.
+For example:
+
+* The `official Pythia 8 (SWIG) bindings available from Conda. <https://anaconda.org/conda-forge/pythia8>`_
+* The `impy <https://github.com/impy-project/impy>`_ project implementing a generic user interface to popular event generators
+  used in cosmic ray and high-energy particle physics.
 
 numpythia: The interface between PYTHIA and NumPy
 =================================================
