@@ -13,10 +13,6 @@ numpythia: The interface between PYTHIA and NumPy
    :target: https://github.com/scikit-hep/numpythia/actions
    :alt: Test status
 
-.. image:: https://dev.azure.com/scikit-hep/numpythia/_apis/build/status/scikit-hep.pyjet?branchName=master
-   :target: https://dev.azure.com/scikit-hep/numpythia/_build/latest?definitionId=9&branchName=master
-   :alt: Wheel builds
-
 numpythia provides an interface between `PYTHIA
 <http://home.thep.lu.se/Pythia/>`_ and `NumPy
 <http://www.numpy.org/>`_ allowing you to generate events as NumPy arrays of
