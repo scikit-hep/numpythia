@@ -3,6 +3,6 @@ requires = [
     "setuptools>=42",
     "Cython>=0.29.13",
     "numpy==1.13.3; python_version<'3.5'",
-    "oldest-supported-numpy; python_version>='3.5'",
+    "oldest-supported-numpy; python_version>='3.7'",
 ]
 build-backend = "setuptools.build_meta"
