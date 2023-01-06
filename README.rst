@@ -1,4 +1,7 @@
 .. -*- mode: rst -*-
+***************************************************************
+:warning:numpythia is deprecated and unmaintained:warning:
+***************************************************************
 
 ``numpythia`` has not been actively maintained for a couple of years. This is mostly due to the emergence of new alternatives which are both faster and more flexible.
 For example:
