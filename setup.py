@@ -83,7 +83,7 @@ extras_require = {"dev": ["pytest"], "test": ["pytest"]}
 
 setup(
     name='numpythia',
-    version='1.2.0',
+    version='1.3.1',
     description='The interface between PYTHIA and NumPy',
     long_description=''.join(open('README.rst').readlines()),
     maintainer='the Scikit-HEP admins',
